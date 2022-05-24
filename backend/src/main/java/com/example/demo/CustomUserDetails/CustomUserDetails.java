@@ -9,11 +9,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+
 @RequiredArgsConstructor
 public class CustomUserDetails implements UserDetails {
 
     private final User user;
-
+    //이 부분 기억안남 다시한번 물어봐야겠음...
     @Override
     public Set<? extends GrantedAuthority> getAuthorities() {
         return user.getRoles().stream()
