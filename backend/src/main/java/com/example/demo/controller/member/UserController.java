@@ -1,6 +1,9 @@
-package com.example.demo.User;
+package com.example.demo.controller.member;
 
-import com.example.demo.Role.Role;
+import com.example.demo.entity.member.Role;
+import com.example.demo.entity.member.AuthorizeCode;
+import com.example.demo.entity.member.User;
+import com.example.demo.service.member.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -39,8 +42,8 @@ public class UserController {
     public String kakaoLogin(String code){
 
         RestTemplate restTemplate = new RestTemplate();
-
-        Code authorizeCode  = new Code(code);
+        //그냥 code만 보내니 안되서, Code 클래스 생성해서 보내니깐 {"code" : code} 이런식으로 맵핑되는듯
+        AuthorizeCode authorizeCode  = new AuthorizeCode(code);
 
         String result = restTemplate.postForObject(
                 "http://localhost:5000/kakao-login",

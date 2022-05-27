@@ -1,10 +1,10 @@
-package com.example.demo.User;
+package com.example.demo.entity.member;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Code {
+public class AuthorizeCode {
     private String code;
 }

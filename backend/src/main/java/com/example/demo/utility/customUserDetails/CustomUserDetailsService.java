@@ -1,7 +1,7 @@
-package com.example.demo.CustomUserDetails;
+package com.example.demo.utility.customUserDetails;
 
-import com.example.demo.User.User;
-import com.example.demo.User.UserRepository;
+import com.example.demo.entity.member.User;
+import com.example.demo.repository.member.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

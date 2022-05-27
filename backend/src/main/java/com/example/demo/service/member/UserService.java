@@ -1,6 +1,7 @@
-package com.example.demo.User;
+package com.example.demo.service.member;
 
-import com.example.demo.Role.Role;
+import com.example.demo.entity.member.Role;
+import com.example.demo.entity.member.User;
 
 import java.util.List;
 

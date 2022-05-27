@@ -1,6 +1,9 @@
-package com.example.demo.User;
+package com.example.demo.service.member;
 
-import com.example.demo.Role.Role;
+import com.example.demo.entity.member.Role;
+import com.example.demo.entity.member.User;
+import com.example.demo.repository.member.UserRepository;
+import com.example.demo.service.member.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
