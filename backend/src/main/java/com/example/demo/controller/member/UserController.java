@@ -1,6 +1,9 @@
-package com.example.demo.User;
+package com.example.demo.controller.member;
 
-import com.example.demo.Role.Role;
+import com.example.demo.entity.member.Role;
+import com.example.demo.entity.member.Code;
+import com.example.demo.entity.member.User;
+import com.example.demo.service.member.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
