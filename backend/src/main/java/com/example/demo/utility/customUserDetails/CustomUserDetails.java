@@ -1,6 +1,6 @@
-package com.example.demo.CustomUserDetails;
+package com.example.demo.utility.customUserDetails;
 
-import com.example.demo.User.User;
+import com.example.demo.entity.member.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

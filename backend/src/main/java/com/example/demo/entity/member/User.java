@@ -1,6 +1,6 @@
-package com.example.demo.User;
+package com.example.demo.entity.member;
 
-import com.example.demo.Role.Role;
+import com.example.demo.entity.member.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

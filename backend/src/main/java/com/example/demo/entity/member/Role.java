@@ -1,6 +1,5 @@
-package com.example.demo.Role;
+package com.example.demo.entity.member;
 
-import com.example.demo.User.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
