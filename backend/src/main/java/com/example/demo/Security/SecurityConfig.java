@@ -23,7 +23,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
                 .authorizeRequests((authz ->
-                        authz.antMatchers("/login", "/", "/register").permitAll()
+                        authz.antMatchers("/login", "/", "/register","/kakaoLogin").permitAll()
                                 .anyRequest().authenticated())
                 )
                 .csrf((c) -> c.disable())
