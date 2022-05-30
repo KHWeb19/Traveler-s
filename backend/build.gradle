@@ -5,8 +5,7 @@ plugins {
 }
 
 group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '17'
 
 configurations {
 	compileOnly {
@@ -34,4 +33,8 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+bootJar{
+	archiveBaseName = 'tpj_backend'
 }
