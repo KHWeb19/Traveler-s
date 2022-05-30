@@ -1,5 +1,6 @@
 package com.example.demo.security;
 
+import com.example.demo.service.member.CustomOAuth2UserService;
 import com.example.demo.utility.customUserDetails.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
+    private final CustomOAuth2UserService customOAuth2UserService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -27,9 +29,13 @@ public class SecurityConfig {
                                 .anyRequest().authenticated())
                 )
                 .csrf((c) -> c.disable())
-                .formLogin()
-                .and()
-                .authenticationProvider(daoAuthenticationProvider());
+                //.formLogin()
+                //.and()
+                //.authenticationProvider(daoAuthenticationProvider())
+                .oauth2Login().loginPage("/login")
+                .userInfoEndpoint()
+                .userService(customOAuth2UserService);
+
 
         return http.build();
     }
