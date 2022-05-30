@@ -1,0 +1,65 @@
+version: "3.9"
+
+services:
+  tpj_backend:
+    container_name: tpj_backend
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    ports:
+      - "7777:7777"
+    restart: always
+    depends_on:
+      - tpj_db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://tpj_db:3306/travelers_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: teamproject
+      SPRING_DATASOURCE_PASSWORD: teamproject
+    networks:
+      - backend
+      - frontend
+
+
+  tpj_frontend:
+    container_name: tpj_frontend
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    environment:
+      - WATCHPACK_POLLING=true
+    ports:
+      - "8080:8080"
+    restart: always
+    volumes:
+      - ./frontend/src:/app/src:ro
+      - /app/node_modules
+    depends_on:
+      - tpj_backend
+    networks:
+      - frontend
+
+
+  tpj_db:
+    container_name: tpj_db
+    image: mysql:8.0.28
+    ports:
+      - "3306:3306"
+    restart: always
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: travelers_db
+      MYSQL_USER: teamproject
+      MYSQL_PASSWORD: teamproject
+      MYSQL_ROOT_PASSWORD: khWeb@123
+    networks:
+      - backend
+
+volumes:
+  db-data:
+
+networks:
+  backend:
+  frontend:
