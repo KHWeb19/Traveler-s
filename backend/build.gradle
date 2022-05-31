@@ -5,7 +5,8 @@ plugins {
 }
 
 group = 'com.example'
-sourceCompatibility = '17'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
 
 configurations {
 	compileOnly {

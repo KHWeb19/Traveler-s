@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ResolvableType;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -18,9 +19,9 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
-@RestController
+@Controller
 @RequiredArgsConstructor
-@RequestMapping("/")
+@RequestMapping
 public class UserController {
 
     private final UserService userService;
@@ -28,7 +29,7 @@ public class UserController {
     @GetMapping
     public String index(){
 
-        return "index page";
+        return "index";
     }
 
     @GetMapping("/listall")
@@ -70,6 +71,7 @@ public class UserController {
     @SuppressWarnings("unchecked")
     @GetMapping("/login")
     public String getLoginPage(Model model) throws Exception {
+
         Iterable<ClientRegistration> clientRegistrations = null;
         ResolvableType type = ResolvableType.forInstance(clientRegistrationRepository)
                 .as(Iterable.class);
@@ -85,5 +87,7 @@ public class UserController {
 
         return "auth/oauth-login";
     }
+
+
 
 }
