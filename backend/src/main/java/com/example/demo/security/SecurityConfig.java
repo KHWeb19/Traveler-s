@@ -41,7 +41,7 @@ public class SecurityConfig {
                 .oauth2Login().loginPage("/login")
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService);
-        
+
         return http.build();
     }
 
