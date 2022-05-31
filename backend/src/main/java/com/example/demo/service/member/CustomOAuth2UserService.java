@@ -5,6 +5,7 @@ import com.example.demo.entity.member.Role;
 import com.example.demo.entity.member.User;
 import com.example.demo.repository.member.UserRepository;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -22,6 +23,7 @@ import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
@@ -34,7 +36,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-
+        log.info("여기오니??");
         OAuth2UserService delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
 
@@ -62,6 +64,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
             user = new User();
             user.setEmail(email);
             user.getRoles().add(new Role("ROLE_USER"));
+            userRepository.save(user);
         }
         httpSession.setAttribute("user", user);
 
