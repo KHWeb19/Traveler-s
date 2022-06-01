@@ -33,10 +33,14 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     @Autowired
     HttpSession httpSession;
 
-
+    //userRequest는 AccessToken정보까지 들어있음
+    //그 정보로 loadUser함수 호출해서 -> 회원프로필을 받아와야함
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        log.info("여기오니??");
+        System.out.println("userRequest:" + userRequest);
+        System.out.println("accessToken:" + userRequest.getAccessToken());
+
+
         OAuth2UserService delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
 
@@ -45,7 +49,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         String email;
         Map<String, Object> response = oAuth2User.getAttributes();
-
+        //registrationId로 구글인지 네이버 로그인인지 구별 가능
         if (registrationId.equals("naver")){
             Map<String, Object> hash = (Map<String, Object>) response.get("response");
             email = (String) hash.get("email");
@@ -58,7 +62,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         User user;
         Optional<User> optionalUser = userRepository.findByEmail(email);
 
-        if(optionalUser.isEmpty()){
+        if(!optionalUser.isEmpty()){
             user = optionalUser.get();
         }else{
             user = new User();
