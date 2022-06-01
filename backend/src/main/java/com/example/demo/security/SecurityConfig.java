@@ -29,15 +29,16 @@ public class SecurityConfig {
     //@Bean은 해당 메서드의 리턴되는 오브젝트를 IoC로 등록 해준다
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+        //csrf(Cross-site Request Forgery) - 사이트간 요청 위조, 웹 애플리케이션의 취약점중 하나로, 이용자가 의도하지않은 공격
+        //이용자가 자신의 의지와는 무관하게 공격자가 의도한 행위(등록,수정,삭제등)를 특정 웹사이트에 요청하도록 하는 공격
+        http.csrf().disable();
         http
-                .authorizeRequests((authz ->
-                        authz.antMatchers("/login", "/", "/register", "/kakaoLogin").permitAll()
-                                .anyRequest().authenticated())
-                )
-                //csrf(Cross-site Request Forgery) - 사이트간 요청 위조, 웹 애플리케이션의 취약점중 하나로, 이용자가 의도하지않은 공격
-                //이용자가 자신의 의지와는 무관하게 공격자가 의도한 행위(등록,수정,삭제등)를 특정 웹사이트에 요청하도록 하는 공격
-                .csrf((c) -> c.disable())
+                .authorizeRequests()
+                        .antMatchers("/login", "/register", "/kakaoLogin").permitAll()
+                //.antMatchers("/").access("hasRole('ROLE_USER')")
+                        .anyRequest().authenticated()
 
+                .and()
                 //.formLogin()
                 //.and()
                 //.authenticationProvider(daoAuthenticationProvider())
