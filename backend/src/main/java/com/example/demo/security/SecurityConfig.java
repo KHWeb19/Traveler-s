@@ -31,21 +31,25 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         //csrf(Cross-site Request Forgery) - 사이트간 요청 위조, 웹 애플리케이션의 취약점중 하나로, 이용자가 의도하지않은 공격
         //이용자가 자신의 의지와는 무관하게 공격자가 의도한 행위(등록,수정,삭제등)를 특정 웹사이트에 요청하도록 하는 공격
+        http.cors();
         http.csrf().disable();
         http
                 .authorizeRequests()
-                        .antMatchers("/login", "/register", "/kakaoLogin").permitAll()
+                        .antMatchers("/login", "/" , "/register", "/kakaoLogin", "/googleLogin").permitAll()
                 //.antMatchers("/").access("hasRole('ROLE_USER')")
-                        .anyRequest().authenticated()
+                        .anyRequest().authenticated();
 
-                .and()
+                //.and()
                 //.formLogin()
                 //.and()
-                //.authenticationProvider(daoAuthenticationProvider())
+                //.authenticationProvider(daoAuthenticationProvider()) // 이부분 무슨 부분인가??
+
+        http
                 .oauth2Login()
                 //.loginPage("/login") //인증 필요한 페이지 접근시 로그인 안했으면 /login 페이지로 이동
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService);
+
 
         return http.build();
     }
