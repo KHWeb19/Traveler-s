@@ -14,7 +14,6 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.util.Map;
 import java.util.Optional;
 
@@ -35,6 +34,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         //userRequest 정보 가져옴
         OAuth2UserService delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
+        log.info(userRequest.getAccessToken().toString());
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         /*String usernameAttributeName = userRequest.getClientRegistration().getProviderDetails()
@@ -60,27 +60,27 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         }
 
         //email 중복 찾기
-        User user;
+        User userEntity;
         Optional<User> optionalUser = userRepository.findByEmail(email);
 
         if(!optionalUser.isEmpty()){
             //로그인 한 적이 있는 경우
-            user = optionalUser.get();
+            userEntity = optionalUser.get();
         }else{
             //로그인한적이 없는 경우
             //setter 대신 builder 고려
             //비밀번호는 어떻게 해야하는지 강사님한테 여쭤보기
             //전화번호는 본인인증 후 db에 넣는것으로 하기
             //이름은 예약할때 변경할 수 있도록하기
-            user = new User();
-            user.setEmail(email);
-            user.setName(name);
-            user.getRoles().add(new Role("ROLE_USER"));
-            userRepository.save(user);
+            userEntity = new User();
+            userEntity.setEmail(email);
+            userEntity.setName(name);
+            userEntity.getRoles().add(new Role("ROLE_USER"));
+            userRepository.save(userEntity);
         }
 
         //return 되는 이것이 Authentication 객체에 저장되고 세션 정보로 들어갈것
-        return new CustomUserDetails(user, response);
+        return new CustomUserDetails(userEntity, response);
 
         /*return new DefaultOAuth2User(user.getRoles().stream().map(r -> new SimpleGrantedAuthority("ROLE_" + r)).collect(Collectors.toSet()),
             oAuth2User.getAttributes(),
