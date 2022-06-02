@@ -4,7 +4,7 @@ package com.example.demo.service.member;
 import com.example.demo.entity.member.Role;
 import com.example.demo.entity.member.User;
 import com.example.demo.repository.member.UserRepository;
-import com.example.demo.utility.customUserDetails.CustomUserDetails;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Map;
 import java.util.Optional;
+
 
 @Slf4j
 @Service
