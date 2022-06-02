@@ -245,9 +245,37 @@
 </template>
 
 <script>
+/*
 export default {
+    name: "HotelReadForm.vue",
+    components: {
+
+    },
+    props: {
+        hotelNo: {
+            type: String,
+            required: true
+        }
+    },
+    computed: {
+        ...mapState(['hotel'])
+    },
+    created () {
+        this.fetchHotel(this.hotelNo)
+            .catch(() => {
+                alert('숙소 게시물 요청 실패!')
+                this.$router.push()
+            })
+    },
+    methods: {
+        ...mapActions(['fetchHotel']),
+        goRegister(){
+            this.$router.push({ name: '' })
+        }
+    }
     
 }
+*/
 </script>
 
 
