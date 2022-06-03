@@ -3,34 +3,51 @@ package com.example.demo.controller.member;
 import com.example.demo.entity.member.Role;
 import com.example.demo.entity.member.Code;
 import com.example.demo.entity.member.User;
+import com.example.demo.response.MemberResponse;
 import com.example.demo.service.member.UserService;
+import com.example.demo.utility.customUserDetails.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.core.ResolvableType;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.security.core.Authentication;
+;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 @Slf4j
-@Controller
+@RestController
 @RequiredArgsConstructor
 @RequestMapping
+@CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 public class UserController {
 
     private final UserService userService;
 
     @GetMapping
-    public String index(){
+    public String index(Authentication authentication){
+        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+        System.out.println("**********" +oAuth2User.getAttributes());
 
-        return "index";
+        return "세션 확인" + oAuth2User.getAttributes();
+
     }
+
+   /* @GetMapping("/googleLogin")
+    public MemberResponse OAuth(Authentication authentication) {
+
+
+
+        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
+        MemberResponse memberResponse = new MemberResponse();
+        memberResponse.setEmail(customUserDetails.getUser().getEmail());
+        memberResponse.setName(customUserDetails.getUser().getName());
+
+        return memberResponse;
+    }*/
 
     @GetMapping("/listall")
     public List<User> login(){
@@ -42,6 +59,7 @@ public class UserController {
         User user = new User("admin", "admin@gmail.com", "password");
         Role role = new Role("ADMIN");
         userService.addUser(user);
+
         userService.addRoleToUser(user, role);
     }
 
@@ -62,32 +80,5 @@ public class UserController {
 
         return result;
     }
-
-    private static final String authorizationRequestBaseUri = "oauth2/authorization";
-    Map<String, String> oauth2AuthenticationUrls = new HashMap<>();
-    private final ClientRegistrationRepository clientRegistrationRepository;
-    // Lombok 아닌 경우 (@RequiredArgsConstructor 없는 경우)
-    // @Autowired private ClientRegistrationRepository clientRegistrationRepository;
-    @SuppressWarnings("unchecked")
-    @GetMapping("/login")
-    public String getLoginPage(Model model) throws Exception {
-
-        Iterable<ClientRegistration> clientRegistrations = null;
-        ResolvableType type = ResolvableType.forInstance(clientRegistrationRepository)
-                .as(Iterable.class);
-        if (type != ResolvableType.NONE &&
-                ClientRegistration.class.isAssignableFrom(type.resolveGenerics()[0])) {
-            clientRegistrations = (Iterable<ClientRegistration>) clientRegistrationRepository;
-        }
-        assert clientRegistrations != null;
-        clientRegistrations.forEach(registration ->
-                oauth2AuthenticationUrls.put(registration.getClientName(),
-                        authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
-        model.addAttribute("urls", oauth2AuthenticationUrls);
-
-        return "auth/oauth-login";
-    }
-
-
 
 }
