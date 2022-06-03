@@ -15,7 +15,6 @@
           transition="scale-transition"
           width="40"
         />
-
         <v-img
           alt="Vuetify Name"
           class="shrink mt-1 hidden-sm-and-down"
@@ -25,9 +24,7 @@
           width="100"
         />
       </div>
-
       <v-spacer></v-spacer>
-
       <v-btn
         href="https://github.com/vuetifyjs/vuetify/releases/latest"
         target="_blank"
@@ -45,10 +42,8 @@
 </template>
 
 <script>
-
 export default {
   name: 'App',
-
   data: () => ({
     //
   }),
