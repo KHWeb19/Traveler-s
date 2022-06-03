@@ -7,6 +7,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Date;
 
 @Data
@@ -25,7 +28,7 @@ public class Review {
     private  String rating;
 
     @CreationTimestamp
-    private Date regDate;
+    private String regDate = LocalDateTime.now().format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT));
 
     @UpdateTimestamp
     private Date updDate;
@@ -34,7 +37,8 @@ public class Review {
     private Long userNo;
 
     // 외래키
-    private Long roomNo;
+    private Long hotelNo;
+
 
 
 
