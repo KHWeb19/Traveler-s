@@ -1,4 +1,4 @@
-package com.example.demo.entity.member.Hotel;
+package com.example.demo.entity.Hotel;
 
 import lombok.Data;
 
