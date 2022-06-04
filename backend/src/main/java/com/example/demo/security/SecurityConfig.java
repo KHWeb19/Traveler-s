@@ -2,6 +2,8 @@ package com.example.demo.security;
 
 import com.example.demo.service.member.CustomOAuth2UserService;
 import com.example.demo.utility.customUserDetails.CustomUserDetailsService;
+import com.example.demo.utility.oAtuh2.HttpCookieOAuth2AuthorizationRequestRepository;
+import com.example.demo.utility.oAtuh2.OAuth2AuthenticationSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +27,13 @@ public class SecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
     private final CustomOAuth2UserService customOAuth2UserService;
+    private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+
+    @Bean
+    public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
+        return new HttpCookieOAuth2AuthorizationRequestRepository();
+    }
+
 
 
     //@Bean은 해당 메서드의 리턴되는 오브젝트를 IoC로 등록 해준다
@@ -47,13 +56,15 @@ public class SecurityConfig {
 
         http
                 .oauth2Login()
-                //.authorizationEndpoint()
-                //.baseUri("/oauth2/authorize")
-                //.authorizationRequestRepository(cookieAuthorizationRequestRepository())
-                //.and()
-                //.loginPage("/login") //인증 필요한 페이지 접근시 로그인 안했으면 /login 페이지로 이동
+                .authorizationEndpoint()
+                .baseUri("/oauth2/authorize")
+                .authorizationRequestRepository(cookieAuthorizationRequestRepository())
+                .and()
+                .loginPage("/login") //인증 필요한 페이지 접근시 로그인 안했으면 /login 페이지로 이동
                 .userInfoEndpoint()
-                .userService(customOAuth2UserService);
+                .userService(customOAuth2UserService)
+                .and()
+                .successHandler(oAuth2AuthenticationSuccessHandler);
 
 
         return http.build();

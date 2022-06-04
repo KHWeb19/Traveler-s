@@ -22,32 +22,18 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping
-@CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 public class UserController {
 
     private final UserService userService;
 
     @GetMapping
     public String index(Authentication authentication){
-        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
-        System.out.println("**********" +oAuth2User.getAttributes());
+        //OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+        //System.out.println("**********" +oAuth2User.getAttributes());
 
-        return "세션 확인" + oAuth2User.getAttributes();
+        return "세션 확인";
 
     }
-
-   /* @GetMapping("/googleLogin")
-    public MemberResponse OAuth(Authentication authentication) {
-
-
-
-        CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
-        MemberResponse memberResponse = new MemberResponse();
-        memberResponse.setEmail(customUserDetails.getUser().getEmail());
-        memberResponse.setName(customUserDetails.getUser().getName());
-
-        return memberResponse;
-    }*/
 
     @GetMapping("/listall")
     public List<User> login(){
