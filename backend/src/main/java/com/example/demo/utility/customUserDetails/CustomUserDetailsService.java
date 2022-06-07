@@ -30,5 +30,4 @@ public class CustomUserDetailsService implements UserDetailsService {
         //return 되면 Authentication으로 들어가고 Security session으로 들어감
         return customUserDetails;
     }
-
 }
