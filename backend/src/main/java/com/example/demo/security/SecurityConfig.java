@@ -26,6 +26,7 @@ public class SecurityConfig {
     private final CustomUserDetailsService customUserDetailsService;
     private final CustomOAuth2UserService customOAuth2UserService;
 
+
     //@Bean은 해당 메서드의 리턴되는 오브젝트를 IoC로 등록 해준다
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -33,11 +34,11 @@ public class SecurityConfig {
         //이용자가 자신의 의지와는 무관하게 공격자가 의도한 행위(등록,수정,삭제등)를 특정 웹사이트에 요청하도록 하는 공격
         http.cors();
         http.csrf().disable();
-        http
+        /*http
                 .authorizeRequests()
-                        .antMatchers("/login", "/" , "/register", "/kakaoLogin", "/googleLogin").permitAll()
+                        .antMatchers("/login", "/" , "/register", "/kakaoLogin").permitAll()
                 //.antMatchers("/").access("hasRole('ROLE_USER')")
-                        .anyRequest().authenticated();
+                        .anyRequest().authenticated();*/
 
                 //.and()
                 //.formLogin()
@@ -46,6 +47,10 @@ public class SecurityConfig {
 
         http
                 .oauth2Login()
+                //.authorizationEndpoint()
+                //.baseUri("/oauth2/authorize")
+                //.authorizationRequestRepository(cookieAuthorizationRequestRepository())
+                //.and()
                 //.loginPage("/login") //인증 필요한 페이지 접근시 로그인 안했으면 /login 페이지로 이동
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService);

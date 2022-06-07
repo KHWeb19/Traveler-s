@@ -1,15 +1,19 @@
 <template>
-  <hello-world />
+   <div class="home">
+        <div id="header">
+            <main-page/>
+        </div>
+    </div>
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
+  import MainPage from '../components/mainHome/MainPage.vue'
 
   export default {
     name: 'HomeView',
 
     components: {
-      HelloWorld,
+      MainPage
     },
   }
 </script>
