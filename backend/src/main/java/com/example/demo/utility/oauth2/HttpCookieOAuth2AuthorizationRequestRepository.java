@@ -1,4 +1,4 @@
-package com.example.demo.utility.oAtuh2;
+package com.example.demo.utility.oauth2;
 
 import com.nimbusds.oauth2.sdk.util.StringUtils;
 import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;

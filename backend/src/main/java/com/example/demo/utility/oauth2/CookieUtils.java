@@ -1,4 +1,4 @@
-package com.example.demo.utility.oAtuh2;
+package com.example.demo.utility.oauth2;
 
 import org.springframework.util.SerializationUtils;
 

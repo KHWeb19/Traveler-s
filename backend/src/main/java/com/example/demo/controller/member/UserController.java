@@ -1,16 +1,20 @@
 package com.example.demo.controller.member;
 
+import com.example.demo.dto.member.AuthResponse;
+import com.example.demo.dto.member.LoginRequest;
 import com.example.demo.entity.member.Role;
 import com.example.demo.entity.member.Code;
 import com.example.demo.entity.member.User;
-import com.example.demo.response.MemberResponse;
+import com.example.demo.security.TokenProvider;
 import com.example.demo.service.member.UserService;
-import com.example.demo.utility.customUserDetails.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 ;
-import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -25,7 +29,26 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final AuthenticationManager authenticationManager;
+    private final TokenProvider tokenProvider;
+    
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest){
 
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getEmail(),
+                        loginRequest.getPassword()
+                )
+        );
+
+        log.info("Set authentication");
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String token = tokenProvider.createToken(authentication);
+        return ResponseEntity.ok(new AuthResponse(token));
+    }
+    
     @GetMapping
     public String index(Authentication authentication){
         //OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
@@ -40,7 +63,7 @@ public class UserController {
         return userService.listAll();
     }
 
-    @PostMapping("/register")
+    @PostMapping("/user/register")
     public void register(){
         User user = new User("admin", "admin@gmail.com", "password");
         Role role = new Role("ADMIN");

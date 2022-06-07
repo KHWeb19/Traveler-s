@@ -1,4 +1,4 @@
-package com.example.demo.utility.oAtuh2;
+package com.example.demo.utility.oauth2;
 
 import com.auth0.jwt.JWT;
 import com.example.demo.entity.member.User;
@@ -8,6 +8,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -60,9 +61,15 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         System.out.println(authentication.getPrincipal().toString());
 
-        String name = authentication.getName();
+        //네이버면??
 
-        Optional<User> memberInfo = userRepository.findByEmail(name);
+        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+
+        Map<String, Object> profile = oAuth2User.getAttributes();
+
+        String email = (String) profile.get("email");
+
+        Optional<User> memberInfo = userRepository.findByEmail(email);
 
         List<String> authority = authentication.getAuthorities()
                 .stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
@@ -72,7 +79,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         Algorithm algorithm = Algorithm.HMAC256("urunner".getBytes());
 
         String access_token = JWT.create()
-                .withSubject(name)
+                .withSubject(email)
                 .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 10000)) // 10^-3 초
                 .withIssuer(request.getRequestURI().toString())
                 .withClaim("roles", authority)
@@ -81,6 +88,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                 .sign(algorithm);
 
         System.out.println(access_token);
+        String hi = "hi";
 
         Map<String, String> tokens = new HashMap<>();
 
