@@ -1,8 +1,11 @@
 package com.example.demo.entity.Hotel;
 
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
@@ -15,8 +18,6 @@ public class Hotel {
     @Column(length = 20, nullable = false)
     private String hotelName;
 
-
-    // 현지님 요청 -> 작성자
     @Column(length = 20, nullable = false)
     private String writer;
 
@@ -33,6 +34,13 @@ public class Hotel {
     @Column(length = 20, nullable = false)
     private String extraAddress;
 
-    // 현지님 요청 -> 카카오톡 링크
     @Column(length = 300, nullable = false)
     private String openKakaotalk;
+
+    @CreationTimestamp
+    private Date regDate;
+
+    @UpdateTimestamp
+    private Date updDate;
+
+}

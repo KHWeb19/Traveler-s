@@ -1,7 +1,7 @@
-package com.example.demo.controller.hotel;
+package com.example.demo.controller.Hotel;
 
 import com.example.demo.entity.Hotel.Hotel;
-import com.example.demo.service.hotel.HotelService;
+import com.example.demo.service.Hotel.HotelService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
