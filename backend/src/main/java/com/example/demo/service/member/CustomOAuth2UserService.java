@@ -5,6 +5,7 @@ import com.example.demo.entity.member.Role;
 import com.example.demo.entity.member.User;
 import com.example.demo.repository.member.UserRepository;
 
+import com.example.demo.utility.customUserDetails.CustomUserDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -70,7 +71,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         }else{
             //로그인한적이 없는 경우
             //setter 대신 builder 고려
-            //비밀번호는 어떻게 해야하는지 강사님한테 여쭤보기
+            //비밀번호는 어떻게 해야하는지 강사님한테 여쭤보기 -> 이메일,이름기반으로 uuid?
             //전화번호는 본인인증 후 db에 넣는것으로 하기
             //이름은 예약할때 변경할 수 있도록하기
             userEntity = new User();
