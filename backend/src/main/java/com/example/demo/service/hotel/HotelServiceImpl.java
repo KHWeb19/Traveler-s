@@ -1,7 +1,7 @@
-package com.example.demo.service.hotel;
+package com.example.demo.service.Hotel;
 
 import com.example.demo.entity.Hotel.Hotel;
-import com.example.demo.repository.hotel.HotelRepository;
+import com.example.demo.repository.Hotel.HotelRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -12,10 +12,15 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class HotelServiceImpl implements HotelService {
+public class HotelServiceImpl implements com.example.demo.service.Hotel.HotelService {
 
     @Autowired
     HotelRepository repository;
+
+    @Override
+    public void register(Hotel hotel) {
+        repository.save(hotel);
+    }
 
     @Override
     public List<Hotel> list() {
@@ -39,5 +44,15 @@ public class HotelServiceImpl implements HotelService {
 
         return maybeReadBoard.get();
 
+    }
+
+    @Override
+    public void modify(Hotel hotel) {
+        repository.save(hotel);
+    }
+
+    @Override
+    public void remove(Integer hotelNo) {
+        repository.deleteById(Long.valueOf(hotelNo));
     }
 }
