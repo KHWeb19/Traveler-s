@@ -11,39 +11,20 @@ public class HotelInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String infoId;
 
-    @Column
     private int oceanView;
-
-    @Column
     private int terrace;
-
-    @Column
     private int swimmingPool;
-
-    @Column
     private int carCharge;
-
-    @Column
     private int nearAirport;
-
-    @Column
     private int golfCourse;
-
-    @Column
     private int freeParking;
-
-    @Column
     private int bbqGrill;
-
-    @Column
     private int pet;
-
-    @Column
     private int pension;
-
-    @Column
     private int spa;
-
-    @Column
     private int ski;
+
+    @ManyToOne
+    @JoinColumn(name = "hotel_info")
+    private Hotel hotelinfo;
 }
