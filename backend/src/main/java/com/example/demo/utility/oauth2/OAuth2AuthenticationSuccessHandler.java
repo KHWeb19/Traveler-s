@@ -5,6 +5,7 @@ import com.example.demo.entity.member.User;
 import com.example.demo.repository.member.UserRepository;
 import com.auth0.jwt.algorithms.Algorithm;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Component
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
@@ -63,6 +65,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         //네이버면??
 
+
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
 
         Map<String, Object> profile = oAuth2User.getAttributes();
@@ -74,23 +77,22 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         List<String> authority = authentication.getAuthorities()
                 .stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
 
-        System.out.println("권한 설정 여부 " + authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
+        System.out.println("******" + authority.get(0));
 
-        Algorithm algorithm = Algorithm.HMAC256("urunner".getBytes());
 
+        Algorithm algorithm = Algorithm.HMAC256("SOMESECRET".getBytes());
+        //tokenprovider써가지고 authentication 넣으면 되게하면되나?
         String access_token = JWT.create()
                 .withSubject(email)
                 .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 10000)) // 10^-3 초
                 .withIssuer(request.getRequestURI().toString())
                 .withClaim("roles", authority)
-                .withClaim("name", memberInfo.get().getName())
-                .withClaim("email", memberInfo.get().getEmail())
                 .sign(algorithm);
 
         System.out.println(access_token);
-        String hi = "hi";
 
-        Map<String, String> tokens = new HashMap<>();
+
+       //Map<String, String> tokens = new HashMap<>();
 
 
         return UriComponentsBuilder.fromUriString(targetUrl)

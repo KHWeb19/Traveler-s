@@ -24,6 +24,8 @@ public class TokenProvider {
 
         Algorithm algorithm = Algorithm.HMAC256("SOMESECRET".getBytes());
 
+
+        //토큰에 개인정보 지금 들어가는가?
         return JWT.create()
                 .withSubject(authentication.getPrincipal().toString())
                 .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 15))
