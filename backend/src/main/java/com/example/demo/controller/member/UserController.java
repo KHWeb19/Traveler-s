@@ -2,6 +2,7 @@ package com.example.demo.controller.member;
 
 import com.example.demo.dto.member.AuthResponse;
 import com.example.demo.dto.member.LoginRequest;
+import com.example.demo.dto.member.MobileRequest;
 import com.example.demo.entity.member.Role;
 import com.example.demo.entity.member.Code;
 import com.example.demo.entity.member.User;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Random;
 
 
 @Slf4j
@@ -88,6 +90,23 @@ public class UserController {
         log.info("result = " + result);
 
         return result;
+    }
+
+    @PostMapping("/check-number")
+    public String checkNumber(@RequestBody MobileRequest mobile){
+        Random rand  = new Random();
+        String numStr = "";
+        for(int i=0; i<4; i++) {
+            String ran = Integer.toString(rand.nextInt(10));
+            numStr+=ran;
+        }
+        log.info("numStr : " + numStr);
+        String phoneNumber = mobile.getMobile();
+        log.info("mobile :" + phoneNumber);
+        userService.cellPhoneCheck(phoneNumber, numStr);
+
+        return numStr;
+
     }
 
 }

@@ -9,4 +9,5 @@ public interface UserService {
     List<User> listAll();
     void addUser(User user);
     void addRoleToUser(User user, Role role);
+    void cellPhoneCheck(String phoneNumber,String sendMsg);
 }
