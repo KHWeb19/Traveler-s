@@ -1,25 +1,29 @@
-package com.example.demo.controller.hotel;
+package com.example.demo.controller.Hotel;
 
 import com.example.demo.entity.Hotel.Hotel;
-import com.example.demo.service.hotel.HotelService;
+import com.example.demo.service.Hotel.HotelService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Slf4j
 @RestController
 @RequestMapping("/hotel")
+//@CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 public class HotelController {
 
     @Autowired
     private HotelService hotelService;
 
+    @PostMapping("/hotelregister")
+    public void hotelRegister (@Validated @RequestBody Hotel hotel) {
+        log.info("hotelRegister()");
 
+        hotelService.register(hotel);
+    }
     @GetMapping("/hotelList")
     public List<Hotel> hotelList () { //메인 페이지에서 호텔 list 불러오기
         log.info("HotelList ()");
@@ -35,6 +39,25 @@ public class HotelController {
         return hotelService.read(hotelNo);
     }
 
+    // modify
+    @PutMapping("/{hotelNo}")
+    public Hotel hotelModify (
+            @PathVariable("hotelNo") Integer hotelNo,
+            @RequestBody Hotel hotel) {
+        log.info("hotelModify(): " + hotel);
 
+        hotel.setHotelNo(Long.valueOf(hotelNo));
+        hotelService.modify(hotel);
 
+        return hotel;
+    }
+
+    //remove
+    @DeleteMapping("/{hotelNo}")
+    public void hotelRemove (
+            @PathVariable("hotelNo") Integer hotelNo) {
+        log.info("hotelRemove()");
+
+        hotelService.remove(hotelNo);
+    }
 }
