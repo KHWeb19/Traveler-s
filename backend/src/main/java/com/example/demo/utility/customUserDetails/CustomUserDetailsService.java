@@ -3,11 +3,13 @@ package com.example.demo.utility.customUserDetails;
 import com.example.demo.entity.member.User;
 import com.example.demo.repository.member.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.Optional;
 
 @Service
@@ -28,6 +30,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         UserDetails customUserDetails = new CustomUserDetails(user.get());
         //return 되면 Authentication으로 들어가고 Security session으로 들어감
+        Collection<? extends GrantedAuthority> authorities = customUserDetails.getAuthorities();
+
         return customUserDetails;
     }
 }
