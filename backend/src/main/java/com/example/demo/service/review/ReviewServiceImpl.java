@@ -12,11 +12,29 @@ public class ReviewServiceImpl  implements ReviewService{
     @Autowired
     ReviewRepository reviewRepository;
 
-    @Override
-    public void register(Review review) { reviewRepository.save(review);
+    /**
+     @Autowired
+     HotelRepository hotelRepository;
 
-    }
+     */
 
+/**
+ @Override
+ public void register(Review review, Long hotelNo){
+ Optional<Hotel> findProduct = hotelRepository.findById(hotelNo);
+
+ review.setHotel(findProduct.get());
+ reviewRepository.save(review);
+
+ }
+ */
+    /**
+     @Override
+     public List<Review> list(Long hotelNo) {
+     // Hotel hotel = hotelRepository.finById(hotelNo).get();
+     return reviewRepository.findReviewByHotelNo(hotel);
+     }
+     */
 
 
     @Override
@@ -25,7 +43,7 @@ public class ReviewServiceImpl  implements ReviewService{
     }
 
     @Override
-    public void remove(Integer reviewNo) { reviewRepository.deleteById(Long.valueOf(reviewNo));
+    public void remove(Long reviewNo) { reviewRepository.deleteById(Long.valueOf(reviewNo));
 
     }
 
