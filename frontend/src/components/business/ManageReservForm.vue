@@ -26,39 +26,31 @@
 
     <template>
         <div class="b_table">
-            <table style="width: 80%">
+            <table style="width: 80%;">
                 <tr>
-                    <th align="center" width="100">날짜</th>
-                    <th align="center" width="540">객실명</th>
+                    <th align="center" width="160">날짜</th>
+                    <th align="center" width="300">객실명</th>
                     <th align="center" width="150">고객명</th>
                     <th align="center" width="150">숙박인원</th>
                     <th align="center" width="130">  </th>
                 </tr>
 
-                <tr v-if="!reservs || (Array.isArray(reservs) && reservs.length === 0)">
-                    <td colspan="5">
-                        현재 예약 고객이 없습니다!
-                    </td>
-                </tr>
-                <tr v-else v-for="reserv in reservs" :key="reserv.reservNo">
+                <tr>
                     <td align="center"> <!-- 날짜 -->
-                        {{ reserv.regDate }}
+                        <p>2022.06.09</p>
                     </td>
 
-                    <td align="left"> <!-- 객실명 -->
-                        {{ reserv.room_name}}
+                    <td align="center"> <!-- 객실명 -->
+                        <p>패밀리 독채</p>
                     </td>
-                    <td align="right"> <!-- 고객명 -->
-                        {{ reserv.name }}
+                    <td align="center"> <!-- 고객명 -->
+                        <p>김땡땡</p>
                     </td>
-                    <td  align="center"> <!-- 숙박인원 -->
-                        {{ reserv.personnel }}
+                    <td align="center"> <!-- 숙박인원 -->
+                        <p>4~6인</p>
                     </td>
                     <td align="center">
-                        <router-link :to="{ name: 'JpaBoardReadPage',
-                                            params: { boardNo: reserv.reservNo.toString() } }">
-                            <v-btn>상세보기</v-btn>
-                        </router-link>
+                        <reserv-detail/>
                     </td>
                 </tr>                
             </table>
@@ -71,11 +63,13 @@
 </template>
 
 <script>
+import ReservDetail from '@/components/business/ReservDetail.vue'
 
 
 export default {
     name: 'ManageReservForm',
     components: {
+        ReservDetail
         
     }    
 }
@@ -85,6 +79,9 @@ export default {
 <style scoped>
 .table, th, td{
     border: 1px solid #444444;
+}
+.td{
+    vertical-align: middle;
 }
 #search{
     width:80%;
