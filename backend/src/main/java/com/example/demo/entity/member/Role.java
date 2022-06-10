@@ -4,11 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class Role{
@@ -20,7 +23,7 @@ public class Role{
 
     @JsonIgnore
     @ManyToMany(mappedBy="roles")
-    private Collection<User> users = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 
     public Role(String name) {
         this.name = name;
