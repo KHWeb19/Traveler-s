@@ -1,21 +1,7 @@
 <template>
   <div>
-    <!-- side bar-->
     <side-bar/>
     <hotel-register-form/>
-    <div class="hotelname">
-        <h3>기본정보</h3>
-        <p>*은 필수 입력사항입니다.</p>
-    </div>
-    <div class="hotelInfo">
-        <h3>시설정보</h3>
-    </div>
-    <div class="hotelAddress">
-        <h3>위치정보</h3>
-    </div>
-    <div class="hotelImg">
-        <h3>이미지</h3>
-    </div>
   </div>
 </template>
 
