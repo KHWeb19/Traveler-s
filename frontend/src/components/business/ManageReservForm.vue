@@ -2,13 +2,14 @@
     <v-container>
 
         <template>
+            <div align="center" style="width: 80%">
             <v-col>
                 <v-row>
                     <v-text-field
                     class="search"
                     v-model="keyWord"
                     label="Search"
-                    placeholder="작성자를 검색해주세요."
+                    placeholder="키워드를 입력해주세요."
                     single-line
                     hide-details
                     ></v-text-field>
@@ -21,32 +22,39 @@
                     </v-col>
                 </v-row>
             </v-col>
+            </div>
         </template>
     <br>
 
     <template>
-        <div class="b_table">
-            <table style="width: 80%;">
+        <div>
+            <table style="width: 80%; ">
                 <tr>
-                    <th align="center" width="160">날짜</th>
-                    <th align="center" width="300">객실명</th>
+                    <th align="center" width="160">체크인 날짜</th>
+                    <th align="center" width="300"  colspan="2">객실명</th>
                     <th align="center" width="150">고객명</th>
                     <th align="center" width="150">숙박인원</th>
                     <th align="center" width="130">  </th>
                 </tr>
 
                 <tr>
-                    <td align="center"> <!-- 날짜 -->
+                    <td id="tdPad" align="center"> <!-- 날짜 -->
                         <p>2022.06.09</p>
+                    </td>                
+
+                    <td id="tdPad" align="center">
+                        <v-img id="roomImg" :src="require(`@/assets/hotelImage/hotel1.jpg`)"/>
                     </td>
 
-                    <td align="center"> <!-- 객실명 -->
-                        <p>패밀리 독채</p>
+                    <td id="tdPad" align="center"> <!-- 객실명 -->
+                    <v-col>                            
+                            <p>패밀리 독채</p>
+                    </v-col>
                     </td>
-                    <td align="center"> <!-- 고객명 -->
+                    <td id="tdPad" align="center"> <!-- 고객명 -->
                         <p>김땡땡</p>
                     </td>
-                    <td align="center"> <!-- 숙박인원 -->
+                    <td id="tdPad" align="center"> <!-- 숙박인원 -->
                         <p>4~6인</p>
                     </td>
                     <td align="center">
@@ -77,13 +85,21 @@ export default {
 
 
 <style scoped>
-.table, th, td{
+table{
     border: 1px solid #444444;
 }
-.td{
-    vertical-align: middle;
+th{
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+}
+#tdPad{
+    padding-top: 15px;
 }
 #search{
     width:80%;
+}
+#roomImg{
+    width: 100px;
+    height: 100px;
 }
 </style>

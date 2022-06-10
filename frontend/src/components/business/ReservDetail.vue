@@ -3,7 +3,7 @@
       <v-layout justify-center>
             <v-dialog  v-model="findPw" resisten max-width="800px">
                <template v-slot:activator="{ on }">
-               <v-btn style="color: black " id="findPw" v-on="on">
+               <v-btn style="color: black" v-on="on">
                   상세보기
                </v-btn>
                </template>
@@ -13,6 +13,9 @@
                   </v-card-title>
 
                   <form>
+
+   <!-- disabled는 컨트롤러로 값이 넘어오지 않는다.
+      readonly를 사용하면 입력만 막고 값은 넘길 수 있다. -->
 
                      <table>
                         <tr>
