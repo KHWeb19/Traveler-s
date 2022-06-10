@@ -3,9 +3,7 @@ package com.example.demo.controller.member;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.demo.dto.member.AuthResponse;
-import com.example.demo.dto.member.LoginRequest;
-import com.example.demo.dto.member.MobileRequest;
+import com.example.demo.dto.member.*;
 import com.example.demo.entity.member.Role;
 import com.example.demo.entity.member.Code;
 import com.example.demo.entity.member.User;
@@ -87,12 +85,31 @@ public class UserController {
     }
 
     @PostMapping("/user/register")
-    public void register(){
-        User user = new User("admin", "admin2@gmail.com", "password");
-        Role role = new Role("ADMIN");
+    public String register(@RequestBody MemberRequest userRequest){
+        log.info("userRequest :" + userRequest);
+        String duplicationMessage = userService.emailDuplicationCheck(userRequest.getEmail());
+
+        if(duplicationMessage != null){
+            return duplicationMessage;
+        }
+
+        Role role = new Role(userRequest.getRole());
+        List<Role> roleList = new ArrayList<>();
+        roleList.add(role);
+
+        User user = User.builder()
+                .email(userRequest.getEmail())
+                .password(userRequest.getPassword())
+                .name(userRequest.getName())
+                .roles(roleList)
+                .mobile(userRequest.getMobile())
+                .build();
+
         userService.addUser(user);
 
         userService.addRoleToUser(user, role);
+
+        return "가입되었습니다";
     }
 
     @GetMapping("/kakaoLogin")
@@ -115,6 +132,12 @@ public class UserController {
 
     @PostMapping("/check-number")
     public String checkNumber(@RequestBody MobileRequest mobile){
+
+        String duplicationMessage = userService.mobileDuplicationCheck(mobile);
+
+        if(duplicationMessage != null){
+            return duplicationMessage;
+        }
         Random rand  = new Random();
         String numStr = "";
         for(int i=0; i<4; i++) {
@@ -135,7 +158,8 @@ public class UserController {
         log.info("Refreshing tokens...");
 
         String authorizationHeader = request.getHeader(AUTHORIZATION);
-
+        HttpSession session = request.getSession();
+        log.info(request.getRequestedSessionId());
         log.info(httpSession.getAttribute("key").toString());
 
         if (httpSession.getAttribute("key").equals(authorizationHeader)) {
