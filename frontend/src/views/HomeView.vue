@@ -1,66 +1,29 @@
 <template>
 	<div class="home_wrap">
+		<v-container>
+		<ChoseDate>
+		</ChoseDate>
+		<!--<ChoseNum>
+		</ChoseNum>-->
+		</v-container>
 		<section id="theme_search">
 			<div class="inner">
-				<h1>테마검색</h1>
-
+				<v-spacer></v-spacer>
 				<div class="theme">
-					<article>
-						<div class="pic">					
-							<p>#공항근처</p>
-						</div>
-					</article>
-					<article>
-						<div class="pic">							
-							<p>#반려동물</p>
-						</div>
-					</article>
-					<article>
-						<div class="pic">
-							<p>#조식</p>
-						</div>
-					</article>
-					<article>
-						<div class="pic">					
-							<p>#오션뷰</p>
-						</div>
-					</article>
-					<article>
-						<div class="pic">					
-							<p>#풀빌라</p>
-						</div>
-					</article>
-					<article>
-						<div class="pic">						
-							<p>#바베큐그릴</p>
-						</div>
-					</article>
-					<br>
-					<article>
-						<div class="pic">						
-							<p>#무료주차</p>
-						</div>
-					</article>
-					<article>
-						<div class="pic">						
-							<p>#팬션</p>
-						</div>
-					</article>
-					<article>
-						<div class="pic">						
-							<p>#스키장</p>
-						</div>
-					</article>
-					<article>
-						<div class="pic">						
-							<p>#온천</p>
-						</div>
-					</article>
-					<article>
-						<div class="pic">						
-							<p>#특급호텔</p>
-						</div>
-					</article>
+					<v-container style="width: 1200px">
+						<h1>테마검색</h1>
+						<v-row justify="center">
+							<v-card align="center">
+								<br>
+								<v-card-actions>
+									<v-spacer></v-spacer>
+									<v-btn>
+										#공항근처
+									</v-btn>
+								</v-card-actions>
+							</v-card>
+						</v-row>
+					</v-container>
 
 				</div>
 			</div>
@@ -68,9 +31,25 @@
 	</div>
 </template>
 
+
 <script>
+//import ChoseNum from '@/components/mainHome/ChoseNum.vue'
+import ChoseDate from '@/components/mainHome/ChoseDate.vue';
+
+  export default {
+ components: {
+	//ChoseNum,
+	ChoseDate
+   },
+
+   data: ()=>({
+
+   }),
+  };
 
 </script>
+
+
 
 <style scoped>
 	.home_wrap {
