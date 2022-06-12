@@ -20,7 +20,7 @@
                 <v-text-field class="name" :rules="nameRules" v-model="name"
                     label="이름" type="text" prepend-icon="mdi-account">
                 </v-text-field>
-                <!--<div class="phone-number">
+                <div class="phone-number">
                     <table v-if="numberCheck == false">
                         <tr>
                             <td><v-icon>mdi-cellphone</v-icon></td>
@@ -62,12 +62,12 @@
                             <td>
                                 <input class="authentication" type="text" v-model="submitNum" readonly>
                                 <v-btn @click="checkNumber()" disabled>
-                                확인
+                                완료
                                 </v-btn>   
                             </td>
                         </tr>
                     </table>
-                </div> -->
+                </div>
                 
                 <div class="button">
                 <v-btn text @click="signUp()">
@@ -127,7 +127,7 @@ export default {
             passwordRules: [
                             v => !! v || '비밀번호를 작성해주세요.',
                             v =>  /^[a-zA-Z0-9]*$/.test(v) || '영문+숫자로만 입력해주세요',
-                            v => /[a-zA-Z]+$/.test(v) || /[0-9]+$/.test(v) || "이건되나?",
+                            v => /(?=.*[0-9])(?=.*[a-zA-ZS])/.test(v) || "섞어섞어섞어국밥",
                             v => !(v && v.length < 8) || '8자리이상으로해주세요' ,
                             v => !(v && v.length > 15) || '15자리를 넘길수없습니다.' 
             ]
@@ -135,13 +135,13 @@ export default {
     },
     methods: {
         signUp () {
-            //const validate = this.$refs.form.validate();
+            const validate = this.$refs.form.validate();
             const role = (this.radioGroup == '개인' ? 'ROLE_USER' : 'ROLE_CEO')
-            //if(validate && this.certification == true ){
+            if(validate && this.certification == true ){
                 const {email, password, name, mobile} = this
                 this.$emit('signUp', {email, password, name, mobile, role})
                
-           // }
+            }
         },
         checkPhoneNumber () {
             this.numberCheck = true
