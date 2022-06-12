@@ -1,6 +1,5 @@
 package com.example.demo.service.member;
 
-import com.example.demo.dto.member.MobileRequest;
 import com.example.demo.entity.member.Role;
 import com.example.demo.entity.member.User;
 import com.example.demo.repository.member.UserRepository;
@@ -29,7 +28,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) {
-
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         userRepository.save(user);
@@ -38,12 +36,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addRoleToUser(User user, Role role) {
         user.getRoles().add(role);
-
         userRepository.save(user);
     }
 
     @Override
-    public void cellPhoneCheck(String phoneNumber, String numStr) {
+    public void cellPhoneCheck(String phoneNumber,String numStr) {
 
         String api_key = "NCS1QRDDXPIDHH1Y";
         String api_secret = "JMVREMDWHT58DCC22NT11OILTTRMYFVY";
@@ -66,34 +63,8 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
+   @Override
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
-    }
-
-    @Override
-    public String emailDuplicationCheck(String email) {
-        String message;
-
-        Optional<User> checkEmail = userRepository.checkEmail(email);
-        if (!checkEmail.equals(Optional.empty())) {
-            message = "이메일 중복입니다";
-
-            return message;
-        }
-        return null;
-    }
-
-    @Override
-    public String mobileDuplicationCheck(MobileRequest mobile) {
-
-        Optional<User> checkMobile = userRepository.checkMobile(mobile.getMobile());
-        if (!checkMobile.equals(Optional.empty())) {
-            String message = new String("이미 인증된 전화번호입니다");
-
-            return message;
-        }
-
-        return null;
     }
 }

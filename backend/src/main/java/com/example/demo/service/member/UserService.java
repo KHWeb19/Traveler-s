@@ -1,6 +1,5 @@
 package com.example.demo.service.member;
 
-import com.example.demo.dto.member.MobileRequest;
 import com.example.demo.entity.member.Role;
 import com.example.demo.entity.member.User;
 
@@ -13,6 +12,4 @@ public interface UserService {
     void addRoleToUser(User user, Role role);
     void cellPhoneCheck(String phoneNumber,String sendMsg);
     Optional<User> findByEmail(String email);
-    String emailDuplicationCheck(String email);
-    String mobileDuplicationCheck(MobileRequest mobile);
 }
