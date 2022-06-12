@@ -1,5 +1,6 @@
 package com.example.demo.service.member;
 
+import com.example.demo.dto.member.MemberRequest;
 import com.example.demo.dto.member.MobileRequest;
 import com.example.demo.entity.member.Role;
 import com.example.demo.entity.member.User;
@@ -11,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -28,10 +30,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addUser(User user) {
+    public void addUser(MemberRequest userRequest) {
 
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
+        String encodedPassword = passwordEncoder.encode(userRequest.getPassword());
+
+        Role role = new Role(userRequest.getRole());
+        List<Role> roleList = new ArrayList<>();
+        roleList.add(role);
+
+        User user = User.builder()
+                .email(userRequest.getEmail())
+                .password(encodedPassword)
+                .name(userRequest.getName())
+                .roles(roleList)
+                .mobile(userRequest.getMobile())
+                .build();
+
+        //user.setPassword(encodedPassword);
         userRepository.save(user);
     }
 

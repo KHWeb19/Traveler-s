@@ -23,6 +23,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -64,23 +65,14 @@ public class UserController {
         String access_token = tokenProvider.createAccessToken(authentication);
         String refresh_token = tokenProvider.createRefreshToken(authentication);
 
-
         httpSession.setAttribute("key", refresh_token);
 
         return ResponseEntity.ok(new AuthResponse(access_token, refresh_token));
     }
-    
-    @GetMapping
-    public String index(Authentication authentication){
-        //OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
-        //System.out.println("**********" +oAuth2User.getAttributes());
-
-        return "세션 확인";
-
-    }
 
     @GetMapping("/listall")
     public List<User> login(){
+        log.info("()()()))");
         return userService.listAll();
     }
 
@@ -93,7 +85,7 @@ public class UserController {
             return duplicationMessage;
         }
 
-        Role role = new Role(userRequest.getRole());
+       /* Role role = new Role(userRequest.getRole());
         List<Role> roleList = new ArrayList<>();
         roleList.add(role);
 
@@ -103,11 +95,11 @@ public class UserController {
                 .name(userRequest.getName())
                 .roles(roleList)
                 .mobile(userRequest.getMobile())
-                .build();
+                .build();*/
 
-        userService.addUser(user);
+        userService.addUser(userRequest);
 
-        userService.addRoleToUser(user, role);
+        //userService.addRoleToUser(user, role);
 
         return "가입되었습니다";
     }
@@ -152,14 +144,13 @@ public class UserController {
         return numStr;
 
     }
-
+    //엑세스 토큰이 만료되면 이쪽으로 url을 보내서 refresh_token을 확인 한다고 함
     @PostMapping("/refreshtoken")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         log.info("Refreshing tokens...");
 
         String authorizationHeader = request.getHeader(AUTHORIZATION);
-        HttpSession session = request.getSession();
-        log.info(request.getRequestedSessionId());
+
         log.info(httpSession.getAttribute("key").toString());
 
         if (httpSession.getAttribute("key").equals(authorizationHeader)) {
