@@ -9,23 +9,26 @@
             cols="12" sm="3" md="3" lg="3">
         <v-card 
           @click="clickHotel(Hotel.hotel_no, hotelName)">
-          <img :src="Hotel.HotelImg.origFileName"/>
+          <img :src="require(`@/assets/${item.hotelImg}.png`)"/>
           <v-card-title class="justify-center">{{ Hotel.hotelname }}</v-card-title>
           <v-card-text>
-            <v-row align="center">
+            
               
-            <!--별점 이쪽을 잘모르겠네요..-->
+            <!--별점 이쪽을 잘모르겠네요.. 시간되면 진행하는걸로! (좋아요 누적?)
+            <v-row align="center">
               <v-rating :value="5" color="amber" half-increments size="18" margin="0"></v-rating>   
               <div class="grey--text ms-4">
                 0~5점 (참여인수)
               </div>
+               </v-row>
+-->
 
-
-            </v-row>
+           <!-- 이것도 나중에? 진행할수있으면 진행!
             <v-card-text>
-
               {{ Hotel.room.price }}
             </v-card-text>
+-->
+
           </v-card-text>
           <v-divider></v-divider>
           <v-card-text>
@@ -47,8 +50,34 @@
 <script>
 export default {
   name: 'HotelRandom',
-  
-  
+/* 고쳐야됨
+  data() {
+        return {
+            keyWord: ''
+        }
+    },
+    methods: {
+        register() {
+            this.$router.push({ name:'tipRegisterPage' })
+        },
+        search() {
+            const { keyWord } = this;
+            axios.post("http://localhost:7777/tipboard/search", { keyWord })
+                .then((res) => {
+                console.log(res.data);
+                alert("검색 완료");
+                this.$router.push({ name: 'livingTipSearchList', params: { searchList: res.data, keyWord: this.keyWord },
+                    })
+                    .catch(() => {});
+                })
+                .catch(() => {
+                alert("검색 실패");
+            });
+        },
+    }
+}
+
+*/
 }
 </script>
 
