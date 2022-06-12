@@ -149,7 +149,7 @@
                      <v-btn>
                            수정
                      </v-btn>
-                     <v-btn>
+                     <v-btn @click.stop="$emit('close')">
                            닫기
                      </v-btn>
                      <v-spacer></v-spacer>
@@ -162,6 +162,7 @@
 
 <script>
 export default {
+   name: 'reservDatail',
 
 }
 </script>
