@@ -5,22 +5,17 @@
 		</ChoseDate>
 		<!--<ChoseNum>
 		</ChoseNum>-->
+		<ThemeSearch>
+		</ThemeSearch>
 		</v-container>
 		<section id="theme_search">
 			<div class="inner">
 				<v-spacer></v-spacer>
 				<div class="theme">
 					<v-container style="width: 1200px">
-						<h1>테마검색</h1>
 						<v-row justify="center">
 							<v-card align="center">
-								<br>
-								<v-card-actions>
-									<v-spacer></v-spacer>
-									<v-btn>
-										#공항근처
-									</v-btn>
-								</v-card-actions>
+								
 							</v-card>
 						</v-row>
 					</v-container>
@@ -35,11 +30,13 @@
 <script>
 //import ChoseNum from '@/components/mainHome/ChoseNum.vue'
 import ChoseDate from '@/components/mainHome/ChoseDate.vue';
+import ThemeSearch from '@/components/mainHome/ThemeSearch.vue';
 
   export default {
  components: {
 	//ChoseNum,
-	ChoseDate
+	ChoseDate,
+	ThemeSearch
    },
 
    data: ()=>({
