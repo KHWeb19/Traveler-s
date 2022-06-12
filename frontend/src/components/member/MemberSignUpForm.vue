@@ -62,7 +62,7 @@
                             <td>
                                 <input class="authentication" type="text" v-model="submitNum" readonly>
                                 <v-btn @click="checkNumber()" disabled>
-                                완료
+                                확인
                                 </v-btn>   
                             </td>
                         </tr>

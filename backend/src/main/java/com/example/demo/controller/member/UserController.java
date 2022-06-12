@@ -3,7 +3,10 @@ package com.example.demo.controller.member;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.demo.dto.member.*;
+import com.example.demo.dto.member.AuthResponse;
+import com.example.demo.dto.member.LoginRequest;
+import com.example.demo.dto.member.MemberRequest;
+import com.example.demo.dto.member.MobileRequest;
 import com.example.demo.entity.member.Role;
 import com.example.demo.entity.member.Code;
 import com.example.demo.entity.member.User;
@@ -50,7 +53,7 @@ public class UserController {
     private final HttpSession httpSession;
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest){
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest, HttpServletResponse response){
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -65,9 +68,11 @@ public class UserController {
         String access_token = tokenProvider.createAccessToken(authentication);
         String refresh_token = tokenProvider.createRefreshToken(authentication);
 
+        CookieUtils.addCookie(response, "refresh_token", refresh_token, 12096000);
+
         httpSession.setAttribute("key", refresh_token);
 
-        return ResponseEntity.ok(new AuthResponse(access_token, refresh_token));
+        return ResponseEntity.ok(new AuthResponse(access_token));
     }
 
     @GetMapping("/listall")
@@ -77,11 +82,11 @@ public class UserController {
     }
 
     @PostMapping("/user/register")
-    public String register(@RequestBody MemberRequest userRequest){
+    public String register(@RequestBody MemberRequest userRequest) {
         log.info("userRequest :" + userRequest);
         String duplicationMessage = userService.emailDuplicationCheck(userRequest.getEmail());
 
-        if(duplicationMessage != null){
+        if (duplicationMessage != null) {
             return duplicationMessage;
         }
 
@@ -140,53 +145,38 @@ public class UserController {
         String phoneNumber = mobile.getMobile();
         log.info("mobile :" + phoneNumber);
         userService.cellPhoneCheck(phoneNumber, numStr);
-
         return numStr;
-
     }
     //엑세스 토큰이 만료되면 이쪽으로 url을 보내서 refresh_token을 확인 한다고 함
     @PostMapping("/refreshtoken")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         log.info("Refreshing tokens...");
-
         String authorizationHeader = request.getHeader(AUTHORIZATION);
-
         log.info(httpSession.getAttribute("key").toString());
-
         if (httpSession.getAttribute("key").equals(authorizationHeader)) {
-
             if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
                 log.info("***********");
                 try {
                 /*
                 Optional<Cookie> refresh_cookie = CookieUtils.getCookie(request, "refresh_token");
-
                 String refresh_token = refresh_cookie.get().getValue();
                 */
                     String refresh_token = authorizationHeader.replace("Bearer ", "");
                     log.info("refresh_token: {} at refresh endpoint", refresh_token);
-
                     DecodedJWT decodedJWT = tokenProvider.decodeJwt(refresh_token);
-
                     String email = decodedJWT.getSubject();
                     User user = userService.findByEmail(email).get();
-
                     Algorithm algorithm = Algorithm.HMAC256("SOMESECRET".getBytes());
-
                     String access_token = JWT.create()
                             .withSubject(user.getEmail())
                             .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 15))
                             .withClaim("roles", user.getRoles().stream().map(Role::getName).collect(Collectors.toList()))
                             .sign(algorithm);
-
-
                     Map<String, String> tokens = new HashMap<>();
                     tokens.put("access_token", access_token);
-
                     //tokens.put("refresh_token",  refresh_token);
                     response.setContentType(APPLICATION_JSON_VALUE);
                     new ObjectMapper().writeValue(response.getOutputStream(), tokens);
-
                 } catch (Exception exception) {
                     response.setHeader("error", exception.getMessage());
                     response.setStatus(UNAUTHORIZED.value());
@@ -196,7 +186,6 @@ public class UserController {
                     response.setContentType(APPLICATION_JSON_VALUE);
                     new ObjectMapper().writeValue(response.getOutputStream(), error);
                 }
-
             } else {
                 throw new RuntimeException("Refresh token is missing");
             }
