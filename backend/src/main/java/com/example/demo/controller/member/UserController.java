@@ -49,7 +49,7 @@ public class UserController {
     private final HttpSession httpSession;
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest){
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest, HttpServletResponse response){
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -64,12 +64,13 @@ public class UserController {
         String access_token = tokenProvider.createAccessToken(authentication);
         String refresh_token = tokenProvider.createRefreshToken(authentication);
 
+        CookieUtils.addCookie(response, "refresh_token", refresh_token, 12096000);
 
         httpSession.setAttribute("key", refresh_token);
 
-        return ResponseEntity.ok(new AuthResponse(access_token, refresh_token));
+        return ResponseEntity.ok(new AuthResponse(access_token));
     }
-    
+    /*
     @GetMapping
     public String index(Authentication authentication){
         //OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
@@ -77,7 +78,7 @@ public class UserController {
 
         return "세션 확인";
 
-    }
+    }*/
 
     @GetMapping("/listall")
     public List<User> login(){
@@ -85,6 +86,7 @@ public class UserController {
     }
 
     @PostMapping("/user/register")
+
     public String register(@RequestBody MemberRequest userRequest){
         log.info("userRequest :" + userRequest);
         String duplicationMessage = userService.emailDuplicationCheck(userRequest.getEmail());
@@ -104,6 +106,11 @@ public class UserController {
                 .roles(roleList)
                 .mobile(userRequest.getMobile())
                 .build();
+
+
+    public void register(){
+        User user = new User("admin", "admin@gmail.com", "password");
+        Role role = new Role("ADMIN");
 
         userService.addUser(user);
 
