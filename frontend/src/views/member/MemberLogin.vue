@@ -1,24 +1,42 @@
 <template>
     <v-container class="content">
-        <div class="content_body">
-            <div class="content_body--input">
-                <div>
-                    <input type="text" v-model="email" placeholder="아이디">
-                </div>
-                <div>
-                    <input type="password" v-model="password" placeholder="비밀번호">
-                </div>
-                <v-btn @click="clickBtnEmail" class="primary content_body--input--button">로그인</v-btn>
-            </div>
-            <div>
-                <button @click="clickBtnGoogle"><img src="../../assets/img/login_google.png" width="400" height="100"></button>
-            </div>
-            <div>
-                <button @click="clickBtnNaver"><img src="../../assets/img/login_naver.png" width="400" height="100"></button>
-            </div>
-
-        </div>
-        
+        <v-row justify="center">
+            <v-col>
+                <ul >
+                    <li class="content_body--input">
+                        <input type="text" v-model="email" placeholder="아이디">
+                    </li>
+                    <li class="content_body--input">
+                        <input type="password" v-model="password" placeholder="비밀번호">
+                    </li>
+                    <li class="content_body--input">
+                        <v-btn @click="clickBtnEmail" class="primary" width="400px">로그인</v-btn>
+                    </li>
+                </ul>
+            </v-col>
+        </v-row>
+        <v-row justify="center">
+            <v-col>
+            </v-col>  
+        </v-row>
+        <v-row>
+            <v-col>
+                <img src="../../assets/img/login_or.png">
+            </v-col>  
+        </v-row>
+        <v-row justify="center">
+            <v-col>
+                <ul>
+                    <li class="content_body--buttons">
+                        <button @click="clickBtnGoogle"><img src="../../assets/img/login_google.png" width="100px" height="100px"></button>
+                    </li>
+                    <li class="content_body--buttons">
+                        <button @click="clickBtnNaver"><img src="../../assets/img/login_naver.png" width="100px" height="100px"></button>
+                    </li>
+                </ul>
+            </v-col>
+        </v-row>
+            
     </v-container> 
 </template>
 
@@ -60,21 +78,26 @@ export default{
 </script>
 
 <style scoped>
+
+    ul {
+        list-style-type: none
+    }
     .content {
-        margin: auto;
+        margin: 50px 4px 4px 4px;
+        padding: 4px;
         text-align: center;
     }
-    .content_body {
-        display:inline-block;
-        width: 400px;
-        height: 400px;
-    }
-    
     .content_body--input {
-
+        margin: 10px;
+        padding: 8px;
     }
-    .content_body--input--button {
-        width: 100%;
-        border-radius: 12px;
+
+    .content_body--button-kakao {
+        border-radius: 50%;
+    }
+    .content_body--buttons{
+        display: inline-block;
+        margin: 4px;
+        padding: 4px;
     }
 </style>
