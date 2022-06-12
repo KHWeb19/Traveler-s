@@ -25,8 +25,9 @@ import java.util.Collection;
 public class JWTVerificationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String authorizationHeader = request.getHeader("Authorization");
 
+        String authorizationHeader = request.getHeader("Authorization");
+        log.info("authorizationHeader :" + authorizationHeader);
         log.info("OncePerRequestFilter....");
 
         if (Strings.isBlank(authorizationHeader) || !authorizationHeader.startsWith("Bearer ")){
