@@ -1,4 +1,4 @@
-package com.example.demo.entity.Hotel;
+package com.example.demo.entity.hotel;
 
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -33,6 +33,9 @@ public class Hotel {
     // 참고항목
     @Column(length = 20, nullable = false)
     private String extraAddress;
+
+    @Column(nullable = false) // default 255
+    private String hotelImgPath;
 
     @Column(length = 300, nullable = false)
     private String openKakaotalk;
