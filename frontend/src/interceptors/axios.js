@@ -24,17 +24,10 @@ axios.interceptors.response.use((response)=>{return response}, async (error) =>
         const originalRequest = error.config
 
         if (error.response.status === 401 && !originalRequest._retry && localStorage.getItem("access_token")){
-<<<<<<< HEAD
-          
-            originalRequest._retry = true
-            const {status,data} = await axios.post('http://localhost:7777/refreshtoken', {}, {withCredentials: true})
-    
-=======
             originalRequest._retry = true
         
             const {status,data} = await axios.post('http://localhost:7777/refreshtoken', {}, {withCredentials: true})
             console.log("Sending a request for refresh token")
->>>>>>> cb5a80f35ccccbad7b455baed6d1fa650acd3ca1
             if (status === 200){
                 localStorage.setItem("access_token", data.access_token)
                 originalRequest.headers['Authorization'] = `Bearer ${data.access_token}`
