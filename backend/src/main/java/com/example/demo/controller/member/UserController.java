@@ -18,6 +18,7 @@ import com.example.demo.utility.oauth2.CookieUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -47,13 +48,14 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 @RequestMapping
 public class UserController {
 
+
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
     private final TokenProvider tokenProvider;
     private final HttpSession httpSession;
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest, HttpServletResponse response){
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest,HttpServletResponse response){
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -149,34 +151,34 @@ public class UserController {
     }
     //엑세스 토큰이 만료되면 이쪽으로 url을 보내서 refresh_token을 확인 한다고 함
     @PostMapping("/refreshtoken")
-    public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ResponseEntity<?> refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         log.info("Refreshing tokens...");
-        String authorizationHeader = request.getHeader(AUTHORIZATION);
-        log.info(httpSession.getAttribute("key").toString());
-        if (httpSession.getAttribute("key").equals(authorizationHeader)) {
-            if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+
+        String access_token = "";
+
+        Optional<Cookie> refresh_cookie = CookieUtils.getCookie(request, "refresh_token");
+        String refresh_token = refresh_cookie.get().getValue();
+
+
+
+        if (( httpSession.getAttribute("key")).equals(refresh_token)) {
+            if (refresh_token != null) {
                 log.info("***********");
                 try {
-                /*
-                Optional<Cookie> refresh_cookie = CookieUtils.getCookie(request, "refresh_token");
-                String refresh_token = refresh_cookie.get().getValue();
-                */
-                    String refresh_token = authorizationHeader.replace("Bearer ", "");
+                    Algorithm algorithm = Algorithm.HMAC256("SOMESECRET".getBytes());
                     log.info("refresh_token: {} at refresh endpoint", refresh_token);
                     DecodedJWT decodedJWT = tokenProvider.decodeJwt(refresh_token);
                     String email = decodedJWT.getSubject();
                     User user = userService.findByEmail(email).get();
-                    Algorithm algorithm = Algorithm.HMAC256("SOMESECRET".getBytes());
-                    String access_token = JWT.create()
+
+
+                             access_token = JWT.create()
                             .withSubject(user.getEmail())
                             .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 15))
                             .withClaim("roles", user.getRoles().stream().map(Role::getName).collect(Collectors.toList()))
                             .sign(algorithm);
-                    Map<String, String> tokens = new HashMap<>();
-                    tokens.put("access_token", access_token);
-                    //tokens.put("refresh_token",  refresh_token);
-                    response.setContentType(APPLICATION_JSON_VALUE);
-                    new ObjectMapper().writeValue(response.getOutputStream(), tokens);
+
+
                 } catch (Exception exception) {
                     response.setHeader("error", exception.getMessage());
                     response.setStatus(UNAUTHORIZED.value());
@@ -190,5 +192,7 @@ public class UserController {
                 throw new RuntimeException("Refresh token is missing");
             }
         }
+
+        return ResponseEntity.ok(new AuthResponse(access_token));
     }
 }
