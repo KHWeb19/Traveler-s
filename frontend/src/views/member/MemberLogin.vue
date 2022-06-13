@@ -66,7 +66,6 @@ export default{
         },
 
         clickBtnGoogle(){
-            alert(GOOGLE_URL)
             window.location.href = GOOGLE_URL
         },
         clickBtnNaver(){

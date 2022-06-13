@@ -9,6 +9,10 @@
 
 <script>
 import axios from 'axios'
+import Vue from 'vue'
+import cookies from "vue-cookies"
+
+Vue.use(cookies)
 
 export default {
     
@@ -17,7 +21,9 @@ export default {
             listall(){
                 axios.get('http://localhost:7777/listall')
                     .then(res => {
+                        
                             if(res.data != "가입되었습니다"){
+                                
                                 console.log('중복')
                                 alert(res.data)
                             }else{

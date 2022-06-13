@@ -13,6 +13,10 @@
 <script>
   import MainHeader from './components/mainHome/MainHeader.vue';
   import MainFooter from './components/mainHome/MainFooter.vue';
+  import Vue from 'vue'
+  import cookies from 'vue-cookies'
+
+  Vue.use(cookies)
 
   export default {
     name: 'App',
@@ -21,6 +25,18 @@
       MainHeader,
       MainFooter,
       // HelloWorld,
+    },
+    methods: {
+      unLoadEvnet(event) {
+        event.preventDefault();
+        
+      }
+    },
+    mounted() { 
+      window.addEventListener('beforeunload' , this.unLoadEvnet)
+    },
+    beforeUnmount() {
+      window.removeEventListener('beforeunload', this.unLoadEvnet)
     },
 
     data: () => ({
