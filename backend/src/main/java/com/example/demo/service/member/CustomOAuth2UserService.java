@@ -16,9 +16,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 
 @Slf4j
@@ -83,11 +81,19 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
             String password = name + uuid + email;
             String encodedPassword = passwordEncoder.encode(password);
 
-            userEntity = new User();
-            userEntity.setEmail(email);
+            Role role = new Role("ROLE_USER");
+            List<Role> roleList= new ArrayList<>();
+            roleList.add(role);
+            //전화번호는 마이페이지나/결제할 때 넣도록 해야할 듯
+            userEntity = User.builder()
+                    .email(email)
+                    .name(name)
+                    .password(encodedPassword)
+                    .roles(roleList).build();
+            /*userEntity.setEmail(email);
             userEntity.setName(name);
             userEntity.setPassword(encodedPassword);
-            userEntity.getRoles().add(new Role("ROLE_USER"));
+            userEntity.getRoles().add(new Role("ROLE_USER"));*/
             userRepository.save(userEntity);
 
         }
