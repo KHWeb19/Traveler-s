@@ -153,13 +153,10 @@ public class UserController {
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         log.info("Refreshing tokens...");
         String authorizationHeader = request.getHeader(AUTHORIZATION);
-        log.info("* AUTHORIZATIONHEADER: {}", authorizationHeader);
 
         Optional<Cookie> refresh_cookie = CookieUtils.getCookie(request, "refresh_token");
         String refresh_token = refresh_cookie.get().getValue();
 
-        boolean check = httpSession.getAttribute("key").equals(refresh_token);
-        log.info("* CHECKING IF SESSION IS EQUAL TO TOKEN {}", check);
         if (httpSession.getAttribute("key").equals(refresh_token)) {
             if (refresh_token != null) {
                 try {
