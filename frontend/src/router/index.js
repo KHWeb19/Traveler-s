@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 import SignUp from '@/views/member/MemberSignUp.vue'
+import ListAll from '@/views/member/ListAll.vue'
 
 
 
@@ -29,6 +30,12 @@ const routes = [
     name: 'SignUp',
     component: SignUp
   },
+  {
+    path: '/listall',
+    name: 'ListAll',
+    component: ListAll
+  },
+
 ]
 
 const router = new VueRouter({
