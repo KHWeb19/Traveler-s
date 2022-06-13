@@ -62,11 +62,9 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         Optional<String> redirectUri = CookieUtils.getCookie(request, "redirect_uri")
                 .map(Cookie::getValue);
 
-        System.out.println("리다이렉트 uri" + redirectUri);
+        log.info("redirectUri : " + redirectUri);
 
         String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
-
-        System.out.println(authentication.getPrincipal().toString());
 
         //token에는 권한만 저장해서 보내기로 함
         //OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
@@ -83,6 +81,8 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         String refresh_token = tokenProvider.createRefreshToken(authentication);
 
         httpSession.setAttribute("key", refresh_token);
+        //httpSession.setMaxInactiveInterval(120);
+
 /*
         String access_token = JWT.create()
                 .withSubject(authentication.getPrincipal().toString())
