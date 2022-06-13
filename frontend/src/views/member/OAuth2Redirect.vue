@@ -15,10 +15,7 @@ export default {
     },
     mounted () {
         localStorage.setItem("access_token", this.$route.query.access_token)
-        this.$cookies.set("refresh_token", this.$route.query.refresh_token)
-        const session = this.$cookies.get("SESSION")
-        console.log(session)
-        this.$cookies.set("SESSION",session,12096000)
+        this.$cookies.set("refresh_token", this.$route.query.refresh_token, {httpOnly : true}, 60 * 60 * 24 * 14)
         if(localStorage.getItem("access_token") != null){
         this.$router.go(-2)}
     }
