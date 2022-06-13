@@ -47,6 +47,7 @@ public class Hotel {
     private String hotelImgPath7;
     private String hotelImgPath8;
     private String hotelImgPath9;
+    private String hotelImgPath10;
 
     @Column(length = 300, nullable = false)
     private String openKakaotalk;
