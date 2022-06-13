@@ -7,7 +7,7 @@
 
 <script>
 import SideBar from '@/components/Layout/SideBar.vue'
-import HotelRegisterForm from '@/components/Hotel/HotelRegisterForm.vue'
+import HotelRegisterForm from '../../components/hotel/HotelRegisterForm.vue'
 // import axios from 'axios'
 
 export default {

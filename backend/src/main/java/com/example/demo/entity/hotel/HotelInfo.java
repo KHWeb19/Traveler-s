@@ -1,4 +1,4 @@
-package com.example.demo.entity.hotel;
+/* package com.example.demo.entity.hotel;
 
 import lombok.Data;
 
@@ -28,3 +28,4 @@ public class HotelInfo {
     @JoinColumn(name = "hotel_info")
     private Hotel hotelinfo;
 }
+*/

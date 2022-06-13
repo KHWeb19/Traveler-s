@@ -18,24 +18,35 @@ public class Hotel {
     @Column(length = 20, nullable = false)
     private String hotelName;
 
-    @Column(length = 20, nullable = false)
+    @Column
     private String writer;
 
-    @Column(length = 10, nullable = false)
+    @Column
+    private String hotelInfo;
+
+    @Column(nullable = false)
     private String postcode;
 
-    @Column(length = 100, nullable = false)
+    @Column(nullable = false)
     private String address;
 
-    @Column(length = 50, nullable = false)
+    @Column(nullable = false)
     private String detailAddress;
 
     // 참고항목
-    @Column(length = 20, nullable = false)
+    @Column(nullable = false)
     private String extraAddress;
 
     @Column(nullable = false) // default 255
-    private String hotelImgPath;
+    private String hotelImgPath1;
+    private String hotelImgPath2;
+    private String hotelImgPath3;
+    private String hotelImgPath4;
+    private String hotelImgPath5;
+    private String hotelImgPath6;
+    private String hotelImgPath7;
+    private String hotelImgPath8;
+    private String hotelImgPath9;
 
     @Column(length = 300, nullable = false)
     private String openKakaotalk;
@@ -45,5 +56,4 @@ public class Hotel {
 
     @UpdateTimestamp
     private Date updDate;
-
 }
