@@ -76,7 +76,7 @@ export default {
 		methods: {
 			listall(){
 				axios.get("http://localhost:7777/listall")
-					.then(res => alert(res.data))
+					.then(res => console.log(res.data))
 					.catch(err => alert(err))
 			}
 		}
