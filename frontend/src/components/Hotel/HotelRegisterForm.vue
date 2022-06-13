@@ -16,34 +16,34 @@
         <hr>
         <div class="hotelInfobox">
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo">오션뷰
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="oceanView">오션뷰
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo">테라스
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="terrace">테라스
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo">수영장
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="swimmingPool">수영장
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo">전기차충전
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="carCharge">전기차충전
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo">공항근처
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="nearAirport">공항근처
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo">골프장
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="golfCourse">골프장
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo">무료주차
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="freeParking">무료주차
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo">바베큐그릴
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="bbqGrill">바베큐그릴
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo">반려동물
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="pet">반려동물
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo">온천
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="spa">온천
         </label>
         </div>
     </div>
@@ -53,11 +53,11 @@
         <h3>위치정보</h3>
         <hr>
         <div class="adApi">
-            <input type="text" id="sample6_postcode" placeholder="우편번호">
-            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-            <input type="text" id="sample6_address" placeholder="주소"><br>
-            <input type="text" id="sample6_detailAddress" placeholder="상세주소">
-            <input type="text" id="sample6_extraAddress" placeholder="참고항목">
+            <input type="text" v-model="postcode" id="postcode" placeholder="우편번호">
+            <input type="button" @click="execDaumPostcode()" value="우편번호 찾기"><br>
+            <input type="text" v-model="address" id="address" placeholder="주소"><br>
+            <input type="text" v-model="detailAddress" id="detailAddress" placeholder="상세주소">
+            <input type="text" v-model="extraAddress" id="extraAddress" placeholder="참고항목">
         </div>
     </div>
 
@@ -81,6 +81,62 @@
 <script>
 export default {
     name: 'HotelRegisterForm',
+    data () {
+        return {
+            hotelName: '',
+            hotelInfo: [],
+            postcode: '',
+            address: '',
+            detailAddress: '',
+            extraAddress: ''
+        }
+    },
+    methods: {
+        execDaumPostcode() {
+      new window.daum.Postcode({
+        oncomplete: (data) => {
+          if (this.extraAddress !== "") {
+            this.extraAddress = "";
+          }
+          if (data.userSelectedType === "R") {
+            // 사용자가 도로명 주소를 선택했을 경우
+            this.address = data.roadAddress;
+          } else {
+            // 사용자가 지번 주소를 선택했을 경우(J)
+            this.address = data.jibunAddress;
+          }
+ 
+          // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+          if (data.userSelectedType === "R") {
+            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+            if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
+              this.extraAddress += data.bname;
+            }
+            // 건물명이 있고, 공동주택일 경우 추가한다.
+            if (data.buildingName !== "" && data.apartment === "Y") {
+              this.extraAddress +=
+                this.extraAddress !== ""
+                  ? `, ${data.buildingName}`
+                  : data.buildingName;
+            }
+            // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+            if (this.extraAddress !== "") {
+              this.extraAddress = `(${this.extraAddress})`;
+            }
+          } else {
+            this.extraAddress = "";
+          }
+          // 우편번호를 입력한다.
+          this.postcode = data.zonecode;
+        },
+      }).open();
+         },
+        onSubmit () {
+            const { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress } = this
+            this.$emit('submit', { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress })
+        }
+    }
 }
 </script>
 
@@ -134,7 +190,7 @@ input[name="hotelinfo"] {
     font-size: 14px;
     line-height: 50px;
 }
-input[id="sample6_postcode"] {
+input[id="postcode"] {
     width: 200px;
     height: 30px;
     padding: 0px 10px 0px 10px;
@@ -144,7 +200,7 @@ input[id="sample6_postcode"] {
     box-shadow: 0 0 0 1pt grey;
     outline: none;
 }
-input[id="sample6_address"] {
+input[id="address"] {
     width: 700px;
     height: 30px;
     padding: 0px 10px;
@@ -153,7 +209,7 @@ input[id="sample6_address"] {
     box-shadow: 0 0 0 1pt grey;
     outline: none;
 }
-input[id="sample6_detailAddress"] {
+input[id="detailAddress"] {
     width: 300px;
     height: 30px;
     padding: 0px 10px;
@@ -162,7 +218,7 @@ input[id="sample6_detailAddress"] {
     box-shadow: 0 0 0 1pt grey;
     outline: none;
 }
-input[id="sample6_extraAddress"] {
+input[id="extraAddress"] {
     width: 300px;
     height: 30px;
     padding: 0px 10px;
