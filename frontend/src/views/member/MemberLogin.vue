@@ -45,11 +45,6 @@ import { GOOGLE_URL, NAVER_URL  } from "@/const/urls"
 import axios from "axios"
 import router from "@/router"
 
-import Vue from 'vue'
-import cookies from "vue-cookies"
-
-Vue.use(cookies)
-
 export default{
 
     data(){
@@ -65,7 +60,6 @@ export default{
             axios.post("http://localhost:7777/login", payload, {withCredentials: true})
             .then((res) => {
             localStorage.setItem("access_token", res.data.accessToken)
-
             router.push("/")
             })
             .catch(() => alert("Invalid Username or Password"))
