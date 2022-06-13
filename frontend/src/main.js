@@ -5,11 +5,7 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import './interceptors/axios'
 
-
-
 Vue.config.productionTip = false
-
-
 
 new Vue({
   router,

@@ -2,12 +2,12 @@
     <v-container class="content">
         <v-row justify="center">
             <v-col>
-                <ul >
+                <ul>
                     <li class="content_body--input">
-                        <input type="text" v-model="email" placeholder="아이디">
+                        <input class="content_body--input--field" type="text" v-model="email" placeholder="아이디">
                     </li>
                     <li class="content_body--input">
-                        <input type="password" v-model="password" placeholder="비밀번호">
+                        <input class="content_body--input--field" type="password" v-model="password" placeholder="비밀번호">
                     </li>
                     <li class="content_body--input">
                         <v-btn @click="clickBtnEmail" class="primary" width="400px">로그인</v-btn>
@@ -96,6 +96,10 @@ export default{
     .content_body--input {
         margin: 10px;
         padding: 8px;
+    }
+    .content_body--input--field{
+        line-height: 40px;
+        width: 400px;
     }
 
     .content_body--button-kakao {

@@ -1,6 +1,7 @@
 package com.example.demo.controller.member;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.demo.dto.member.AuthResponse;
@@ -18,7 +19,6 @@ import com.example.demo.utility.oauth2.CookieUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -48,14 +48,13 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 @RequestMapping
 public class UserController {
 
-
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
     private final TokenProvider tokenProvider;
     private final HttpSession httpSession;
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest,HttpServletResponse response){
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest, HttpServletResponse response){
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -151,35 +150,38 @@ public class UserController {
     }
     //엑세스 토큰이 만료되면 이쪽으로 url을 보내서 refresh_token을 확인 한다고 함
     @PostMapping("/refreshtoken")
-    public ResponseEntity<?> refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         log.info("Refreshing tokens...");
-
-        String access_token = "";
+        String authorizationHeader = request.getHeader(AUTHORIZATION);
 
         Optional<Cookie> refresh_cookie = CookieUtils.getCookie(request, "refresh_token");
         String refresh_token = refresh_cookie.get().getValue();
 
-
-
-        if (( httpSession.getAttribute("key")).equals(refresh_token)) {
+        if (httpSession.getAttribute("key").equals(refresh_token)) {
             if (refresh_token != null) {
-                log.info("***********");
                 try {
+
                     Algorithm algorithm = Algorithm.HMAC256("SOMESECRET".getBytes());
-                    log.info("refresh_token: {} at refresh endpoint", refresh_token);
+
                     DecodedJWT decodedJWT = tokenProvider.decodeJwt(refresh_token);
+
+                    log.info("* DECODING SUCCESSFUL");
+
                     String email = decodedJWT.getSubject();
                     User user = userService.findByEmail(email).get();
 
-
-                             access_token = JWT.create()
+                    String access_token = JWT.create()
                             .withSubject(user.getEmail())
-                            .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 15))
+                            .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 10))
                             .withClaim("roles", user.getRoles().stream().map(Role::getName).collect(Collectors.toList()))
                             .sign(algorithm);
-
-
+                    Map<String, String> tokens = new HashMap<>();
+                    tokens.put("access_token", access_token);
+                    //tokens.put("refresh_token",  refresh_token);
+                    response.setContentType(APPLICATION_JSON_VALUE);
+                    new ObjectMapper().writeValue(response.getOutputStream(), tokens);
                 } catch (Exception exception) {
+                    log.info("* ERROR WHILE DECODING");
                     response.setHeader("error", exception.getMessage());
                     response.setStatus(UNAUTHORIZED.value());
                     //response.sendError(FORBIDDEN.value());
@@ -191,8 +193,8 @@ public class UserController {
             } else {
                 throw new RuntimeException("Refresh token is missing");
             }
+        } else{
+            log.info("* Session value does not equal to Cookie");
         }
-
-        return ResponseEntity.ok(new AuthResponse(access_token));
     }
 }

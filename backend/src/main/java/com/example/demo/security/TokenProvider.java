@@ -51,10 +51,18 @@ public class TokenProvider {
     }
 
     public DecodedJWT decodeJwt(String token){
+
         Algorithm algorithm = Algorithm.HMAC256("SOMESECRET".getBytes());
         JWTVerifier verifier = JWT.require(algorithm).build();
         DecodedJWT decodedJWT = verifier.verify(token);
+/*
+
+        Algorithm algorithm = Algorithm.HMAC256("SOMESECRET".getBytes());
+        JWTVerifier verifier = JWT.require(algorithm).build();
+        DecodedJWT decodedJWT = verifier.verify(token);
+        */
         return decodedJWT;
+
     }
 
 }
