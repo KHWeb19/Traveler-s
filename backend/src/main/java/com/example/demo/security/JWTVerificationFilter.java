@@ -25,8 +25,9 @@ import java.util.Collection;
 public class JWTVerificationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String authorizationHeader = request.getHeader("Authorization");
 
+        String authorizationHeader = request.getHeader("Authorization");
+        log.info("authorizationHeader :" + authorizationHeader);
         log.info("OncePerRequestFilter....");
 
         if (Strings.isBlank(authorizationHeader) || !authorizationHeader.startsWith("Bearer ")){
@@ -35,15 +36,18 @@ public class JWTVerificationFilter extends OncePerRequestFilter {
             return;
         }
         try {
+            //토큰에 role 확인
+            // barer 토큰만 저장
             String token = authorizationHeader.replace("Bearer ", "");
-            Algorithm algorithm = Algorithm.HMAC256("SOMESECRET".getBytes());
 
+            Algorithm algorithm = Algorithm.HMAC256("SOMESECRET".getBytes());
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT decodedJWT = verifier.verify(token);
 
             String username = decodedJWT.getSubject();
             String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
             Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+            System.out.println("*****" + authorities);
             Arrays.stream(roles).forEach(role -> { authorities.add(new SimpleGrantedAuthority(role));});
 
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, null, authorities);

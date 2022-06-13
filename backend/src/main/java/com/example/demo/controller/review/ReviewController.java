@@ -16,33 +16,42 @@ import org.springframework.web.bind.annotation.*;
 public class ReviewController {
 
     @Autowired
-    private ReviewService service;
+    private ReviewService reviewService;
+/**
+ @PostMapping("/register/{hotelNo}")
+ public void reviewRegister(@Validated Review review, @PathVariable("hotelNo") Long hotelNo){
+ log.info("reviewRegister()" );
+ reviewService.register(review, hotelNo);
+ }
+ */
 
-    @PostMapping("/register")
-    public void reviewRegister (@Validated @RequestParam Review review){
-        log.info("reviewRegister()");
+    /**
+     @GetMapping("/list/{hotelNo}")
+     public void List<Review> list(@PathVariable("hotelNo") Long hotelNo{
+     log.info("list()");
 
-        service.register(review);
-    }
+     return reviewService.list(hotelNo);
 
-    @PutMapping("/{reviewNo}")
+     }
+     */
+
+    @PutMapping("/update/{reviewNo}")
     public Review jpaReviewModify (
             @PathVariable("reviewNo") Integer boardNo,
             @RequestBody Review review) {
         log.info("jpaReviewModify(): " + review);
 
         review.setReviewNo(Long.valueOf(boardNo));
-        service.modify(review);
+        reviewService.modify(review);
 
         return review;
     }
 
-    @DeleteMapping("/{reviewNo}")
+    @DeleteMapping("/delete/{reviewNo}")
     public void jpaReviewRemove (
-            @PathVariable("reviewNo") Integer reviewNo) {
+            @PathVariable("reviewNo") Long reviewNo) {
         log.info("jpaReviewRemove()");
 
-        service.remove(reviewNo);
+        reviewService.remove(reviewNo);
     }
 }
-

@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
@@ -25,12 +24,13 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
+import static org.springframework.http.HttpMethod.GET;
+
 @RequiredArgsConstructor
 @Configuration
 @Slf4j
 public class SecurityConfig {
 
-    private final CustomUserDetailsService customUserDetailsService;
     private final CustomOAuth2UserService customOAuth2UserService;
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
     private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
@@ -43,8 +43,11 @@ public class SecurityConfig {
         //이용자가 자신의 의지와는 무관하게 공격자가 의도한 행위(등록,수정,삭제등)를 특정 웹사이트에 요청하도록 하는 공격
         http
                 .authorizeRequests((authz ->
-                        authz.antMatchers("/h2-console/**", "/login", "/oauth2/authorize/**", "/oauth2/callback/**","/","/kakaoLogin").permitAll()
+                        authz.antMatchers("/h2-console/**", "/login", "/user/register", "/oauth2/authorize/**",
+                                        "/oauth2/callback/**","/","/kakaoLogin","/check-number", "/refreshtoken").permitAll()
+                                //.antMatchers(GET, "/listall").hasAnyAuthority("ROLE_USER")
                                 .anyRequest().authenticated())
+
                 )
                 .csrf((c) -> c.disable())
                 .cors().and()
@@ -61,7 +64,8 @@ public class SecurityConfig {
                                 ue.userService(customOAuth2UserService))
                         .successHandler(oAuth2AuthenticationSuccessHandler)
                         .failureHandler(oAuth2AuthenticationFailureHandler))
-                .addFilterBefore(jwtVerificationFilter(), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtVerificationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .logout().deleteCookies();
 
 
         return http.build();
@@ -72,11 +76,6 @@ public class SecurityConfig {
     @Bean
     public JWTVerificationFilter jwtVerificationFilter(){
         return new JWTVerificationFilter();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -94,17 +93,6 @@ public class SecurityConfig {
         return authenticationProvider;
     }
 */
-    @Bean
-    CorsConfigurationSource corsConfigurationSource(){
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(Arrays.asList("http://localhost:8080"));
-        config.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
-        config.setAllowCredentials(true); //내 서버가 응답을 할 때 JSON을 자바스크립트에서 처리할 수 있게 할지를 설정하는 것
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-        return source;
-    }
 
 }
 

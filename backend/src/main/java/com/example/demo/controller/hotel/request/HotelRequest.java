@@ -1,4 +1,4 @@
-package com.example.demo.controller.Hotel.request;
+package com.example.demo.controller.hotel.request;
 
 import lombok.Data;
 

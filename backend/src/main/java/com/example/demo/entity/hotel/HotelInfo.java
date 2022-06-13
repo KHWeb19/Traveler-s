@@ -1,11 +1,11 @@
-package com.example.demo.entity.Hotel;
+package com.example.demo.entity.hotel;
 
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Data
-@Entity
+//@Entity
 public class HotelInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

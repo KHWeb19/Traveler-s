@@ -8,6 +8,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -41,8 +43,9 @@ public class CustomUserDetails implements UserDetails, OAuth2User {
     //해당 User의 권한을 리턴하는 곳
     @Override
     public Set<? extends GrantedAuthority> getAuthorities() {
+
         return user.getRoles().stream()
-                .map(r -> new SimpleGrantedAuthority("ROLE_"+r))
+                .map(r -> new SimpleGrantedAuthority(r.getName()))
                 .collect(Collectors.toSet());
     }
     //password 리턴

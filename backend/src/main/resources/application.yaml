@@ -50,6 +50,13 @@ spring:
             user-info-uri: https://openapi.naver.com/v1/nid/me
             user-name-attribute: response #회원정보를 json으로 받는데 reponse라는 키값으로 네이버가 리턴해줌
 
+  session:
+    timeout: 12096000
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
+      table-name: SPRING_SESSION
+
 logging:
   level:
     root: info
