@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 import SignUp from '@/views/member/MemberSignUp.vue'
+import ListAll from '@/views/member/ListAll.vue'
+import OAuthRedirect from '@/views/member/OAuth2Redirect.vue'
 
 
 
@@ -29,6 +31,18 @@ const routes = [
     name: 'SignUp',
     component: SignUp
   },
+  {
+    path: '/listall',
+    name: 'ListAll',
+    component: ListAll
+  },
+  {
+    path: '/oauth2/redirect',
+    name: 'OAuth2Redirect',
+    component: OAuthRedirect
+  },
+  
+
 ]
 
 const router = new VueRouter({
