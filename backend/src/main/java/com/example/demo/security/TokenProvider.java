@@ -45,8 +45,7 @@ public class TokenProvider {
 
         return JWT.create()
                 .withSubject(customUserDetails.getUsername()) //토큰 제목 - 토큰에서 사용자에 대한 식별 값이 됨
-                //.withExpiresAt(new Date(System.currentTimeMillis()+ 12096000)) // 2주
-                .withExpiresAt(new Date(System.currentTimeMillis()+ 1000 * 20)) // 2주
+                .withExpiresAt(new Date(System.currentTimeMillis()+ 12096000)) // 2주
                 //.withIssuer(authentication.getPrincipal().toString()) //토근 발급자
                 .sign(algorithm);
     }
