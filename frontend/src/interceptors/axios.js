@@ -1,9 +1,5 @@
 import axios from "axios"
 import router from "../router/index.js"
-import Vue from 'vue'
-import cookies from "vue-cookies"
-
-Vue.use(cookies)
 
 axios.interceptors.request.use((config) =>
     
@@ -12,7 +8,6 @@ axios.interceptors.request.use((config) =>
             config.headers.common['Authorization'] = `Bearer ${localStorage.getItem("access_token")}`
             console.log("Seding a request")
         }
-
         return config
     },
 
