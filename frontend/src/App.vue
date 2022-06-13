@@ -1,9 +1,11 @@
 <template>
 	<v-app>
 		<v-main style="width: 100%">
-			<MainHeader/>
+			<!-- <MainHeader/>-->
+      <MainHeader/>
 			<router-view class="page"/>
-			<MainFooter/>
+      <MainFooter/>
+			<!-- <MainFooter/>-->
 		</v-main>
 	</v-app>
 </template>
