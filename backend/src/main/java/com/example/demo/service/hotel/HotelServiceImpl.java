@@ -1,7 +1,7 @@
-package com.example.demo.service.Hotel;
+package com.example.demo.service.hotel;
 
-import com.example.demo.entity.Hotel.Hotel;
-import com.example.demo.repository.Hotel.HotelRepository;
+import com.example.demo.entity.hotel.Hotel;
+import com.example.demo.repository.hotel.HotelRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class HotelServiceImpl implements com.example.demo.service.Hotel.HotelService {
+public class HotelServiceImpl implements HotelService {
 
     @Autowired
     HotelRepository repository;

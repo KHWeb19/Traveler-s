@@ -1,6 +1,6 @@
-package com.example.demo.service.Hotel;
+package com.example.demo.service.hotel;
 
-import com.example.demo.entity.Hotel.Hotel;
+import com.example.demo.entity.hotel.Hotel;
 
 import java.util.List;
 
