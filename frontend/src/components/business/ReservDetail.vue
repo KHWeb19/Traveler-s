@@ -9,7 +9,7 @@
                </template>
                <v-card align="center">
                   <v-card-title id="title">
-                     김땡땡 고객님 예약정보
+                     {{reserv.name}} 고객님 예약정보
                   </v-card-title>
 
                   <form>
@@ -24,7 +24,7 @@
                            </td>
                            <td>
                               &ensp;
-                              <input type="text" id="cantTouch" value="3052349" readonly/>
+                              <input type="text" id="cantTouch" value="reserv.reservNo" readonly/>
                            </td>
                         </tr>
 
@@ -34,7 +34,7 @@
                            </td>
                            <td>
                               &ensp;
-                              <input type="text" id="cantTouch" value="김땡땡" readonly/>
+                              <input type="text" id="cantTouch" value="reserv.name" readonly/>
                            </td>
                         </tr>
 
@@ -44,7 +44,7 @@
                            </td>
                            <td>
                               &ensp;
-                              <input type="text" id="cantTouch" value="010-0000-0000" readonly/>
+                              <input type="text" id="cantTouch" value="reserv.telNum" readonly/>
                            </td>
                         </tr>
 
@@ -54,7 +54,7 @@
                            </td>
                            <td>
                               &ensp;
-                              <input type="email" id="cantTouch" value="wefadf@naver.com" readonly/>
+                              <input type="email" id="cantTouch" value="reserv.email" readonly/>
                            </td> <!--  텍스트 입력 필드처럼 보이지만 유효성 검증 매개변수가 존재 -->
                         </tr>
 
@@ -64,7 +64,7 @@
                            </td>
                            <td>
                               &ensp;
-                              <input type="date" id="cantTouch" value="2022-06-20" readonly/>
+                              <input type="date" id="cantTouch" value="reserv.check_in" readonly/>
                            </td>
                         </tr>
 
@@ -74,7 +74,7 @@
                            </td>
                            <td>
                               &ensp;
-                              <input type="date" id="cantTouch" value="2022-06-23" readonly/>
+                              <input type="date" id="cantTouch" value="reserv.check_out" readonly/>
                            </td>
                         </tr>
 
@@ -84,7 +84,7 @@
                            </td>
                            <td>
                               &ensp;
-                              <input type="text" id="cantTouch" value="100,000" readonly/>
+                              <input type="text" id="cantTouch" value="reserv.price" readonly/>
                            </td>
                         </tr>
 
@@ -94,7 +94,7 @@
                            </td>
                            <td>
                               &ensp;
-                              <input type="text" id="cantTouch" style="height: 200px;" value="내용이 입력되어 있어요." readonly/>
+                              <input type="text" id="cantTouch" style="height: 200px;" value="reserv.content" readonly/>
                            </td>
                         </tr>
 
@@ -110,30 +110,26 @@
                                  <th align="center" width="130">날짜</th>
                                  <th align="center" width="170">객실명</th>
                                  <th align="center" width="100">요금</th>
-                                 <th align="center" width="60">성인</th>
-                                 <th align="center" width="60">아동</th>
+                                 <th align="center" width="60">인원</th>
                                  <th align="center" width="40">&ensp;&ensp;</th>                                 
                               </tr>
 
                               <tr>
                                  <td  align="center">
-                                    2022-06-20 ~ &ensp;
-                                    <br> &ensp; 2022-06-23
+                                    <span>{{reserv.check_in}} ~ &ensp;
+                                    <br> &ensp; {{reserv.check_out}}</span>
                                  </td>
                                  <td  align="center">
-                                    패밀리 독채
+                                    <span>{{reserv.room_name}}</span>
                                  </td>                                 
                                  <td  align="center">
-                                    100,000
+                                    <span>{{reserv.price}}</span>
                                  </td>
                                  <td  align="center">
-                                    <input type="number" id="cantTouch" style="width: 40px;" readonly/>
+                                    <input type="number" id="cantTouch" value="reserv.personnel" style="width: 40px;" readonly/>
                                  </td>
                                  <td  align="center">
-                                    <input type="number" id="cantTouch" style="width: 40px;" readonly/>
-                                 </td>
-                                 <td  align="center">
-                                    <v-btn id="delButton">
+                                    <v-btn id="delButton" @click="onDelete">
                                        X
                                     </v-btn>
                                  </td>
@@ -161,9 +157,33 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
    name: 'reservDatail',
-
+   props: {
+      reserv: {
+         type: Object,
+         required: true
+      }
+   },
+   created() {
+      this.reservNo = this.reserv.reservNo
+   },
+   methods: {
+      onDelete () {
+            const { reservNo } = this.reserv
+            //alert('지우는 게시물 번호: ' + boardNo)
+            axios.delete(`http://localhost:7777/reserv/${reservNo}`)
+                    .then(() => {
+                        alert('삭제 성공!')
+                        this.$router.push({ name: 'ManageReservList' })
+                    })
+                    .catch(() => {
+                        alert('삭제 실패! 문제 발생!')
+                    })
+        }        
+   }
 }
 </script>
 
