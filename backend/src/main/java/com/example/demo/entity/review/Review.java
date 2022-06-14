@@ -1,6 +1,6 @@
 package com.example.demo.entity.review;
 
-import com.example.demo.entity.Hotel.Hotel;
+import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.member.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,5 +1,6 @@
 package com.example.demo.service.hotel;
 
+import com.example.demo.dto.hotel.HotelRequest;
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.repository.hotel.HotelRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +19,9 @@ public class HotelServiceImpl implements HotelService {
     HotelRepository repository;
 
     @Override
-    public void register(Hotel hotel) {
+    public void register(HotelRequest hotelRequest) {
+        Hotel hotel = new Hotel();
+        hotel.setHotelInfo(hotelRequest.getHotelInfo());
         repository.save(hotel);
     }
 
