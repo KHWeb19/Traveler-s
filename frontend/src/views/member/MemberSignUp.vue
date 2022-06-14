@@ -56,7 +56,6 @@ export default {
                 axios.post('http://localhost:7777/user/register', {email, password, name, mobile, role})
                     .then(res => {
                             if(res.data != "가입되었습니다"){
-                                console.log('중복')
                                 alert(res.data)
                             }else{
                            alert('회원가입이 완료 되었습니다.')

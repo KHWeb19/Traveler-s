@@ -3,7 +3,10 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 import SignUp from '@/views/member/MemberSignUp.vue'
+
 import store from '@/store'
+import OAuthRedirect from '@/views/member/OAuth2Redirect.vue'
+
 
 
 
@@ -30,6 +33,13 @@ const routes = [
     name: 'SignUp',
     component: SignUp
   },
+  {
+    path: '/oauth2/redirect',
+    name: 'OAuth2Redirect',
+    component: OAuthRedirect
+  },
+  
+
 ]
 
 const router = new VueRouter({

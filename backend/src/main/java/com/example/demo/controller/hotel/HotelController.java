@@ -1,5 +1,6 @@
 package com.example.demo.controller.hotel;
 
+import com.example.demo.dto.hotel.HotelRequest;
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.service.hotel.HotelService;
 import lombok.extern.slf4j.Slf4j;
@@ -12,17 +13,17 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/hotel")
-//@CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 public class HotelController {
 
     @Autowired
     private HotelService hotelService;
 
-    @PostMapping("/hotelregister")
-    public void hotelRegister (@Validated @RequestBody Hotel hotel) {
+    @PostMapping("/hotelRegister")
+    public void hotelRegister (@Validated @RequestBody HotelRequest hotelRequest) {
         log.info("hotelRegister()");
-
-        hotelService.register(hotel);
+        log.info("hotelRequest: " + hotelRequest);
+        hotelService.register(hotelRequest);
     }
     @GetMapping("/hotelList")
     public List<Hotel> hotelList () { //메인 페이지에서 호텔 list 불러오기
