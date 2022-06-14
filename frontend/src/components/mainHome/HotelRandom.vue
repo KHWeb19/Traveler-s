@@ -11,9 +11,7 @@
           @click="clickHotel(Hotel.hotel_no, hotelName)">
           <img :src="require(`@/assets/${item.hotelImg}.png`)"/>
           <v-card-title class="justify-center">{{ Hotel.hotelname }}</v-card-title>
-          <v-card-text>
-            
-              
+          <v-card-text>        
             <!--별점 이쪽을 잘모르겠네요.. 시간되면 진행하는걸로! (좋아요 누적?)
             <v-row align="center">
               <v-rating :value="5" color="amber" half-increments size="18" margin="0"></v-rating>   
@@ -21,29 +19,22 @@
                 0~5점 (참여인수)
               </div>
                </v-row>
--->
-
-           <!-- 이것도 나중에? 진행할수있으면 진행!
+            이것도 나중에? 진행할수있으면 진행!
             <v-card-text>
               {{ Hotel.room.price }}
             </v-card-text>
 -->
-
           </v-card-text>
           <v-divider></v-divider>
           <v-card-text>
             {{ Hotel.address }}
           </v-card-text>
-
-<!-- 호탤 태그 가져와야 하는부분인데 이것도 맞는지 모르겠네요-->
           <v-card-text>
             {{ Hotel.hotel_info }}
           </v-card-text>
-
         </v-card>
       </v-col>
-      </div>
-    
+      </div>    
   </v-container>
 </template>
 

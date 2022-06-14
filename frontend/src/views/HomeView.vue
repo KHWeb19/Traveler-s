@@ -1,13 +1,10 @@
 <template>
 	<div class="home_wrap">
 		<v-container>
-		<ChoseDate>
-		</ChoseDate>
-		<!--<ChoseNum>
-		</ChoseNum>-->
-		<ThemeSearch>
-		</ThemeSearch>
+		<ChoseDate></ChoseDate>
+		<ChoseNum></ChoseNum>
 		</v-container>
+		<HotelRandom></HotelRandom>
 		<section id="theme_search">
 			<div class="inner">
 				<v-spacer></v-spacer>
@@ -19,7 +16,6 @@
 							</v-card>
 						</v-row>
 					</v-container>
-
 				</div>
 			</div>
 		</section>
@@ -28,15 +24,15 @@
 
 
 <script>
-//import ChoseNum from '@/components/mainHome/ChoseNum.vue'
+import ChoseNum from '@/components/mainHome/ChoseNum.vue'
 import ChoseDate from '@/components/mainHome/ChoseDate.vue';
-import ThemeSearch from '@/components/mainHome/ThemeSearch.vue';
+import HotelRandom from '@/components/mainHome/HotelRandom.vue';
 
   export default {
  components: {
-	//ChoseNum,
+	ChoseNum,
 	ChoseDate,
-	ThemeSearch
+	HotelRandom
    },
 
    data: ()=>({
@@ -49,6 +45,7 @@ import ThemeSearch from '@/components/mainHome/ThemeSearch.vue';
 
 
 <style scoped>
+
 	.home_wrap {
 		/*width: 1200px;*/
 		width: 100%;

@@ -1,24 +1,21 @@
 <template>
-    <div class="row">
-        <div class="col-sm-3 col-xs-3 col-md-3">
-            <v-card class="mx-auto" max-width="120">
-                <v-list rounded>
-                    <v-subheader>숙박 인원</v-subheader>
-                    <v-list-item-group v-model="selectedPeopleNum" color="primary">
-                        <v-list-item v-for="(Num, i) in Num" :key="i">
-                            <v-list-item-content>
-                                <v-list-item-title v-text="Num.text"></v-list-item-title>
-                            </v-list-item-content>
-                        </v-list-item>
-                    </v-list-item-group>
-                </v-list>
-            </v-card>
-        </div>
-    </div>
+    <v-row>
+        <v-col cols="12" sm="3">
+            <v-select :items="items" label="인원 선택" rounded solo></v-select>
+        </v-col>
+        <v-col cols="12" sm="3">
+            <v-text-field label="도시 입력" rounded solo type="city">
+                <template #append>
+                    <v-btn type="submit" value="Subscribe">
+                        검색하기
+                    </v-btn>
+                </template>
+            </v-text-field>
+        </v-col>
+    </v-row>
 </template>
 
 <script>
-
 
   export default {
 
@@ -27,25 +24,15 @@
     },
 
     data: () => ({
-      selectedPeopleNum: 1,
-      Num: [
-        { text: '1'},
-        { text: '2'},
-        { text: '3'},
-      ]
+      items: ['1', '2', '3', '4'],
+      value: null,
     }),
   }
 </script>
 
 <style scoped>
-
-.v-subheader {
-    font-size: 13px;
+.v-btn {
+    color: rgb(55,55,55);
 }
-
-.v-list-item-content {
-    font-size: 13px;
-}
-
 
 </style>
