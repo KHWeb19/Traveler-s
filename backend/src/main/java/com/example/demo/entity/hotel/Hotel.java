@@ -1,11 +1,13 @@
 package com.example.demo.entity.hotel;
 
+import com.example.demo.dto.hotel.HotelConvert;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -21,8 +23,8 @@ public class Hotel {
     @Column
     private String writer;
 
-    @Column
-    private String hotelInfo;
+    @Convert(converter = HotelConvert.class)
+    private List<String> hotelInfo;
 
     @Column(nullable = false)
     private String postcode;
