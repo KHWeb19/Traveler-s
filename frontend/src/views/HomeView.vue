@@ -2,6 +2,7 @@
 	<div class="home_wrap">
 		<section id="theme_search">
 			<div class="inner">
+				<v-btn @click="listall">listall</v-btn>
 				<h1>테마검색</h1>
 
 				<div class="theme">
@@ -69,7 +70,17 @@
 </template>
 
 <script>
+import axios from 'axios'
 
+export default {
+		methods: {
+			listall(){
+				axios.get("http://localhost:7777/listall")
+					.then(res => console.log(res.data))
+					.catch(err => alert(err))
+			}
+		}
+	}
 </script>
 
 <style scoped>

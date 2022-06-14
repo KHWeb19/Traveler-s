@@ -1,11 +1,13 @@
-package com.example.demo.entity.Hotel;
+package com.example.demo.entity.hotel;
 
+import com.example.demo.dto.hotel.HotelConvert;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -18,21 +20,36 @@ public class Hotel {
     @Column(length = 20, nullable = false)
     private String hotelName;
 
-    @Column(length = 20, nullable = false)
+    @Column
     private String writer;
 
-    @Column(length = 10, nullable = false)
+    @Convert(converter = HotelConvert.class)
+    private List<String> hotelInfo;
+
+    @Column(nullable = false)
     private String postcode;
 
-    @Column(length = 100, nullable = false)
+    @Column(nullable = false)
     private String address;
 
-    @Column(length = 50, nullable = false)
+    @Column(nullable = false)
     private String detailAddress;
 
     // 참고항목
-    @Column(length = 20, nullable = false)
+    @Column(nullable = false)
     private String extraAddress;
+
+    @Column(nullable = false) // default 255
+    private String hotelImgPath1;
+    private String hotelImgPath2;
+    private String hotelImgPath3;
+    private String hotelImgPath4;
+    private String hotelImgPath5;
+    private String hotelImgPath6;
+    private String hotelImgPath7;
+    private String hotelImgPath8;
+    private String hotelImgPath9;
+    private String hotelImgPath10;
 
     @Column(length = 300, nullable = false)
     private String openKakaotalk;
@@ -42,5 +59,4 @@ public class Hotel {
 
     @UpdateTimestamp
     private Date updDate;
-
 }

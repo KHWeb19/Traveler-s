@@ -1,6 +1,7 @@
 <template>
      <member-sign-up    @checkPhoneNumber="checkPhoneNumber"
                         @checkNumber="checkNumber"
+                        @signUp="signUp"
                         :certification="certification"/>
 </template>
 
@@ -28,8 +29,12 @@ export default {
                 console.log(mobile)
                 axios.post('http://localhost:7777/check-number', {mobile})
                     .then(res => {
+                        if(res.data == "이미 인증된 전화번호입니다"){
+                            alert(res.data)
+                        }else{
                            this.numStr = res.data
                            console.log(this.numStr)
+                        }
                         })
                     
                         .catch(() => {
@@ -45,7 +50,24 @@ export default {
                 }else{
                     alert("다시 입력 하세요")
                 }
-            }
+            },
+            signUp(payload){
+                const { email, password, name, mobile, role } = payload
+                axios.post('http://localhost:7777/user/register', {email, password, name, mobile, role})
+                    .then(res => {
+                            if(res.data != "가입되었습니다"){
+                                alert(res.data)
+                            }else{
+                           alert('회원가입이 완료 되었습니다.')
+                           }
+                        })
+                    
+                        .catch(() => {
+                        alert('오류발생')
+                            })
+            },
+                
+            
         }
 
 }
