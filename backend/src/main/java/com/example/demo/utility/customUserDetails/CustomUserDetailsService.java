@@ -23,6 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     //UesrDetails -> security session > Authentication > UserDetails
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("check Dupulication :" + username);
         Optional<User> user = userRepository.findByEmail(username);
 
         if (user.isEmpty())
