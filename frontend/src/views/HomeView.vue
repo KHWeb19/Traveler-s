@@ -9,7 +9,13 @@
 		<HotelRandom></HotelRandom>
 		<section id="theme_search">
 			<div class="inner">
+<<<<<<< HEAD
 				<v-spacer></v-spacer>
+=======
+				<v-btn @click="listall">listall</v-btn>
+				<h1>테마검색</h1>
+
+>>>>>>> upstream/main
 				<div class="theme">
 					<v-container style="width: 1200px">
 						<v-row justify="center">
@@ -26,6 +32,7 @@
 
 
 <script>
+<<<<<<< HEAD
 import ChoseNum from '@/components/mainHome/ChoseNum.vue'
 import ChoseDate from '@/components/mainHome/ChoseDate.vue';
 import HotelRandom from '@/components/mainHome/HotelRandom.vue';
@@ -41,7 +48,19 @@ import HotelRandom from '@/components/mainHome/HotelRandom.vue';
 
    }),
   };
+=======
+import axios from 'axios'
+>>>>>>> upstream/main
 
+export default {
+		methods: {
+			listall(){
+				axios.get("http://localhost:7777/listall")
+					.then(res => console.log(res.data))
+					.catch(err => alert(err))
+			}
+		}
+	}
 </script>
 
 

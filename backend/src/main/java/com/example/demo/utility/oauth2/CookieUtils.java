@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class CookieUtils {
     //  로그인시 받은 정보에서 쿠키 가져오는 유틸
-//  쿠키 받고 HttpCookieOAuth2AuthorizationRequestRepository 에서 진행
+    //  쿠키 받고 HttpCookieOAuth2AuthorizationRequestRepository 에서 진행
     public static Optional<Cookie> getCookie(HttpServletRequest request, String name) {
         Cookie[] cookies = request.getCookies();
 

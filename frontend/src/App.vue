@@ -1,9 +1,21 @@
 <template>
+<<<<<<< HEAD
   <v-app>
     <AllHeader/>
     <HomeView />
     <Allfooter/>
   </v-app>
+=======
+	<v-app>
+		<v-main style="width: 100%">
+			<!-- <MainHeader/>-->
+      <MainHeader/>
+			<router-view class="page"/>
+      <MainFooter/>
+			<!-- <MainFooter/>-->
+		</v-main>
+	</v-app>
+>>>>>>> upstream/main
 </template>
 
 <script>
