@@ -80,6 +80,8 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         String access_token = tokenProvider.createAccessToken(authentication);
         String refresh_token = tokenProvider.createRefreshToken(authentication);
 
+        CookieUtils.addCookie(response, "refresh_token", refresh_token, 12096000);
+
         httpSession.setAttribute("key", refresh_token);
         //httpSession.setMaxInactiveInterval(120);
 
