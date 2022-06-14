@@ -3,20 +3,31 @@
         <v-row justify="center">
             <v-col>
                 <ul>
-                    <li class="content_body--input">
-                        <input class="content_body--input--field" type="text" v-model="email" placeholder="아이디">
+                    <li class="content_body--li">
+                        <input class="content_body--li--field" type="text" v-model="email" placeholder="아이디">
                     </li>
-                    <li class="content_body--input">
-                        <input class="content_body--input--field" type="password" v-model="password" placeholder="비밀번호">
+                    <li class="content_body--li">
+                        <input class="content_body--li--field" type="password" v-model="password" placeholder="비밀번호">
                     </li>
-                    <li class="content_body--input">
-                        <v-btn @click="clickBtnEmail" class="primary" width="400px">로그인</v-btn>
+                    <li class="content_body--li">
+                        <v-btn @click="clickBtnEmail" class="primary" width="300px">로그인</v-btn>
                     </li>
                 </ul>
             </v-col>
         </v-row>
         <v-row justify="center">
             <v-col>
+                <ul>
+                    <li class="content_body--li--link">
+                        <p>아이디 찾기</p>
+                    </li>
+                    <li class="content_body--li--link">
+                        <p>비밀번호 찾기</p>
+                    </li>
+                    <li class="content_body--li--link">
+                        <router-link :to="{path: '/signup'}" style="text-decoration: none; color: black;">회원가입</router-link>
+                    </li>
+                </ul>
             </v-col>  
         </v-row>
         <v-row>
@@ -72,25 +83,27 @@ export default{
 <style scoped>
 
     ul {
-        list-style-type: none
+        list-style-type: none;
     }
     .content {
         margin: 50px 4px 4px 4px;
         padding: 4px;
         text-align: center;
     }
-    .content_body--input {
+    .content_body--li {
         margin: 10px;
         padding: 8px;
     }
-    .content_body--input--field{
+    .content_body--li--field{
         line-height: 40px;
-        width: 400px;
+        width: 300px;
+    }
+    .content_body--li--link{
+        display: inline-block;
+        margin: 4px;
+        padding: 4px;
     }
 
-    .content_body--button-kakao {
-        border-radius: 50%;
-    }
     .content_body--buttons{
         display: inline-block;
         margin: 4px;
