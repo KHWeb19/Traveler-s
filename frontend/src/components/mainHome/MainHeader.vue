@@ -38,8 +38,8 @@
     },
     methods: {
       onClickLogout() {
-        this.$store.dispatch("logout")
-        this.$router.push({name: "Home"});
+        this.$store.dispatch("attemptLogout")
+        this.$router.push({name: "home"});
       },
     },
   }

@@ -38,6 +38,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -148,6 +150,7 @@ public class UserController {
         userService.cellPhoneCheck(phoneNumber, numStr);
         return numStr;
     }
+
     //엑세스 토큰이 만료되면 이쪽으로 url을 보내서 refresh_token을 확인 한다고 함
     @PostMapping("/refreshtoken")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -183,8 +186,8 @@ public class UserController {
                 } catch (Exception exception) {
                     log.info("* ERROR WHILE DECODING");
                     response.setHeader("error", exception.getMessage());
-                    response.setStatus(UNAUTHORIZED.value());
-                    //response.sendError(FORBIDDEN.value());
+                    //response.setStatus(UNAUTHORIZED.value());
+                    response.setStatus(FORBIDDEN.value());
                     Map<String, String> error = new HashMap<>();
                     error.put("error_message", exception.getMessage());
                     response.setContentType(APPLICATION_JSON_VALUE);
