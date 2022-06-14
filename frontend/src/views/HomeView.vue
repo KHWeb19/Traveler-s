@@ -6,63 +6,13 @@
 				<h1>테마검색</h1>
 
 				<div class="theme">
-					<article>
-						<div class="pic">					
-							<p>#공항근처</p>
-						</div>
-					</article>
-					<article>
-						<div class="pic">							
-							<p>#반려동물</p>
-						</div>
-					</article>
-					<article>
-						<div class="pic">
-							<p>#조식</p>
-						</div>
-					</article>
-					<article>
-						<div class="pic">					
-							<p>#오션뷰</p>
-						</div>
-					</article>
-					<article>
-						<div class="pic">					
-							<p>#풀빌라</p>
-						</div>
-					</article>
-					<article>
-						<div class="pic">						
-							<p>#바베큐그릴</p>
-						</div>
-					</article>
-					<br>
-					<article>
-						<div class="pic">						
-							<p>#무료주차</p>
-						</div>
-					</article>
-					<article>
-						<div class="pic">						
-							<p>#팬션</p>
-						</div>
-					</article>
-					<article>
-						<div class="pic">						
-							<p>#스키장</p>
-						</div>
-					</article>
-					<article>
-						<div class="pic">						
-							<p>#온천</p>
-						</div>
-					</article>
-					<article>
-						<div class="pic">						
-							<p>#특급호텔</p>
-						</div>
-					</article>
+					<v-container style="width: 1200px">
+						<v-row justify="center">
+							<v-card align="center">
 
+							</v-card>
+						</v-row>
+					</v-container>
 				</div>
 			</div>
 		</section>
