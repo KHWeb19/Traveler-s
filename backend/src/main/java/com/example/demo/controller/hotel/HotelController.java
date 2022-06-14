@@ -1,4 +1,4 @@
-package com.example.demo.controller.Hotel;
+package com.example.demo.controller.hotel;
 
 import com.example.demo.entity.Hotel.Hotel;
 import com.example.demo.service.Hotel.HotelService;
