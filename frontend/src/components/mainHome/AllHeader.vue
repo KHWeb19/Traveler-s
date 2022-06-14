@@ -3,7 +3,7 @@
 
     <v-toolbar height="90">
       <div>
-        <div @click="home"> <img src ="@/assets/TeamLogo.jpg"/> </div>
+        <div @click="home"> <img src="@/assets/TeamLogo.jpg" /> </div>
       </div>
 
       <v-spacer></v-spacer>
@@ -29,9 +29,13 @@
         </ul>
 
         <ul v-else-if="this.auth == '관리자'">
-          <li><a href="/admin">회원관리</a></li>
-          <li><a href="/qnalist">문의관리</a></li>
-          <li><a href="/admin/video_manage">유튜브 관리</a></li>
+          <li><a>내정보</a>
+            <ul>
+              <li><a href="/회원관리">회원관리</a></li>
+              <li><a href="/문의관리">문의관리</a></li>
+              <li><a href="/추가사항">추가사항</a></li>
+            </ul>
+          </li>
           <li><a href="#">로그아웃</a></li>
         </ul>
       </div>
@@ -80,7 +84,9 @@ export default {
 </script>
 
 <style scoped>
-
+.v-card{
+  margin-bottom: 10px;
+}
 .header {
   position: absolute;
   top: 0;

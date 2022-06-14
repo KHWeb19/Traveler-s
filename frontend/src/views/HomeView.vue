@@ -1,8 +1,10 @@
 <template>
 	<div class="home_wrap">
 		<v-container>
-		<ChoseDate></ChoseDate>
-		<ChoseNum></ChoseNum>
+			<v-row>
+				<ChoseDate></ChoseDate>
+				<ChoseNum></ChoseNum>
+			</v-row>
 		</v-container>
 		<HotelRandom></HotelRandom>
 		<section id="theme_search">
@@ -12,7 +14,7 @@
 					<v-container style="width: 1200px">
 						<v-row justify="center">
 							<v-card align="center">
-								
+
 							</v-card>
 						</v-row>
 					</v-container>
