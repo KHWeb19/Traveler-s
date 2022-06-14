@@ -1,22 +1,18 @@
 <template>
   <v-card flat width="100%" tile>
-
     <v-toolbar height="90">
       <div>
-        <div @click="home"> <img src="@/assets/TeamLogo.jpg" /> </div>
+         <img src="@/assets/TeamLogo.jpg"/>
       </div>
-
       <v-spacer></v-spacer>
-
-      <div class="header" v-if="!isLoggedIn">
+    <div class="header" v-if="!isLoggedIn"> 
         <ul>
-          <li><a href="/로그인페이지">로그인</a></li>
-          <li><a href="/회원가입페이지">회원가입</a></li>
+          <li><a href="/login">로그인</a></li>
+          <li><a href="/signup">회원가입</a></li>
         </ul>
-      </div>
-
-      <div class="header" v-if="isLoggedIn">
-        <ul v-if="this.auth == '개인'">
+	</div>
+    <div class="header" v-else>
+		<ul>
           <li><a>내정보</a>
             <ul>
               <li><a href="/내정보 수정">내정보 수정</a></li>
@@ -25,10 +21,13 @@
               <li><a href="/문의">문의</a></li>
             </ul>
           </li>
-          <li><a href="#" @click="logout()">로그아웃</a></li>
+          
         </ul>
-
+		<!--
+		<ul v-if="this.auth == '개인'">
         <ul v-else-if="this.auth == '관리자'">
+		-->
+		<ul>
           <li><a>내정보</a>
             <ul>
               <li><a href="/회원관리">회원관리</a></li>
@@ -36,51 +35,34 @@
               <li><a href="/추가사항">추가사항</a></li>
             </ul>
           </li>
-          <li><a href="#">로그아웃</a></li>
-        </ul>
+          <li><button @click="onClickLogout">로그아웃</button></li>
+		</ul>
       </div>
     </v-toolbar>
   </v-card>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import {mapState} from 'vuex'
 
-
-export default {
-  components: {
-   
-  },
-  data() {
-    return {
-      isLogin: false,
-    }
-  },
-  methods: {
-    logout() {
-      this.$cookies.remove("user");
-      this.isLogin = false;
-      this.$router.push({ name: 'HomeView' })
-      alert('로그아웃 되었습니다.')
-    }
-  },
-  mounted() {
-    console.log('session : ' + this.session)
-  },
-  computed: {
-      ...mapState([]),
-      isLoggedIn() {
-        if(this.session == null || this.session == '') {
-          return false
-        } else {
-          return true
-        }
-      },
-      auth() {
-        return this.session.auth;
+  export default {
+    name: "MainHeader",
+    data() {
+      return {
+        nickName: this.$store.state.userInfo.nickname,
       }
-  },
-};
+    },
+	computed:{
+		...mapState(['isLoggedIn'])
+	},
+
+    methods: {
+      onClickLogout() {
+        this.$store.dispatch("attemptLogout")
+	}
+  }
+}
+
 </script>
 
 <style scoped>
