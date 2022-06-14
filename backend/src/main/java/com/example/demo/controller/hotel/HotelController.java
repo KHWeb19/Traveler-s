@@ -12,13 +12,13 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/hotel")
-//@CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 public class HotelController {
 
     @Autowired
     private HotelService hotelService;
 
-    @PostMapping("/hotelregister")
+    @PostMapping("/hotelRegister")
     public void hotelRegister (@Validated @RequestBody Hotel hotel) {
         log.info("hotelRegister()");
 
