@@ -21,11 +21,12 @@ export default {
                     commit(FETCH_HOTEL, res.data)
                 })
     },
-    attemptLogin({commit}, payload){
+    attemptLogin({commit, state}, payload){
         axios.post("http://localhost:7777/login", payload, {withCredentials: true})
         .then((res) => {
             localStorage.setItem("access_token", res.data.accessToken)
             commit(IS_LOGGEDIN)
+            console.log(state.isLoggedIn)
             router.push("/")
         })
         .catch(() => alert("Invalid username or password"))
@@ -35,6 +36,7 @@ export default {
         .then(() => {
             localStorage.removeItem("access_token")
             commit(NOT_LOGGEDIN)
+            router.push("/")
         })
         .catch(() => alert("로그인 실패"))
     },

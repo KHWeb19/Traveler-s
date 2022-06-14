@@ -1,8 +1,8 @@
 export default {
     IS_LOGGEDIN(state){
-        state.isLogin = true
+        state.isLoggedIn = true
     },
     NOT_LOGGEDIN(state){
-        state.isLogin = false
+        state.isLoggedIn = false
     }
 }
