@@ -6,13 +6,6 @@ Vue.use(cookies)
 
 export default {
     name: 'OAuth2Redirect',
-    data () {
-        return {
-            access_token:'',
-            refresh_token:''
-
-        }
-    },
     mounted () {
         localStorage.setItem("access_token", this.$route.query.access_token)
         this.$cookies.set("refresh_token", this.$route.query.refresh_token, {httpOnly : true}, 60 * 60 * 24 * 14)
