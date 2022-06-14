@@ -1,125 +1,92 @@
 <template>
-	<footer id="footer">
-		<div class="inner">
-			<div class="fl">
-				<p>
-					사업자 정보
-					since 2022 어쩌고 저쩌고...우리 회사의 간단한 소개가 적혀있다.. 고객문의: 010-0000-0000 / Email: 0000@gamil.com
-				</p>
-				<div class="copyRight">사업자 정보 추가사항 블라 블라~</div>
-			</div>
-			<div class="fr">
-				<div class="customer">
-					<P></P>
-				</div>
-				<ul class="sns">
-					<li>
-						<router-link to=""><v-icon>mdi-facebook</v-icon></router-link>
-					</li>
-					<li>
-						<router-link to=""><v-icon>mdi-instagram</v-icon></router-link>
-					</li>
-					<li>
-						<router-link to=""><v-icon>mdi-youtube</v-icon></router-link>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</footer>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <h6>사업자 정보</h6>
+                    <h8>
+                        since 2022 어쩌고 저쩌고...우리 회사의 간단한 소개가 적혀있다..
+                    </h8>
+                </div>
+                <div class="col-sm-3 col-xs-3 col-md-3">
+                    <h6> 고객문의</h6>
+                    <h8>
+                        TEL : 000-000-0000<br>
+                        Email : 000000@gmail.com
+                    </h8>
+                </div>
+                <div class="col-sm-3 col-xs-3 col-md-3">
+                    <h6>SNS</h6>
+                    <ul class="footer-links">
+                        <a href="https://www.facebook.com/" target="_blank">
+                            <img width="30" height="30" src="@/assets/footer/Facebook.png">
+                        </a>
+                        &nbsp;
+                        <a href="https://www.instagram.com/?hl=ko" target="_blank">
+                            <img width="30" height="30" src="@/assets/footer/Instagram.png">
+                        </a>
+                        &nbsp;
+                        <a href="https://www.kakaocorp.com/page/service/service/KakaoTalk?lang=ko" target="_blank">
+                            <img width="30" height="30" src="@/assets/footer/KakaoTalk.png">
+                        </a>
+                        &nbsp;
+                        <a href="https://youtube.com/?lang=ko" target="_blank">
+                            <img width="30" height="30" src="@/assets/footer/youtube.png">
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </footer>
 </template>
 
-<script>
-  export default {
-    name: "MainFooter"
-  }
-</script>
-
 <style scoped>
-	#footer {
-		background: #fff;
-		position: relative;
-		transition: 0.5s;
-		border-top: 1px dashed #fff;
-		padding: 30px 80px;
-		bottom: -50px;
-	}
+.site-footer {
+    background-color: rgb(255, 255, 255);
+    padding: 0px;
+    font-size: 15px;
+    line-height: 25px;
+    color: rgb(0, 0, 0);
+}
 
-	#footer:after, #footer .inner:after {
-		content: "";
-		display: block;
-		clear: both;
-	}
+.site-footer hr {
+    border-top-color: rgb(0, 0, 0);
+    opacity: 0.5;
+    size : 100%;
+}
 
-	#footer .inner {
-		width: 1200px;
-		margin: 0 auto;
-		position: relative;
-	}
+.site-footer h6 {
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-top: 5px;
+}
 
-	#footer .inner .fl {
-		float: left;
-	}
+.site-footer h8 {
+    color: rgb(0, 0, 0);
+    font-size: 13px;
+    text-transform: uppercase;
+    margin-top: 5px;
 
-	#footer .inner .fl ul::after {
-		content: '';
-		clear: both;
-		display: block;
-	}
+}
 
-	#footer .inner .fl ul li {
-		float: left;
-	}
+.footer-links {
+    padding-left: 0;
+    list-style: none;
+    margin-right: 20px;
+    margin-bottom: 0px;
+}
 
-	#footer .inner .fl ul li:not(:last-of-type) {
-		margin-right: 40px; }
+.footer-links a {
+    color: rgb(0, 0, 0);
+}
 
-	#footer .inner .fl ul li a {
-		font-size: 15px;
-		border-bottom: 1px solid #666;
-		color: rgb(0, 0, 0);
-	}
+.footer-links li {
+    display: block
+}
 
-	#footer .inner .fl p {
-		line-height: 25px;
-		font-size: 15px;
-		margin: 22px 0;
-	}
-
-	#footer .inner .fl .copyRight {
-		font-size: 15px;
-	}
-
-	#footer .inner .fr {
-		float: right;
-	}
-
-	#footer .inner .fr p {
-		font-size: 15px;
-		line-height: 25px;
-	}
-
-	#footer .inner .fr p em {
-		font-size: 22px;
-		font-style: normal;
-		font-weight: 600;
-	}
-
-	#footer .inner .fr .sns {
-		margin-top: 30px;
-	}
-
-	#footer .inner .fr .sns li {
-		float: left;
-
-	}
-
-	#footer .inner .fr .sns li:not(:last-of-type) {
-		margin-right: 30px;
-	}
-
-	#footer .inner .fr .sns li i {
-		font-size: 45px;
-		color: rgba(47, 114, 202, 0.89);
-	}
-
+.footer-links.inline li {
+    display: inline-block
+}
 </style>
