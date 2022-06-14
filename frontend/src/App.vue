@@ -1,11 +1,4 @@
 <template>
-<<<<<<< HEAD
-  <v-app>
-    <AllHeader/>
-    <HomeView />
-    <Allfooter/>
-  </v-app>
-=======
 	<v-app>
 		<v-main style="width: 100%">
 			<!-- <MainHeader/>-->
@@ -15,7 +8,6 @@
 			<!-- <MainFooter/>-->
 		</v-main>
 	</v-app>
->>>>>>> upstream/main
 </template>
 
 <script>
