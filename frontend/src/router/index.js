@@ -38,16 +38,7 @@ const routes = [
     name: 'OAuth2Redirect',
     component: OAuthRedirect
   },
-  {
-    path: '/hotel',
-    name: 'HotelRegisterPage',
-    component: () => import('../views/hotel/HotelRegisterPage.vue')
-  },
-  {
-    path: '/reserve',
-    name: 'reservDatail',
-    component: () => import('../components/business/ReservDetail.vue')
-  },
+  
   
 
 ]
