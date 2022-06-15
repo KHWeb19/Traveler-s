@@ -38,6 +38,11 @@ const routes = [
     name: 'OAuth2Redirect',
     component: OAuthRedirect
   },
+  {
+    path: '/mypage',
+    name: 'MyPage',
+    component: () => import('../views/mypage/MyPage.vue')
+  }
   
   
 
