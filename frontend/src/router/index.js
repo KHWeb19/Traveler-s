@@ -3,7 +3,10 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 import SignUp from '@/views/member/MemberSignUp.vue'
+
+import store from '@/store'
 import OAuthRedirect from '@/views/member/OAuth2Redirect.vue'
+
 
 
 
@@ -53,6 +56,12 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+
+router.beforeEach(function(to,from,next){
+  store.dispatch("validate_login")
+  next()
 })
 
 export default router
