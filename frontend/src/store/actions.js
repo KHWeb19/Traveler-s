@@ -2,7 +2,8 @@ import {
     FETCH_HOTEL_LIST,
     FETCH_HOTEL,
     IS_LOGGEDIN,
-    NOT_LOGGEDIN
+    NOT_LOGGEDIN,
+    SET_USER
 } from './mutation-types'
 
 import axios from 'axios'
@@ -42,5 +43,12 @@ export default {
     },
     validate_login({commit}){
         localStorage.getItem('access_token') ? commit(IS_LOGGEDIN) : commit(NOT_LOGGEDIN)
+    },
+    setUser({commit}){
+        axios.get("http://localhost:7777/getUser")
+            .then((res => {
+                alert("유저정보 가져오기 테스트")
+                commit(SET_USER, res.data)
+            }))
     }
 }

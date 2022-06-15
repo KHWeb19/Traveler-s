@@ -15,7 +15,7 @@
 		<ul>
           <li><a>내정보</a>
             <ul>
-              <li><a href="/내정보 수정">내정보 수정</a></li>
+              <li><a href="/mypage">내정보 수정</a></li>
               <li><a href="/찜리스트">찜리스트</a></li>
               <li><a href="/내게시물">내 게시물</a></li>
               <li><a href="/문의">문의</a></li>
