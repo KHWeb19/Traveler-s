@@ -67,21 +67,35 @@
         <hr>
         <p class="hotelImgLabel">* 숙소이미지</p>
     </div>
-    <div  v-if="this.files">
-         <table>
-            <tr>
-                <td v-for="(file, index) in files" :key="index" >
-                    <img :src="file.preview" class="preview" width="150px" height="150px"/>
-                </td>
-            </tr>
-        </table>
-    </div>
  
     <div>
-        <input type="file" id="files" ref="files" 
-                            multiple v-on:change="handleFileUpload()"/>
+         <table>
+            <tr>
+                <td v-for="(none, index) in notImage" :key="index" > 
+                    <div v-if="files[index] == null">
+                    <input  type="file" id="fileUpload" ref="files" 
+                         v-on:change="handleFileUpload()" hidden />
+                    <v-icon @click="chooseFile">
+                        mdi-image
+                    </v-icon> 
+                    </div>
+                    <div v-else class="image-frame">
+                         <img  :src="files[index].preview" class="preview" width="200px" height="200px"/>
+                         <v-icon @click="imgCancel(index)">
+                            mdi-close
+                        </v-icon>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
     </div>
     
+ 
+   <div>
+        <input type="file" id="files" ref="files" 
+                            multiple v-on:change="handleFileUpload()"/>
+    </div> 
 
     <div class="btn">
     <button type="submit">저장하기</button>
@@ -105,7 +119,9 @@ export default {
             detailAddress: '',
             extraAddress: '',
             files: [],
-            filesPreview:[]
+            filesPreview:[],
+            notImage: ['','','','','','','','','']
+        
         }
     },
     methods: {
@@ -158,20 +174,26 @@ export default {
             this.$emit('submit', { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress, files })
         },
            handleFileUpload () {
-            
-                        for (let i = 0; i < this.$refs.files.files.length; i++) {
+            console.log(this.$refs.files.files)
+                        for (let i = 0; i < this.$refs.files.files; i++) {
                             this.files = [
                                 ...this.files,
-                               
                                 {
                                     file: this.$refs.files.files[i],
                                     preview: URL.createObjectURL(this.$refs.files.files[i]),
                                 }
                             ];
-                        }
+                        }  
                         
-                    
-        }
+           },
+    
+        chooseFile() {
+              document.getElementById("fileUpload").click()
+        },
+        imgCancel(index) {
+            this.files.splice(index,1)
+        }   
+        
     }
  
 }
@@ -281,10 +303,12 @@ input[id="extraAddress"] {
 table {
     margin-left: auto;
     margin-right: auto;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 10px;
 }
 
 td {
+    border: 1px solid black;
     width: 200px;
     height: 200px;
     text-align: center;
@@ -292,5 +316,12 @@ td {
 }
 .preview {
     width: 100%;
+}
+.image1{
+    background-image: url('@/assets/hotel.jpg');
+
+}
+image-frame{
+     padding: 0 !important;
 }
 </style>
