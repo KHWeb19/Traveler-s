@@ -26,7 +26,7 @@ public class Hotel {
 
     @Convert(converter = HotelConvert.class)
     private List<String> hotelInfo;
-
+    /*
     @Column(nullable = false)
     private String postcode;
 
@@ -39,10 +39,14 @@ public class Hotel {
     // 참고항목
     @Column(nullable = false)
     private String extraAddress;
+    */
 
-    @Convert(converter = HotelConvert.class)
-    private List<String> filePath;
-    /*@Column(nullable = false) // default 255
+    @Column(nullable = false)
+    private String totalAddress;
+
+    /*@Convert(converter = HotelConvert.class)
+    private List<String> filePath;*/
+    @Column(nullable = false) // default 255
     private String hotelImgPath1;
     @Column(nullable = false)
     private String hotelImgPath2;
@@ -60,8 +64,7 @@ public class Hotel {
     private String hotelImgPath8;
     @Column
     private String hotelImgPath9;
-    @Column
-    private String hotelImgPath10;*/
+
 
     //@Column(length = 300, nullable = false)
     //private String openKakaotalk;
