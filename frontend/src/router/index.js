@@ -44,6 +44,7 @@ const routes = [
     component: () => import('../views/mypage/MyPage.vue')
   }
   
+  
 
 ]
 

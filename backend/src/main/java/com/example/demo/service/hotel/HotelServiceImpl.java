@@ -7,33 +7,63 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @Service
 public class HotelServiceImpl implements HotelService {
 
     @Autowired
-    HotelRepository repository;
+    HotelRepository hotelRepository;
 
     @Override
-    public void register(HotelRequest hotelRequest) {
-        Hotel hotel = new Hotel();
-        hotel.setHotelInfo(hotelRequest.getHotelInfo());
-        repository.save(hotel);
+    public void register(Hotel hotel, List<MultipartFile> files) throws Exception {
+
+        List<String> filePath = new ArrayList<>();
+        try {
+            if (files != null) {
+                UUID uuid = UUID.randomUUID();
+
+                for (MultipartFile multipartFile : files) {
+                    log.info(multipartFile.getOriginalFilename());
+                    String fileName = uuid + "_" + multipartFile.getOriginalFilename();
+                    log.info(fileName);
+                    FileOutputStream saveFile = new FileOutputStream(
+                            "../frontend/src/assets/hotelImg/" + fileName);
+                    saveFile.write(multipartFile.getBytes());
+                    saveFile.close();
+
+                    filePath.add(fileName);
+                }
+            }
+        }catch (Exception e) {
+            log.info("Upload Fail!!!");
+        }
+
+        hotel.setFilePath(filePath);
+
+        hotelRepository.save(hotel);
+        System.out.println(hotelRepository.findAll());
     }
 
     @Override
     public List<Hotel> list() {
         log.info("HotelServiceIMPL list");
-        return repository.findAll(Sort.by(Sort.Direction.DESC, "hotelNo"));
+        return hotelRepository.findAll(Sort.by(Sort.Direction.DESC, "hotelNo"));
     }
 
     @Override
     public Hotel read(Integer hotelNo) {
-        Optional<Hotel> maybeReadBoard = repository.findById(Long.valueOf(hotelNo));
+        Optional<Hotel> maybeReadBoard = hotelRepository.findById(Long.valueOf(hotelNo));
         //Optional: null일 수도 있는 객체를 감싸는 일종의 Wrapper 클래스
         /*
         optional 변수 내부에는 null이 아닌 T 객체가 있을 수도 있고 null이 있을 수도 있습니다.
@@ -51,11 +81,11 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public void modify(Hotel hotel) {
-        repository.save(hotel);
+        hotelRepository.save(hotel);
     }
 
     @Override
     public void remove(Integer hotelNo) {
-        repository.deleteById(Long.valueOf(hotelNo));
+        hotelRepository.deleteById(Long.valueOf(hotelNo));
     }
 }

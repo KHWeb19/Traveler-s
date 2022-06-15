@@ -67,6 +67,35 @@
         <hr>
         <p class="hotelImgLabel">* 숙소이미지</p>
     </div>
+ 
+    <div>
+         <table>
+            <tr>
+                <td v-for="(none, index) in notImage" :key="index" > 
+                    <div v-if="files[index] == null">
+                    <input  type="file" id="fileUpload" ref="files" 
+                         v-on:change="handleFileUpload()" hidden />
+                    <v-icon @click="chooseFile">
+                        mdi-image
+                    </v-icon> 
+                    </div>
+                    <div v-else class="image-frame">
+                         <img  :src="files[index].preview" class="preview" width="200px" height="200px"/>
+                         <v-icon @click="imgCancel(index)">
+                            mdi-close
+                        </v-icon>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    
+ 
+   <div>
+        <input type="file" id="files" ref="files" 
+                            multiple v-on:change="handleFileUpload()"/>
+    </div> 
 
     <div class="btn">
     <button type="submit">저장하기</button>
@@ -88,7 +117,11 @@ export default {
             postcode: '',
             address: '',
             detailAddress: '',
-            extraAddress: ''
+            extraAddress: '',
+            files: [],
+            filesPreview:[],
+            notImage: ['','','','','','','','','']
+        
         }
     },
     methods: {
@@ -133,14 +166,40 @@ export default {
       }).open();
          },
         onSubmit () {
-            const { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress } = this
-            this.$emit('submit', { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress })
-        }
+           
+            this.files = this.$refs.files.files
+            console.log(this.files[0])
+            const { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress, files } = this
+            
+            this.$emit('submit', { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress, files })
+        },
+           handleFileUpload () {
+            console.log(this.$refs.files.files)
+                        for (let i = 0; i < this.$refs.files.files; i++) {
+                            this.files = [
+                                ...this.files,
+                                {
+                                    file: this.$refs.files.files[i],
+                                    preview: URL.createObjectURL(this.$refs.files.files[i]),
+                                }
+                            ];
+                        }  
+                        
+           },
+    
+        chooseFile() {
+              document.getElementById("fileUpload").click()
+        },
+        imgCancel(index) {
+            this.files.splice(index,1)
+        }   
+        
     }
+ 
 }
 </script>
 
-<style>
+<style scoped>
 h3 {
     margin: 10px;
 }
@@ -240,5 +299,29 @@ input[id="extraAddress"] {
 .btn {
     text-align: center;
     word-spacing: 10px;
+}
+table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+
+td {
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    
+}
+.preview {
+    width: 100%;
+}
+.image1{
+    background-image: url('@/assets/hotel.jpg');
+
+}
+image-frame{
+     padding: 0 !important;
 }
 </style>
