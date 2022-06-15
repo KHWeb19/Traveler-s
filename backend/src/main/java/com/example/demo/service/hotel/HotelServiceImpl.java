@@ -28,7 +28,7 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public void register(Hotel hotel, List<MultipartFile> files) throws Exception {
 
-        List<String> filePath = new ArrayList<>();
+        List<String> filePathList = new ArrayList<>();
         try {
             if (files != null) {
                 UUID uuid = UUID.randomUUID();
@@ -42,17 +42,49 @@ public class HotelServiceImpl implements HotelService {
                     saveFile.write(multipartFile.getBytes());
                     saveFile.close();
 
-                    filePath.add(fileName);
+                    filePathList.add(fileName);
+
                 }
             }
         }catch (Exception e) {
             log.info("Upload Fail!!!");
         }
 
-        hotel.setFilePath(filePath);
+        for(int i = 0; i < filePathList.size(); i++) {
+            switch (i){
+                case 0:
+                     hotel.setHotelImgPath1(filePathList.get(i));
+                break;
+                case 1:
+                    hotel.setHotelImgPath2(filePathList.get(i));
+                    break;
+                case 2:
+                    hotel.setHotelImgPath3(filePathList.get(i));
+                    break;
+                case 3:
+                    hotel.setHotelImgPath4(filePathList.get(i));
+                    break;
+                case 4:
+                    hotel.setHotelImgPath5(filePathList.get(i));
+                    break;
+                case 5:
+                    hotel.setHotelImgPath6(filePathList.get(i));
+                    break;
+                case 6:
+                    hotel.setHotelImgPath7(filePathList.get(i));
+                    break;
+                case 7:
+                    hotel.setHotelImgPath8(filePathList.get(i));
+                    break;
+                case 8:
+                    hotel.setHotelImgPath9(filePathList.get(i));
+                    break;
+            }
+
+        }
+
 
         hotelRepository.save(hotel);
-        System.out.println(hotelRepository.findAll());
     }
 
     @Override

@@ -133,7 +133,8 @@ export default {
             extraAddress: '',
             files: [],
             notImage: ['','','','','','','','',''],
-            fileNum: 0
+            fileNum: 0,
+            totalAddress:''
         }
     },
     methods: {
@@ -178,15 +179,13 @@ export default {
       }).open();
          },
         onSubmit () {
-           
-            this.files = this.$refs.files.files
             const { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress, files } = this
-            
-            this.$emit('submit', { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress, files })
+            this.totalAddress = postcode + " " + address + detailAddress + extraAddress
+            const { totalAddress} = this
+            this.$emit('submit', { hotelName, hotelInfo, totalAddress ,files })
             
         },
            handleFilesUpload () {
-            console.log(this.$refs.files.files.length)
             if(this.$refs.files.files.length > 9){
                 alert("최대 9장 까지 가능 합니다")
                 this.$refs.files.value = ''
@@ -194,17 +193,17 @@ export default {
             }
 
             this.fileNum += this.$refs.files.files.length
-            console.log(this.files.length)
             if(this.fileNum < 10){
                         for (let i = 0; i < this.$refs.files.files.length; i++) {
                             this.files = [
                                 ...this.files,
                                 {
                                     file: this.$refs.files.files[i],
-                                    preview: URL.createObjectURL(this.$refs.files.files[i]),
+                                    preview: URL.createObjectURL(this.$refs.files.files[i])
                                 }
                             ]
                         }      
+                     
             }else{
                 alert("최대 9장 까지 가능 합니다")
                 this.fileNum -= this.$refs.files.files.length
@@ -240,8 +239,7 @@ export default {
             this.files.splice(index,1)
             URL.revokeObjectURL
             console.log(this.files)
-        }   
-        
+        }
     }
  
 }

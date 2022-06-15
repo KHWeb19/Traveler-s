@@ -18,21 +18,18 @@ export default {
     },
     methods: {
         onSubmit (payload) {
-            const { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress, files } = payload
+            const { hotelName, hotelInfo, totalAddress , files } = payload
             let formData = new FormData()
             let hotel = {
                     hotelName,
                     hotelInfo,
-                    postcode,
-                    address,
-                    detailAddress,
-                    extraAddress
+                    totalAddress
             }
       
             formData.append('hotel',new Blob([JSON.stringify(hotel)],{type: "application/json"}))
             
             for (let i = 0; i <  files.length; i++) {
-                formData.append('files',files[i])
+                formData.append('files',files[i].file)
             }
 
            
