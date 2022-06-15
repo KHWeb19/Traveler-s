@@ -11,17 +11,17 @@
 </template>
 
 <script>
-  import AllHeader from './components/mainHome/AllHeader.vue';
-  import Allfooter from './components/mainHome/AllFooter.vue';
-  import HomeView from './views/HomeView.vue';
+  import MainHeader from './components/mainHome/MainHeader.vue';
+  import MainFooter from './components/mainHome/MainFooter.vue';
+  //import HomeView from './views/HomeView.vue';
 
   export default {
     name: 'App',
 
     components: {
-      AllHeader,
-      Allfooter,
-      HomeView
+      MainHeader,
+      MainFooter
+      //HomeView
       // HelloWorld,
     },
 
