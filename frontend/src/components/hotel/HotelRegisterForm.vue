@@ -67,6 +67,21 @@
         <hr>
         <p class="hotelImgLabel">* 숙소이미지</p>
     </div>
+    <div  v-if="this.files">
+         <table>
+            <tr>
+                <td v-for="(file, index) in files" :key="index" >
+                    <img :src="file.preview" class="preview" width="150px" height="150px"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+ 
+    <div>
+        <input type="file" id="files" ref="files" 
+                            multiple v-on:change="handleFileUpload()"/>
+    </div>
+    
 
     <div class="btn">
     <button type="submit">저장하기</button>
@@ -88,7 +103,9 @@ export default {
             postcode: '',
             address: '',
             detailAddress: '',
-            extraAddress: ''
+            extraAddress: '',
+            files: [],
+            filesPreview:[]
         }
     },
     methods: {
@@ -133,14 +150,34 @@ export default {
       }).open();
          },
         onSubmit () {
-            const { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress } = this
-            this.$emit('submit', { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress })
+           
+            this.files = this.$refs.files.files
+            console.log(this.files[0])
+            const { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress, files } = this
+            
+            this.$emit('submit', { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress, files })
+        },
+           handleFileUpload () {
+            
+                        for (let i = 0; i < this.$refs.files.files.length; i++) {
+                            this.files = [
+                                ...this.files,
+                               
+                                {
+                                    file: this.$refs.files.files[i],
+                                    preview: URL.createObjectURL(this.$refs.files.files[i]),
+                                }
+                            ];
+                        }
+                        
+                    
         }
     }
+ 
 }
 </script>
 
-<style>
+<style scoped>
 h3 {
     margin: 10px;
 }
@@ -240,5 +277,20 @@ input[id="extraAddress"] {
 .btn {
     text-align: center;
     word-spacing: 10px;
+}
+table {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+td {
+    width: 200px;
+    height: 200px;
+    text-align: center;
+    
+}
+.preview {
+    width: 100%;
 }
 </style>

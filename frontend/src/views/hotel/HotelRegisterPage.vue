@@ -6,20 +6,42 @@
 </template>
 
 <script>
-import SideBar from '@/components/Layout/SideBar.vue'
+//import SideBar from '@/components/Layout/SideBar.vue'
 import HotelRegisterForm from '@/components/hotel/HotelRegisterForm.vue'
 import axios from 'axios'
 
 export default {
     name: 'HotelRegisterPage',
     components: {
-        SideBar,
+        //SideBar,
         HotelRegisterForm
     },
     methods: {
         onSubmit (payload) {
-            const { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress } = payload
-            axios.post('http://localhost:7777/hotel/hotelRegister', { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress })
+            const { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress, files } = payload
+            let formData = new FormData()
+            let hotel = {
+                    hotelName,
+                    hotelInfo,
+                    postcode,
+                    address,
+                    detailAddress,
+                    extraAddress
+            }
+      
+            formData.append('hotel',new Blob([JSON.stringify(hotel)],{type: "application/json"}))
+            console.log(files[1])
+            for (let i = 0; i <  files.length; i++) {
+                formData.append('files',files[i])
+            }
+
+           
+
+            axios.post('http://localhost:7777/hotel/hotelRegister', formData, {
+                headers: {
+                    'Content-Type' : 'multipart/form-data'
+                }
+            })
             .then(() => {
                 alert('등록 되었습니다.')
 
