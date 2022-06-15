@@ -67,20 +67,36 @@
         <hr>
         <p class="hotelImgLabel">* 숙소이미지</p>
     </div>
- 
+
+    <div v-if="this.files.length < 9">
+        <input type="file" id="files" ref="files" 
+                        multiple v-on:change="handleFilesUpload()" hidden />
+        <v-icon>
+            mdi-image-plus 
+        </v-icon>
+        <v-btn @click="chooseFile" text>
+            이미지 첨부
+        </v-btn> 
+    </div>  
+    <div v-else>
+        <v-icon>
+            mdi-close
+        </v-icon>
+        <v-btn @click="cancelFile" text>
+            전체 취소
+        </v-btn> 
+    </div>
     <div>
          <table>
             <tr>
                 <td v-for="(none, index) in notImage" :key="index" > 
                     <div v-if="files[index] == null">
-                    <input  type="file" id="fileUpload" ref="files" 
-                         v-on:change="handleFileUpload()" hidden />
-                    <v-icon @click="chooseFile">
-                        mdi-image
-                    </v-icon> 
+                        <v-icon>
+                            mdi-image
+                        </v-icon>
                     </div>
-                    <div v-else class="image-frame">
-                         <img  :src="files[index].preview" class="preview" width="200px" height="200px"/>
+                    <div v-else>
+                         <img :src="files[index].preview" class="preview" width="100%" height="165px"/>
                          <v-icon @click="imgCancel(index)">
                             mdi-close
                         </v-icon>
@@ -91,12 +107,9 @@
         </table>
     </div>
     
- 
-   <div>
-        <input type="file" id="files" ref="files" 
-                            multiple v-on:change="handleFileUpload()"/>
-    </div> 
-
+  
+   
+    
     <div class="btn">
     <button type="submit">저장하기</button>
         <router-link :to="{ name: '' }">
@@ -119,9 +132,8 @@ export default {
             detailAddress: '',
             extraAddress: '',
             files: [],
-            filesPreview:[],
-            notImage: ['','','','','','','','','']
-        
+            notImage: ['','','','','','','','',''],
+            fileNum: 0
         }
     },
     methods: {
@@ -168,30 +180,66 @@ export default {
         onSubmit () {
            
             this.files = this.$refs.files.files
-            console.log(this.files[0])
             const { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress, files } = this
             
             this.$emit('submit', { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress, files })
+            
         },
-           handleFileUpload () {
-            console.log(this.$refs.files.files)
-                        for (let i = 0; i < this.$refs.files.files; i++) {
+           handleFilesUpload () {
+            console.log(this.$refs.files.files.length)
+            if(this.$refs.files.files.length > 9){
+                alert("최대 9장 까지 가능 합니다")
+                this.$refs.files.value = ''
+                return
+            }
+
+            this.fileNum += this.$refs.files.files.length
+            console.log(this.files.length)
+            if(this.fileNum < 10){
+                        for (let i = 0; i < this.$refs.files.files.length; i++) {
                             this.files = [
                                 ...this.files,
                                 {
                                     file: this.$refs.files.files[i],
                                     preview: URL.createObjectURL(this.$refs.files.files[i]),
                                 }
-                            ];
-                        }  
-                        
+                            ]
+                        }      
+            }else{
+                alert("최대 9장 까지 가능 합니다")
+                this.fileNum -= this.$refs.files.files.length
+                this.$refs.files.value = ''
+            }  
+            
            },
+          /* handleFileUpload () {
+            //this.$refs.files2[0].files 는 배열의 상태여서 그랬던거 같음
+            //파일 추가하고 또 버튼 눌러서 추가할때마다 files객체 생기는듯
+            console.log(this.$refs.files2)
+                console.log(this.$refs.files2[0].files[0])
+                this.files = [
+                            ...this.files,
+                                {
+                                    file: this.$refs.files2[0].files[0],
+                                    preview: URL.createObjectURL(this.$refs.files2[0].files[0]),
+                                }
+                            ]
+                        console.log(this.files)
+                
+           },*/
     
         chooseFile() {
-              document.getElementById("fileUpload").click()
+              document.getElementById("files").click()
+        },
+        cancelFile() {
+            this.files = ''
+            this.fileNum = 0
         },
         imgCancel(index) {
+            //인덱스 어디부터 하나 삭제
             this.files.splice(index,1)
+            URL.revokeObjectURL
+            console.log(this.files)
         }   
         
     }
@@ -314,14 +362,7 @@ td {
     text-align: center;
     
 }
-.preview {
-    width: 100%;
-}
-.image1{
-    background-image: url('@/assets/hotel.jpg');
-
-}
-image-frame{
-     padding: 0 !important;
+#files {
+    margin: 30px
 }
 </style>

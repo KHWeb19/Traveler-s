@@ -2,10 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
-import SignUp from '@/views/member/MemberSignUp.vue'
-
 import store from '@/store'
-import OAuthRedirect from '@/views/member/OAuth2Redirect.vue'
+
 
 
 
@@ -31,14 +29,18 @@ const routes = [
   {
     path: '/signup',
     name: 'SignUp',
-    component: SignUp
+    component: () => import('@/views/member/MemberSignUp.vue')
   },
   {
     path: '/oauth2/redirect',
     name: 'OAuth2Redirect',
-    component: OAuthRedirect
+    component: () => import('../views/member/OAuth2Redirect.vue')
   },
-  
+  {
+    path: '/hotelRegister',
+    name: 'HotelRegisterPage',
+    component: () => import('../views/hotel/HotelRegisterPage.vue')
+  }
   
 
 ]

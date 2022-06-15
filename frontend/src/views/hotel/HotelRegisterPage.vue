@@ -30,7 +30,7 @@ export default {
             }
       
             formData.append('hotel',new Blob([JSON.stringify(hotel)],{type: "application/json"}))
-            console.log(files[1])
+            
             for (let i = 0; i <  files.length; i++) {
                 formData.append('files',files[i])
             }
