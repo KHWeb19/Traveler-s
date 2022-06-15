@@ -73,7 +73,7 @@ public class SecurityConfig {
 
     //비밀번호 암호화 안하면 security로 로그인 할 수 없음
 
-    @Bean
+   @Bean
     public JWTVerificationFilter jwtVerificationFilter(){
         return new JWTVerificationFilter();
     }
