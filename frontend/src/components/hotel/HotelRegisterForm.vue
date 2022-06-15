@@ -193,6 +193,7 @@ export default {
             }
 
             this.fileNum += this.$refs.files.files.length
+            console.log(this.fileNum)
             if(this.fileNum < 10){
                         for (let i = 0; i < this.$refs.files.files.length; i++) {
                             this.files = [
@@ -206,6 +207,7 @@ export default {
                      
             }else{
                 alert("최대 9장 까지 가능 합니다")
+                console.log(this.fileNum)
                 this.fileNum -= this.$refs.files.files.length
                 this.$refs.files.value = ''
             }  
@@ -237,7 +239,7 @@ export default {
         imgCancel(index) {
             //인덱스 어디부터 하나 삭제
             this.files.splice(index,1)
-            URL.revokeObjectURL
+            this.fileNum -= 1
             console.log(this.files)
         }
     }
