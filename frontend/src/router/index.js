@@ -40,8 +40,12 @@ const routes = [
     path: '/hotelRegister',
     name: 'HotelRegisterPage',
     component: () => import('../views/hotel/HotelRegisterPage.vue')
+  },
+  {
+    path: '/mypage',
+    name: 'MyPage',
+    component: () => import('../views/mypage/MyPage.vue')
   }
-  
 
 ]
 
