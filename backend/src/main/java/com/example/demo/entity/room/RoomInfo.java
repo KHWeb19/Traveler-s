@@ -1,4 +1,4 @@
-package com.example.demo.entity.Room;
+package com.example.demo.entity.room;
 
 public class RoomInfo {
 }

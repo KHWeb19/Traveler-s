@@ -1,8 +1,6 @@
-package com.example.demo.entity.Room;
+package com.example.demo.entity.room;
 
 import lombok.Data;
-
-import javax.persistence.Entity;
 
 @Data
 //@Entity

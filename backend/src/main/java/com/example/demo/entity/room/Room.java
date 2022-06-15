@@ -1,10 +1,7 @@
-package com.example.demo.entity.Room;
+package com.example.demo.entity.room;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Data
