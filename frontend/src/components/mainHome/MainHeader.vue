@@ -6,36 +6,51 @@
       </div>
       <v-spacer></v-spacer>
     <div class="header" v-if="!isLoggedIn"> 
-        <ul>
-          <li><a href="/login">로그인</a></li>
-          <li><a href="/signup">회원가입</a></li>
+       <!-- <ul>
+          <li><a href="/login"><v-btn>로그인</v-btn></a></li>
+          <li><a href="/signup"><v-btn>회원가입</v-btn></a></li>
         </ul>
+        
 	</div>
-    <div class="header" v-else>
+    <div class="header" v-else>-->
 		<ul>
-          <li><a>내정보</a>
-            <ul>
-              <li><a href="/내정보 수정">내정보 수정</a></li>
-              <li><a href="/찜리스트">찜리스트</a></li>
-              <li><a href="/내게시물">내 게시물</a></li>
-              <li><a href="/문의">문의</a></li>
-            </ul>
+          <li> <v-card
+   class="mx-auto"
+    max-width="300"
+    tile
+  >
+		<v-list-group>
+      <template v-slot:activator>
+      <v-list-item-title>내정보</v-list-item-title>
+      </template>
+      <v-list-item-group :value="true"
+          no-action
+          sub-group>
+        <v-list-item>
+          <template>
+            <v-text>내정보수정</v-text>
+          </template>
+          </v-list-item>
+          <v-list-item>
+          <template>
+            <v-text>찜리스트</v-text>
+          </template>
+          </v-list-item>
+          <v-list-item>
+          <template>
+            <v-text>내 게시물</v-text>
+          </template>
+          </v-list-item>
+          <v-list-item>
+          <template>
+            <v-text>문의 내역</v-text>
+          </template>
+          </v-list-item>
+      </v-list-item-group>
+    </v-list-group>
+    </v-card> 
           </li>
-          
-        </ul>
-		<!--
-		<ul v-if="this.auth == '개인'">
-        <ul v-else-if="this.auth == '관리자'">
-		-->
-		<ul>
-          <li><a>내정보</a>
-            <ul>
-              <li><a href="/회원관리">회원관리</a></li>
-              <li><a href="/문의관리">문의관리</a></li>
-              <li><a href="/추가사항">추가사항</a></li>
-            </ul>
-          </li>
-          <li><button @click="onClickLogout">로그아웃</button></li>
+          <li><button @click="onClickLogout"><v-btn>로그아웃</v-btn></button></li>
 		</ul>
       </div>
     </v-toolbar>
