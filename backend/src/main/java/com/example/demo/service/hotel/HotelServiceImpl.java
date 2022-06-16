@@ -93,10 +93,14 @@ public class HotelServiceImpl implements HotelService {
         return hotelRepository.findAll(Sort.by(Sort.Direction.DESC, "hotelNo"));
     }
 
-    public List<Hotel> random () {
+    /*
+    public List<Hotel> random (Integer randNum) {
         log.info("HotelServiceIMPL random");
-        return hotelRepository.
+        List<Hotel> randomResults = hotelRepository.randomPick(randNum);
+
+        return randomResults;
     }
+     */
 
 
     @Override
