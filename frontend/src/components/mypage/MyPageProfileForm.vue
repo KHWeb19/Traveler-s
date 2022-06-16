@@ -6,13 +6,6 @@
         <label for="staticEmail" class="col-sm-2 col-form-label">이름</label>
         <div class="col-sm-10">
           <p>{{ userInfo.name }}</p>
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder="이름"
-          />
         </div>
       </div>
       <br />
@@ -20,13 +13,6 @@
         <label for="staticEmail" class="col-sm-2 col-form-label">이메일</label>
         <div class="col-sm-10">
           <p>{{ userInfo.email }}</p>
-          <input
-            type="email"
-            class="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder="이메일"
-          />
         </div>
       </div>
       <br />
@@ -57,8 +43,15 @@
       <h6>사진 이미지 미리보기</h6>
 
       <div class="form-group">
-        <label for="formFile" class="form-label mt-4">이미지 추가/변경</label>
-        <input class="form-control" type="file" id="formFile" />
+        <label>이미지 추가/변경</label>
+        <input
+          class="form-control"
+          type="file"
+          id="files"
+          ref="files"
+          multiple
+          v-on:change="handleFilesUpload()"
+        />
       </div>
       <br />
       <br />
