@@ -14,7 +14,6 @@
               <v-btn>회원가입</v-btn>
             </a></li>
         </ul>
-<<<<<<< HEAD
       </div>
       <div class="header" v-else>
         <ul>
@@ -48,18 +47,6 @@
                 </v-list-item-group>
               </v-list-group>
             </v-card>
-=======
-	</div>
-    <div class="header" v-else>
-		<ul>
-          <li><a>내정보</a>
-            <ul>
-              <li><a href="/mypage">내정보 수정</a></li>
-              <li><a href="/찜리스트">찜리스트</a></li>
-              <li><a href="/내게시물">내 게시물</a></li>
-              <li><a href="/문의">문의</a></li>
-            </ul>
->>>>>>> 4b3156859929278494b7209b7347c9d6cf7165e2
           </li>
           <li><button @click="onClickLogout">
               <v-btn>로그아웃</v-btn>
