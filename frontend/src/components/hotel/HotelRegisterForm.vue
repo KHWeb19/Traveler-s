@@ -92,7 +92,7 @@
                         </v-icon>
                     </div>
                     <div v-else>
-                         <img :src="files[index].preview" class="preview" width="100%" height="165px"/>
+                         <img :src="files[index].preview" class="preview" width="100px" height="100px"/>
                          <v-icon @click="imgCancel(index)">
                             mdi-close
                         </v-icon>
@@ -369,9 +369,14 @@ input[id="extraAddress"] {
     font-size: 15px;
     cursor: pointer;
 }
-.vbtn, .cancelFile {
+.vbtn {
     position: relative;
     left: 86%;
+    bottom: 5px;
+}
+.cancelFile {
+    position: relative;
+    left: 87%;
     bottom: 5px;
 }
 table {
