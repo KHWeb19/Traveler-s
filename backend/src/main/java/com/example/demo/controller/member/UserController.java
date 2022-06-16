@@ -199,15 +199,4 @@ public class UserController {
         }
     }
 
-    @GetMapping("/getUser")
-    public ResponseEntity<MyPageResponse> getUser(){
-        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Optional<User> optionalUser = userService.findByEmail(email);
-        User user = optionalUser.get();
-        log.info("User: {}", user.toString());
-
-        MyPageResponse myPageResponse = new MyPageResponse(user.getName(), user.getEmail());
-
-        return new ResponseEntity<MyPageResponse>(myPageResponse, HttpStatus.OK);
-    }
 }
