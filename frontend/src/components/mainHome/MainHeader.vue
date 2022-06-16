@@ -2,73 +2,90 @@
   <v-card flat width="100%" tile>
     <v-toolbar height="90">
       <div>
-         <img src="@/assets/TeamLogo.jpg"/>
+        <img src="@/assets/TeamLogo.jpg" />
       </div>
       <v-spacer></v-spacer>
-    <div class="header" v-if="!isLoggedIn"> 
+      <div class="header" v-if="!isLoggedIn">
         <ul>
-          <li><a href="/login">로그인</a></li>
-          <li><a href="/signup">회원가입</a></li>
+          <li><a href="/login">
+              <v-btn>로그인</v-btn>
+            </a></li>
+          <li><a href="/signup">
+              <v-btn>회원가입</v-btn>
+            </a></li>
         </ul>
-	</div>
-    <div class="header" v-else>
-		<ul>
-          <li><a>내정보</a>
-            <ul>
-              <li><a href="/mypage">내정보 수정</a></li>
-              <li><a href="/찜리스트">찜리스트</a></li>
-              <li><a href="/내게시물">내 게시물</a></li>
-              <li><a href="/문의">문의</a></li>
-            </ul>
+      </div>
+      <div class="header" v-else>
+        <ul>
+          <li>
+            <v-card class="mx-auto" max-width="300" tile>
+              <v-list-group>
+                <template v-slot:activator>
+                  <a href="/mypage"><v-list-item-title>내정보</v-list-item-title></a>
+                </template>
+                <v-list-item-group :value="true" no-action sub-group>
+                  <v-list-item>
+                    <template>
+                      <v-text>내정보수정</v-text>
+                    </template>
+                  </v-list-item>
+                  <v-list-item>
+                    <template>
+                      <v-text>찜리스트</v-text>
+                    </template>
+                  </v-list-item>
+                  <v-list-item>
+                    <template>
+                      <v-text>내 게시물</v-text>
+                    </template>
+                  </v-list-item>
+                  <v-list-item>
+                    <template>
+                      <v-text>문의 내역</v-text>
+                    </template>
+                  </v-list-item>
+                </v-list-item-group>
+              </v-list-group>
+            </v-card>
           </li>
-          
+          <li><button @click="onClickLogout">
+              <v-btn>로그아웃</v-btn>
+            </button></li>
         </ul>
-		<!--
-		<ul v-if="this.auth == '개인'">
-        <ul v-else-if="this.auth == '관리자'">
-		-->
-		<ul>
-          <li><a>내정보</a>
-            <ul>
-              <li><a href="/회원관리">회원관리</a></li>
-              <li><a href="/문의관리">문의관리</a></li>
-              <li><a href="/추가사항">추가사항</a></li>
-            </ul>
-          </li>
-          <li><button @click="onClickLogout">로그아웃</button></li>
-		</ul>
       </div>
     </v-toolbar>
   </v-card>
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import { mapState } from 'vuex'
 
-  export default {
-    name: "MainHeader",
-    data() {
-      return {
-        nickName: this.$store.state.userInfo.nickname,
-      }
-    },
-	computed:{
-		...mapState(['isLoggedIn'])
-	},
+export default {
+  name: "MainHeader",
+  data() {
+    return {
+      nickName: this.$store.state.userInfo.nickname,
+    }
+  },
+  computed: {
+    ...mapState(['isLoggedIn'])
+  },
 
-    methods: {
-      onClickLogout() {
-        this.$store.dispatch("attemptLogout")
-	}
+  methods: {
+    onClickLogout() {
+      this.$store.dispatch("attemptLogout")
+    }
   }
 }
 
 </script>
 
 <style scoped>
-.v-card{
+
+.v-card {
   margin-bottom: 10px;
 }
+
 .header {
   position: absolute;
   top: 0;
@@ -78,15 +95,18 @@ import {mapState} from 'vuex'
   justify-content: space-between;
   align-items: center;
 }
+
 .header ul {
   display: flex;
   justify-content: right;
   align-items: right;
   margin-right: 1%;
 }
+
 .header ul li {
   list-style: none;
 }
+
 .header ul li a {
   text-decoration: none;
   padding: 10px 10px;
@@ -103,5 +123,4 @@ import {mapState} from 'vuex'
   list-style: none;
   right: 2em;
 }
-
 </style>
