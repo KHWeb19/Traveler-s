@@ -201,7 +201,9 @@ public class UserController {
 
     @GetMapping("/getUser")
     public ResponseEntity<MyPageResponse> getUser(){
+        log.info("GetUser Endpoint");
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        log.info("* getting principal");
         Optional<User> optionalUser = userService.findByEmail(email);
         User user = optionalUser.get();
         log.info("User: {}", user.toString());
