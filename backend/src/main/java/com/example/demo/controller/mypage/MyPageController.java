@@ -10,8 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -29,12 +34,13 @@ public class MyPageController {
         User user = optionalUser.get();
         log.info("User: {}", user.toString());
 
-        MyPageResponse myPageResponse = new MyPageResponse(user.getName(), user.getEmail());
+        MyPageResponse myPageResponse = new MyPageResponse(user.getName(), user.getEmail(), user.getProfile_path());
 
         return new ResponseEntity<MyPageResponse>(myPageResponse, HttpStatus.OK);
     }
-    @PutMapping("/updatePassword")
+    @PostMapping("/updatePassword")
     public ResponseEntity<?> updatePassword(@RequestParam("password") String password){
+        log.info("/updatePassword");
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> optionalUser = userService.findByEmail(email);
         User user = optionalUser.get();
@@ -44,4 +50,34 @@ public class MyPageController {
 
         return ResponseEntity.ok().build();
     }
+
+    @PostMapping("/changeProfileImage")
+    public ResponseEntity<?> changeProfileImage(@RequestBody MultipartFile multipartFile){
+        log.info("* changeProfileImage Controller");
+        log.info("MultipartFile: {}", multipartFile.getOriginalFilename());
+
+
+        UUID uuid = UUID.randomUUID();
+        String filePath = "../frontend/src/assets/img/";
+        String fileName = uuid + multipartFile.getOriginalFilename();
+
+        try {
+            FileOutputStream fos = new FileOutputStream(filePath + fileName);
+            fos.write(multipartFile.getBytes());
+            log.info("* Saved an image");
+            fos.close();
+        }
+        catch (IOException ioe){
+            System.out.println("* Unable to write file: " + ioe.getMessage());
+        }
+
+        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<User> optionalUser = userService.findByEmail(email);
+        User user = optionalUser.get();
+        user.setProfile_path(fileName);
+        userService.saveUser(user);
+
+        return ResponseEntity.ok().build();
+    }
+
 }
