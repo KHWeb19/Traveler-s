@@ -34,14 +34,11 @@ export default {
   },
   methods: {
     ...mapActions(["setUser"]),
-    updatePassword() {
-      axios
-        .put("http://localhost:7777/updatePassword", {
-          params: { password: "1234567" },
-        })
-        .then(() => {
-          alert("변경 성공");
-        });
+    updatePassword(password) {
+      const params = new URLSearchParams()
+      params.append('password', password)
+      axios.post('http://localhost:7777/updatePassword', params)
+      .then(() => alert("변경성공"))
     },
   },
   mounted() {

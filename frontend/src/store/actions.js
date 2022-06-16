@@ -47,7 +47,6 @@ export default {
     setUser({commit}){
         axios.get("http://localhost:7777/getUser")
             .then((res => {
-                alert("유저정보 가져오기 테스트")
                 commit(SET_USER, res.data)
             }))
     }
