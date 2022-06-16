@@ -1,39 +1,46 @@
 <template>
 	<div class="home_wrap">
-		<section id="theme_search">
-			<div class="inner">
-				<v-btn @click="listall">listall</v-btn>
-				<h1>테마검색</h1>
-
-				<div class="theme">
-					<v-container style="width: 1200px">
-						<v-row justify="center">
-							<v-card align="center">
-
-							</v-card>
-						</v-row>
-					</v-container>
-				</div>
-			</div>
-		</section>
+		<v-container>
+			<v-row>
+				<ChoseDate></ChoseDate>
+				<ChoseNum></ChoseNum>
+			</v-row>
+		</v-container>
+		<HotelRandom></HotelRandom>
+		<v-container>
+			<v-row>
+				<TagSearch></TagSearch>
+			</v-row>
+		</v-container>
 	</div>
 </template>
 
-<script>
-import axios from 'axios'
 
-export default {
-		methods: {
-			listall(){
-				axios.get("http://localhost:7777/listall")
-					.then(res => console.log(res.data))
-					.catch(err => alert(err))
-			}
-		}
-	}
+<script>
+import ChoseNum from '@/components/mainHome/ChoseNum.vue'
+import ChoseDate from '@/components/mainHome/ChoseDate.vue';
+import HotelRandom from '@/components/mainHome/HotelRandom.vue';
+import TagSearch from '@/components/mainHome/TagSearch.vue';
+
+  export default {
+ components: {
+	ChoseNum,
+	ChoseDate,
+	HotelRandom,
+	TagSearch
+   },
+
+   data: ()=>({
+
+   }),
+  };
+
 </script>
 
+
+
 <style scoped>
+
 	.home_wrap {
 		/*width: 1200px;*/
 		width: 100%;
