@@ -198,18 +198,4 @@ public class UserController {
             log.info("* Session value does not equal to Cookie");
         }
     }
-
-    @GetMapping("/getUser")
-    public ResponseEntity<MyPageResponse> getUser(){
-        log.info("GetUser Endpoint");
-        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        log.info("* getting principal");
-        Optional<User> optionalUser = userService.findByEmail(email);
-        User user = optionalUser.get();
-        log.info("User: {}", user.toString());
-
-        MyPageResponse myPageResponse = new MyPageResponse(user.getName(), user.getEmail());
-
-        return new ResponseEntity<MyPageResponse>(myPageResponse, HttpStatus.OK);
-    }
 }
