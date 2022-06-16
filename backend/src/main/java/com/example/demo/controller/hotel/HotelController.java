@@ -32,11 +32,22 @@ public class HotelController {
 
         hotelService.register(hotel, files);
     }
+
+
+    @PostMapping("/hotelRandom")
+    public List<Hotel> hotelRandom () {
+        log.info("HotelRandom()");
+        return hotelService.random();
+    }
+
+
     @GetMapping("/hotelList")
     public List<Hotel> hotelList () { //메인 페이지에서 호텔 list 불러오기
         log.info("HotelList ()");
         return hotelService.list();
     }
+
+
 
     //search 넣기
 

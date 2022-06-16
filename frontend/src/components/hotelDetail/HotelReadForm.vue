@@ -24,8 +24,10 @@
 
                 <tr>
                 <td>
-                    <h1>{{hotel.hotelname}}</h1>  <!-- 숙소 이름 -->
-                    <p>{{hotel.intro}}</p> <!-- 숙소 한줄 소개 -->
+                    <!-- 숙소 이름 -->
+                    <!-- 숙소 한줄 소개 -->
+                    <h1>숙소 이름</h1>
+                    <p>숙소 한줄 소개</p>
                 </td>
                 </tr>
 
@@ -163,7 +165,7 @@
                 <td>
                     <br>
                         <h3>숙소 위치</h3>
-                        <p>{{hotel.address}}</p>
+                        <p>oo시 oo구 oo동 어쩌고 저쩌고 133-1234</p>
                     <br>
                 </td>
                 </tr>
@@ -183,13 +185,13 @@
                         <table style="width: 180px; margin-right: 10px;">
                             <tr>
                                 <td>
-                                    <h3>{{hotel.writer}}</h3>
+                                    <h3>사업자명</h3>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     
-                                    <p onclick="window.open('{{hotel.hotel_talk}}/')"> <v-icon>mdi-chat-question-outline</v-icon> 카톡으로 문의하기 </p>
+                                    <p> <v-icon>mdi-chat-question-outline</v-icon> 카톡으로 문의하기 </p>
                                 </td>
                             </tr>
                         </table>
@@ -210,17 +212,20 @@
                             <table style="width: 95%">
                                 <tr>
                                     <td>
-                                        <p>★★★★★ &ensp;|&ensp; {{hotel.who}}고객명</p>
+                                        <p>★★★★★ &ensp;|&ensp; 고객명</p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <p>2022.05.11 &ensp;|&ensp; {{hotel.room_name}}객실종류</p>
+                                        <p>2022.05.11 &ensp;|&ensp; 객실종류</p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td >
-                                        <p>{{hotel.content}}</p>
+                                        <p>내집처럼 편안하게 머물다 갑니다~~주인분께서 친절하시고 비대면 체크인이라 너무 편안합니다
+                                            따뜻하고 잠자리도 편안 합니다
+                                            맛집도 알려주셔서 맛난곳에서 식사도 해결하고  아들과 둘만의 여행의 좋은 추억이 되었습니다.♡
+                                            다음에 다시 제주도에 오면 다시 꼭 머물고 싶어요</p>
                                     </td>
                                 </tr>
                             </table>
