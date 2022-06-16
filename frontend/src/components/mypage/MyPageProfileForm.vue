@@ -45,7 +45,9 @@
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             placeholder="변경할 비밀번호"
+            v-model="password"
           />
+          <v-btn @click="updatePassword">비밀번호변경</v-btn>
         </div>
       </div>
       <br />
@@ -82,9 +84,14 @@ export default {
   name: "MyPageForm",
   props: ["userInfo"],
   data() {
-    return {};
+    return {
+      password: "",
+    };
   },
   methods: {
+    updatePassword() {
+      this.$emit("updatePassword", this.password);
+    },
     management() {
       alert("권한이 없습니다.");
     },

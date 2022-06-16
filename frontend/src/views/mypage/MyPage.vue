@@ -6,7 +6,10 @@
           <my-page-left-menu-vue />
         </v-col>
         <v-col>
-          <my-page-profile-form :userInfo="user" />
+          <my-page-profile-form
+            :userInfo="user"
+            @updatePassword="updatePassword"
+          />
         </v-col>
       </v-row>
     </div>
@@ -19,6 +22,7 @@
 import MyPageProfileForm from "@/components/mypage/MyPageProfileForm.vue";
 import MyPageLeftMenuVue from "@/components/mypage/MyPageLeftMenu.vue";
 import { mapActions, mapState } from "vuex";
+import axios from "axios";
 
 export default {
   components: {
@@ -30,6 +34,15 @@ export default {
   },
   methods: {
     ...mapActions(["setUser"]),
+    updatePassword() {
+      axios
+        .put("http://localhost:7777/updatePassword", {
+          params: { password: "1234567" },
+        })
+        .then(() => {
+          alert("변경 성공");
+        });
+    },
   },
   mounted() {
     this.setUser();
