@@ -4,5 +4,8 @@ export default {
     },
     NOT_LOGGEDIN(state){
         state.isLoggedIn = false
+    },
+    SET_USER(state, user){
+        state.user = user
     }
 }

@@ -44,13 +44,13 @@ public class SecurityConfig {
         //csrf(Cross-site Request Forgery) - 사이트간 요청 위조, 웹 애플리케이션의 취약점중 하나로, 이용자가 의도하지않은 공격
         //이용자가 자신의 의지와는 무관하게 공격자가 의도한 행위(등록,수정,삭제등)를 특정 웹사이트에 요청하도록 하는 공격
         http
-                .authorizeRequests((authz ->
-                        authz.antMatchers("/h2-console/**", "/login", "/user/register", "/oauth2/authorize/**",
-                                        "/oauth2/callback/**","/","/kakaoLogin","/check-number", "/refreshtoken").permitAll()
-                                //.antMatchers(GET, "/listall").hasAnyAuthority("ROLE_USER")
-                                .anyRequest().authenticated())
+                /* .authorizeRequests((authz ->
+                         authz.antMatchers("/h2-console/**", "/login", "/user/register", "/oauth2/authorize/**",
+                                         "/oauth2/callback/**","/","/kakaoLogin","/check-number", "/refreshtoken").permitAll()
+                                 //.antMatchers(GET, "/listall").hasAnyAuthority("ROLE_USER")
+                                 .anyRequest().authenticated())
 
-                )
+                 )*/
                 .csrf((c) -> c.disable())
                 .cors().and()
                 .headers((h -> h.frameOptions().disable()))
@@ -66,7 +66,7 @@ public class SecurityConfig {
                                 ue.userService(customOAuth2UserService))
                         .successHandler(oAuth2AuthenticationSuccessHandler)
                         .failureHandler(oAuth2AuthenticationFailureHandler))
-                .addFilterBefore(jwtVerificationFilter(), UsernamePasswordAuthenticationFilter.class)
+                //.addFilterBefore(jwtVerificationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .logout(logout -> logout
                         .invalidateHttpSession(true)
                         .deleteCookies("refresh_token")
@@ -78,10 +78,10 @@ public class SecurityConfig {
 
     //비밀번호 암호화 안하면 security로 로그인 할 수 없음
 
-    @Bean
+   /*@Bean
     public JWTVerificationFilter jwtVerificationFilter(){
         return new JWTVerificationFilter();
-    }
+    }*/
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception{
@@ -100,7 +100,6 @@ public class SecurityConfig {
 */
 
 }
-
 
 
 
