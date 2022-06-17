@@ -1,6 +1,5 @@
 package com.example.demo.controller.hotel;
 
-
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.room.Room;
 import com.example.demo.service.hotel.HotelService;
@@ -36,4 +35,5 @@ public class RoomController {
 
         roomService.register(room, files);
     }
+
 }
