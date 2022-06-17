@@ -2,6 +2,7 @@ package com.example.demo.service.room;
 
 import com.example.demo.entity.room.Room;
 import com.example.demo.repository.room.RoomRepository;
+import com.example.demo.utility.fileUpload.FileUpload;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,33 +16,16 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Slf4j
 @Service
-public class RoomServiceImpl implements RoomService {
+public class RoomServiceImpl extends FileUpload implements RoomService {
 
     private final RoomRepository roomRepository;
 
     @Override
     public void register(Room room, List<MultipartFile> files) throws Exception {
+        String path = "roomImg";
         List<String> filePathList = new ArrayList<>();
-        try {
-            if (files != null) {
-                UUID uuid = UUID.randomUUID();
 
-                for (MultipartFile multipartFile : files) {
-                    log.info(multipartFile.getOriginalFilename());
-                    String fileName = uuid + "_" + multipartFile.getOriginalFilename();
-                    log.info(fileName);
-                    FileOutputStream saveFile = new FileOutputStream(
-                            "../frontend/src/assets/roomImg/" + fileName);
-                    saveFile.write(multipartFile.getBytes());
-                    saveFile.close();
-
-                    filePathList.add(fileName);
-
-                }
-            }
-        }catch (Exception e) {
-            log.info("Upload Fail!!!");
-        }
+        fileUpload(files,path,filePathList);
 
         for(int i = 0; i < filePathList.size(); i++) {
             switch (i){
