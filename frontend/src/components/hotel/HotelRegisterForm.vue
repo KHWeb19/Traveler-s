@@ -361,4 +361,30 @@ td {
 #files {
     margin: 30px
 }
+.btn1 {
+    margin-left: 40%;
+    margin-bottom: 30px;
+    text-align: center;
+    word-spacing: 15px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 35px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    cursor: pointer;
+}
+.btn2 {
+    margin-left: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+    word-spacing: 15px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 35px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    cursor: pointer;
+}
 </style>
