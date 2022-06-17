@@ -11,27 +11,43 @@
           <li><a href="/signup">회원가입</a></li>
         </ul>
 	</div>
-    <div class="header" v-else>
-		<ul>
-          <li><a>내정보</a>
-            <ul>
-
-            </ul>
+<div class="header" v-else>
+        <ul>
+          <li>
+            <v-card class="mx-auto" max-width="300" tile>
+              <v-list-group>
+                <template v-slot:activator>
+                  <a href="/mypage"><v-list-item-title>내정보</v-list-item-title></a>
+                </template>
+                <v-list-item-group :value="true" no-action sub-group>
+                  <v-list-item>
+                    <template>
+                      <v-text>내정보수정</v-text>
+                    </template>
+                  </v-list-item>
+                  <v-list-item>
+                    <template>
+                      <v-text>찜리스트</v-text>
+                    </template>
+                  </v-list-item>
+                  <v-list-item>
+                    <template>
+                      <v-text>내 게시물</v-text>
+                    </template>
+                  </v-list-item>
+                  <v-list-item>
+                    <template>
+                      <v-text>문의 내역</v-text>
+                    </template>
+                  </v-list-item>
+                </v-list-item-group>
+              </v-list-group>
+            </v-card>
           </li>
-          
+          <li><button @click="onClickLogout">
+              <v-btn>로그아웃</v-btn>
+            </button></li>
         </ul>
-		<!--
-		<ul v-if="this.auth == '개인'">
-        <ul v-else-if="this.auth == '관리자'">
-		-->
-		<ul>
-          <li><a>내정보</a>
-            <ul>
-
-            </ul>
-          </li>
-          <li><button @click="onClickLogout">로그아웃</button></li>
-		</ul>
       </div>
     </v-toolbar>
   </v-card>
