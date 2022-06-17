@@ -1,13 +1,17 @@
 package com.example.demo.controller.hotel;
 
 import com.example.demo.dto.hotel.HotelRequest;
+
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.service.hotel.HotelService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -17,13 +21,16 @@ import java.util.List;
 public class HotelController {
 
     @Autowired
-    private HotelService hotelService;
+    HotelService hotelService;
 
-    @PostMapping("/hotelRegister")
-    public void hotelRegister (@Validated @RequestBody HotelRequest hotelRequest) {
-        log.info("hotelRegister()");
-        log.info("hotelRequest: " + hotelRequest);
-        hotelService.register(hotelRequest);
+    @PostMapping(value="/hotelRegister", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
+    public void hotelRegister (@Validated @RequestPart(value="hotel") Hotel hotel,
+                               @RequestPart(value = "files") List<MultipartFile> files) throws Exception {
+        log.info("hotelRegister()" + hotel);
+
+        log.info("files :" + files);
+
+        hotelService.register(hotel, files);
     }
     @GetMapping("/hotelList")
     public List<Hotel> hotelList () { //메인 페이지에서 호텔 list 불러오기

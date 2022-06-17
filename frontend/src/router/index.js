@@ -2,8 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
-import SignUp from '@/views/member/MemberSignUp.vue'
-import OAuthRedirect from '@/views/member/OAuth2Redirect.vue'
+import store from '@/store'
+
+
 
 
 
@@ -28,14 +29,23 @@ const routes = [
   {
     path: '/signup',
     name: 'SignUp',
-    component: SignUp
+    component: () => import('@/views/member/MemberSignUp.vue')
   },
   {
     path: '/oauth2/redirect',
     name: 'OAuth2Redirect',
-    component: OAuthRedirect
+    component: () => import('../views/member/OAuth2Redirect.vue')
   },
-  
+  {
+    path: '/hotelRegister',
+    name: 'HotelRegisterPage',
+    component: () => import('../views/hotel/HotelRegisterPage.vue')
+  },
+  {
+    path: '/mypage',
+    name: 'MyPage',
+    component: () => import('../views/mypage/MyPage.vue')
+  }
 
 ]
 
@@ -43,6 +53,12 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+
+router.beforeEach(function(to,from,next){
+  store.dispatch("validate_login")
+  next()
 })
 
 export default router

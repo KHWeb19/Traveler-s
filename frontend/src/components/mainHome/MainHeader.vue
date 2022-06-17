@@ -1,42 +1,56 @@
 <template>
   <v-card flat width="100%" tile>
-
     <v-toolbar height="90">
       <div>
-        <div @click="home"> <img src="@/assets/TeamLogo.jpg" /> </div>
+        <img src="@/assets/TeamLogo.jpg" />
       </div>
-
       <v-spacer></v-spacer>
-
       <div class="header" v-if="!isLoggedIn">
         <ul>
-          <li><a href="/로그인페이지">로그인</a></li>
-          <li><a href="/회원가입페이지">회원가입</a></li>
+          <li><a href="/login">
+              <v-btn>로그인</v-btn>
+            </a></li>
+          <li><a href="/signup">
+              <v-btn>회원가입</v-btn>
+            </a></li>
         </ul>
       </div>
-
-      <div class="header" v-if="isLoggedIn">
-        <ul v-if="this.auth == '개인'">
-          <li><a>내정보</a>
-            <ul>
-              <li><a href="/내정보 수정">내정보 수정</a></li>
-              <li><a href="/찜리스트">찜리스트</a></li>
-              <li><a href="/내게시물">내 게시물</a></li>
-              <li><a href="/문의">문의</a></li>
-            </ul>
+      <div class="header" v-else>
+        <ul>
+          <li>
+            <v-card class="mx-auto" max-width="300" tile>
+              <v-list-group>
+                <template v-slot:activator>
+                  <a href="/mypage"><v-list-item-title>내정보</v-list-item-title></a>
+                </template>
+                <v-list-item-group :value="true" no-action sub-group>
+                  <v-list-item>
+                    <template>
+                      <v-text>내정보수정</v-text>
+                    </template>
+                  </v-list-item>
+                  <v-list-item>
+                    <template>
+                      <v-text>찜리스트</v-text>
+                    </template>
+                  </v-list-item>
+                  <v-list-item>
+                    <template>
+                      <v-text>내 게시물</v-text>
+                    </template>
+                  </v-list-item>
+                  <v-list-item>
+                    <template>
+                      <v-text>문의 내역</v-text>
+                    </template>
+                  </v-list-item>
+                </v-list-item-group>
+              </v-list-group>
+            </v-card>
           </li>
-          <li><a href="#" @click="logout()">로그아웃</a></li>
-        </ul>
-
-        <ul v-else-if="this.auth == '관리자'">
-          <li><a>내정보</a>
-            <ul>
-              <li><a href="/회원관리">회원관리</a></li>
-              <li><a href="/문의관리">문의관리</a></li>
-              <li><a href="/추가사항">추가사항</a></li>
-            </ul>
-          </li>
-          <li><a href="#">로그아웃</a></li>
+          <li><button @click="onClickLogout">
+              <v-btn>로그아웃</v-btn>
+            </button></li>
         </ul>
       </div>
     </v-toolbar>
@@ -44,49 +58,34 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
+import { mapState } from 'vuex'
 
 export default {
-  components: {
-   
-  },
+  name: "MainHeader",
   data() {
     return {
-      isLogin: false,
+      nickName: this.$store.state.userInfo.nickname,
     }
-  },
-  methods: {
-    logout() {
-      this.$cookies.remove("user");
-      this.isLogin = false;
-      this.$router.push({ name: 'HomeView' })
-      alert('로그아웃 되었습니다.')
-    }
-  },
-  mounted() {
-    console.log('session : ' + this.session)
   },
   computed: {
-      ...mapState([]),
-      isLoggedIn() {
-        if(this.session == null || this.session == '') {
-          return false
-        } else {
-          return true
-        }
-      },
-      auth() {
-        return this.session.auth;
-      }
+    ...mapState(['isLoggedIn'])
   },
-};
+
+  methods: {
+    onClickLogout() {
+      this.$store.dispatch("attemptLogout")
+    }
+  }
+}
+
 </script>
 
 <style scoped>
-.v-card{
+
+.v-card {
   margin-bottom: 10px;
 }
+
 .header {
   position: absolute;
   top: 0;
@@ -96,15 +95,18 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
+
 .header ul {
   display: flex;
   justify-content: right;
   align-items: right;
   margin-right: 1%;
 }
+
 .header ul li {
   list-style: none;
 }
+
 .header ul li a {
   text-decoration: none;
   padding: 10px 10px;
@@ -121,5 +123,4 @@ export default {
   list-style: none;
   right: 2em;
 }
-
 </style>

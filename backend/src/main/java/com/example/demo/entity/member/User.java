@@ -17,6 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
+@ToString
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +30,8 @@ public class User {
 
     @CreationTimestamp
     private Date reg_date;
+
+    private String profile_path;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore

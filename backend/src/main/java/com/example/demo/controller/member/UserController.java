@@ -4,10 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.demo.dto.member.AuthResponse;
-import com.example.demo.dto.member.LoginRequest;
-import com.example.demo.dto.member.MemberRequest;
-import com.example.demo.dto.member.MobileRequest;
+import com.example.demo.dto.member.*;
 import com.example.demo.entity.member.Role;
 import com.example.demo.entity.member.Code;
 import com.example.demo.entity.member.User;
@@ -19,6 +16,7 @@ import com.example.demo.utility.oauth2.CookieUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -38,6 +36,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -148,6 +148,7 @@ public class UserController {
         userService.cellPhoneCheck(phoneNumber, numStr);
         return numStr;
     }
+
     //엑세스 토큰이 만료되면 이쪽으로 url을 보내서 refresh_token을 확인 한다고 함
     @PostMapping("/refreshtoken")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -183,8 +184,8 @@ public class UserController {
                 } catch (Exception exception) {
                     log.info("* ERROR WHILE DECODING");
                     response.setHeader("error", exception.getMessage());
-                    response.setStatus(UNAUTHORIZED.value());
-                    //response.sendError(FORBIDDEN.value());
+                    //response.setStatus(UNAUTHORIZED.value());
+                    response.setStatus(FORBIDDEN.value());
                     Map<String, String> error = new HashMap<>();
                     error.put("error_message", exception.getMessage());
                     response.setContentType(APPLICATION_JSON_VALUE);

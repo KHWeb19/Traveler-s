@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -42,9 +44,10 @@ public class SecurityConfig {
         //csrf(Cross-site Request Forgery) - 사이트간 요청 위조, 웹 애플리케이션의 취약점중 하나로, 이용자가 의도하지않은 공격
         //이용자가 자신의 의지와는 무관하게 공격자가 의도한 행위(등록,수정,삭제등)를 특정 웹사이트에 요청하도록 하는 공격
         http
-                .authorizeRequests((authz ->
+
+               .authorizeRequests((authz ->
                         authz.antMatchers("/h2-console/**", "/login", "/user/register", "/oauth2/authorize/**",
-                                        "/oauth2/callback/**","/","/kakaoLogin","/check-number", "/refreshtoken").permitAll()
+                                        "/oauth2/callback/**","/","/kakaoLogin","/check-number", "/refreshtoken","/hotel/hotelRegister").permitAll()
                                 //.antMatchers(GET, "/listall").hasAnyAuthority("ROLE_USER")
                                 .anyRequest().authenticated())
 
@@ -65,13 +68,17 @@ public class SecurityConfig {
                         .successHandler(oAuth2AuthenticationSuccessHandler)
                         .failureHandler(oAuth2AuthenticationFailureHandler))
                 .addFilterBefore(jwtVerificationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .logout().deleteCookies();
+                .logout(logout -> logout
+                        .invalidateHttpSession(true)
+                        .deleteCookies("refresh_token")
+                        .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler(HttpStatus.OK)));
 
 
         return http.build();
     }
 
     //비밀번호 암호화 안하면 security로 로그인 할 수 없음
+
 
     @Bean
     public JWTVerificationFilter jwtVerificationFilter(){
@@ -95,7 +102,6 @@ public class SecurityConfig {
 */
 
 }
-
 
 
 
