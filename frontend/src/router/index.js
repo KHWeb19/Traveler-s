@@ -45,7 +45,13 @@ const routes = [
     path: '/mypage',
     name: 'MyPage',
     component: () => import('../views/mypage/MyPage.vue')
-  }
+  },
+  {
+    path: '/roomRegister',
+    name: 'RoomRegisterPage',
+    component: () => import('../views/hotel/RoomRegisterPage.vue')
+  },
+
 
 ]
 
