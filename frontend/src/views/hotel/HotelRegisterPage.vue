@@ -1,20 +1,19 @@
 <template>
   <div>
-    <side-bar/>
+    <bm-side-bar/>
     <hotel-register-form @submit="onSubmit"/>
   </div>
 </template>
 
 <script>
-//import SideBar from '@/components/Layout/SideBar.vue'
+import BmSideBar from '@/components/layout/BmSideBar.vue'
 import HotelRegisterForm from '@/components/hotel/HotelRegisterForm.vue'
 import axios from 'axios'
-
 export default {
     name: 'HotelRegisterPage',
     components: {
-        //SideBar,
-        HotelRegisterForm
+        BmSideBar,
+        HotelRegisterForm,
     },
     methods: {
         onSubmit (payload) {
@@ -31,9 +30,7 @@ export default {
             for (let i = 0; i <  files.length; i++) {
                 formData.append('files',files[i].file)
             }
-
            
-
             axios.post('http://localhost:7777/hotel/hotelRegister', formData, {
                 headers: {
                     'Content-Type' : 'multipart/form-data'
@@ -41,10 +38,9 @@ export default {
             })
             .then(() => {
                 alert('등록 되었습니다.')
-
-                /* this.$router.push({
-                    name: ''
-                }) */
+                this.$router.push({
+                    name: 'HotelListPage'
+                })
             })
             .catch(() => {
                 alert('오류가 발생하였습니다.')
@@ -55,5 +51,4 @@ export default {
 </script>
 
 <style>
-
 </style>

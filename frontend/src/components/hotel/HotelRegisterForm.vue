@@ -66,26 +66,22 @@
         <h3>이미지</h3>
         <hr>
         <p class="hotelImgLabel">* 숙소이미지</p>
-    </div>
-
+    
     <div v-if="this.files.length < 9">
         <input type="file" id="files" ref="files" 
                         multiple v-on:change="handleFilesUpload()" hidden />
-        <v-icon>
-            mdi-image-plus 
-        </v-icon>
-        <v-btn @click="chooseFile" text>
-            이미지 첨부
-        </v-btn> 
-    </div>  
-    <div v-else>
-        <v-icon>
-            mdi-close
-        </v-icon>
-        <v-btn @click="cancelFile" text>
+        <v-btn @click="chooseFile"  class="vbtn">
+            이미지 업로드
+        </v-btn>
+        <span>최대 9장까지 등록 가능합니다.</span>
+    </div>
+
+    <div v-else class="cancelFile">
+        <v-btn @click="cancelFile">
             전체 취소
         </v-btn> 
     </div>
+
     <div>
          <table>
             <tr>
@@ -106,16 +102,10 @@
 
         </table>
     </div>
-    
-  
-   
-    
-    <div class="btn">
-    <button type="submit">저장하기</button>
-        <router-link :to="{ name: '' }">
-            취소
-        </router-link>
     </div>
+
+        <v-btn type="submit" class="btn1">저장하기</v-btn>
+        <router-link :to="{ name: 'HotelListPage' }" ><v-btn class="btn2">취소</v-btn></router-link>
 
 </form>
 </template>
@@ -191,7 +181,6 @@ export default {
                 this.$refs.files.value = ''
                 return
             }
-
             this.fileNum += this.$refs.files.files.length
             console.log(this.fileNum)
             if(this.fileNum < 10){
@@ -248,6 +237,15 @@ export default {
 </script>
 
 <style scoped>
+form {
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
+}
+a {
+    text-decoration: none;
+}
 h3 {
     margin: 10px;
 }
@@ -256,8 +254,8 @@ h3 {
 }
 .hotelNameP {
     position: absolute;
-    top: 7%;
-    left: 87%;
+    top: 5%;
+    left: 88%;
     font-size: 12px;
 }
 .hotelNameLabel {
@@ -336,7 +334,7 @@ input[id="extraAddress"] {
     outline: none;
 }
 .hotelImg {
-    margin: 50px 50px 100px 50px;
+    margin: 50px 50px 10px 50px;
 }
 .hotelImgLabel  {
     font-size: 14px;
@@ -344,25 +342,57 @@ input[id="extraAddress"] {
     left: 50px;
     top: 30px;
 }
-.btn {
+.btn1 {
+    margin-left: 40%;
+    margin-bottom: 30px;
     text-align: center;
-    word-spacing: 10px;
+    word-spacing: 15px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 35px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    cursor: pointer;
+}
+.btn2 {
+    margin-left: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+    word-spacing: 15px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 35px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    cursor: pointer;
+}
+.vbtn, .cancelFile {
+    position: relative;
+    left: 86%;
+    bottom: 5px;
 }
 table {
-    margin-left: auto;
-    margin-right: auto;
+    position: relative;
+    bottom: 50px;
+    left: 140px;
     border-collapse: separate;
     border-spacing: 10px;
 }
-
 td {
     border: 1px solid black;
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     text-align: center;
-    
 }
 #files {
-    margin: 30px
+    margin: 30px;
+}
+span {
+    position: relative;
+    left: 77%;
+    top: 30px;
+    font-size: 12px;
 }
 </style>
