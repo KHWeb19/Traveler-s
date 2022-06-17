@@ -3,18 +3,15 @@
     <div style="display: inline-block">
       <v-row>
         <v-col>
-          <my-page-left-menu-vue />
+          <my-page-left-menu-vue/>
         </v-col>
         <v-col>
-          <my-page-profile-form
-            :userInfo="user"
-            @updatePassword="updatePassword"
-          />
+          <my-page-profile-form/>
         </v-col>
       </v-row>
     </div>
-    <p>{{ user.name }}</p>
-    <p>{{ user.email }}</p>
+    <p>{{user.name}}</p>
+    <p>{{user.email}}</p>
   </v-container>
 </template>
 
@@ -22,15 +19,14 @@
 import MyPageProfileForm from "@/components/mypage/MyPageProfileForm.vue";
 import MyPageLeftMenuVue from "@/components/mypage/MyPageLeftMenu.vue";
 import { mapActions, mapState } from "vuex";
-import axios from "axios";
 
 export default {
-  components: {
+  components: { 
     MyPageProfileForm,
-    MyPageLeftMenuVue,
+    MyPageLeftMenuVue
   },
   computed: {
-    ...mapState(["user"]),
+    ...mapState(['user'])
   },
   methods: {
     ...mapActions(["setUser"]),

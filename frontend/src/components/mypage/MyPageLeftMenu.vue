@@ -1,67 +1,63 @@
 <template>
-  <div>
-    <h4>MY 페이지</h4>
-    <br /><br />
-    <div class="left_menu">
-      <v-col>
-        <v-row>
-          <ul>
-            <div>
-              <tr></tr>
-            </div>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <li>
-              <router-link :to="{ name: '', params: {} }">
-                <strong style="text-align: center"> 프로필 </strong>
-              </router-link>
-            </li>
-            <br />
-            <br />
-            <br />
-            <li>
-              <router-link :to="{ name: '', params: {} }">
-                <strong style="text-align: center"> 위시리스트 </strong>
-              </router-link>
-            </li>
-            <br />
-            <br />
-            <br />
-            <li>
-              <router-link :to="{ name: '', params: {} }">
-                <strong style="text-align: center"> 예약 내역 확인 </strong>
-              </router-link>
-            </li>
-            <br />
-            <br />
-            <br />
-            <li>
-              <router-link :to="{ name: '', params: {} }">
-                <strong style="text-align: center" @click="management">
-                  숙소 관리
-                </strong>
-              </router-link>
-            </li>
-          </ul>
-        </v-row>
-      </v-col>
+    <div>
+      <h4>MY 페이지</h4>
+      <br /><br />
+      <div class="left_menu">
+        <v-col>
+          <v-row>
+            <ul>
+              <div>
+                <tr>
+                  
+                </tr>
+              </div>
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <br />
+              <li>
+                <router-link :to="{ name: '', params: {  } }">
+                  <strong style="text-align: center"> 프로필 </strong>
+                </router-link>
+              </li>
+              <br />
+              <br />
+              <br />
+              <li>
+                <router-link :to="{ name: '', params: {} }">
+                  <strong style="text-align: center"> 위시리스트 </strong>
+                </router-link>
+              </li>
+              <br />
+              <br />
+              <br />
+              <li>
+                <router-link :to="{ name: '', params: {} }">
+                  <strong style="text-align: center"> 예약 내역 확인 </strong>
+                </router-link>
+              </li>
+              <br />
+              <br />
+              <br />
+              <li>
+                <router-link
+                  :to="{ name: '', params: {  } }"
+                >
+                  <strong style="text-align: center" @click="management">
+                    숙소 관리
+                  </strong>
+                </router-link>
+              </li>
+            </ul>
+          </v-row>
+        </v-col>
+      </div>
     </div>
-  </div>
 </template>
 
-<script>
-export default {
-  methods: {
-    management() {
-      alert("권한이 없습니다.");
-    },
-  },
-};
-</script>
+
 <style scoped>
 .left_menu {
   width: 200px;

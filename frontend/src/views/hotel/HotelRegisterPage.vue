@@ -1,20 +1,20 @@
 <template>
   <div>
-    <bm-side-bar/>
+    <side-bar/>
     <hotel-register-form @submit="onSubmit"/>
   </div>
 </template>
 
 <script>
-import BmSideBar from '@/components/layout/BmSideBar.vue'
+//import SideBar from '@/components/Layout/SideBar.vue'
 import HotelRegisterForm from '@/components/hotel/HotelRegisterForm.vue'
 import axios from 'axios'
 
 export default {
     name: 'HotelRegisterPage',
     components: {
-        BmSideBar,
-        HotelRegisterForm,
+        //SideBar,
+        HotelRegisterForm
     },
     methods: {
         onSubmit (payload) {
@@ -42,9 +42,9 @@ export default {
             .then(() => {
                 alert('등록 되었습니다.')
 
-                this.$router.push({
-                    name: 'HotelListPage'
-                })
+                /* this.$router.push({
+                    name: ''
+                }) */
             })
             .catch(() => {
                 alert('오류가 발생하였습니다.')
