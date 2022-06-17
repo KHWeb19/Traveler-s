@@ -23,7 +23,6 @@ import MyPageProfileForm from "@/components/mypage/MyPageProfileForm.vue";
 import MyPageLeftMenuVue from "@/components/mypage/MyPageLeftMenu.vue";
 import { mapActions, mapState } from "vuex";
 import axios from "axios";
-
 export default {
   components: {
     MyPageProfileForm,
