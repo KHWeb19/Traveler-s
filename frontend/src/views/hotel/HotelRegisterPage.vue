@@ -9,6 +9,7 @@
 import BmSideBar from '@/components/layout/BmSideBar.vue'
 import HotelRegisterForm from '@/components/hotel/HotelRegisterForm.vue'
 import axios from 'axios'
+
 export default {
     name: 'HotelRegisterPage',
     components: {
@@ -17,11 +18,12 @@ export default {
     },
     methods: {
         onSubmit (payload) {
-            const { hotelName, hotelInfo, totalAddress , files } = payload
+            const { hotelName, hotelInfo, postcode, totalAddress , files } = payload
             let formData = new FormData()
             let hotel = {
                     hotelName,
                     hotelInfo,
+                    postcode,
                     totalAddress
             }
       
