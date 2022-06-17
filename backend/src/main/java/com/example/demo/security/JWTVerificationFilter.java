@@ -41,6 +41,7 @@ public class JWTVerificationFilter extends OncePerRequestFilter {
                 return;
             }
             try {
+                log.info("* Decoding access token in OncePerRequestFilter");
                 //토큰에 role 확인
                 // barer 토큰만 저장
                 String token = authorizationHeader.replace("Bearer ", "");

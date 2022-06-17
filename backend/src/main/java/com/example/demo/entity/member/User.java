@@ -31,6 +31,8 @@ public class User {
     @CreationTimestamp
     private Date reg_date;
 
+    private String profile_path;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore
     @JoinTable(

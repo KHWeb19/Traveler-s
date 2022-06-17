@@ -11,6 +11,7 @@ import java.util.List;
 public interface HotelService {
     public void register (Hotel hotel, List<MultipartFile> files) throws Exception;
     public List<Hotel> list ();
+ //   public List<Hotel> random ();
     public Hotel read (Integer hotelNo);
     public void modify (Hotel hotel);
     public void remove (Integer hotelNo);

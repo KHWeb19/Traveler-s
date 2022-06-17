@@ -198,5 +198,4 @@ public class UserController {
             log.info("* Session value does not equal to Cookie");
         }
     }
-
 }
