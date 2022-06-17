@@ -79,7 +79,7 @@
         저장하기</v-btn
       >
       
-      <div>
+      <div v-if="userInfo">
         <p>{{userInfo.profile_path}}</p>
         <img :src="require(`@/assets/img/${userInfo.profile_path}`)">
       </div>
@@ -90,6 +90,7 @@
 
 <script>
 import axios from 'axios';
+import router from '@/router';
 export default {
   name: "MyPageForm",
   props: ["userInfo"],
@@ -97,8 +98,7 @@ export default {
     return {
       password: "",
       preview: [],
-      file: '',
-      profile_path: this.userInfo.profile_path
+      file: ''
     };
   },
   methods: {
@@ -116,7 +116,10 @@ export default {
         headers: {
                     'Content-Type': 'multipart/form-data'
                 }})
-      .then(() => console.log('통신성공'))
+      .then(() => {
+        console.log('통신성공')
+        router.push("/")
+    })
     },
     management() {
       alert("권한이 없습니다.");
