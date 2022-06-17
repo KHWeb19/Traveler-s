@@ -1,6 +1,8 @@
 package com.example.demo.entity.room;
 
 import com.example.demo.dto.hotel.HotelConvert;
+import com.example.demo.entity.hotel.Hotel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,6 +33,11 @@ public class Room {
 
     @Convert(converter = HotelConvert.class)
     private List<String> roomInfo;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name= "hotel_no")
+    private Hotel hotel;
 
     @Column(nullable = false) // default 255
     private String roomImgPath1;

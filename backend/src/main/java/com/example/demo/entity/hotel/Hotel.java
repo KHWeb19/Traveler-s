@@ -1,12 +1,15 @@
 package com.example.demo.entity.hotel;
 
 import com.example.demo.dto.hotel.HotelConvert;
+import com.example.demo.entity.room.Room;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -65,7 +68,9 @@ public class Hotel {
     @Column
     private String hotelImgPath9;
 
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "hotel", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
+    private List<Room> rooms = new ArrayList<>();
     //@Column(length = 300, nullable = false)
     //private String openKakaotalk;
 
