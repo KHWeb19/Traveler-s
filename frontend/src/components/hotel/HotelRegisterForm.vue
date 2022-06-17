@@ -181,7 +181,6 @@ export default {
                 this.$refs.files.value = ''
                 return
             }
-
             this.fileNum += this.$refs.files.files.length
             console.log(this.fileNum)
             if(this.fileNum < 10){

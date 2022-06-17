@@ -82,22 +82,18 @@ export default {
 .btn2 {
   background: rgb(224, 224, 224);
 }
-
 .right {
   width: 600px;
   height: 848px;
   background: rgb(250, 250, 250);
 }
-
 ul a {
   color: inherit;
 }
-
 ul {
   list-style: none;
   margin: 20% 0 0 0;
 }
-
 a {
   text-decoration: none;
 }
