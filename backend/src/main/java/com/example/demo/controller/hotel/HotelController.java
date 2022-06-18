@@ -19,7 +19,6 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/hotel")
-@CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 public class HotelController {
 
     @Autowired
@@ -50,7 +49,7 @@ public class HotelController {
  */
 
 
-    @GetMapping("/hotelList")
+    @GetMapping("/list")
     public List<Hotel> hotelList () { //메인 페이지에서 호텔 list 불러오기
         log.info("HotelList ()");
         return hotelService.list();
