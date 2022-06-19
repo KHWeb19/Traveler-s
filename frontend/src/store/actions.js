@@ -11,7 +11,7 @@ import router from '@/router'
 
 export default {
     fetchHotelList ({ commit }) {
-        return axios.get('http://localhost:7777/hotel/list')
+        return axios.get('http://localhost:7777/hotel/mainList')
                 .then((res) => {
                     commit(FETCH_HOTEL_LIST, res.data)
                 })

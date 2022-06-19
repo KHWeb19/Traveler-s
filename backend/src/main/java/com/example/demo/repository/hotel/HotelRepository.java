@@ -8,9 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
-  /*
     @Transactional
-    @Query(value = "select * from hotel order by rand() limit randNum", nativeQuery = true)
+    @Query(value = "select * from hotel order by rand() limit ?1", nativeQuery = true)
     public List<Hotel> randomPick(Integer randNum);
-   */
 }
