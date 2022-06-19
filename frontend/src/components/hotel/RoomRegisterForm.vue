@@ -16,7 +16,7 @@
         </div>
         <div>
             <label class="perssonel"> *객실인원</label> 
-            <input class="numberBox" v-model="perssonel" type="number" min="1" max="100" step="1">
+            <input class="numberBox" v-model="personnel" type="number" min="1" max="100" step="1">
         </div>
     </div>
     <!-- 시설정보 -->
@@ -120,7 +120,8 @@ export default {
             notImage: ['','','','','','','','',''],
             fileNum: 0,
             totalAddress:'',
-            perssonel: ''
+            personnel: '',
+            writer: this.$store.state.email
         }
     },
     methods: {
@@ -128,8 +129,8 @@ export default {
             if(this.files.length < 5){
                 alert('사진은 5장 이상 첨부해주세요')
             }else{
-                const { roomName, roomType, perssonel,roomInfo, files } = this
-                this.$emit('submit', { roomName, roomType, perssonel, roomInfo, files })
+                const { roomName, roomType, personnel,roomInfo, files , writer} = this
+                this.$emit('submit', { roomName, roomType, personnel, roomInfo, files , writer })
             }
         },
            handleFilesUpload () {

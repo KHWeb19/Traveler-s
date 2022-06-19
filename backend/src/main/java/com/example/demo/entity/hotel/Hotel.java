@@ -69,7 +69,7 @@ public class Hotel {
     private String hotelImgPath9;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "hotel", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hotel", fetch = FetchType.EAGER,  cascade = CascadeType.ALL)
     private List<Room> rooms = new ArrayList<>();
     //@Column(length = 300, nullable = false)
     //private String openKakaotalk;

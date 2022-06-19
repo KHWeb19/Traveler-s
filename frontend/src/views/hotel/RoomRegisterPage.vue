@@ -14,17 +14,20 @@ export default {
     },
     methods: {
         onSubmit (payload) {
-            const { roomName, roomType, perssonel, roomInfo, files } = payload
+            const { roomName, roomType, personnel, roomInfo, files, writer } = payload
             let formData = new FormData()
-            let hotel = {
+            let room = {
                    roomName, 
                    roomType, 
-                   perssonel,
+                   personnel,
                    roomInfo, 
-                   files
+                   files,
+                   writer
             }
+
+            
       
-            formData.append('hotel',new Blob([JSON.stringify(hotel)],{type: "application/json"}))
+            formData.append('roomRequest',new Blob([JSON.stringify(room)],{type: "application/json"}))
             
             for (let i = 0; i <  files.length; i++) {
                 formData.append('files',files[i].file)
@@ -34,7 +37,7 @@ export default {
                 headers: {
                     'Content-Type' : 'multipart/form-data'
                 }
-            })
+            }, writer)
             .then(() => {
                 alert('등록 되었습니다.')
                 this.$router.push({
