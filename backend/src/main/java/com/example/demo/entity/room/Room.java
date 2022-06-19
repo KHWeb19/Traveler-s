@@ -1,11 +1,13 @@
 package com.example.demo.entity.room;
 
+import com.example.demo.controller.room.AvailableRoom;
 import com.example.demo.dto.hotel.HotelConvert;
 import com.example.demo.entity.hotel.Hotel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -29,7 +31,7 @@ public class Room {
     private String roomType;
 
     @Column(nullable = false)
-    private int perssonel;
+    private int personnel;
 
     @Convert(converter = HotelConvert.class)
     private List<String> roomInfo;
@@ -38,6 +40,10 @@ public class Room {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "hotel_no")
     private Hotel hotel;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
+    private List<AvailableRoom> availableRooms = new ArrayList<>();
 
     @Column(nullable = false) // default 255
     private String roomImgPath1;

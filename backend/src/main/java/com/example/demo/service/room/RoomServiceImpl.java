@@ -1,6 +1,9 @@
 package com.example.demo.service.room;
 
+import com.example.demo.dto.hotel.RoomRequest;
+import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.room.Room;
+import com.example.demo.repository.hotel.HotelRepository;
 import com.example.demo.repository.room.RoomRepository;
 import com.example.demo.utility.fileUpload.FileUpload;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -19,13 +23,27 @@ import java.util.UUID;
 public class RoomServiceImpl extends FileUpload implements RoomService {
 
     private final RoomRepository roomRepository;
+    private final HotelRepository hotelRepository;
 
     @Override
-    public void register(Room room, List<MultipartFile> files) throws Exception {
+    public void register(RoomRequest roomRequest, List<MultipartFile> files) throws Exception {
         String path = "roomImg";
         List<String> filePathList = new ArrayList<>();
+        log.info(roomRequest.getWriter());
+        Optional<Hotel> hotelOptional = hotelRepository.findByWriter(roomRequest.getWriter());
 
+        Hotel hotel = hotelOptional.get();
+        log.info("hotel :" + hotel);
         fileUpload(files,path,filePathList);
+
+        Room room = Room.builder()
+                .roomName(roomRequest.getRoomName())
+                .roomType(roomRequest.getRoomType())
+                .roomInfo(roomRequest.getRoomInfo())
+                .personnel(roomRequest.getPersonnel())
+                .hotel(hotel)
+                .build();
+
 
         for(int i = 0; i < filePathList.size(); i++) {
             switch (i){
@@ -59,7 +77,7 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
             }
 
         }
-
+        log.info("room : " + room);
 
         roomRepository.save(room);
     }
