@@ -16,34 +16,34 @@
         <hr>
         <div class="hotelInfobox">
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="oceanView">오션뷰
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="오션뷰">오션뷰
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="terrace">테라스
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="테라스">테라스
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="swimmingPool">수영장
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="수영장">수영장
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="carCharge">전기차충전
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="전기차충전">전기차충전
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="nearAirport">공항근처
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="공항근처">공항근처
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="golfCourse">골프장
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="골프장">골프장
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="freeParking">무료주차
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="무료주차">무료주차
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="bbqGrill">바베큐그릴
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="바베큐그릴">바베큐그릴
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="pet">반려동물
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="반려동물">반려동물
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="spa">온천
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="온천">온천
         </label>
         </div>
     </div>
@@ -105,7 +105,7 @@
     </div>
     
    <v-btn type="submit" class="btn1">저장하기</v-btn>
-    <router-link :to="{ name: 'hotelListPage' }" ><v-btn class="btn2">취소</v-btn></router-link>
+    <router-link :to="{ name: 'HotelListPage' }" ><v-btn class="btn2">취소</v-btn></router-link>
 
 </form>
 </template>
