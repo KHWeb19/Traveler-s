@@ -1,44 +1,43 @@
 <template>
   <div>
-    <bm-side-bar/>
-    <hotel-register-form @submit="onSubmit"/>
+    <room-register-form @submit="onSubmit"/>
   </div>
 </template>
 
 <script>
-import BmSideBar from '@/components/layout/BmSideBar.vue'
-import HotelRegisterForm from '@/components/hotel/HotelRegisterForm.vue'
+import RoomRegisterForm from '@/components/hotel/RoomRegisterForm.vue'
 import axios from 'axios'
-
 export default {
-    name: 'HotelRegisterPage',
+    name: 'RoomRegisterPage',
     components: {
-        BmSideBar,
-        HotelRegisterForm,
+        RoomRegisterForm,
     },
     methods: {
         onSubmit (payload) {
-            const { hotelName, hotelInfo, postcode, totalAddress , files, writer } = payload
+            const { roomName, roomType, personnel, roomInfo, files, writer } = payload
             let formData = new FormData()
-            let hotel = {
-                    hotelName,
-                    hotelInfo,
-                    postcode,
-                    totalAddress,
-                    writer
+            let room = {
+                   roomName, 
+                   roomType, 
+                   personnel,
+                   roomInfo, 
+                   files,
+                   writer
             }
+
+            
       
-            formData.append('hotel',new Blob([JSON.stringify(hotel)],{type: "application/json"}))
+            formData.append('roomRequest',new Blob([JSON.stringify(room)],{type: "application/json"}))
             
             for (let i = 0; i <  files.length; i++) {
                 formData.append('files',files[i].file)
             }
            
-            axios.post('http://localhost:7777/hotel/hotelRegister', formData, {
+            axios.post('http://localhost:7777/room/register', formData, {
                 headers: {
                     'Content-Type' : 'multipart/form-data'
                 }
-            })
+            }, writer)
             .then(() => {
                 alert('등록 되었습니다.')
                 this.$router.push({

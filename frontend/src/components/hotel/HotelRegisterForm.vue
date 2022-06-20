@@ -127,7 +127,9 @@ export default {
             files: [],
             notImage: ['','','','','','','','',''],
             fileNum: 0,
-            totalAddress:''
+            totalAddress:'',
+            writer: this.$store.state.email
+
         }
     },
     methods: {
@@ -175,10 +177,10 @@ export default {
             if(this.files.length < 5){
                 alert('사진은 5장 이상 첨부해주세요')
             }else{
-                const { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress, files } = this
+                const { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress, files, writer } = this
                 this.totalAddress = address + detailAddress + extraAddress
                 const { totalAddress} = this
-                this.$emit('submit', { hotelName, hotelInfo, postcode, totalAddress ,files })
+                this.$emit('submit', { hotelName, hotelInfo, postcode, totalAddress ,files ,writer })
             }
         },
            handleFilesUpload () {
