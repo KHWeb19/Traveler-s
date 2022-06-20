@@ -11,7 +11,7 @@ import router from '@/router'
 
 export default {
     fetchHotelList ({ commit }) {
-        return axios.get('http://localhost:7777/hotel/list')
+        return axios.get('http://localhost:7777/hotel/mainList')
                 .then((res) => {
                     commit(FETCH_HOTEL_LIST, res.data)
                 })
@@ -47,7 +47,6 @@ export default {
     setUser({commit}){
         axios.get("http://localhost:7777/getUser")
             .then((res => {
-                alert("유저정보 가져오기 테스트")
                 commit(SET_USER, res.data)
             }))
     }
