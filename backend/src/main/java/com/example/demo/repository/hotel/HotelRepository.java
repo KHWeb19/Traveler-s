@@ -18,6 +18,3 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
     @Query(value = "select * from hotel m where m.writer = :writer", nativeQuery = true)
     Optional<Hotel> findByWriter(@Param("writer") String writer);
 }
-
-}
-

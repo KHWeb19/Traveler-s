@@ -26,7 +26,7 @@
               {{ hotel.totalAddress }}
             </v-card-text>
             <span class="hotel_info">
-              {{ hotel.hotelInfo }}
+              {{ "#" + hotel.hotelInfo }}
             </span>
           </v-card>
         </v-col>
@@ -38,14 +38,19 @@
 <script>
 export default {
   name: 'HotelRandom',
+  data() {
+    return {
+    
+    }
+  },
   props: {
     hotels: {
       type: Array
     }
   },
-  methods: {
-    hotel_info() {
-
+  methods: { 
+    hotel_info(){
+     
     }
   },
 }
@@ -91,5 +96,8 @@ export default {
 }
 #HotelImg{
   margin-top:15px;
+}
+#spaninfo{
+  margin: 1%;
 }
 </style>

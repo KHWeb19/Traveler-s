@@ -1,29 +1,21 @@
 <template>
   <div>
-    <h4>MY 페이지</h4>
-    <br /><br />
-    <div class="left_menu">
+    <div class="left_menu" style="margin-top: 20px;">
       <v-col>
         <v-row>
           <v-col>
             <v-row>
               <v-layout>
                 <img
-                  v-if="userInfo.profile_path"
-                  :src="require(`@/assets/img/${this.userInfo.profile_path}`)"
-                  id="imageBefore"
-                  class="proimg"
-                />
-                <img
-                  v-else
-                  src="@/assets/img/profile.png"
-                  id="imageBefore"
-                  class="proimg"
-                />
+                v-if="userInfo.profile_path"
+                :src="require(`@/assets/img/${this.userInfo.profile_path}`)"
+                id="imageBefore"
+                class="proimg"
+              />
+                
               </v-layout>
             </v-row>
           </v-col>
-          <div></div>
           <ul>
             <p>{{ userInfo.name }}</p>
             <br />
