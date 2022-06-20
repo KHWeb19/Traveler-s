@@ -1,4 +1,8 @@
 package com.example.demo.repository.room;
 
-public interface RoomRepository {
+import com.example.demo.entity.room.Room;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RoomRepository extends JpaRepository<Room, String> {
 }
+
