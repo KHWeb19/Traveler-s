@@ -5,24 +5,35 @@
     <div class="left_menu">
       <v-col>
         <v-row>
+          <v-col>
+            <v-row>
+              <v-layout>
+                <img
+                  v-if="userInfo.profile_path"
+                  :src="require(`@/assets/img/${this.userInfo.profile_path}`)"
+                  id="imageBefore"
+                  class="proimg"
+                />
+                <img
+                  v-else
+                  src="@/assets/img/profile.png"
+                  id="imageBefore"
+                  class="proimg"
+                />
+              </v-layout>
+            </v-row>
+          </v-col>
+          <div></div>
           <ul>
-            <div>
-              <tr></tr>
-            </div>
+            <p>{{ userInfo.name }}</p>
             <br />
             <br />
             <br />
             <br />
             <br />
+
             <br />
-            <li>
-              <router-link :to="{ name: '', params: {} }">
-                <strong style="text-align: center"> 프로필 </strong>
-              </router-link>
-            </li>
-            <br />
-            <br />
-            <br />
+
             <li>
               <router-link :to="{ name: '', params: {} }">
                 <strong style="text-align: center"> 위시리스트 </strong>
@@ -55,6 +66,7 @@
 
 <script>
 export default {
+  props: ["userInfo"],
   methods: {
     management() {
       alert("권한이 없습니다.");
@@ -75,6 +87,11 @@ export default {
 }
 .proimg {
   width: 150px;
+  height: 150px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 70%;
 }
 .col1 {
   background: rgb(224, 224, 224);
@@ -82,22 +99,18 @@ export default {
 .btn2 {
   background: rgb(224, 224, 224);
 }
-
 .right {
   width: 600px;
   height: 848px;
   background: rgb(250, 250, 250);
 }
-
 ul a {
   color: inherit;
 }
-
 ul {
   list-style: none;
   margin: 20% 0 0 0;
 }
-
 a {
   text-decoration: none;
 }

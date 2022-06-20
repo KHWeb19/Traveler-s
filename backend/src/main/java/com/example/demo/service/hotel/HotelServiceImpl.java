@@ -1,6 +1,6 @@
 package com.example.demo.service.hotel;
 
-import com.example.demo.dto.hotel.HotelRequest;
+
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.repository.hotel.HotelRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -9,10 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

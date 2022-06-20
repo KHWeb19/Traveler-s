@@ -1,5 +1,6 @@
 package com.example.demo.entity.hotel;
 
+
 import com.example.demo.dto.hotel.HotelConvert;
 import lombok.Builder;
 import lombok.Data;

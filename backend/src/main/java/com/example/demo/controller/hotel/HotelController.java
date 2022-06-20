@@ -1,8 +1,9 @@
 package com.example.demo.controller.hotel;
 
-import com.example.demo.dto.hotel.HotelRequest;
+
 
 import com.example.demo.entity.hotel.Hotel;
+
 import com.example.demo.service.hotel.HotelService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
+
 import java.util.List;
 
 @Slf4j
