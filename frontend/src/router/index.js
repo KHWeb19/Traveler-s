@@ -51,6 +51,11 @@ const routes = [
     name: 'RoomRegisterPage',
     component: () => import('../views/hotel/RoomRegisterPage.vue')
   },
+  {
+    path: '/hotelReadPage',
+    name: 'HotelReadPage',
+    component: () => import('../views/hotelDetail/HotelReadPage.vue')
+  },
 
 
 ]
