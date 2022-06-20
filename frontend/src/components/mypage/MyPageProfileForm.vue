@@ -1,28 +1,27 @@
 <template>
-  <v-container>
-    <br /><br /><br />
-
+  <v-container style="padding: 0px; margin-top: 20px;">
     <v-card class="right">
       <div style="display: flex; justify-content: center">
-        <form @submit.prevent="onSubmit">
+        <v-form ref="form" lazy-validation>
           <table>
             <br />
             <br />
             <tr>
               <td style="text-align: right; padding-right: 10px">이름</td>
               <td>
-                <input
+                <div
                   style="
+                    text-align: left;
                     margin: 3px;
                     border: 1px solid #d6d6d6;
                     border-radius: 3px;
                     width: 300px;
                     height: 35px;
-                    padding-left: 5px;
+                    padding: 5px;
                   "
-                  type="text"
-                  v-model="memberName"
-                />
+                  type="text">
+                  {{userInfo.name}}
+                  </div>
               </td>
             </tr>
             <tr>
@@ -40,18 +39,20 @@
             <tr>
               <td style="text-align: right; padding-right: 10px">이메일</td>
               <td>
-                <input
+                <div
                   style="
+                    text-align: left;
                     margin: 3px;
                     border: 1px solid #d6d6d6;
                     border-radius: 3px;
                     width: 300px;
                     height: 35px;
-                    padding-left: 5px;
+                    padding: 5px;
                   "
                   type="text"
-                  v-model="memberEmail"
-                />
+                  >{{userInfo.email}}
+                </div>
+
               </td>
             </tr>
             <br />
@@ -61,19 +62,15 @@
                 새 비밀번호
               </td>
               <td>
-                <input
-                  style="
-                    margin: 3px;
-                    border: 1px solid #d6d6d6;
-                    border-radius: 3px;
-                    width: 300px;
-                    height: 35px;
-                    padding-left: 5px;
-                  "
+                <v-text-field
                   type="password"
                   v-model="password"
-                />
-                <v-btn @click="updatePassword">비밀번호변경</v-btn>
+                  :rules="passwordRules"
+                  style="width: 300px;"
+                /> 
+              </td>
+              <td>
+                <v-btn @click="updatePassword" style="width: 80px; margin: 10px; padding: 5px;">변경</v-btn>
               </td>
             </tr>
             <br />
@@ -81,7 +78,7 @@
             <br />
             <br />
             <br />
-            <h4>사진 이미지 미리보기</h4>
+            <h5>사진 이미지 미리보기</h5>
             <tr>
               <td style="text-align: right; padding-right: 10px">
                 이미지 추가/변경
@@ -101,9 +98,8 @@
             <br />
             <br />
             <br />
-
-            <img :src="preview" style="width: 200px" />
           </table>
+          <img :src="preview" style="width: 200px; text-align: center;" />
           <div style="text-align: center; padding-top: 26px">
             <br />
             <v-btn
@@ -118,7 +114,7 @@
               저장하기</v-btn
             >
           </div>
-        </form>
+        </v-form>
       </div>
     </v-card>
   </v-container>
@@ -145,11 +141,22 @@ export default {
       profile_path: this.userInfo.profile_path,
       memberName: this.userInfo.name,
       memberEmail: this.userInfo.email,
+
+      passwordRules: [
+                            v => !! v || '비밀번호를 작성해주세요.',
+                            v =>  /^[a-zA-Z0-9]*$/.test(v) || '영문+숫자로만 입력해주세요',
+                            v => /(?=.*[0-9])(?=.*[a-zA-ZS])/.test(v) || "영문+숫자를 섞어주세요",
+                            v => !(v && v.length < 8) || '8자리이상으로해주세요' ,
+                            v => !(v && v.length > 15) || '15자리를 넘길수없습니다.' 
+            ]
     };
   },
   methods: {
     updatePassword() {
-      this.$emit("updatePassword", this.password);
+      if (this.$refs.form.validate()){
+        this.$emit("updatePassword", this.password);
+      }
+
     },
     selectFile(e) {
       this.file = e.target.files[0];

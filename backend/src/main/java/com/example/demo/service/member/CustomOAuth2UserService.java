@@ -89,7 +89,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                     .email(email)
                     .name(name)
                     .password(encodedPassword)
-                    .profile_path("default.jpg")
+                    .profile_path("default.png")
                     .roles(roleList).build();
             /*userEntity.setEmail(email);
             userEntity.setName(name);

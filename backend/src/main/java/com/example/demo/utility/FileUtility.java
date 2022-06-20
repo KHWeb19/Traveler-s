@@ -22,7 +22,7 @@ public class FileUtility {
             fos.write(multipartFile.getBytes());
             fos.close();
 
-            if (!oldProfilePath.equals("default.jpg"))
+            if (!oldProfilePath.equals("default.png"))
                 Files.delete(Path.of(FILE_PATH + oldProfilePath));
         }
         catch (IOException ioe){
