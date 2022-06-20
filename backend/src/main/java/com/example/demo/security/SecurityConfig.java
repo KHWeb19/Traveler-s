@@ -45,9 +45,14 @@ public class SecurityConfig {
         //이용자가 자신의 의지와는 무관하게 공격자가 의도한 행위(등록,수정,삭제등)를 특정 웹사이트에 요청하도록 하는 공격
         http
 
-               .authorizeRequests((authz ->
+                .authorizeRequests((authz ->
                         authz.antMatchers("/h2-console/**", "/login", "/user/register", "/oauth2/authorize/**",
-                                        "/oauth2/callback/**","/","/kakaoLogin","/check-number", "/refreshtoken","/hotel/hotelRegister").permitAll()
+
+                                        "/oauth2/callback/**","/","/kakaoLogin","/check-number", "/refreshtoken",
+                                        "/hotel/hotelRegister","/room/register").permitAll()
+
+                                        "/oauth2/callback/**","/","/kakaoLogin","/check-number", "/refreshtoken","/hotel/hotelRegister","/hotel/mainList").permitAll()
+
                                 //.antMatchers(GET, "/listall").hasAnyAuthority("ROLE_USER")
                                 .anyRequest().authenticated())
 

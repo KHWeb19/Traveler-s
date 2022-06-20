@@ -1,18 +1,16 @@
 package com.example.demo.service.hotel;
 
-import com.example.demo.dto.hotel.HotelRequest;
+
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.repository.hotel.HotelRepository;
+import com.example.demo.utility.fileUpload.FileUpload;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +18,7 @@ import java.util.UUID;
 
 @Slf4j
 @Service
-public class HotelServiceImpl implements HotelService {
+public class HotelServiceImpl extends FileUpload implements HotelService {
 
     @Autowired
     HotelRepository hotelRepository;
@@ -28,27 +26,10 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public void register(Hotel hotel, List<MultipartFile> files) throws Exception {
 
+        String path = "hotelImg";
         List<String> filePathList = new ArrayList<>();
-        try {
-            if (files != null) {
-                UUID uuid = UUID.randomUUID();
 
-                for (MultipartFile multipartFile : files) {
-                    log.info(multipartFile.getOriginalFilename());
-                    String fileName = uuid + "_" + multipartFile.getOriginalFilename();
-                    log.info(fileName);
-                    FileOutputStream saveFile = new FileOutputStream(
-                            "../frontend/src/assets/hotelImg/" + fileName);
-                    saveFile.write(multipartFile.getBytes());
-                    saveFile.close();
-
-                    filePathList.add(fileName);
-
-                }
-            }
-        }catch (Exception e) {
-            log.info("Upload Fail!!!");
-        }
+        fileUpload(files,path,filePathList);
 
         for(int i = 0; i < filePathList.size(); i++) {
             switch (i){
@@ -87,20 +68,21 @@ public class HotelServiceImpl implements HotelService {
         hotelRepository.save(hotel);
     }
 
+    /*
     @Override
     public List<Hotel> list() {
         log.info("HotelServiceIMPL list");
         return hotelRepository.findAll(Sort.by(Sort.Direction.DESC, "hotelNo"));
-    }
+    }*/
 
-    /*
-    public List<Hotel> random (Integer randNum) {
+
+    public List<Hotel> random () {
         log.info("HotelServiceIMPL random");
-        List<Hotel> randomResults = hotelRepository.randomPick(randNum);
+        List<Hotel> randomResults = hotelRepository.randomPick(6);
 
         return randomResults;
     }
-     */
+
 
 
     @Override

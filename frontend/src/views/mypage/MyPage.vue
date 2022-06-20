@@ -3,7 +3,7 @@
     <div style="display: inline-block">
       <v-row>
         <v-col>
-          <my-page-left-menu-vue />
+          <my-page-left-menu-vue :userInfo="user" />
         </v-col>
         <v-col>
           <my-page-profile-form
@@ -32,10 +32,11 @@ export default {
   methods: {
     ...mapActions(["setUser"]),
     updatePassword(password) {
-      const params = new URLSearchParams()
-      params.append('password', password)
-      axios.post('http://localhost:7777/updatePassword', params)
-      .then(() => alert("변경성공"))
+      const params = new URLSearchParams();
+      params.append("password", password);
+      axios
+        .post("http://localhost:7777/updatePassword", params)
+        .then(() => alert("변경성공"));
     },
   },
   mounted() {

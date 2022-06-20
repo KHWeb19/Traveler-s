@@ -1,17 +1,17 @@
 import {
-    FETCH_HOTEL_LIST,
-    FETCH_HOTEL,
-    IS_LOGGEDIN,
-    NOT_LOGGEDIN,
-    SET_USER
-} from './mutation-types'
+  FETCH_HOTEL_LIST,
+  FETCH_HOTEL,
+  IS_LOGGEDIN,
+  NOT_LOGGEDIN,
+  SET_USER,
+} from "./mutation-types";
 
-import axios from 'axios'
-import router from '@/router'
+import axios from "axios";
+import router from "@/router";
 
 export default {
     fetchHotelList ({ commit }) {
-        return axios.get('http://localhost:7777/hotel/list')
+        return axios.get('http://localhost:7777/hotel/mainList')
                 .then((res) => {
                     commit(FETCH_HOTEL_LIST, res.data)
                 })
