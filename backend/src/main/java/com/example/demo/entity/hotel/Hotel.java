@@ -27,10 +27,10 @@ public class Hotel {
 
     @Convert(converter = HotelConvert.class)
     private List<String> hotelInfo;
-    /*
+
     @Column(nullable = false)
     private String postcode;
-
+      /*
     @Column(nullable = false)
     private String address;
 

@@ -1,5 +1,8 @@
 export default {
     isLoggedIn: false,
-    user: []
+    user: [],
+
+    hotels: [],
+    hotel: null,
 }
 

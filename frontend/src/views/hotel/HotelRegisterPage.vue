@@ -18,11 +18,12 @@ export default {
     },
     methods: {
         onSubmit (payload) {
-            const { hotelName, hotelInfo, totalAddress , files } = payload
+            const { hotelName, hotelInfo, postcode, totalAddress , files } = payload
             let formData = new FormData()
             let hotel = {
                     hotelName,
                     hotelInfo,
+                    postcode,
                     totalAddress
             }
       
@@ -31,9 +32,7 @@ export default {
             for (let i = 0; i <  files.length; i++) {
                 formData.append('files',files[i].file)
             }
-
            
-
             axios.post('http://localhost:7777/hotel/hotelRegister', formData, {
                 headers: {
                     'Content-Type' : 'multipart/form-data'
@@ -41,7 +40,6 @@ export default {
             })
             .then(() => {
                 alert('등록 되었습니다.')
-
                 this.$router.push({
                     name: 'HotelListPage'
                 })
@@ -55,5 +53,4 @@ export default {
 </script>
 
 <style>
-
 </style>
