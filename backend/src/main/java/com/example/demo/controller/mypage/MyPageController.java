@@ -3,10 +3,12 @@ package com.example.demo.controller.mypage;
 import com.example.demo.dto.member.MyPageResponse;
 import com.example.demo.entity.member.User;
 import com.example.demo.service.member.UserService;
+import com.example.demo.utility.FileUtility;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
+
+import static com.example.demo.utility.FileUtility.FILE_PATH;
+import static com.example.demo.utility.FileUtility.createFileAndReturnPath;
 
 @Slf4j
 @RestController
@@ -56,25 +61,13 @@ public class MyPageController {
         log.info("* changeProfileImage Controller");
         log.info("MultipartFile: {}", multipartFile.getOriginalFilename());
 
-
-        UUID uuid = UUID.randomUUID();
-        String filePath = "../frontend/src/assets/img/";
-        String fileName = uuid + multipartFile.getOriginalFilename();
-
-        try {
-            FileOutputStream fos = new FileOutputStream(filePath + fileName);
-            fos.write(multipartFile.getBytes());
-            log.info("* Saved an image");
-            fos.close();
-        }
-        catch (IOException ioe){
-            System.out.println("* Unable to write file: " + ioe.getMessage());
-        }
-
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> optionalUser = userService.findByEmail(email);
         User user = optionalUser.get();
-        user.setProfile_path(fileName);
+        String currentProfilePath = user.getProfile_path();
+
+        String newFilePath = createFileAndReturnPath(multipartFile, currentProfilePath);
+        user.setProfile_path(newFilePath);
         userService.saveUser(user);
 
         return ResponseEntity.ok().build();
