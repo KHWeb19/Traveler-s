@@ -75,7 +75,7 @@
             mdi-image-plus 
         </v-icon>
         <v-btn @click="chooseFile" text>
-            이미지 첨부
+            이미지 첨부  (*최소 5장입니다)
         </v-btn> 
     </div>  
     <div v-else>
@@ -107,15 +107,8 @@
         </table>
     </div>
     
-  
-   
-    
-    <div class="btn">
-    <button type="submit">저장하기</button>
-        <router-link :to="{ name: '' }">
-            취소
-        </router-link>
-    </div>
+   <v-btn type="submit" class="btn1">저장하기</v-btn>
+    <router-link :to="{ name: 'HotelListPage' }" ><v-btn class="btn2">취소</v-btn></router-link>
 
 </form>
 </template>
@@ -134,7 +127,9 @@ export default {
             files: [],
             notImage: ['','','','','','','','',''],
             fileNum: 0,
-            totalAddress:''
+            totalAddress:'',
+            writer: this.$store.state.email
+
         }
     },
     methods: {
@@ -179,11 +174,14 @@ export default {
       }).open();
          },
         onSubmit () {
-            const { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress, files } = this
-            this.totalAddress = postcode + " " + address + detailAddress + extraAddress
-            const { totalAddress} = this
-            this.$emit('submit', { hotelName, hotelInfo, totalAddress ,files })
-            
+            if(this.files.length < 5){
+                alert('사진은 5장 이상 첨부해주세요')
+            }else{
+                const { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress, files, writer } = this
+                this.totalAddress = address + detailAddress + extraAddress
+                const { totalAddress} = this
+                this.$emit('submit', { hotelName, hotelInfo, postcode, totalAddress ,files ,writer })
+            }
         },
            handleFilesUpload () {
             if(this.$refs.files.files.length > 9){
@@ -364,5 +362,31 @@ td {
 }
 #files {
     margin: 30px
+}
+.btn1 {
+    margin-left: 40%;
+    margin-bottom: 30px;
+    text-align: center;
+    word-spacing: 15px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 35px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    cursor: pointer;
+}
+.btn2 {
+    margin-left: 10px;
+    margin-bottom: 30px;
+    text-align: center;
+    word-spacing: 15px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 35px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    cursor: pointer;
 }
 </style>

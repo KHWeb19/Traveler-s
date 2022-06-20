@@ -1,32 +1,23 @@
 <template>
   <v-card flat width="100%" tile>
     <v-toolbar height="90">
-        <div id="HomeButton" @click="home">
-          <img src="@/assets/TeamLogo.jpg" />
-        </div>  
-      <v-spacer></v-spacer>
-      <v-col class="UserSpace" v-if="!isLoggedIn">
       <div>
+         <img src="@/assets/TeamLogo.jpg"/>
+      </div>
+      <v-spacer></v-spacer>
+    <div class="header" v-if="!isLoggedIn"> 
         <ul>
-          <li id="LBotton"><a href="/login">
-              <v-btn>로그인</v-btn>
-            </a></li>
-          <li id="RBotton"><a href="/signup">
-              <v-btn>회원가입</v-btn>
-            </a></li>
+          <li><a href="/login">로그인</a></li>
+          <li><a href="/signup">회원가입</a></li>
         </ul>
-        </div>
-      </v-col>
-      <v-col class="UserSpace" v-else>
-        <div>
+	</div>
+<div class="header" v-else>
         <ul>
-          <li id="LBotton">
+          <li>
             <v-card class="mx-auto" max-width="300" tile>
               <v-list-group>
                 <template v-slot:activator>
-                  <a href="/mypage">
-                    <v-list-item-title>내정보</v-list-item-title>
-                  </a>
+                  <a href="/mypage"><v-list-item-title>내정보</v-list-item-title></a>
                 </template>
                 <v-list-item-group :value="true" no-action sub-group>
                   <v-list-item>
@@ -53,102 +44,75 @@
               </v-list-group>
             </v-card>
           </li>
-          <li id="RBotton"><button @click="onClickLogout">
+          <li><button @click="onClickLogout">
               <v-btn>로그아웃</v-btn>
-
             </button></li>
-
-          <li><button @click="onClickLogout">로그아웃</button></li>
         </ul>
-        </div>
-      </v-col>
-      <!--
-		<ul v-if="this.auth == '개인'">
-        <ul v-else-if="this.auth == '관리자'">
-		-->
+      </div>
     </v-toolbar>
   </v-card>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import router from '@/router'
+import {mapState} from 'vuex'
 
-export default {
-  name: "MainHeader",
-  data() {
-    return {
-      nickName: this.$store.state.userInfo.nickname,
-    }
-  },
-  computed: {
-    ...mapState(['isLoggedIn'])
-  },
-
-  methods: {
-    onClickLogout() {
-      this.$store.dispatch("attemptLogout")
+  export default {
+    name: "MainHeader",
+    data() {
+      return {
+        nickName: this.$store.state.userInfo.nickname,
+      }
     },
-     home () {
-      (window.location.pathname !== '/') ? router.push('/') : router.go(0)
-     }
+	computed:{
+		...mapState(['isLoggedIn'])
+	},
+
+    methods: {
+      onClickLogout() {
+        this.$store.dispatch("attemptLogout")
+	}
   }
 }
 
 </script>
 
 <style scoped>
-
-.v-card {
+.v-card{
   margin-bottom: 10px;
 }
-
-.UserSpace {
-  padding-right: 2%;
+.header {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   padding: 15px 60px;
   justify-content: space-between;
   align-items: center;
-  min-width: 300px;
 }
-
-.UserSpace ul {
+.header ul {
   display: flex;
   justify-content: right;
   align-items: right;
   margin-right: 1%;
 }
-
-.UserSpace ul li {
+.header ul li {
   list-style: none;
-  padding-top: 5px;
 }
-
-.UserSpace ul li a {
+.header ul li a {
   text-decoration: none;
+  padding: 10px 10px;
   color: rgb(0, 0, 0);
   position: relative;
-    font-size: 30px;
-  }
-  
-  .UserSpace-top {
-    position: absolute;
-    top: 1em;
-    list-style: none;
-    right: 2em;
-  }
-  
-  #RBotton {
-    margin-right: 2%;
-    margin-left: 3%;
-  }
-  
-  #LBotton {
-    margin-right: 3%;
-    margin-left: 2%;
-  }
-  #HomeButton{
-    z-index: 1;
-  }
+  font-size: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.header-top {
+  position: absolute;
+  top: 1em;
+  list-style: none;
+  right: 2em;
+}
+
 </style>
