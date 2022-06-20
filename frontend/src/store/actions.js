@@ -1,13 +1,13 @@
 import {
-    FETCH_HOTEL_LIST,
-    FETCH_HOTEL,
-    IS_LOGGEDIN,
-    NOT_LOGGEDIN,
-    SET_USER
-} from './mutation-types'
+  FETCH_HOTEL_LIST,
+  FETCH_HOTEL,
+  IS_LOGGEDIN,
+  NOT_LOGGEDIN,
+  SET_USER,
+} from "./mutation-types";
 
-import axios from 'axios'
-import router from '@/router'
+import axios from "axios";
+import router from "@/router";
 
 export default {
     fetchHotelList ({ commit }) {
