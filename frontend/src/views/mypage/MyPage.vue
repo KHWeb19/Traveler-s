@@ -13,8 +13,6 @@
         </v-col>
       </v-row>
     </div>
-    <p>{{ user.name }}</p>
-    <p>{{ user.email }}</p>
   </v-container>
 </template>
 

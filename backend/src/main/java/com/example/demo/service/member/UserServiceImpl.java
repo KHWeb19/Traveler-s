@@ -44,6 +44,7 @@ public class UserServiceImpl implements UserService {
                 .name(userRequest.getName())
                 .roles(roleList)
                 .mobile(userRequest.getMobile())
+                .profile_path("default.jpg")
                 .build();
 
         //user.setPassword(encodedPassword);
