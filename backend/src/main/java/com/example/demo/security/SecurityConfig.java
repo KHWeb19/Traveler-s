@@ -46,15 +46,10 @@ public class SecurityConfig {
         http
 
                 .authorizeRequests((authz ->
-                                authz.antMatchers("/h2-console/**", "/login", "/user/register", "/oauth2/authorize/**",
-
-                                        "/oauth2/callback/**","/","/kakaoLogin","/check-number", "/refreshtoken",
-                                        "/hotel/hotelRegister","/room/register").permitAll()
-
-                        "/oauth2/callback/**","/","/kakaoLogin","/check-number", "/refreshtoken","/hotel/hotelRegister","/hotel/mainList").permitAll()
-
-                //.antMatchers(GET, "/listall").hasAnyAuthority("ROLE_USER")
-                .anyRequest().authenticated())
+                        authz.antMatchers("/h2-console/**", "/login", "/user/register", "/oauth2/authorize/**",
+                                        "/oauth2/callback/**","/","/kakaoLogin","/check-number", "/refreshtoken","/hotel/hotelRegister","/hotel/mainList").permitAll()
+                                //.antMatchers(GET, "/listall").hasAnyAuthority("ROLE_USER")
+                                .anyRequest().authenticated())
 
                 )
                 .csrf((c) -> c.disable())
