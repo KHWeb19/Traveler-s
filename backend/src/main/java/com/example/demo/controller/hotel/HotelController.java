@@ -19,7 +19,6 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/hotel")
-@CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 public class HotelController {
 
     @Autowired
@@ -50,10 +49,21 @@ public class HotelController {
  */
 
 
-    @GetMapping("/hotelList")
-    public List<Hotel> hotelList () { //메인 페이지에서 호텔 list 불러오기
-        log.info("HotelList ()");
-        return hotelService.list();
+    @GetMapping("/mainList")
+    public List<Hotel> hotelMainList () { //메인 페이지에서 호텔 list 불러오기
+        log.info("HotelRandom()");
+
+        List<Hotel> randomHotel = hotelService.random(); //randHotel을 추리는 작업을 hotelService안의 random이 실행한다.
+        List<HotelResponse> responses = new ArrayList<>();
+
+        for(Hotel hotel : randomHotel) {
+            responses.add(new HotelResponse(
+                    hotel.getHotelImgPath1(), hotel.getHotelName(), hotel.getTotalAddress(), hotel.getHotelInfo()
+            ));
+        }
+
+
+        return randomHotel;
     }
 
 

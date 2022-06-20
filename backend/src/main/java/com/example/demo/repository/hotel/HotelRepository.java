@@ -10,11 +10,14 @@ import java.util.List;
 import java.util.Optional;
 
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
-  /*
     @Transactional
-    @Query(value = "select * from hotel order by rand() limit randNum", nativeQuery = true)
+    @Query(value = "select * from hotel order by rand() limit ?1", nativeQuery = true)
     public List<Hotel> randomPick(Integer randNum);
-   */
+
+
     @Query(value = "select * from hotel m where m.writer = :writer", nativeQuery = true)
     Optional<Hotel> findByWriter(@Param("writer") String writer);
 }
+
+}
+

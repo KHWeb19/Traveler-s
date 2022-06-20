@@ -71,20 +71,21 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
         hotelRepository.save(hotel);
     }
 
+    /*
     @Override
     public List<Hotel> list() {
         log.info("HotelServiceIMPL list");
         return hotelRepository.findAll(Sort.by(Sort.Direction.DESC, "hotelNo"));
-    }
+    }*/
 
-    /*
-    public List<Hotel> random (Integer randNum) {
+
+    public List<Hotel> random () {
         log.info("HotelServiceIMPL random");
-        List<Hotel> randomResults = hotelRepository.randomPick(randNum);
+        List<Hotel> randomResults = hotelRepository.randomPick(6);
 
         return randomResults;
     }
-     */
+
 
 
     @Override
