@@ -2,15 +2,13 @@
 	<div align="center" class="home_wrap">
 		<v-container>
 			<v-row>
-				<MainSearch/>
-			</v-row>
-			<v-row>
-			<hotel-random :hotels="hotels" :list-array="pageArray"/>
+				<main-search/>
 			</v-row>
 		</v-container>
+		<hotel-random :hotels="hotels" :list-array="pageArray"/>
 		<v-container>
 			<v-row>
-				<TagSearch/>
+				<tag-search/>
 			</v-row>
 		</v-container>
 	</div>
@@ -47,7 +45,7 @@ export default {
    },
    created(){
       axios
-        .get("http://localhost:7777/hotel/list")
+        .get("http://localhost:7777/hotel/mainList")
         .then((res) => {
         this.pageArray = res.data;
         })
@@ -58,6 +56,8 @@ export default {
 };
 
 </script>
+
+
 
 <style scoped>
 
