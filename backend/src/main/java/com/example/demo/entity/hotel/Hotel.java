@@ -5,6 +5,7 @@ import com.example.demo.entity.room.Room;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Data
 @Entity
+@ToString(exclude = {"rooms"})
 @Table(name = "hotel")
 public class Hotel {
     @Id
