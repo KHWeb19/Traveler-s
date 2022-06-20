@@ -16,34 +16,34 @@
         <hr>
         <div class="hotelInfobox">
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="oceanView">오션뷰
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="오션뷰">오션뷰
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="terrace">테라스
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="테라스">테라스
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="swimmingPool">수영장
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="수영장">수영장
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="carCharge">전기차충전
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="전기차충전">전기차충전
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="nearAirport">공항근처
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="공항근처">공항근처
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="golfCourse">골프장
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="골프장">골프장
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="freeParking">무료주차
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="무료주차">무료주차
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="bbqGrill">바베큐그릴
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="바베큐그릴">바베큐그릴
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="pet">반려동물
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="반려동물">반려동물
         </label>
         <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="spa">온천
+            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="온천">온천
         </label>
         </div>
     </div>
@@ -66,26 +66,22 @@
         <h3>이미지</h3>
         <hr>
         <p class="hotelImgLabel">* 숙소이미지</p>
-    </div>
-
+    
     <div v-if="this.files.length < 9">
         <input type="file" id="files" ref="files" 
                         multiple v-on:change="handleFilesUpload()" hidden />
-        <v-icon>
-            mdi-image-plus 
-        </v-icon>
-        <v-btn @click="chooseFile" text>
-            이미지 첨부  (*최소 5장입니다)
-        </v-btn> 
-    </div>  
-    <div v-else>
-        <v-icon>
-            mdi-close
-        </v-icon>
-        <v-btn @click="cancelFile" text>
+        <v-btn @click="chooseFile"  class="vbtn">
+            이미지 업로드
+        </v-btn>
+        <span>최대 9장까지 등록 가능합니다.</span>
+    </div>
+
+    <div v-else class="cancelFile">
+        <v-btn @click="cancelFile">
             전체 취소
         </v-btn> 
     </div>
+
     <div>
          <table>
             <tr>
@@ -96,7 +92,7 @@
                         </v-icon>
                     </div>
                     <div v-else>
-                         <img :src="files[index].preview" class="preview" width="100%" height="165px"/>
+                         <img :src="files[index].preview" class="preview" width="100px" height="100px"/>
                          <v-icon @click="imgCancel(index)">
                             mdi-close
                         </v-icon>
@@ -105,6 +101,7 @@
             </tr>
 
         </table>
+    </div>
     </div>
     
    <v-btn type="submit" class="btn1">저장하기</v-btn>
@@ -246,6 +243,15 @@ export default {
 </script>
 
 <style scoped>
+form {
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
+}
+a {
+    text-decoration: none;
+}
 h3 {
     margin: 10px;
 }
@@ -254,8 +260,8 @@ h3 {
 }
 .hotelNameP {
     position: absolute;
-    top: 7%;
-    left: 87%;
+    top: 5%;
+    left: 88%;
     font-size: 12px;
 }
 .hotelNameLabel {
@@ -334,34 +340,13 @@ input[id="extraAddress"] {
     outline: none;
 }
 .hotelImg {
-    margin: 50px 50px 100px 50px;
+    margin: 50px 50px 10px 50px;
 }
 .hotelImgLabel  {
     font-size: 14px;
     position: relative;
     left: 50px;
     top: 30px;
-}
-.btn {
-    text-align: center;
-    word-spacing: 10px;
-}
-table {
-    margin-left: auto;
-    margin-right: auto;
-    border-collapse: separate;
-    border-spacing: 10px;
-}
-
-td {
-    border: 1px solid black;
-    width: 200px;
-    height: 200px;
-    text-align: center;
-    
-}
-#files {
-    margin: 30px
 }
 .btn1 {
     margin-left: 40%;
@@ -388,5 +373,37 @@ td {
     display: inline-block;
     font-size: 15px;
     cursor: pointer;
+}
+.vbtn {
+    position: relative;
+    left: 86%;
+    bottom: 5px;
+}
+.cancelFile {
+    position: relative;
+    left: 87%;
+    bottom: 5px;
+}
+table {
+    position: relative;
+    bottom: 50px;
+    left: 140px;
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+td {
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+}
+#files {
+    margin: 30px;
+}
+span {
+    position: relative;
+    left: 77%;
+    top: 30px;
+    font-size: 12px;
 }
 </style>

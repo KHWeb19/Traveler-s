@@ -19,5 +19,3 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
     Optional<Hotel> findByWriter(@Param("writer") String writer);
 }
 
-}
-
