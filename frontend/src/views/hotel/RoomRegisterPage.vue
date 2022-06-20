@@ -41,7 +41,7 @@ export default {
             .then(() => {
                 alert('등록 되었습니다.')
                 this.$router.push({
-                    name: 'HotelListPage'
+                    name: 'hotelListPage'
                 })
             })
             .catch(() => {

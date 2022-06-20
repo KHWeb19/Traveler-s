@@ -5,24 +5,30 @@
       <span class="page-count">전체 0 {{ pageCount }} </span>
       <router-link :to="{ name: 'HotelRegisterPage' }" class="btn"><v-btn>숙소등록</v-btn></router-link>
       <br>
-		<v-text-field v-model="searchkeyword" dense outlined class="searchkeyword"/>
-    <v-icon>fas fa-search</v-icon>
-    <i class="fas fa-search"></i>
-    <!-- <v-btn @click="searchstart" :style="{marginTop:'10px'}">검색</v-btn>-->
-    <hotel-list/>
+    <hotel-list :hotels="hotels"/>
   </div>
 </template>
 
 <script>
 
 import HotelList from '@/components/hotel/HotelList.vue'
-import BmSideBar from '@/components/layout/BmSideBar.vue';
+import BmSideBar from '@/components/layout/BmSideBar.vue'
+import { mapState, mapActions } from 'vuex'
 
 export default {
     name: 'HotelListPage',
     components: {
         HotelList,
         BmSideBar
+    },
+    computed: {
+      ...mapState(['hotels'])
+    },
+    mounted () {
+      this.fetchHotelList()
+    },
+    methods: {
+      ...mapActions(['fetchHotelList'])
     }
 }
 </script>
@@ -50,12 +56,5 @@ h2 {
   position: sticky;
   left: 90%;
   text-decoration: none;
-}
-.v-btn:before {
-  opacity: 0 !important;
-}
-.searchkeyword {
-  width: 94.4%;
-  padding: 20px 0px 30px 50px;
 }
 </style>

@@ -37,6 +37,11 @@ const routes = [
     component: () => import('../views/member/OAuth2Redirect.vue')
   },
   {
+    path: '/HotelListPage',
+    name: 'HotelListPage',
+    component: () => import('../views/hotel/HotelListPage.vue')
+  },
+  {
     path: '/hotelRegister',
     name: 'HotelRegisterPage',
     component: () => import('../views/hotel/HotelRegisterPage.vue')
@@ -50,11 +55,6 @@ const routes = [
     path: '/roomRegister',
     name: 'RoomRegisterPage',
     component: () => import('../views/hotel/RoomRegisterPage.vue')
-  },
-  {
-    path: '/hotelReadPage',
-    name: 'HotelReadPage',
-    component: () => import('../views/hotelDetail/HotelReadPage.vue')
   },
 
 
