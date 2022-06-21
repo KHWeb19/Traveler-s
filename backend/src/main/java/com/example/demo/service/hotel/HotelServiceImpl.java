@@ -86,7 +86,7 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
 
 
     @Override
-    public Hotel read(Integer hotelNo) {
+    public Hotel mRead(Integer hotelNo) {
         Optional<Hotel> maybeReadBoard = hotelRepository.findById(Long.valueOf(hotelNo));
         //Optional: null일 수도 있는 객체를 감싸는 일종의 Wrapper 클래스
         /*
