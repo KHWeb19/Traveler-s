@@ -34,19 +34,6 @@ public class HotelController {
         hotelService.register(hotel, files);
     }
 
-/*
-    @PostMapping("/hotelRandom")
-    public List<Hotel> hotelRandom () {
-        log.info("HotelRandom()");
-
-        List<Hotel> randomHotel = hotelService.random(); //randHotel을 추리는 작업을 hotelService안의 random이 실행한다.
-        List<HotelResponse> responses = new ArrayList<>();
-
-
-
-        return hotelService.random();
-    }
- */
 
 
     @GetMapping("/mainList")
@@ -70,11 +57,11 @@ public class HotelController {
 
     //search 넣기
 
-    @GetMapping("/{hotelNo}") //호텔 상세보기
-    public Hotel hotelRead (
+    @GetMapping("/mRead/{hotelNo}") //고객 페이지쪽 호텔 상세보기
+    public Hotel mHotelRead (
             @PathVariable("hotelNo") Integer hotelNo) {
-        log.info("hotelRead()");
-        return hotelService.read(hotelNo);
+        log.info("memberHotelRead()");
+        return hotelService.mRead(hotelNo);
     }
 
     // modify
