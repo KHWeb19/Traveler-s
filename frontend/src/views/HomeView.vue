@@ -8,7 +8,7 @@
 		<hotel-random :hotels="hotels" :list-array="pageArray"/>
 		<v-container>
 			<v-row>
-				<tag-search/>
+				<tag-search :hotels="hotels"/>
 			</v-row>
 		</v-container>
 	</div>
