@@ -246,7 +246,7 @@
 export default {
     name: 'HotelReadForm',
     props: {
-        hotelNo: {
+        hotel: {
             type: Object,
             required: true
         }
