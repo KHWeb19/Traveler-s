@@ -10,7 +10,7 @@
                     <div class="slide-10d">
                         <v-container style="padding: 0px">
                             <swiper class="swiper position-relative" :options="swiperOption">
-                                <swiper-slide><v-img  width="100%" height="400px" :src="require(`@/assets/hotelImage/hotel1.jpg`)"/></swiper-slide>
+                                <swiper-slide><v-img  width="100%" height="400px" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath1}`)"/></swiper-slide>
                                 <div class="swiper-pagination" slot="pagination"></div>
                                 <div class="swiper-button-prev" slot="button-prev"></div>
                                 <div class="swiper-button-next" slot="button-next"></div>
@@ -24,10 +24,8 @@
 
                 <tr>
                 <td>
-                    <!-- 숙소 이름 -->
-                    <!-- 숙소 한줄 소개 -->
-                    <h1>숙소 이름</h1>
-                    <p>숙소 한줄 소개</p>
+                    <h1>{{hotel.hotelName}}</h1> <!-- 숙소 이름 -->
+                    <p>{{hotel.hotelName}}</p> <!-- 숙소 한줄 소개 -->
                 </td>
                 </tr>
 
@@ -56,7 +54,7 @@
                                 <table id="inCard" style="width: 30%; height: 200px;">
                                     <tr>
                                         <td>
-                                            <v-img  width="300px" height="160px" :src="require(`@/assets/hotelImage/hotel1.jpg`)"/>
+                                            <v-img  width="300px" height="160px" :src="require(`@/assets/hotel.jpg`)"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -179,7 +177,7 @@
                     <v-row justify="right">
                         <table style="margin-left:auto; margin-right: 10px;">
                             <tr>
-                                <v-img id="myImg" :src="require(`@/assets/hotelImage/hotel1.jpg`)"/>
+                                <v-img id="myImg" :src="require(`@/assets/hotel.jpg`)"/>
                             </tr>
                         </table>
                         <table style="width: 180px; margin-right: 10px;">
@@ -245,37 +243,16 @@
 </template>
 
 <script>
-/*
 export default {
-    name: "HotelReadForm.vue",
-    components: {
-
-    },
+    name: 'HotelReadForm',
     props: {
-        hotelNo: {
-            type: String,
+        hotel: {
+            type: Object,
             required: true
         }
     },
-    computed: {
-        ...mapState(['hotel'])
-    },
-    created () {
-        this.fetchHotel(this.hotelNo)
-            .catch(() => {
-                alert('숙소 게시물 요청 실패!')
-                this.$router.push()
-            })
-    },
-    methods: {
-        ...mapActions(['fetchHotel']),
-        goRegister(){
-            this.$router.push({ name: '' })
-        }
-    }
-    
 }
-*/
+
 </script>
 
 
