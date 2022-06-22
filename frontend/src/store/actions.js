@@ -4,6 +4,7 @@ import {
   IS_LOGGEDIN,
   NOT_LOGGEDIN,
   SET_USER,
+  GET_HOTEL_TYPE
 } from "./mutation-types";
 
 import axios from "axios";
@@ -49,5 +50,12 @@ export default {
             .then((res => {
                 commit(SET_USER, res.data)
             }))
-    }
+    },
+    getHotelType({commit}){
+        axios.get("http://localhost:7777/room/getHotelType")
+            .then((res => {
+                commit(GET_HOTEL_TYPE, res.data)
+            }))
+    },
+
 }
