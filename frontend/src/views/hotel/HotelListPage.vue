@@ -2,7 +2,7 @@
   <div>
     <bm-side-bar/>
       <h2>숙소 관리</h2>
-      <span class="page-count">전체 0 {{ pageCount }} </span>
+      <span class="page-count">전체</span>
       <router-link :to="{ name: 'HotelRegisterPage' }" class="btn"><v-btn>숙소등록</v-btn></router-link>
       <br>
     <hotel-list :hotels="hotels"/>

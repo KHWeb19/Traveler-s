@@ -105,7 +105,7 @@
     </div>
     
    <v-btn type="submit" class="btn1">저장하기</v-btn>
-    <router-link :to="{ name: 'home' }" ><v-btn class="btn2">취소</v-btn></router-link>
+    <router-link :to="{ name: 'HotelListPage' }" ><v-btn class="btn2">취소</v-btn></router-link>
 
 </form>
 </template>
@@ -113,12 +113,6 @@
 <script>
 export default {
     name: 'HotelRegisterForm',
-    props: {
-        user: {
-            type: Object,
-            require: true,
-        },
-    },
     data () {
         return {
             hotelName: '',
@@ -130,7 +124,8 @@ export default {
             files: [],
             notImage: ['','','','','','','','',''],
             fileNum: 0,
-            totalAddress:''
+            totalAddress:'',
+            writer: this.$store.state.email
 
         }
     },
@@ -179,11 +174,10 @@ export default {
             if(this.files.length < 5){
                 alert('사진은 5장 이상 첨부해주세요')
             }else{
-                const writer = this.user.email 
-                const { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress, files } = this
+                const { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress, files, writer } = this
                 this.totalAddress = address + detailAddress + extraAddress
                 const { totalAddress} = this
-                this.$emit('submit', { hotelName, hotelInfo, postcode, totalAddress ,files, writer })
+                this.$emit('submit', { hotelName, hotelInfo, postcode, totalAddress ,files ,writer })
             }
         },
            handleFilesUpload () {
@@ -244,7 +238,7 @@ export default {
             console.log(this.files)
         }
     }
-
+ 
 }
 </script>
 
