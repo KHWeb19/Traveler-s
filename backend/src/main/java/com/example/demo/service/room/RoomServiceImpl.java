@@ -1,6 +1,7 @@
 package com.example.demo.service.room;
 
 import com.example.demo.dto.hotel.RoomRequest;
+import com.example.demo.dto.hotel.RoomResponse;
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.room.Room;
 import com.example.demo.repository.hotel.HotelRepository;
@@ -29,8 +30,8 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
     public void register(RoomRequest roomRequest, List<MultipartFile> files) throws Exception {
         String path = "roomImg";
         List<String> filePathList = new ArrayList<>();
-        log.info(roomRequest.getWriter());
-        Optional<Hotel> hotelOptional = hotelRepository.findByWriter(roomRequest.getWriter());
+        log.info("hotelNo : " + roomRequest.getHotelNo());
+        Optional<Hotel> hotelOptional = hotelRepository.findByHotelNo(roomRequest.getHotelNo());
 
         Hotel hotel = hotelOptional.get();
         log.info("hotel :" + hotel);
@@ -80,5 +81,19 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
         log.info("room : " + room);
 
         roomRepository.save(room);
+    }
+
+    @Override
+    public List<RoomResponse> findHotel(String writer) {
+        log.info("writer : " + writer);
+        List<Hotel> hotelList = hotelRepository.findByWriter(writer);
+        List<RoomResponse> ceoHotel = new ArrayList<>();
+        RoomResponse roomResponse;
+        for(Hotel hotel : hotelList){
+            roomResponse = new RoomResponse(hotel.getHotelNo(),hotel.getHotelName());
+            ceoHotel.add(roomResponse);
+        }
+
+        return ceoHotel;
     }
 }

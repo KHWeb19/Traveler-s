@@ -15,7 +15,10 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
     public List<Hotel> randomPick(Integer randNum);
 
 
-    @Query(value = "select * from hotel m where m.writer = :writer", nativeQuery = true)
-    Optional<Hotel> findByWriter(@Param("writer") String writer);
+    Optional<Hotel> findByHotelNo(@Param("hotelNo") Long hotelNo);
+
+    List<Hotel> findByWriter(@Param("writer") String writer);
+
+
 }
 

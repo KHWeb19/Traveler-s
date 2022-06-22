@@ -29,7 +29,7 @@ public class TokenProvider {
 
         return JWT.create()
                 .withSubject(customUserDetails.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 15))
+                .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 15))
                 //.withClaim("roles", authResult.getAuthorities().stream().map(r -> new SimpleGrantedAuthority("ROLE_"+r)).collect(Collectors.toList()))
                 .withClaim("roles", authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .sign(algorithm);
