@@ -1,6 +1,7 @@
 import {
     FETCH_HOTEL_LIST,
     FETCH_HOTEL,
+    GET_HOTEL_TYPE
 } from './mutation-types'
 
 export default {
@@ -18,5 +19,8 @@ export default {
     },
     [FETCH_HOTEL] (state, hotel) {
         state.hotel = hotel
+    },
+    [GET_HOTEL_TYPE] (state, hotelType){
+        state.hotelType = hotelType
     }
 }
