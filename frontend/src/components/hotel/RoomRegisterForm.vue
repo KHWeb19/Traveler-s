@@ -7,6 +7,12 @@
             <h3>기본정보</h3>
             <p class="roomName">*은 필수 입력사항입니다.</p>
             <hr>
+        <div>
+            <label class="hotelNameLabel">* 호텔이름</label>
+             <select  class="hotel-select" v-model="hotelNo">
+                <option v-for="(hotel, idx) in hotelType" :key="idx" :value="hotel.hotelNo" > {{hotel.hotelName}}</option>
+            </select>
+        </div>
             <label class="roomNameLabel">* 객실이름</label>
             <input type="text" class="roomNameBox" v-model="roomName" placeholder="객실명을 입력해주세요."/>
         </div>
@@ -102,7 +108,7 @@
     </div>
     
     <v-btn type="submit" class="btn1">저장하기</v-btn>
-    <router-link :to="{ name: 'RoomListPage' }" ><v-btn class="btn2">취소</v-btn></router-link>
+    <router-link :to="{ name: 'home' }" ><v-btn class="btn2">취소</v-btn></router-link>
 
 
 </form>
@@ -111,6 +117,12 @@
 <script>
 export default {
     name: 'HotelRegisterForm',
+     props: {
+        hotelType: {
+            type: Array,
+            require: true,
+        },
+    },
     data () {
         return {
             roomName: '',
@@ -121,7 +133,7 @@ export default {
             fileNum: 0,
             totalAddress:'',
             personnel: '',
-            writer: this.$store.state.email
+            hotelNo : ''
         }
     },
     methods: {
@@ -129,8 +141,10 @@ export default {
             if(this.files.length < 5){
                 alert('사진은 5장 이상 첨부해주세요')
             }else{
-                const { roomName, roomType, personnel,roomInfo, files , writer} = this
-                this.$emit('submit', { roomName, roomType, personnel, roomInfo, files , writer })
+              
+                console.log(this.hotelType)
+                const { roomName, roomType, personnel,roomInfo, files, hotelNo } = this
+                this.$emit('submit', { roomName, roomType, personnel, roomInfo, files , hotelNo})
             }
         },
            handleFilesUpload () {
@@ -188,13 +202,14 @@ h3 {
 }
 .roomName {
     position: absolute;
-    top: 7%;
+    top: 8%;
     left: 87%;
     font-size: 12px;
 }
 .roomNameLabel,
 .roomTypeLabel,
-.perssonel
+.perssonel,
+.hotelNameLabel
  {
     font-size: 14px;
     margin-left: 50px;
@@ -293,5 +308,16 @@ td {
     display: inline-block;
     font-size: 15px;
     cursor: pointer;
+}
+.hotel-select{
+    margin-top: 10px;
+    margin-left: 30px;
+    width: 200px;
+    height: 30px;
+    border-radius: 2pt;
+    box-shadow: 0 0 0 1pt grey;
+    outline: none;
+    transition: .1s;
+
 }
 </style>

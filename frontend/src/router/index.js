@@ -4,7 +4,7 @@ import HomeView from '../views/HomeView.vue'
 
 import store from '@/store'
 
-
+import HotelReadPage from '@/views/hotelDetail/HotelReadPage.vue'
 
 
 
@@ -55,6 +55,16 @@ const routes = [
     path: '/roomRegister',
     name: 'RoomRegisterPage',
     component: () => import('../views/hotel/RoomRegisterPage.vue')
+  },
+  {
+    path: '/hotelReadPage/:hotelNo',
+    name: 'HotelReadPage',
+    components: {
+      default: HotelReadPage
+    },
+    props: {
+      default: true
+    }
   },
 
 
