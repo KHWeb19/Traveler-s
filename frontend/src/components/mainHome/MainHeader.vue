@@ -76,7 +76,7 @@ export default {
   name: "MainHeader",
   data() {
     return {
-      nickName: this.$store.state.userInfo.nickname,
+      // nickName: this.$store.state.userInfo.nickname,
     }
   },
   computed: {

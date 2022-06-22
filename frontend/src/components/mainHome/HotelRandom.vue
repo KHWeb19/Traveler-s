@@ -27,7 +27,7 @@
               {{ hotel.totalAddress }}
             </v-card-text>
             <span class="hotel_info">
-              {{ hotel.hotelInfo }}
+              {{ "#" + hotel.hotelInfo[i] }}
             </span>
           </v-card>
         </v-col>
