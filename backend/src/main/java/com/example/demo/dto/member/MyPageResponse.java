@@ -13,6 +13,6 @@ public class MyPageResponse {
     public MyPageResponse(String name, String email, String profile_path) {
         this.name = name;
         this.email = email;
-	this.profile_path = profile_path;
+        this.profile_path = profile_path;
    }
 }
