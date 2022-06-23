@@ -12,6 +12,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -30,8 +31,15 @@ public class Hotel {
     @Column
     private String writer;
 
-    @Convert(converter = HotelConvert.class)
-    private List<String> hotelInfo;
+
+    //@Convert(converter = HotelConvert.class)
+    //private List<String> hotelInfo;
+
+    @Column(name = "hotelInfo")
+    private String hotelInfo;
+
+    @Column(length = 128, nullable = false)
+    private String hotelIntro;
 
     @Column(nullable = false)
     private String postcode;
@@ -74,8 +82,9 @@ public class Hotel {
     @JsonIgnore
     @OneToMany(mappedBy = "hotel", fetch = FetchType.EAGER,  cascade = CascadeType.ALL)
     private List<Room> rooms = new ArrayList<>();
-    //@Column(length = 300, nullable = false)
-    //private String openKakaotalk;
+
+    @Column
+    private String openKakaotalk;
 
     @CreationTimestamp
     private Date regDate;
@@ -83,11 +92,52 @@ public class Hotel {
     @UpdateTimestamp
     private Date updDate;
 
-    public Hotel(String hotelName, String writer, List<String> hotelInfo, String totalAddress, String hotelImgPath1) {
+
+
+    public List<String> getHotelInfo() {
+        List<String> list = new ArrayList<>();
+        if (hotelInfo != null) {
+            Arrays.stream(hotelInfo.split(","))
+                    .map(String::trim)
+                    .filter(s -> !"".equals(s))
+                    .forEach(list::add);
+        }
+        return list;
+    }
+
+    public void setHotelInfo(List<String> hotelInfo) {
+        this.hotelInfo = treeAsString(hotelInfo);
+    }
+
+    private static String treeAsString(List<String> hotelInfo) {
+        List<String> orderedSet = new ArrayList<>();
+        if (hotelInfo != null && !hotelInfo.isEmpty()) {
+            orderedSet.addAll(hotelInfo);
+        }
+        return "," + String.join(",", orderedSet) + ",";
+    }
+
+    public static class HotelBuilder {
+
+        private String hotelInfo;
+
+        public HotelBuilder hotelInfo(List<String> hotelInfo) {
+            this.hotelInfo = treeAsString(hotelInfo);
+            return this;
+        }
+
+    }
+    public Hotel(String hotelName, String hotelIntro, String totalAddress, String postcode,
+                 String hotelImgPath1, String hotelImgPath2, String hotelImgPath3, String hotelImgPath4, String hotelImgPath5) {
         this.hotelName = hotelName;
-        this.writer = writer;
-        this.hotelInfo = hotelInfo;
+        this.hotelIntro = hotelIntro;
+        this.postcode = postcode;
         this.totalAddress = totalAddress;
         this.hotelImgPath1 = hotelImgPath1;
+        this.hotelImgPath2 = hotelImgPath2;
+        this.hotelImgPath3 = hotelImgPath3;
+        this.hotelImgPath4 = hotelImgPath4;
+        this.hotelImgPath5 = hotelImgPath5;
     }
+
 }

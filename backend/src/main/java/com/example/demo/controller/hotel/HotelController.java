@@ -24,6 +24,7 @@ public class HotelController {
     @Autowired
     HotelService hotelService;
 
+    //사업자 매뉴얼 페이지 호텔 등록
     @PostMapping(value="/hotelRegister", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public void hotelRegister (@Validated @RequestPart(value="hotel") Hotel hotel,
                                @RequestPart(value = "files") List<MultipartFile> files) throws Exception {
@@ -34,19 +35,45 @@ public class HotelController {
         hotelService.register(hotel, files);
     }
 
-/*
-    @PostMapping("/hotelRandom")
-    public List<Hotel> hotelRandom () {
-        log.info("HotelRandom()");
+    //사업자 매뉴얼 페이지 호텔 목록
+    @GetMapping("/bm/list")
+    public List<Hotel> bmHotelList () {
+        log.info("jpaBoardList()");
 
-        List<Hotel> randomHotel = hotelService.random(); //randHotel을 추리는 작업을 hotelService안의 random이 실행한다.
-        List<HotelResponse> responses = new ArrayList<>();
-
-
-
-        return hotelService.random();
+        return hotelService.bmHotelList();
     }
- */
+
+    //사업자 매뉴얼 페이지 호텔 읽기
+    @GetMapping("/bm/{hotelNo}")
+    public Hotel bmHotelRead (
+            @PathVariable("hotelNo") Integer hotelNo) {
+        log.info("business member Hotel Read()");
+        return hotelService.bmHotelRead(hotelNo);
+    }
+
+    //사업자 매뉴얼 페이지 호텔 수정
+    @PutMapping("/bm/{hotelNo}")
+    public Hotel bmhotelModify (
+            @PathVariable("hotelNo") Integer hotelNo,
+            @RequestBody Hotel hotel) {
+        log.info("business member Hotel Modify(): " + hotel);
+
+        hotel.setHotelNo(Long.valueOf(hotelNo));
+        hotelService.bmhotelModify(hotel);
+
+        return hotel;
+    }
+
+    //사업자 매뉴얼 페이지 호텔 삭제
+    @DeleteMapping("/bm/{hotelNo}")
+    public void bmhotelRemove (
+            @PathVariable("hotelNo") Integer hotelNo) {
+        log.info("hotelRemove()");
+
+        hotelService.bmhotelRemove(hotelNo);
+    }
+
+// ---------------------------------------------------------------------------------------------------------------------
 
 
     @GetMapping("/mainList")
@@ -66,36 +93,13 @@ public class HotelController {
         return randomHotel;
     }
 
-
+    @GetMapping("/mRead/{hotelNo}") //고객 페이지쪽 호텔 상세보기
+    public Hotel mHotelRead (
+            @PathVariable("hotelNo") Integer hotelNo) {
+        log.info("memberHotelRead()");
+        return hotelService.mRead(hotelNo);
+    }
 
     //search 넣기
 
-    @GetMapping("/{hotelNo}") //호텔 상세보기
-    public Hotel hotelRead (
-            @PathVariable("hotelNo") Integer hotelNo) {
-        log.info("hotelRead()");
-        return hotelService.read(hotelNo);
-    }
-
-    // modify
-    @PutMapping("/{hotelNo}")
-    public Hotel hotelModify (
-            @PathVariable("hotelNo") Integer hotelNo,
-            @RequestBody Hotel hotel) {
-        log.info("hotelModify(): " + hotel);
-
-        hotel.setHotelNo(Long.valueOf(hotelNo));
-        hotelService.modify(hotel);
-
-        return hotel;
-    }
-
-    //remove
-    @DeleteMapping("/{hotelNo}")
-    public void hotelRemove (
-            @PathVariable("hotelNo") Integer hotelNo) {
-        log.info("hotelRemove()");
-
-        hotelService.remove(hotelNo);
-    }
 }

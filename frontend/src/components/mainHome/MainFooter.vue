@@ -4,16 +4,16 @@
             <div class="row">
                 <div class="col-sm-12 col-md-6">
                     <h6>사업자 정보</h6>
-                    <h8>
+                    <p>
                         since 2022 어쩌고 저쩌고...우리 회사의 간단한 소개가 적혀있다..
-                    </h8>
+                    </p>
                 </div>
                 <div class="col-sm-3 col-xs-3 col-md-3">
                     <h6> 고객문의</h6>
-                    <h8>
+                    <p>
                         TEL : 000-000-0000<br>
                         Email : 000000@gmail.com
-                    </h8>
+                    </p>
                 </div>
                 <div class="col-sm-3 col-xs-3 col-md-3">
                     <h6>SNS</h6>

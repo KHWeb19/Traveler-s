@@ -3,8 +3,9 @@
     <section>
       <v-card-title id="RandomTitle" class="justify-center" style="font-size:3em">랜덤숙소 추천</v-card-title>
       <div class="row">
-        <v-col v-for="hotel in hotels" :key="hotel.hotelNo" cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
-          <v-card @click="clickHotel(hotel.hotelNo, hotelName)">
+        <v-col v-for="hotel in hotels" :key="hotel.hotelNo"
+                cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
+          <v-card @click="readHotel(hotel.hotelNo)">
             <img id="HotelImg" style="height: 200px; width: 260px;"
               :src="require(`@/assets/hotelImg/${hotel.hotelImgPath1}`)" />
             <v-card-title id="hotelName" class="justify-center">{{ hotel.hotelName }}</v-card-title>
@@ -26,7 +27,7 @@
               {{ hotel.totalAddress }}
             </v-card-text>
             <span class="hotel_info">
-              {{ hotel.hotelInfo }}
+              {{ "#" + hotel.hotelInfo[i] }}
             </span>
           </v-card>
         </v-col>
@@ -44,8 +45,8 @@ export default {
     }
   },
   methods: {
-    hotel_info() {
-
+    readHotel(hotelNo) {
+            this.$router.push({ name:'HotelReadPage', params: { hotelNo: hotelNo.toString() } })      
     }
   },
 }

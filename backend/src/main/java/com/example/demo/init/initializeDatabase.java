@@ -22,6 +22,7 @@ public class initializeDatabase implements CommandLineRunner {
     private final UserRepository userRepository;
     private final HotelRepository hotelRepository;
 
+    private String FILE_PATH = "../frontend/src/hotelImg/";
 
     @Override
     public void run(String... args) throws Exception {
@@ -33,8 +34,10 @@ public class initializeDatabase implements CommandLineRunner {
         user.addRoleToUser(role);
         userRepository.save(user);
 
-        List<String> list = List.of("tag1, tag2, tag3");
-        Hotel hotel = new Hotel("admin's hotel", "admin", list, "totalAddress", "hotel1.jpg");
+        Hotel hotel = new Hotel("hotelName","hotelIntro", "totalAddress", "postcode",
+                FILE_PATH + "hotel1.jpg", FILE_PATH + "hotel2.jpg", FILE_PATH + "hotel3.jpg",
+                FILE_PATH + "hotel4.jpg", FILE_PATH + "hotel5.jpg");
+        hotelRepository.save(hotel);
         System.out.println("CommandLine Runner");
     }
 }

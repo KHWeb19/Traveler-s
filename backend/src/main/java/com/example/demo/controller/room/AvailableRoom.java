@@ -9,10 +9,10 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @ToString(exclude = "room")
 public class AvailableRoom {
 
@@ -21,10 +21,10 @@ public class AvailableRoom {
     private Long id;
 
     @Column(nullable = false)
-    private int price;
+    private Long price;
 
     @Column(nullable = false)
-    private int numberOfRoom;
+    private Long numberOfRoom;
 
     @Column(nullable = false)
     private String useDate;
@@ -33,7 +33,7 @@ public class AvailableRoom {
     private String checkDate;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name= "room_no")
     private Room room;
 

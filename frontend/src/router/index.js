@@ -4,7 +4,7 @@ import HomeView from '../views/HomeView.vue'
 
 import store from '@/store'
 
-
+import HotelReadPage from '@/views/hotelDetail/HotelReadPage.vue'
 
 
 
@@ -37,6 +37,11 @@ const routes = [
     component: () => import('../views/member/OAuth2Redirect.vue')
   },
   {
+    path: '/HotelListPage',
+    name: 'HotelListPage',
+    component: () => import('../views/hotel/HotelListPage.vue')
+  },
+  {
     path: '/hotelRegister',
     name: 'HotelRegisterPage',
     component: () => import('../views/hotel/HotelRegisterPage.vue')
@@ -52,9 +57,14 @@ const routes = [
     component: () => import('../views/hotel/RoomRegisterPage.vue')
   },
   {
-    path: '/hotelReadPage',
+    path: '/hotelReadPage/:hotelNo',
     name: 'HotelReadPage',
-    component: () => import('../views/hotelDetail/HotelReadPage.vue')
+    components: {
+      default: HotelReadPage
+    },
+    props: {
+      default: true
+    }
   },
 
 

@@ -70,7 +70,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         if(!optionalUser.isEmpty()){
             //로그인 한 적이 있는 경우
             userEntity = optionalUser.get();
-       }else{
+        }else{
             //로그인한적이 없는 경우
             //setter 대신 builder 고려
             //비밀번호는 어떻게 해야하는지 강사님한테 여쭤보기 -> 이메일,이름기반으로 uuid?

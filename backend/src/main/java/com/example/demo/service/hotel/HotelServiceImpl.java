@@ -23,6 +23,7 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
     @Autowired
     HotelRepository hotelRepository;
 
+    // 사업자 매뉴얼 호텔 등록
     @Override
     public void register(Hotel hotel, List<MultipartFile> files) throws Exception {
 
@@ -68,12 +69,41 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
         hotelRepository.save(hotel);
     }
 
-    /*
+    // 사업자 매뉴얼 호텔 리스트
     @Override
-    public List<Hotel> list() {
-        log.info("HotelServiceIMPL list");
-        return hotelRepository.findAll(Sort.by(Sort.Direction.DESC, "hotelNo"));
-    }*/
+    public List<Hotel> bmHotelList() {
+        return hotelRepository.findAll(Sort.by(Sort.Direction.DESC, "HotelNo"));
+    }
+
+    // 사업자 매뉴얼 호텔 읽기
+    @Override
+    public Hotel bmHotelRead(Integer hotelNo) {
+        log.info("hotelNo" + hotelNo);
+        Optional<Hotel> maybeReadBoard = hotelRepository.findById(Long.valueOf(hotelNo));
+
+        if (maybeReadBoard.equals(Optional.empty())) {
+            log.info("Can't read board!");
+            return null;
+        }
+
+        return maybeReadBoard.get();
+    }
+
+    // 사업자 매뉴얼 호텔 수정
+    @Override
+    public void bmhotelModify(Hotel hotel) {
+        hotelRepository.save(hotel);
+    }
+
+    // 사업자 매뉴얼 호텔 삭제
+    @Override
+    public void bmhotelRemove(Integer hotelNo) {
+        hotelRepository.deleteById(Long.valueOf(hotelNo));
+    }
+
+
+    // ---------------------------------------------------------------------------------------------------------------
+
 
 
     public List<Hotel> random () {
@@ -83,10 +113,7 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
         return randomResults;
     }
 
-
-
-    @Override
-    public Hotel read(Integer hotelNo) {
+    public Hotel mRead(Integer hotelNo) {
         Optional<Hotel> maybeReadBoard = hotelRepository.findById(Long.valueOf(hotelNo));
         //Optional: null일 수도 있는 객체를 감싸는 일종의 Wrapper 클래스
         /*
@@ -98,18 +125,21 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
             log.info("Can't read board!");
             return null;
         }
-
         return maybeReadBoard.get();
-
     }
 
     @Override
-    public void modify(Hotel hotel) {
-        hotelRepository.save(hotel);
+    public List<Hotel> searchList(String keyWord) {
+        List<Hotel> findSearchList = hotelRepository.findByHotelInfoContaining(keyWord);
+
+        log.info("findSearchList : " + findSearchList);
+
+        return findSearchList;
     }
 
-    @Override
-    public void remove(Integer hotelNo) {
-        hotelRepository.deleteById(Long.valueOf(hotelNo));
-    }
+
+
+
+
+
 }

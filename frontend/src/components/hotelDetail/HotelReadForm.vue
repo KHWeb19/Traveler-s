@@ -7,14 +7,19 @@
 
                 <tr>
                 <td>
-                    <div class="slide-10d">
+                    <div class="slide-9img">
                         <v-container style="padding: 0px">
-                            <swiper class="swiper position-relative" :options="swiperOption">
-                                <!--<swiper-slide><v-img  width="100%" height="400px" :src="require(`@/assets/hotelImage/hotel1.jpg`)"/></swiper-slide>-->
-                                <div class="swiper-pagination" slot="pagination"></div>
-                                <div class="swiper-button-prev" slot="button-prev"></div>
-                                <div class="swiper-button-next" slot="button-next"></div>
-                            </swiper>
+                            <v-carousel cycle hide-delimiters class="cover">
+                            <v-carousel-item :src="require(`@/assets/hotelImg/${hotel.hotelImgPath1}`)"/>
+                            <v-carousel-item :src="require(`@/assets/hotelImg/${hotel.hotelImgPath2}`)"/>
+                            <v-carousel-item :src="require(`@/assets/hotelImg/${hotel.hotelImgPath3}`)"/>
+                            <v-carousel-item :src="require(`@/assets/hotelImg/${hotel.hotelImgPath4}`)"/>
+                            <v-carousel-item :src="require(`@/assets/hotelImg/${hotel.hotelImgPath5}`)"/>
+                            <v-carousel-item v-if="hotel.hotelImgPath6" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath6}`)"/>
+                            <v-carousel-item v-if="hotel.hotelImgPath7" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath7}`)"/>
+                            <v-carousel-item v-if="hotel.hotelImgPath8" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath8}`)"/>
+                            <v-carousel-item v-if="hotel.hotelImgPath9" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath9}`)"/>
+                            </v-carousel>
                         </v-container>
                     </div>
                 </td>
@@ -24,10 +29,8 @@
 
                 <tr>
                 <td>
-                    <!-- 숙소 이름 -->
-                    <!-- 숙소 한줄 소개 -->
-                    <h1>숙소 이름</h1>
-                    <p>숙소 한줄 소개</p>
+                    <h1>{{hotel.hotelName}}</h1> <!-- 숙소 이름 -->
+                    <p>{{hotel.hotelIntro}}</p> <!-- 숙소 한줄 소개 -->
                 </td>
                 </tr>
 
@@ -43,84 +46,9 @@
                 </tr>
 
 
-                <tr> <!-- 객실 란 -->
+                <tr> <!-- 객실 란 컴포넌트 분리하여 작업 중!-->
                 <td>
-                    <template>
-                        <v-card :elevation="hover ? 16:2" class="{ 'on-hover': hover }" 
-                            align = "center"
-                            style="margin: 10px; width: 100%; height: 200px;">
-
-                        <v-col>
-                            <v-row justify="center">
-                            
-                                <table id="inCard" style="width: 30%; height: 200px;">
-                                    <tr>
-                                        <td>
-                                            <!--<v-img  width="300px" height="160px" :src="require(`@/assets/hotelImage/hotel1.jpg`)"/>-->
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <table id="inCard" style="width: 42%; height: 190px;">
-                                    <tr>
-                                        <td>
-                                            <p>평수</p>
-                                        </td>
-                                    </tr>
-                                    <tr> 
-                                        <td>
-                                            <p>기준 n명, 최대 n명</p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <v-row >
-                                                <span id="tagSpan1"># 욕조</span>
-                                                <span id="tagSpan1"># 와이파이</span>
-                                                <span id="tagSpan1"># 주차장</span>
-                                                <span id="tagSpan1"># 주방</span>
-                                                <span id="tagSpan1"># 세탁기</span>
-                                                <span id="tagSpan1"># 건조기</span>
-                                                <span id="tagSpan1"># 에어컨</span>                                               
-                                                <span id="tagSpan1"># TV</span>
-                                                <span id="tagSpan1"># 드라이기</span>
-                                                <span id="tagSpan1"># 소화기</span>
-                                            </v-row>
-                                        </td>
-                                    </tr>
-                                </table>
-                                <pr></pr>
-                                <table id="inCard" style="width: 10%; height: 190px;">
-                                    <tr>
-                                        <td>
-                                            <v-col>
-                                                <v-row justify="right">
-                                                    <tr>
-                                                        <td>
-                                                            <v-btn id="button"
-                                                            @click="roomDetail(room.boardNo, room.id)"
-                                                            >
-                                                            상세보기</v-btn>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <v-btn id="button"
-                                                            @click="goRegister()"
-                                                            >
-                                                            예약하기</v-btn>
-                                                        </td>
-                                                    </tr>
-                                                </v-row>
-                                            </v-col>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                            </v-row>
-                            </v-col>        
-                        </v-card>
-                    </template>
+                    <room-read-form/>
                     <br>
                 </td>
                 </tr>
@@ -136,19 +64,14 @@
                         <tr>
                             <td>
                                 <v-col>
+                                       <!-- hotelInfo라는 자료의 데이터 갯수만큼 반복이 된다. data 변수명은 item이라고 해준다.  -->
+                                       <!-- key의 용도는 반복문 돌린 요소를 컴퓨터가 구분하기 위한 것. 반복문 돌면서 변하는 숫자/문자   -->
+                                        <!-- 작명 두개 할 시(데이터 변수, 1씩 증가하는 정수 변수) / 이때 key에는 보통 정수 변수를 입력   -->
                                     <v-row justify="center">
-                                        <span id="tagSpan2"># 오션뷰</span>
-                                        <span id="tagSpan2"># 테라스</span>
-                                        <span id="tagSpan2"># 수영장</span>
-                                        <span id="tagSpan2"># 전기차충전</span>
-                                        <span id="tagSpan2"># 공항근처</span>
-                                        <span id="tagSpan2"># 골프장</span>
-                                        <span id="tagSpan2"># 무료주차</span>
-                                        <span id="tagSpan2"># 바베큐그릴</span>
-                                        <span id="tagSpan2"># 반려동물</span>
-                                        <span id="tagSpan2"># 펜션</span>                            
-                                        <span id="tagSpan2"># 온천</span>
-                                        <span id="tagSpan2"># 스키장</span>    
+                                        <span id="tagSpan2" v-for="(item, i) in hotel.hotelInfo" :key="i" class="hotel_info">
+                                            {{ "#" + item }}
+                                            <!-- i 번째 item를 출력  -->
+                                        </span>   
                                     </v-row>
                                 </v-col>
                             </td>
@@ -161,11 +84,13 @@
 
                 <hr>               
 
-                <tr><!-- 숙소 위치 -->
+                <tr>
                 <td>
                     <br>
                         <h3>숙소 위치</h3>
-                        <p>oo시 oo구 oo동 어쩌고 저쩌고 133-1234</p>
+                        <p>{{hotel.totalAddress}}</p>
+                    <br>
+                        <kakao-map-api/>
                     <br>
                 </td>
                 </tr>
@@ -179,17 +104,17 @@
                     <v-row justify="right">
                         <table style="margin-left:auto; margin-right: 10px;">
                             <tr>
-                                <!--<v-img id="myImg" :src="require(`@/assets/hotelImage/hotel1.jpg`)"/-->
+                                <v-img id="myImg" :src="require(`@/assets/hotel.jpg`)"/>
                             </tr>
                         </table>
                         <table style="width: 180px; margin-right: 10px;">
                             <tr>
                                 <td>
-                                    <h3>사업자명</h3>
+                                    <h3>{{hotel.writer}}</h3>
                                 </td>
                             </tr>
                             <tr>
-                                <td>
+                                <td text onclick="window.open('https://open.kakao.com/o/siza2rWb')">
                                     
                                     <p> <v-icon>mdi-chat-question-outline</v-icon> 카톡으로 문의하기 </p>
                                 </td>
@@ -244,37 +169,31 @@
 </div>
 </template>
 <script>
-/*
-export default {
-    name: "HotelReadForm.vue",
-    components: {
+import KakaoMapApi from '@/components/hotelDetail/KakaoMapApi.vue'
+import RoomReadForm from './RoomReadForm.vue'
 
+export default {
+    name: 'HotelReadForm',
+    components: {
+        KakaoMapApi,
+        RoomReadForm
+    },
+    data() {
+        return {
+            hotelInfo: [],
+        }
     },
     props: {
-        hotelNo: {
-            type: String,
+        hotel: {
+            type: Object,
             required: true
         }
     },
-    computed: {
-        ...mapState(['hotel'])
-    },
-    created () {
-        this.fetchHotel(this.hotelNo)
-            .catch(() => {
-                alert('숙소 게시물 요청 실패!')
-                this.$router.push()
-            })
-    },
     methods: {
-        ...mapActions(['fetchHotel']),
-        goRegister(){
-            this.$router.push({ name: '' })
-        }
+
     }
-    
 }
-*/
+
 </script>
 
 
@@ -290,16 +209,6 @@ export default {
     margin-left: 20px;
     padding-left: 30px;
     padding-right: 30px;
-}
-#tagSpan1{    
-    margin: 10px;
-    padding: 6px;
-    padding-left: 20px;
-    padding-right: 20px;
-    border-radius: 5px;
-    background-color: lightgray;
-    font-size: 12px;
-    color: gray;
 }
 #tagSpan2{    
     margin: 10px;
