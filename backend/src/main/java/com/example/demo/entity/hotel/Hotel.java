@@ -33,6 +33,9 @@ public class Hotel {
     @Convert(converter = HotelConvert.class)
     private List<String> hotelInfo;
 
+    @Column(length = 128, nullable = false)
+    private String hotelIntro;
+
     @Column(nullable = false)
     private String postcode;
       /*
@@ -74,8 +77,9 @@ public class Hotel {
     @JsonIgnore
     @OneToMany(mappedBy = "hotel", fetch = FetchType.EAGER,  cascade = CascadeType.ALL)
     private List<Room> rooms = new ArrayList<>();
-    //@Column(length = 300, nullable = false)
-    //private String openKakaotalk;
+
+    @Column
+    private String openKakaotalk;
 
     @CreationTimestamp
     private Date regDate;

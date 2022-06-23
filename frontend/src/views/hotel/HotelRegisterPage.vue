@@ -18,11 +18,12 @@ export default {
     },
     methods: {
         onSubmit (payload) {
-            const { hotelName, hotelInfo, postcode, totalAddress , files, writer } = payload
+            const { hotelName, hotelInfo, hotelIntro,  postcode, totalAddress , files, writer } = payload
             let formData = new FormData()
             let hotel = {
                     hotelName,
                     hotelInfo,
+                    hotelIntro,
                     postcode,
                     totalAddress,
                     writer
