@@ -93,7 +93,12 @@ public class HotelController {
         return randomHotel;
     }
 
-
+    @GetMapping("/mRead/{hotelNo}") //고객 페이지쪽 호텔 상세보기
+    public Hotel mHotelRead (
+            @PathVariable("hotelNo") Integer hotelNo) {
+        log.info("memberHotelRead()");
+        return hotelService.mRead(hotelNo);
+    }
 
     //search 넣기
 
