@@ -1,6 +1,6 @@
 import {
-    FETCH_HOTEL_LIST,
-    FETCH_HOTEL,
+    FETCH_M_HOTEL_LIST,
+    FETCH_M_HOTEL,
 
     FETCH_BM_HOTEL_LIST,
     FETCH_BM_HOTEL,
@@ -17,11 +17,11 @@ export default {
     SET_USER(state, user){
         state.user = user
     },
-    [FETCH_HOTEL_LIST] (state, hotels) {
-        state.hotels = hotels
+    [FETCH_M_HOTEL_LIST] (state, mHotels) {
+        state.mHotels = mHotels
     },
-    [FETCH_HOTEL] (state, hotel) {
-        state.hotel = hotel
+    [FETCH_M_HOTEL] (state, mHotel) {
+        state.mHotel = mHotel
     },
     [GET_HOTEL_TYPE] (state, hotelType){
         state.hotelType = hotelType

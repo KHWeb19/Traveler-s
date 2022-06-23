@@ -5,10 +5,10 @@
 				<main-search/>
 			</v-row>
 		</v-container>
-		<hotel-random :hotels="hotels" :list-array="pageArray"/>
+		<hotel-random :mHotels="mHotels" :list-array="pageArray"/>
 		<v-container>
 			<v-row>
-				<tag-search :hotels="hotels"/>
+				<tag-search :mHotels="mHotels"/>
 			</v-row>
 		</v-container>
 	</div>
@@ -35,13 +35,13 @@ export default {
 	}
    },
    computed: {
-	...mapState(['hotels'])
+	...mapState(['mHotels'])
    },
    mounted () {
-	this.fetchHotelList()
+	this.fetchMHotelList()
    },
    methods: {
-	...mapActions(['fetchHotelList', 'fetchHotel']),
+	...mapActions(['fetchMHotelList', 'fetchMHotel']),
    },
    created(){
       axios
