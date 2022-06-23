@@ -35,8 +35,8 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
         for(int i = 0; i < filePathList.size(); i++) {
             switch (i){
                 case 0:
-                     hotel.setHotelImgPath1(filePathList.get(i));
-                break;
+                    hotel.setHotelImgPath1(filePathList.get(i));
+                    break;
                 case 1:
                     hotel.setHotelImgPath2(filePathList.get(i));
                     break;

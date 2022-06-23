@@ -66,7 +66,11 @@ const routes = [
       default: true
     }
   },
-
+  {
+    path: '/search',
+    name: 'SearchPage',
+    component: () => import('../views/searchpage/SearchPage.vue')
+  },
 
 ]
 
