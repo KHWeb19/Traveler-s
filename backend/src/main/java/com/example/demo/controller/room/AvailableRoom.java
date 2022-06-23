@@ -32,9 +32,5 @@ public class AvailableRoom {
     @Column(nullable = false)
     private String checkDate;
 
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name= "room_no")
-    private Room room;
 
 }

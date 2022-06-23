@@ -5,8 +5,9 @@ import {
   NOT_LOGGEDIN,
   SET_USER,
   GET_HOTEL_TYPE,
-  FETCH_BMHOTEL_LIST,
-  FETCH_BMHOTEL
+  FETCH_BM_HOTEL_LIST,
+  FETCH_BMHOTEL,
+  FETCH_BMROOM_LIST
 } from "./mutation-types";
 
 import axios from "axios";
@@ -62,7 +63,7 @@ export default {
     fetchBmHotelList ({ commit }) {
         return axios.get('http://localhost:7777/hotel/bm/list')
                 .then((res) => {
-                    commit(FETCH_BMHOTEL_LIST, res.data)
+                    commit(FETCH_BM_HOTEL_LIST, res.data)
                 })
     },
     fetchBmHotel ({ commit }, hotelNo) {
@@ -71,4 +72,10 @@ export default {
                     commit(FETCH_BMHOTEL, res.data)
                 })
     },
+    fetchBmRoomList({commit}, writer) { 
+        return axios.get('http://localhost:7777/room/bm/list', {writer} )
+                .then((res) => {
+                    commit(FETCH_BMROOM_LIST, res.data)
+                })
+    }
 }

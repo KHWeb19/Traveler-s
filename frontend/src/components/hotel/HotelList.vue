@@ -20,12 +20,12 @@
     </tr>
   </thead>
   <tbody>
-        <tr v-if="!hotels || (Array.isArray(hotels) && hotels.length === 0)">
+        <tr v-if="!bmHotels || (Array.isArray(bmHotels) && bmHotels.length === 0)">
             <td colspan="5">
                 숙소를 등록해주세요.
             </td>
         </tr>
-        <tr v-else v-for="hotel in hotels" :key="hotel.hotelNo">
+        <tr v-else v-for="hotel in bmHotels" :key="hotel.hotelNo">
           <td><input class="check all" type="checkbox"></td>
             <td>
                 {{ hotel.hotelNo }}
@@ -69,9 +69,12 @@
 export default {
   name: 'HotelList',
   props: {
-    hotels: {
+    bmHotels: {
       type: Array
     }
+  },
+  created () {
+      console.log(this.bmHotels)
   }
 }
 </script>
