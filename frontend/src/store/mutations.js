@@ -1,7 +1,7 @@
 import {
     FETCH_M_HOTEL_LIST,
     FETCH_M_HOTEL,
-
+  
     FETCH_BM_HOTEL_LIST,
     FETCH_BM_HOTEL,
     GET_HOTEL_TYPE

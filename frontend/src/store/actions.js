@@ -7,6 +7,7 @@ import {
   GET_HOTEL_TYPE,
   FETCH_BM_HOTEL_LIST,
   FETCH_BM_HOTEL
+
 } from "./mutation-types";
 
 import axios from "axios";
@@ -70,6 +71,18 @@ export default {
             .then((res => {
                 commit(GET_HOTEL_TYPE, res.data)
             }))
+    },
+    fetchBmHotelList ({ commit }) {
+        return axios.get('http://localhost:7777/hotel/bm/list')
+                .then((res) => {
+                    commit(FETCH_BM_HOTEL_LIST, res.data)
+                })
+    },
+    fetchBmHotel ({ commit }, hotelNo) {
+        return axios.get(`http://localhost:7777/hotel/bm/${hotelNo}`)
+                .then((res) => {
+                    commit(FETCH_BM_HOTEL, res.data)
+                })
     },
 
 }
