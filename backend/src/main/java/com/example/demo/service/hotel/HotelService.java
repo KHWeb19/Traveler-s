@@ -19,8 +19,6 @@ public interface HotelService {
 
     public List<Hotel> random ();
     public Hotel mRead (Integer hotelNo);
-    public void modify (Hotel hotel);
-    public void remove (Integer hotelNo);
     public List<Hotel> searchList(String searchWord);
 
 }

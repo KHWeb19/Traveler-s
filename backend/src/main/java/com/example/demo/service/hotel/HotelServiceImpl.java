@@ -35,8 +35,8 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
         for(int i = 0; i < filePathList.size(); i++) {
             switch (i){
                 case 0:
-                     hotel.setHotelImgPath1(filePathList.get(i));
-                break;
+                    hotel.setHotelImgPath1(filePathList.get(i));
+                    break;
                 case 1:
                     hotel.setHotelImgPath2(filePathList.get(i));
                     break;
@@ -113,8 +113,29 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
         return randomResults;
     }
 
+    public Hotel mRead(Integer hotelNo) {
+        Optional<Hotel> maybeReadBoard = hotelRepository.findById(Long.valueOf(hotelNo));
+        //Optional: null일 수도 있는 객체를 감싸는 일종의 Wrapper 클래스
+        /*
+        optional 변수 내부에는 null이 아닌 T 객체가 있을 수도 있고 null이 있을 수도 있습니다.
+        따라서, Optional 클래스는 여러 가지 API를 제공하여 null일 수도 있는 객체를 다룰 수 있도록 돕습니다
+         */
+        log.info("HotelServiceIMPL readOK");
+        if (maybeReadBoard.equals(Optional.empty())) {
+            log.info("Can't read board!");
+            return null;
+        }
+        return maybeReadBoard.get();
+    }
 
+    @Override
+    public List<Hotel> searchList(String keyWord) {
+        List<Hotel> findSearchList = hotelRepository.findByHotelInfoContaining(keyWord);
 
+        log.info("findSearchList : " + findSearchList);
+
+        return findSearchList;
+    }
 
 
 
