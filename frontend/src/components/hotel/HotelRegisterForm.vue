@@ -7,7 +7,9 @@
         <p class="hotelNameP">*은 필수 입력사항입니다.</p>
         <hr>
         <label class="hotelNameLabel">* 숙소명</label>
-        <input type="text" class="hotelNameBox" v-model="hotelName" placeholder="숙소명을 입력해주세요."/>
+        <input type="text" class="hotelNameBox" v-model="hotelName" placeholder="숙소명을 입력해주세요."/><br>
+        <label class="hotelIntroLabel">소개</label>
+        <input type="text" class="hotelIntroBox" v-model="hotelIntro" placeholder="소개글을 입력해주세요."/>
     </div>
     
     <!-- 시설정보 -->
@@ -123,6 +125,7 @@ export default {
         return {
             hotelName: '',
             hotelInfo: [],
+            hotelIntro: '',
             postcode: '',
             address: '',
             detailAddress: '',
@@ -179,11 +182,10 @@ export default {
             if(this.files.length < 5){
                 alert('사진은 5장 이상 첨부해주세요')
             }else{
-                const writer = this.user.email 
-                const { hotelName, hotelInfo, postcode, address, detailAddress, extraAddress, files } = this
+                const { hotelName, hotelInfo, hotelIntro, postcode, address, detailAddress, extraAddress, files, writer } = this
                 this.totalAddress = address + detailAddress + extraAddress
                 const { totalAddress} = this
-                this.$emit('submit', { hotelName, hotelInfo, postcode, totalAddress ,files, writer })
+                this.$emit('submit', { hotelName, hotelInfo, hotelIntro, postcode, totalAddress ,files ,writer })
             }
         },
            handleFilesUpload () {
@@ -278,6 +280,20 @@ h3 {
     width: 400px;
     padding: 5px 8px;
     margin: 30px;
+    font-size: 13px;
+    border-radius: 2pt;
+    box-shadow: 0 0 0 1pt grey;
+    outline: none;
+    transition: .1s;
+}
+.hotelIntroLabel {
+    font-size: 14px;
+    margin-left: 50px;
+}
+.hotelIntroBox, .hotelIntroBox:focus {
+    width: 800px;
+    padding: 5px 8px;
+    margin: 30px 0px 0px 30px;
     font-size: 13px;
     border-radius: 2pt;
     box-shadow: 0 0 0 1pt grey;

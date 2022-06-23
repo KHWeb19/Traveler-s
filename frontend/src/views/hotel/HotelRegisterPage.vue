@@ -24,12 +24,13 @@ export default {
     methods: {
          ...mapActions(["setUser"]),
         onSubmit (payload) {
-            const { hotelName, hotelInfo, postcode, totalAddress , files, writer } = payload
-            console.log(writer)
+            const { hotelName, hotelInfo, hotelIntro,  postcode, totalAddress , files, writer } = payload
+
             let formData = new FormData()
             let hotel = {
                     hotelName,
                     hotelInfo,
+                    hotelIntro,
                     postcode,
                     totalAddress,
                     writer
