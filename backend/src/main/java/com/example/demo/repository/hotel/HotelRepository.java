@@ -3,6 +3,7 @@ package com.example.demo.repository.hotel;
 import com.example.demo.entity.hotel.Hotel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,8 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
     Optional<Hotel> findByHotelNo(@Param("hotelNo") Long hotelNo);
 
     List<Hotel> findByWriter(@Param("writer") String writer);
+
+    List<Hotel> findByHotelInfoContaining(String keyWord);
 
 
 }

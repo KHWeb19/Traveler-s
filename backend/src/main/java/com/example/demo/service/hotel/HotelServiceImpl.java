@@ -73,6 +73,17 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
     @Override
     public List<Hotel> bmHotelList() {
         return hotelRepository.findAll(Sort.by(Sort.Direction.DESC, "bmHotelNo"));
+    public List<Hotel> list() {
+        log.info("HotelServiceIMPL list");
+        return hotelRepository.findAll(Sort.by(Sort.Direction.DESC, "hotelNo"));
+    }*/
+
+
+    public List<Hotel> random () {
+        log.info("HotelServiceIMPL random");
+        List<Hotel> randomResults = hotelRepository.randomPick(6);
+        log.info("radomResults" + randomResults);
+        return randomResults;
     }
 
     // 사업자 매뉴얼 호텔 읽기
@@ -104,8 +115,7 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
 
     // ---------------------------------------------------------------------------------------------------------------
 
-
-
+      
     public List<Hotel> random () {
         log.info("HotelServiceIMPL random");
         List<Hotel> randomResults = hotelRepository.randomPick(6);
@@ -113,12 +123,12 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
         return randomResults;
     }
 
+    @Override
+    public List<Hotel> searchList(String keyWord) {
+        List<Hotel> findSearchList = hotelRepository.findByHotelInfoContaining(keyWord);
 
+        log.info("findSearchList : " + findSearchList);
 
-
-
-
-
-
-
+        return findSearchList;
+    }
 }
