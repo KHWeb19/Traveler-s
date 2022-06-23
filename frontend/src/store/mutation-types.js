@@ -5,4 +5,5 @@ export const NOT_LOGGEDIN = 'NOT_LOGGEDIN'
 export const SET_USER = 'SET_USER' //얘 빼야 하는듯?
 export const GET_HOTEL_TYPE = 'GET_HOTEL_TYPE'
 export const FETCH_BMHOTEL = 'FETCH_BMHOTEL'
-export const FETCH_BMHOTEL_LIST = 'FETCH_BMHOTEL_LIST'
+export const FETCH_BM_HOTEL_LIST = 'FETCH_BM_HOTEL_LIST'
+export const FETCH_BMROOM_LIST = 'FETCH_BMROOM_LIST'

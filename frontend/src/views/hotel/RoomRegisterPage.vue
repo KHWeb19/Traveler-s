@@ -20,10 +20,10 @@ export default {
     methods: {
         ...mapActions(["getHotelType"]),
         onSubmit (payload) {
-            const { roomName, roomType, personnel, roomInfo, files ,hotelNo } = payload
+            const { price, roomType, personnel, roomInfo, files ,hotelNo } = payload
             let formData = new FormData()
             let room = {
-                   roomName, 
+                   price, 
                    roomType, 
                    personnel,
                    roomInfo, 
