@@ -25,10 +25,10 @@ export default {
       ...mapState(['hotels'])
     },
     mounted () {
-      this.fetchHotelList()
+      this.fetchBmHotelList()
     },
     methods: {
-      ...mapActions(['fetchHotelList'])
+      ...mapActions(['fetchBmHotelList'])
     }
 }
 </script>
