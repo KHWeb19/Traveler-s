@@ -73,9 +73,6 @@ export default {
       type: Array
     }
   },
-  created () {
-      console.log(this.bmHotels)
-  }
 }
 </script>
 
