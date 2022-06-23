@@ -1,13 +1,11 @@
 <template>
   <div>
-    <bm-side-bar/>
     <hotel-register-form @submit="onSubmit"
                             :user="user"/>
   </div>
 </template>
 
 <script>
-import BmSideBar from '@/components/layout/BmSideBar.vue'
 import HotelRegisterForm from '@/components/hotel/HotelRegisterForm.vue'
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
@@ -15,7 +13,6 @@ import { mapActions, mapState } from 'vuex'
 export default {
     name: 'HotelRegisterPage',
     components: {
-        BmSideBar,
         HotelRegisterForm,
     },
     computed: {
@@ -50,7 +47,7 @@ export default {
             .then(() => {
                 alert('등록 되었습니다.')
                 this.$router.push({
-                    name: 'home'
+                    name: 'HotelListPage'
                 })
             })
             .catch(() => {

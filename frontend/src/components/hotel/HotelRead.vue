@@ -33,6 +33,7 @@
             <h3>이미지</h3>
             <hr>
             <div>
+                <v-container>
                 <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath1}`)"/>
                 <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath2}`)"/>
                 <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath3}`)"/>
@@ -42,6 +43,8 @@
                 <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath7}`)"/>
                 <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath8}`)"/>
                 <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath9}`)"/>
+                </v-container>
+                
             </div>
         </div>
 

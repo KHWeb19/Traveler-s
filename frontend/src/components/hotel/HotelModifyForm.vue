@@ -4,7 +4,6 @@
     <!-- 기본정보 -->
     <div class="hotelName">
         <h3>기본정보</h3>
-        <p class="hotelNameP">*은 필수 입력사항입니다.</p>
         <hr>
         <label class="hotelNameLabel">* 숙소명</label>
         <input type="text" class="hotelNameBox" v-model="hotelName" placeholder="숙소명을 입력해주세요."/>
@@ -48,18 +47,17 @@
         </div>
     </div>
 
-    <!-- 위치정보
+    <!-- 위치정보 -->
     <div class="hotelAddress">
         <h3>위치정보</h3>
         <hr>
         <div class="adApi">
-            <input type="text" v-model="postcode" id="postcode" placeholder="우편번호">
-            <input type="button" @click="execDaumPostcode()" value="우편번호 찾기"><br>
-            <input type="text" v-model="address" id="address" placeholder="주소"><br>
-            <input type="text" v-model="detailAddress" id="detailAddress" placeholder="상세주소">
-            <input type="text" v-model="extraAddress" id="extraAddress" placeholder="참고항목">
+            <label>우편번호</label>
+                <input type="text" id="postcode" :value="hotel.postcode" readonly/><br>
+                <label>주소</label>
+                <input type="text" id="address" :value="hotel.totalAddress" readonly/>
         </div>
-    </div> -->
+    </div>
 
     <!-- 이미지 -->
     <div class="hotelImg">
@@ -125,22 +123,49 @@ props: {
 data () {
     return {
         hotelName: '',
-        //hotelInfo: [],
-        /* files: [],
+        hotelInfo: [],
+        files: [],
         notImage: ['','','','','','','','',''],
-        fileNum: 0, */
+        fileNum: 0,
     }
 },
 methods: {
     onSubmit () {
-        const { hotelName, /*hotelInfo,  files, notImage, fileNum */ } = this
-        this.$emit('submit', { hotelName, /*hotelInfo,  files, notImage, fileNum */ })
-    }
+        const { hotelName, hotelInfo, files } = this
+        this.$emit('submit', { hotelName, hotelInfo, files })
+    },
+    handleFilesUpload () {
+            if(this.$refs.files.files.length > 9){
+                alert("최대 9장 까지 가능 합니다")
+                this.$refs.files.value = ''
+                return
+            }
+
+            this.fileNum += this.$refs.files.files.length
+            console.log(this.fileNum)
+            if(this.fileNum < 10){
+                        for (let i = 0; i < this.$refs.files.files.length; i++) {
+                            this.files = [
+                                ...this.files,
+                                {
+                                    file: this.$refs.files.files[i],
+                                    preview: URL.createObjectURL(this.$refs.files.files[i])
+                                }
+                            ]
+                        }      
+                     
+            }else{
+                alert("최대 9장 까지 가능 합니다")
+                console.log(this.fileNum)
+                this.fileNum -= this.$refs.files.files.length
+                this.$refs.files.value = ''
+            }  
+           },
 },
 created () {
     this.hotelName = this.hotel.hotelName
-    //this.hotelInfo = this.hotelInfo
-    /*this.files = this.files
+    /*this.hotelInfo = this.hotelInfo
+    this.files = this.files
     this.notImage = this.notImage
     this.fileNum = this. fileNum*/
 }
@@ -202,46 +227,24 @@ input[name="hotelinfo"] {
     margin: 50px 50px 10px 50px;
 }
 .adApi {
-    padding: 50px 0px 0px 50px;
+    padding: 0px 0px 0px 50px;
     font-size: 14px;
     line-height: 50px;
 }
 input[id="postcode"] {
-    width: 200px;
-    height: 30px;
-    padding: 0px 10px 0px 10px;
-    margin-right: 20px;
-    font-size: 13px;
-    border-radius: 2pt;
-    box-shadow: 0 0 0 1pt grey;
+    width: 100px;
+    padding: 5px 8px;
+    margin: 30px 0px 0px 35px;
+    font-size: 14px;
+    font-weight: bold;
     outline: none;
 }
 input[id="address"] {
     width: 700px;
-    height: 30px;
-    padding: 0px 10px;
-    font-size: 13px;
-    border-radius: 2pt;
-    box-shadow: 0 0 0 1pt grey;
-    outline: none;
-}
-input[id="detailAddress"] {
-    width: 300px;
-    height: 30px;
-    padding: 0px 10px;
-    font-size: 13px;
-    border-radius: 2pt;
-    box-shadow: 0 0 0 1pt grey;
-    outline: none;
-}
-input[id="extraAddress"] {
-    width: 300px;
-    height: 30px;
-    padding: 0px 10px;
-    margin-left: 20px;
-    font-size: 13px;
-    border-radius: 2pt;
-    box-shadow: 0 0 0 1pt grey;
+    padding: 5px 8px;
+    margin: 0px 0px 0px 35px;
+    font-size: 14px;
+    font-weight: bold;
     outline: none;
 }
 .hotelImg {
