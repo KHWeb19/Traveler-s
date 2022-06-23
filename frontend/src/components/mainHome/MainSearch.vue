@@ -1,5 +1,11 @@
 <template>
     <v-col class="MainSearch">
+        <v-col>
+            <v-btn><a href="/HotelListPage">HotelListPage</a></v-btn><p />
+            <v-btn><a href="/hotelRegister">hotelRegister</a></v-btn><p />
+            <v-btn><a href="/mypage">mypage</a></v-btn><p />
+            <v-btn><a href="/roomRegister">roomRegister</a></v-btn><p />
+        </v-col>
         <v-row>
             <v-col cols="12" xs="12" sm="6" md="4">
                 <v-menu class="menu1" v-model="calendar" :close-on-content-click="false" transition="scale-transition"
@@ -20,7 +26,7 @@
                 <v-text-field class="CitySearch" prepend-icon="mdi-city-variant-outline" label="도시 입력" rounded solo
                     type="city">
                     <template #append>
-                        <v-btn type="submit" value="Subscribe">
+                        <v-btn @click="searchPage(/*이부분에 날자정보, 인원수, 도시검색정보 넣어야되는게 맞나요.,.? */)" type="submit" value="Subscribe">
                             검색하기
                         </v-btn>
                     </template>
@@ -33,11 +39,14 @@
 <script>
 
 export default {
-
-    component: {
-
+    name: 'MainSearch',
+    props:{
+        hotels:{
+            type: Array
+        }
     },
-
+    component: {
+    },
     data: () => ({
         dates: ['2022-06-13', '2022-06-13'],
         items: ['1', '2', '3', '4'],
@@ -47,6 +56,11 @@ export default {
         dateRangeText() {
             return this.dates.join(' ~ ')
         },
+    },
+    methods: {
+        searchPage(/*이부분에 날자정보, 인원수, 도시검색정보 넣어야하는게 맞는건지..? */) {
+            this.$router.push({name:'DetailSearch'},/*params:{ 위에 데이터 투스트링으로???}*/)
+        }
     },
 }
 </script>

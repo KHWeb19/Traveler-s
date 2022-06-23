@@ -26,9 +26,17 @@
             <v-card-text class="address">
               {{ hotel.totalAddress }}
             </v-card-text>
-            <span class="hotel_info">
-              {{ hotel.hotelInfo }}
+            <span class="hotel_info" v-for="(info , i) in hotel.hotelInfo" :key="i">
+              {{ "#" + info }}
             </span>
+            <!--
+            호탤 엔티티에있는 호텔인포 컬럼은 정보를 리스트형태로 저장하고있다.
+            호텔인포 컬럼에 저장된 리스트를 포이치로 하나씩 떼어낸다.
+            포이치로 뗴어낸 리스트를 infolist라고 부른다.
+            for문을 사용하여 infolist의 모든 키워드가 남지않을때까지 반복시킨다.
+            =infolist의 길이만큼 for문이 반복되도록 한다.
+            for (infolistlength>=i; ;)
+            -->
           </v-card>
         </v-col>
       </div>
@@ -42,6 +50,9 @@ export default {
   props: {
     hotels: {
       type: Array
+    },
+    infos: {
+      type: Array 
     }
   },
   methods: {

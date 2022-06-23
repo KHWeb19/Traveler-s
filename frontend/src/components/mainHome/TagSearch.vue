@@ -5,20 +5,15 @@
             <v-card-title class="justify-center" style="font-size:3em">테마 검색</v-card-title>
             <v-row align="center" justify="center">
                 <v-btn v-for="(info, idx) in hotelInfo" :key="idx" @click="search(info)" rounded class="button1 b-color rot-1">#{{info}}</v-btn>
-
             </v-row>
         </section>
-     
-        <v-carousel cycle hide-delimiters class="cover">
-        <v-carousel-item  v-for="(list,idx) in searchList" :key="idx" :src="require(`@/assets/hotelImg/${list.hotelImgPath1}`)"  >
+        <v-carousel cycle hide-delsimiters class="cover">
+        <v-carousel-item  v-for="(lit,idx) in searchList" :key="idx" :src="require(`@/assets/hotelImg/${list.hotelImgPath1}`)"  >
             <v-row class="img" align="center" justify="center" >
             </v-row>
         </v-carousel-item>
          </v-carousel>
-        
-        <v-divider></v-divider>
-
-                      
+        <v-divider></v-divider>                     
     </v-container>
 </template>
 

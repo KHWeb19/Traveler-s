@@ -1,118 +1,226 @@
 <template>
-  <v-card flat width="100%" tile>
-    <v-toolbar height="90">
-      <div>
-         <img src="@/assets/TeamLogo.jpg"/>
-      </div>
-      <v-spacer></v-spacer>
-    <div class="header" v-if="!isLoggedIn"> 
-        <ul>
-          <li><a href="/login">로그인</a></li>
-          <li><a href="/signup">회원가입</a></li>
-        </ul>
-	</div>
-<div class="header" v-else>
-        <ul>
-          <li>
-            <v-card class="mx-auto" max-width="300" tile>
-              <v-list-group>
-                <template v-slot:activator>
-                  <a href="/mypage"><v-list-item-title>내정보</v-list-item-title></a>
-                </template>
-                <v-list-item-group :value="true" no-action sub-group>
-                  <v-list-item>
-                    <template>
-                      <v-text>내정보수정</v-text>
-                    </template>
-                  </v-list-item>
-                  <v-list-item>
-                    <template>
-                      <v-text>찜리스트</v-text>
-                    </template>
-                  </v-list-item>
-                  <v-list-item>
-                    <template>
-                      <v-text>내 게시물</v-text>
-                    </template>
-                  </v-list-item>
-                  <v-list-item>
-                    <template>
-                      <v-text>문의 내역</v-text>
-                    </template>
-                  </v-list-item>
-                </v-list-item-group>
-              </v-list-group>
-            </v-card>
-          </li>
-          <li><button @click="onClickLogout">
-              <v-btn>로그아웃</v-btn>
-            </button></li>
-        </ul>
-      </div>
-    </v-toolbar>
-  </v-card>
+  <v-container>
+    <v-app-bar app color="#ffffff" height="90px">
+      <v-app-bar-nav-icon id="BarBtn" @click="drawer = true"></v-app-bar-nav-icon>
+      <v-spacer />
+      <v-col id="HomeButton" @click="home">
+        <img src="@/assets/TeamLogo.jpg" />
+      </v-col>
+      <v-col id="Login">
+        <v-col class="UserSpace" v-if="!isLoggedIn">
+          <div>
+            <ul>
+              <li id="LBotton"><a href="/login">
+                  <v-btn>로그인</v-btn>
+                </a></li>
+              <li id="RBotton"><a href="/signup">
+                  <v-btn>회원가입</v-btn>
+                </a></li>
+            </ul>
+          </div>
+        </v-col>
+        <v-col class="UserSpace" v-else>
+          <div>
+            <ul>
+              <li id="LBotton">
+                <v-card class="mx-auto" max-width="300" tile>
+                </v-card>
+              </li>
+              <li id="RBotton"><button @click="onClickLogout">
+                  <v-btn>로그아웃</v-btn>
+                </button></li>
+            </ul>
+          </div>
+        </v-col>
+      </v-col>
+    </v-app-bar>
+    <v-navigation-drawer v-model="drawer" absolute temporary>
+      <v-list nav dense>
+        <v-list-item-group v-model="group">
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>마이페이지</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>위시리스트</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>예약 내역 확인</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>관리자 메뉴얼</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>예약관리</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>객실등록</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>객실설정</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>요금설정</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>숙박관리</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>숙소관리</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>객실관리</v-list-item-title>
+          </v-list-item>
+
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
+  </v-container>
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import { mapState } from 'vuex'
+import router from '@/router'
 
-  export default {
-    name: "MainHeader",
-    data() {
-      return {
-        nickName: this.$store.state.userInfo.nickname,
-      }
+export default {
+  name: "MainHeader",
+
+  data: () => ({
+    drawer: false,
+    group: null,
+  }),
+
+  computed: {
+
+    ...mapState(['isLoggedIn'])
+  },
+
+  methods: {
+    onClickLogout() {
+      this.$store.dispatch("attemptLogout")
     },
-	computed:{
-		...mapState(['isLoggedIn'])
-	},
-
-    methods: {
-      onClickLogout() {
-        this.$store.dispatch("attemptLogout")
-	}
+    home() {
+      (window.location.pathname !== '/') ? router.push('/') : router.go(0)
+    }
   }
 }
 
 </script>
 
 <style scoped>
-.v-card{
+
+
+.container {
+  margin: 0;
+  padding: 0;
+}
+
+.v-app-bar {
+  margin: 0;
+  padding: 0;
+}
+
+.v-card {
   margin-bottom: 10px;
 }
-.header {
+
+.UserSpace {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 15px 60px;
+  width: 200px;
+  padding: 0;
   justify-content: space-between;
   align-items: center;
 }
-.header ul {
+
+.UserSpace ul {
   display: flex;
   justify-content: right;
   align-items: right;
   margin-right: 1%;
 }
-.header ul li {
+
+.UserSpace ul li {
   list-style: none;
+  padding-top: 0;
 }
-.header ul li a {
+
+.UserSpace ul li a {
   text-decoration: none;
-  padding: 10px 10px;
   color: rgb(0, 0, 0);
   position: relative;
   font-size: 30px;
-  margin-left: 10px;
-  margin-right: 10px;
 }
 
-.header-top {
+.UserSpace-top {
   position: absolute;
   top: 1em;
   list-style: none;
   right: 2em;
 }
 
+#RBotton {
+  margin-right: 2%;
+    margin-left: 3%;
+  }
+  
+  #LBotton {
+    margin-right: 3%;
+    margin-left: 2%;
+  }
+  #HomeButton{
+    z-index: 1;
+    widows: 200px;
+    height: 90px;
+    padding: 0;
+    margin: 0;
+    padding-right: 2%;
+}
+  .v-app-bar{
+    color: rgb(255, 255, 255);
+  }
+  #Login{
+    height: 90px;
+    padding: 0;
+    padding-top: 18px;
+    margin: 0;
+    padding-right: 10%;
+    min-width: 205px;
+    max-width: 300px;
+  }
+  #BarBtn {
+    padding: 0;
+    width: 50px;
+  }
 </style>

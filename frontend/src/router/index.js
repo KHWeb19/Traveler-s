@@ -37,6 +37,11 @@ const routes = [
     component: () => import('../views/member/OAuth2Redirect.vue')
   },
   {
+    path: '/HotelListPage',
+    name: 'HotelListPage',
+    component: () => import('../views/hotel/HotelListPage.vue')
+  },
+  {
     path: '/hotelRegister',
     name: 'HotelRegisterPage',
     component: () => import('../views/hotel/HotelRegisterPage.vue')
@@ -61,7 +66,11 @@ const routes = [
       default: true
     }
   },
-
+  {
+    path: '/search',
+    name: 'SearchPage',
+    component: () => import('../views/searchpage/SearchPage.vue')
+  },
 
 ]
 
