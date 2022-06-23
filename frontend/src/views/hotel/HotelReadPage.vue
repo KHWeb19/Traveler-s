@@ -1,6 +1,5 @@
 <template>
   <div>
-    <bm-side-bar/>
     <hotel-modify-form v-if="hotel" :hotel="hotel" @submit="onSubmit"/>
     <p v-else>로딩중 .......</p>
   </div>
@@ -10,11 +9,9 @@
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
 import HotelModifyForm from '@/components/hotel/HotelModifyForm.vue'
-import BmSideBar from '@/components/layout/BmSideBar.vue'
 export default {
     components: {
         HotelModifyForm,
-        BmSideBar
     },
     props: {
         hotelNo: {
