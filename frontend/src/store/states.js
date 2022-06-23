@@ -5,6 +5,7 @@ export default {
     hotels: [],
     hotel: null,
 
-    bmhotels: [],
+    bmHotels: [],
     bmhotel: null,
+    bmRooms: []
 }
