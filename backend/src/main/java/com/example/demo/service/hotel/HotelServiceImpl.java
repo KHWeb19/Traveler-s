@@ -79,7 +79,7 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
     public List<Hotel> random () {
         log.info("HotelServiceIMPL random");
         List<Hotel> randomResults = hotelRepository.randomPick(6);
-
+        log.info("radomResults" + randomResults);
         return randomResults;
     }
 
@@ -111,5 +111,14 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
     @Override
     public void remove(Integer hotelNo) {
         hotelRepository.deleteById(Long.valueOf(hotelNo));
+    }
+
+    @Override
+    public List<Hotel> searchList(String keyWord) {
+        List<Hotel> findSearchList = hotelRepository.findByHotelInfoContaining(keyWord);
+
+        log.info("findSearchList : " + findSearchList);
+
+        return findSearchList;
     }
 }

@@ -12,6 +12,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -30,8 +31,12 @@ public class Hotel {
     @Column
     private String writer;
 
-    @Convert(converter = HotelConvert.class)
-    private List<String> hotelInfo;
+
+    //@Convert(converter = HotelConvert.class)
+    //private List<String> hotelInfo;
+
+    @Column(name = "hotelInfo")
+    private String hotelInfo;
 
     @Column(nullable = false)
     private String postcode;
@@ -82,4 +87,39 @@ public class Hotel {
 
     @UpdateTimestamp
     private Date updDate;
+
+    public List<String> getHotelInfo() {
+        List<String> list = new ArrayList<>();
+        if (hotelInfo != null) {
+            Arrays.stream(hotelInfo.split(","))
+                    .map(String::trim)
+                    .filter(s -> !"".equals(s))
+                    .forEach(list::add);
+        }
+        return list;
+    }
+
+    public void setHotelInfo(List<String> hotelInfo) {
+        this.hotelInfo = treeAsString(hotelInfo);
+    }
+
+    private static String treeAsString(List<String> hotelInfo) {
+        List<String> orderedSet = new ArrayList<>();
+        if (hotelInfo != null && !hotelInfo.isEmpty()) {
+            orderedSet.addAll(hotelInfo);
+        }
+        return "," + String.join(",", orderedSet) + ",";
+    }
+
+    public static class HotelBuilder {
+
+        private String hotelInfo;
+
+        public HotelBuilder hotelInfo(List<String> hotelInfo) {
+            this.hotelInfo = treeAsString(hotelInfo);
+            return this;
+        }
+
+    }
+
 }
