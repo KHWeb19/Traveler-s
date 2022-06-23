@@ -182,7 +182,8 @@ export default {
             if(this.files.length < 5){
                 alert('사진은 5장 이상 첨부해주세요')
             }else{
-                const { hotelName, hotelInfo, hotelIntro, postcode, address, detailAddress, extraAddress, files, writer } = this
+                const writer = this.user.email
+                const { hotelName, hotelInfo, hotelIntro, postcode, address, detailAddress, extraAddress, files } = this
                 this.totalAddress = address + detailAddress + extraAddress
                 const { totalAddress} = this
                 this.$emit('submit', { hotelName, hotelInfo, hotelIntro, postcode, totalAddress ,files ,writer })
