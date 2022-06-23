@@ -10,7 +10,7 @@
                     <div class="slide-10d">
                         <v-container style="padding: 0px">
                             <swiper class="swiper position-relative" :options="swiperOption">
-                                <swiper-slide><v-img  width="100%" height="400px" :src="require(`@/assets/hotelImage/hotel1.jpg`)"/></swiper-slide>
+                                <!--<swiper-slide><v-img  width="100%" height="400px" :src="require(`@/assets/hotelImage/hotel1.jpg`)"/></swiper-slide>-->
                                 <div class="swiper-pagination" slot="pagination"></div>
                                 <div class="swiper-button-prev" slot="button-prev"></div>
                                 <div class="swiper-button-next" slot="button-next"></div>
@@ -56,7 +56,7 @@
                                 <table id="inCard" style="width: 30%; height: 200px;">
                                     <tr>
                                         <td>
-                                            <v-img  width="300px" height="160px" :src="require(`@/assets/hotelImage/hotel1.jpg`)"/>
+                                            <!--<v-img  width="300px" height="160px" :src="require(`@/assets/hotelImage/hotel1.jpg`)"/>-->
                                         </td>
                                     </tr>
                                 </table>
@@ -179,7 +179,7 @@
                     <v-row justify="right">
                         <table style="margin-left:auto; margin-right: 10px;">
                             <tr>
-                                <v-img id="myImg" :src="require(`@/assets/hotelImage/hotel1.jpg`)"/>
+                                <!--<v-img id="myImg" :src="require(`@/assets/hotelImage/hotel1.jpg`)"/-->
                             </tr>
                         </table>
                         <table style="width: 180px; margin-right: 10px;">
@@ -243,7 +243,6 @@
 
 </div>
 </template>
-
 <script>
 /*
 export default {

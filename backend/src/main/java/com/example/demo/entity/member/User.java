@@ -41,11 +41,17 @@ public class User {
             joinColumns = @JoinColumn(name="user_id"),
             inverseJoinColumns = @JoinColumn(name="role_id")
     )
+    @Builder.Default
     private List<Role> roles = new ArrayList<>();
 
     public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public void addRoleToUser(Role role){
+        this.getRoles().add(role);
+        role.getUsers().add(this);
     }
 }

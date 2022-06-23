@@ -82,4 +82,12 @@ public class Hotel {
 
     @UpdateTimestamp
     private Date updDate;
+
+    public Hotel(String hotelName, String writer, List<String> hotelInfo, String totalAddress, String hotelImgPath1) {
+        this.hotelName = hotelName;
+        this.writer = writer;
+        this.hotelInfo = hotelInfo;
+        this.totalAddress = totalAddress;
+        this.hotelImgPath1 = hotelImgPath1;
+    }
 }
