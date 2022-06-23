@@ -25,6 +25,18 @@ export default {
                     commit(FETCH_HOTEL, res.data)
                 })
     },
+    fetchBmHotelList ({ commit }) {
+        return axios.get('http://localhost:7777/hotel/bm/list')
+                .then((res) => {
+                    commit(FETCH_BMHOTEL_LIST, res.data)
+                })
+    },
+    fetchBmHotel ({ commit }, hotelNo) {
+        return axios.get(`http://localhost:7777/hotel/bm/${hotelNo}`)
+                .then((res) => {
+                    commit(FETCH_BMHOTEL, res.data)
+                })
+    },
     attemptLogin({commit, state}, payload){
         axios.post("http://localhost:7777/login", payload, {withCredentials: true})
         .then((res) => {
@@ -59,16 +71,5 @@ export default {
                 commit(GET_HOTEL_TYPE, res.data)
             }))
     },
-    fetchBmHotelList ({ commit }) {
-        return axios.get('http://localhost:7777/hotel/bm/list')
-                .then((res) => {
-                    commit(FETCH_BMHOTEL_LIST, res.data)
-                })
-    },
-    fetchBmHotel ({ commit }, hotelNo) {
-        return axios.get(`http://localhost:7777/hotel/bm/${hotelNo}`)
-                .then((res) => {
-                    commit(FETCH_BMHOTEL, res.data)
-                })
-    },
+
 }

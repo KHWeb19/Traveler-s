@@ -1,46 +1,57 @@
 <template>
-  <div>
-    <hotel-modify-form v-if="hotel" :hotel="hotel" @submit="onSubmit"/>
-    <p v-else>로딩중 .......</p>
-  </div>
+<div>
+    <h2>숙소 읽기</h2>
+    <hotel-read v-if="bmhotel" :bmhotel="bmhotel"/>
+    <p v-else>로딩중 입니다.</p>
+    <router-link :to="{ name: 'BHotelModifyPage', params: { hotelNo } }">
+            수정
+        </router-link>
+     <button @click="onDelete">삭제</button>
+     <router-link :to="{ name: 'BHotelListPage' }">
+            목록
+        </router-link>
+</div>
 </template>
 
 <script>
+import HotelRead from '@/components/hotel/HotelRead.vue'
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
-import HotelModifyForm from '@/components/hotel/HotelModifyForm.vue'
 export default {
-    components: {
-        HotelModifyForm,
-    },
+    name: 'HotelReadPage',
     props: {
         hotelNo: {
             type: String,
             required: true
         }
     },
+    components: {
+        HotelRead
+    },
     computed: {
-        ...mapState(['hotel'])
+        ...mapState(['bmhotel'])
+    },
+    created () {
+        this.fetchBmHotel(this.hotelNo)
+                .catch(() => {
+                    alert('불러오지 못했습니다.')
+                    this.$router.push()
+                })
     },
     methods: {
-        ...mapActions(['fetchHotel']),
-        onSubmit (payload) {
-            const { hotelName, hotelInfo, files, notImage, fileNum } = payload
-
-            axios.put(`http://localhost:7777/hotel/bm/${this.hotelNo}`,
-                { hotelName, hotelInfo, files, notImage, fileNum  })
-                    .then(res => {
-                        alert('게시물 수정 성공!')
-                        this.$router.push({
-                            name: 'HotelReadPage',
-                            params: { hotelNo: res.data.hotelNo.toString() }
-                        })
+        ...mapActions(['fetchBmHotel']),
+        onDelete () {
+            const { hotelNo } = this.bmhotel
+            axios.delete(`http://localhost:7777/hotel/bm/${hotelNo}`)
+                    .then(() => {
+                        alert('삭제 되었습니다.')
+                        this.$router.push({ name: 'BHotelListPage' })
                     })
                     .catch(() => {
-                        alert('게시물 수정 실패!')
+                        alert('실패했습니다.')
                     })
         }
-    },
+    }
 }
 </script>
 

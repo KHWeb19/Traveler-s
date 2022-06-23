@@ -107,7 +107,7 @@
     </div>
     
    <v-btn type="submit" class="btn1">저장하기</v-btn>
-    <router-link :to="{ name: 'HotelListPage' }" ><v-btn class="btn2">취소</v-btn></router-link>
+    <router-link :to="{ name: 'BHotelListPage' }" ><v-btn class="btn2">취소</v-btn></router-link>
 
 </form>
 </template>

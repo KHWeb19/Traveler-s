@@ -2,9 +2,9 @@
   <div>
       <h2>숙소 관리</h2>
       <span class="page-count">전체</span>
-      <router-link :to="{ name: 'HotelRegisterPage' }" class="btn"><v-btn>숙소등록</v-btn></router-link>
+      <router-link :to="{ name: 'BHotelRegisterPage' }" class="btn"><v-btn>숙소등록</v-btn></router-link>
       <br>
-    <hotel-list :hotels="hotels"/>
+    <hotel-list :bmhotels="bmhotels"/>
   </div>
 </template>
 
@@ -19,7 +19,7 @@ export default {
         HotelList,
     },
     computed: {
-      ...mapState(['hotels'])
+      ...mapState(['bmhotels'])
     },
     mounted () {
       this.fetchBmHotelList()

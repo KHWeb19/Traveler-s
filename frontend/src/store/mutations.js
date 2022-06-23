@@ -4,7 +4,6 @@ import {
 
     FETCH_BMHOTEL_LIST,
     FETCH_BMHOTEL,
-
     GET_HOTEL_TYPE
 } from './mutation-types'
 
@@ -28,9 +27,9 @@ export default {
         state.hotelType = hotelType
     },
     [FETCH_BMHOTEL_LIST] (state, bmhotels) {
-        state.hotels = bmhotels
+        state.bmhotels = bmhotels
     },
     [FETCH_BMHOTEL] (state, bmhotel) {
-        state.hotel = bmhotel
+        state.bmhotel = bmhotel
     },
 }

@@ -20,30 +20,30 @@
     </tr>
   </thead>
   <tbody>
-        <tr v-if="!hotels || (Array.isArray(hotels) && hotels.length === 0)">
+        <tr v-if="bmhotels || (Array.isArray(bmhotels) && bmhotels.length === 0)">
             <td colspan="5">
                 숙소를 등록해주세요.
             </td>
         </tr>
-        <tr v-else v-for="hotel in hotels" :key="hotel.hotelNo">
+        <tr v-else v-for="bmhotel in bmhotels" :key="bmhotel.hotelNo">
           <td><input class="check all" type="checkbox"></td>
             <td>
-                {{ hotel.hotelNo }}
+                {{ bmhotel.hotelNo }}
             </td>
             <td>
-                <router-link :to="{ name: 'HotelReadPage',
-                                    params: { hotelNo: hotel.hotelNo.toString() } }">
-                    {{ hotel.hotelName }}
+                <router-link :to="{ name: 'BHotelReadPage',
+                                    params: { hotelNo: bmhotel.hotelNo.toString() } }">
+                    {{ bmhotel.hotelName }}
                 </router-link>
             </td>
             <td>
-                <router-link :to="{ name: 'HotelReadPage',
-                                    params: { hotelNo: hotel.hotelNo.toString() } }">
-                    {{ hotel.totalAddress }}
+                <router-link :to="{ name: 'BHotelReadPage',
+                                    params: { hotelNo: bmhotel.hotelNo.toString() } }">
+                    {{ bmhotel.totalAddress }}
                 </router-link>
             </td>
             <td>
-                {{ hotel.regDate }}
+                {{ bmhotel.regDate }}
             </td>
         </tr>
   </tbody>
@@ -69,7 +69,7 @@
 export default {
   name: 'HotelList',
   props: {
-    hotels: {
+    bmhotels: {
       type: Array
     }
   }
