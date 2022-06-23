@@ -10,15 +10,15 @@
                     <div class="slide-9img">
                         <v-container style="padding: 0px">
                             <v-carousel cycle hide-delimiters class="cover">
-                            <v-carousel-item :src="require(`@/assets/hotelImg/${hotel.hotelImgPath1}`)"/>
-                            <v-carousel-item :src="require(`@/assets/hotelImg/${hotel.hotelImgPath2}`)"/>
-                            <v-carousel-item :src="require(`@/assets/hotelImg/${hotel.hotelImgPath3}`)"/>
-                            <v-carousel-item :src="require(`@/assets/hotelImg/${hotel.hotelImgPath4}`)"/>
-                            <v-carousel-item :src="require(`@/assets/hotelImg/${hotel.hotelImgPath5}`)"/>
-                            <v-carousel-item v-if="hotel.hotelImgPath6" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath6}`)"/>
-                            <v-carousel-item v-if="hotel.hotelImgPath7" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath7}`)"/>
-                            <v-carousel-item v-if="hotel.hotelImgPath8" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath8}`)"/>
-                            <v-carousel-item v-if="hotel.hotelImgPath9" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath9}`)"/>
+                            <v-carousel-item :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath1}`)"/>
+                            <v-carousel-item :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath2}`)"/>
+                            <v-carousel-item :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath3}`)"/>
+                            <v-carousel-item :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath4}`)"/>
+                            <v-carousel-item :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath5}`)"/>
+                            <v-carousel-item v-if="mHotel.hotelImgPath6" :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath6}`)"/>
+                            <v-carousel-item v-if="mHotel.hotelImgPath7" :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath7}`)"/>
+                            <v-carousel-item v-if="mHotel.hotelImgPath8" :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath8}`)"/>
+                            <v-carousel-item v-if="mHotel.hotelImgPath9" :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath9}`)"/>
                             </v-carousel>
                         </v-container>
                     </div>
@@ -29,8 +29,8 @@
 
                 <tr>
                 <td>
-                    <h1>{{hotel.hotelName}}</h1> <!-- 숙소 이름 -->
-                    <p>{{hotel.hotelIntro}}</p> <!-- 숙소 한줄 소개 -->
+                    <h1>{{mHotel.hotelName}}</h1> <!-- 숙소 이름 -->
+                    <p>{{mHotel.hotelIntro}}</p> <!-- 숙소 한줄 소개 -->
                 </td>
                 </tr>
 
@@ -68,7 +68,7 @@
                                        <!-- key의 용도는 반복문 돌린 요소를 컴퓨터가 구분하기 위한 것. 반복문 돌면서 변하는 숫자/문자   -->
                                         <!-- 작명 두개 할 시(데이터 변수, 1씩 증가하는 정수 변수) / 이때 key에는 보통 정수 변수를 입력   -->
                                     <v-row justify="center">
-                                        <span id="tagSpan2" v-for="(item, i) in hotel.hotelInfo" :key="i" class="hotel_info">
+                                        <span id="tagSpan2" v-for="(item, i) in mHotel.hotelInfo" :key="i" class="hotel_info">
                                             {{ "#" + item }}
                                             <!-- i 번째 item를 출력  -->
                                         </span>   
@@ -88,7 +88,7 @@
                 <td>
                     <br>
                         <h3>숙소 위치</h3>
-                        <p>{{hotel.totalAddress}}</p>
+                        <p>{{mHotel.totalAddress}}</p>
                     <br>
                         <kakao-map-api/>
                     <br>
@@ -110,7 +110,7 @@
                         <table style="width: 180px; margin-right: 10px;">
                             <tr>
                                 <td>
-                                    <h3>{{hotel.writer}}</h3>
+                                    <h3>{{mHotel.writer}}</h3>
                                 </td>
                             </tr>
                             <tr>
@@ -185,7 +185,7 @@ export default {
         }
     },
     props: {
-        hotel: {
+        mHotel: {
             type: Object,
             required: true
         }

@@ -1,6 +1,6 @@
 import {
-  FETCH_HOTEL_LIST,
-  FETCH_HOTEL,
+  FETCH_M_HOTEL_LIST,
+  FETCH_M_HOTEL,
   IS_LOGGEDIN,
   NOT_LOGGEDIN,
   SET_USER,
@@ -13,16 +13,16 @@ import axios from "axios";
 import router from "@/router";
 
 export default {
-    fetchHotelList ({ commit }) {
+    fetchMHotelList ({ commit }) {
         return axios.get('http://localhost:7777/hotel/mainList')
                 .then((res) => {
-                    commit(FETCH_HOTEL_LIST, res.data)
+                    commit(FETCH_M_HOTEL_LIST, res.data)
                 })
     },
-    fetchHotel ({ commit }, hotelNo) {
-        return axios.get(`http://localhost:7777/hotel/${hotelNo}`)
+    fetchMHotel ({ commit }, hotelNo) {
+        return axios.get(`http://localhost:7777/hotel/mRead/${hotelNo}`)
                 .then((res) => {
-                    commit(FETCH_HOTEL, res.data)
+                    commit(FETCH_M_HOTEL, res.data)
                 })
     },
     fetchBmHotelList ({ commit }) {
