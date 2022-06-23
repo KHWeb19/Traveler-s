@@ -14,7 +14,7 @@
                     <div class="slide-10d">
                         <v-container style="padding: 0px">
                             <swiper class="swiper position-relative" :options="swiperOption">
-                                <swiper-slide><v-img  width="100%" height="400px" :src="require(`@/assets/hotelImg/hotel1.jpg`)"/></swiper-slide>
+                                <!--<swiper-slide><v-img  width="100%" height="400px" :src="require(`@/assets/hotelImg/hotel1.jpg`)"/></swiper-slide>-->
                                 <div class="swiper-pagination" slot="pagination"></div>
                                 <div class="swiper-button-prev" slot="button-prev"></div>
                                 <div class="swiper-button-next" slot="button-next"></div>

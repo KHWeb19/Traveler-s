@@ -47,9 +47,8 @@ public class SecurityConfig {
 
                 .authorizeRequests((authz ->
                         authz.antMatchers("/h2-console/**", "/login", "/user/register", "/oauth2/authorize/**",
-
                                         "/oauth2/callback/**","/","/kakaoLogin","/check-number", "/refreshtoken",
-                                        "/hotel/**","/room/**","/getUser").permitAll()
+                                        "/hotel/**","/room/**","/hotel/bm/**").permitAll()
 
                                 //.antMatchers(GET, "/listall").hasAnyAuthority("ROLE_USER")
                                 .anyRequest().authenticated())

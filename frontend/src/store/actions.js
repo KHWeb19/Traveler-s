@@ -52,6 +52,9 @@ export default {
             .then((res => {
                 commit(SET_USER, res.data)
             }))
+            .catch(() => {
+                router.push({path: "/login"})
+                alert("내 정보를 읽어오는데 실패했습니다")})
     },
     getHotelType({commit}){
         axios.get("http://localhost:7777/room/getHotelType")
