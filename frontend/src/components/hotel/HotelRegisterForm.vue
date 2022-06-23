@@ -115,6 +115,12 @@
 <script>
 export default {
     name: 'HotelRegisterForm',
+    props: {
+        user: {
+            type: Object,
+            require: true,
+        },
+    },
     data () {
         return {
             hotelName: '',
@@ -127,8 +133,7 @@ export default {
             files: [],
             notImage: ['','','','','','','','',''],
             fileNum: 0,
-            totalAddress:'',
-            writer: this.$store.state.email
+            totalAddress:''
 
         }
     },
@@ -241,7 +246,7 @@ export default {
             console.log(this.files)
         }
     }
- 
+
 }
 </script>
 
