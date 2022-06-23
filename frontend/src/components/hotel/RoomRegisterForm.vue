@@ -12,13 +12,13 @@
              <select  class="hotel-select" v-model="hotelNo">
                 <option v-for="(hotel, idx) in hotelType" :key="idx" :value="hotel.hotelNo" > {{hotel.hotelName}}</option>
             </select>
-        </div>
-            <label class="roomNameLabel">* 객실이름</label>
-            <input type="text" class="roomNameBox" v-model="roomName" placeholder="객실명을 입력해주세요."/>
-        </div>
         <div>
             <label class="roomTypeLabel">* 객실유형</label>
             <input type="text" class="roomTypeBox" v-model="roomType" placeholder="객실유형을 입력해주세요."/>
+        </div>
+         </div>
+            <label class="roomNameLabel">* 객실가격</label>
+            <input type="text" class="roomNameBox" v-model="price" placeholder="가격을 입력해주세요."/>
         </div>
         <div>
             <label class="perssonel"> *객실인원</label> 
@@ -125,9 +125,9 @@ export default {
     },
     data () {
         return {
-            roomName: '',
             roomType: '',
             roomInfo: [],
+            price: '',
             files: [],
             notImage: ['','','','','','','','',''],
             fileNum: 0,
@@ -143,8 +143,8 @@ export default {
             }else{
               
                 console.log(this.hotelType)
-                const { roomName, roomType, personnel,roomInfo, files, hotelNo } = this
-                this.$emit('submit', { roomName, roomType, personnel, roomInfo, files , hotelNo})
+                const { price, roomType, personnel,roomInfo, files, hotelNo } = this
+                this.$emit('submit', { price, roomType, personnel, roomInfo, files , hotelNo})
             }
         },
            handleFilesUpload () {
@@ -187,9 +187,14 @@ export default {
             this.files.splice(index,1)
             this.fileNum -= 1
             console.log(this.files)
-        }
+        },
+    },
+    watch: {
+        price : function() {
+            return this.price = this.price.replace(/[^0-9]/g, '')
+            }
     }
- 
+
 }
 </script>
 

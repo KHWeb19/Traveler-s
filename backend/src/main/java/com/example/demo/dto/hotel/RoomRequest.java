@@ -6,15 +6,15 @@ import java.util.List;
 
 @Data
 public class RoomRequest {
-    String roomName;
+    Long price;
     String roomType;
     List<String> roomInfo;
     int personnel;
     Long hotelNo;
 
 
-    public RoomRequest (String roomName ,String roomType ,int personnel ,Long hotelNo , List<String> roomInfo) {
-        this.roomName = roomName;
+    public RoomRequest (Long price ,String roomType ,int personnel ,Long hotelNo , List<String> roomInfo) {
+        this.price = price;
         this.roomType = roomType;
         this.roomInfo = roomInfo;
         this.personnel = personnel;
