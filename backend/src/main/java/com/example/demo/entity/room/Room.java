@@ -18,17 +18,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table( name = "Room" )
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roomNo;
 
     @Column(length = 20, nullable = false)
-    private String roomName;
-
-    @Column(length = 20, nullable = false)
     private String roomType;
+
+    @Column(nullable = false)
+    private Long price;
 
     @Column(nullable = false)
     private int personnel;
@@ -40,10 +39,6 @@ public class Room {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "hotel_no")
     private Hotel hotel;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
-    private List<AvailableRoom> availableRooms = new ArrayList<>();
 
     @Column(nullable = false) // default 255
     private String roomImgPath1;

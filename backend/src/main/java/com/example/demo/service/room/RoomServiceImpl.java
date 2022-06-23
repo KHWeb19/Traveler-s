@@ -38,8 +38,8 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
         fileUpload(files,path,filePathList);
 
         Room room = Room.builder()
-                .roomName(roomRequest.getRoomName())
                 .roomType(roomRequest.getRoomType())
+                .price(roomRequest.getPrice())
                 .roomInfo(roomRequest.getRoomInfo())
                 .personnel(roomRequest.getPersonnel())
                 .hotel(hotel)
