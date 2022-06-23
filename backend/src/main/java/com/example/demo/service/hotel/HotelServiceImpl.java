@@ -72,7 +72,7 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
     // 사업자 매뉴얼 호텔 리스트
     @Override
     public List<Hotel> bmHotelList() {
-        return hotelRepository.findAll(Sort.by(Sort.Direction.DESC, "HotelNo"));
+        return hotelRepository.findAll(Sort.by(Sort.Direction.DESC, "bmHotelNo"));
     }
 
     // 사업자 매뉴얼 호텔 읽기
