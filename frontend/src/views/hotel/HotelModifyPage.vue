@@ -1,6 +1,6 @@
 <template>
   <div>
-    <hotel-modify-form v-if="bmhotel" :bmhotel="bmhotel" @submit="onSubmit"/>
+    <hotel-modify-form v-if="bmHotel" :bmHotel="bmHotel" @submit="onSubmit"/>
     <p v-else>안뜨고있는거임 하.....</p>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
         }
     },
     computed: {
-        ...mapState(['bmhotel'])
+        ...mapState(['bmHotel'])
     },
     methods: {
         ...mapActions(['fetchBmHotel']),

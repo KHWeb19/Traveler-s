@@ -53,9 +53,9 @@
         <hr>
         <div class="adApi">
             <label>우편번호</label>
-                <input type="text" id="postcode" :value="hotel.postcode" readonly/><br>
+                <input type="text" id="postcode" :value="bmHotel.postcode" readonly/><br>
                 <label>주소</label>
-                <input type="text" id="address" :value="hotel.totalAddress" readonly/>
+                <input type="text" id="address" :value="bmHotel.totalAddress" readonly/>
         </div>
     </div>
 
@@ -104,7 +104,7 @@
     
    <v-btn type="submit" class="btn1">저장하기</v-btn>
     <router-link :to="{ name: 'BHotelReadPage',
-                                    params: { hotelNo: hotel.hotelNo.toString() } }">
+                                    params: { hotelNo: bmHotel.hotelNo.toString() } }">
                     취소
                 </router-link>
 
@@ -115,7 +115,7 @@
 export default {
 name: 'HotelModifyForm',
 props: {
-    hotel: {
+    bmHotel: {
         type: Object,
         required: true
     }
@@ -163,7 +163,7 @@ methods: {
            },
 },
 created () {
-    this.hotelName = this.bmhotel.hotelName
+    this.hotelName = this.bmHotel.hotelName
     /*this.hotelInfo = this.hotelInfo
     this.files = this.files
     this.notImage = this.notImage

@@ -1,7 +1,7 @@
 <template>
 <div>
     <h2>숙소 읽기</h2>
-    <hotel-read v-if="bmhotel" :bmhotel="bmhotel"/>
+    <hotel-read v-if="bmHotel" :bmHotel="bmHotel"/>
     <p v-else>로딩중 입니다.</p>
     <router-link :to="{ name: 'BHotelModifyPage', params: { hotelNo } }">
             수정
@@ -29,7 +29,7 @@ export default {
         HotelRead
     },
     computed: {
-        ...mapState(['bmhotel'])
+        ...mapState(['bmHotel'])
     },
     created () {
         this.fetchBmHotel(this.hotelNo)
@@ -41,7 +41,7 @@ export default {
     methods: {
         ...mapActions(['fetchBmHotel']),
         onDelete () {
-            const { hotelNo } = this.bmhotel
+            const { hotelNo } = this.bmHotel
             axios.delete(`http://localhost:7777/hotel/bm/${hotelNo}`)
                     .then(() => {
                         alert('삭제 되었습니다.')

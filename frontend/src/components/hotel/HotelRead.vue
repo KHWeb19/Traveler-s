@@ -5,7 +5,7 @@
             <h3>기본정보</h3>
             <hr>
             <label class="hotelNameLabel">숙소명</label>
-            <input type="text" class="hotelNameBox" :value="hotel.hotelName" readonly/>
+            <input type="text" class="hotelNameBox" :value="bmHotel.hotelName" readonly/>
         </div>
 
         <!-- 시설정보 -->
@@ -13,7 +13,7 @@
             <h3>시설정보</h3>
             <hr>
             <label class="hotelInfoLabel">옵션</label>    
-            <input type="text" class="hotelInfobox" :value="hotel.hotelInfo" readonly/>
+            <input type="text" class="hotelInfobox" :value="bmHotel.hotelInfo" readonly/>
         </div>
         
         <!-- 위치정보 -->
@@ -22,9 +22,9 @@
             <hr>
             <div class="adApi">
                 <label>우편번호</label>
-                <input type="text" id="postcode" :value="hotel.postcode" readonly/><br>
+                <input type="text" id="postcode" :value="bmHotel.postcode" readonly/><br>
                 <label>주소</label>
-                <input type="text" id="address" :value="hotel.totalAddress" readonly/>
+                <input type="text" id="address" :value="bmHotel.totalAddress" readonly/>
             </div>
         </div>
         
@@ -34,15 +34,15 @@
             <hr>
             <div>
                 <v-container>
-                <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath1}`)"/>
-                <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath2}`)"/>
-                <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath3}`)"/>
-                <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath4}`)"/>
-                <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath5}`)"/>
-                <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath6}`)"/>
-                <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath7}`)"/>
-                <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath8}`)"/>
-                <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath9}`)"/>
+                <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${bmHotel.hotelImgPath1}`)"/>
+                <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${bmHotel.hotelImgPath2}`)"/>
+                <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${bmHotel.hotelImgPath3}`)"/>
+                <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${bmHotel.hotelImgPath4}`)"/>
+                <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${bmHotel.hotelImgPath5}`)"/>
+                <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${bmHotel.hotelImgPath6}`)"/>
+                <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${bmHotel.hotelImgPath7}`)"/>
+                <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${bmHotel.hotelImgPath8}`)"/>
+                <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${bmHotel.hotelImgPath9}`)"/>
                 </v-container>
                 
             </div>
@@ -57,7 +57,7 @@
 export default {
     name: 'HotelRead',
     props: {
-        hotel: {
+        bmHotel: {
             type: Object,
             require: true
         }
