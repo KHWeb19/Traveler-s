@@ -1,8 +1,7 @@
 <template>
   <div>
-    <bm-side-bar/>
       <h2>숙소 관리</h2>
-      <span class="page-count">전체 0 {{ pageCount }} </span>
+      <span class="page-count">전체</span>
       <router-link :to="{ name: 'HotelRegisterPage' }" class="btn"><v-btn>숙소등록</v-btn></router-link>
       <br>
     <hotel-list :hotels="hotels"/>
@@ -12,23 +11,21 @@
 <script>
 
 import HotelList from '@/components/hotel/HotelList.vue'
-import BmSideBar from '@/components/layout/BmSideBar.vue'
 import { mapState, mapActions } from 'vuex'
 
 export default {
     name: 'HotelListPage',
     components: {
         HotelList,
-        BmSideBar
     },
     computed: {
       ...mapState(['hotels'])
     },
     mounted () {
-      this.fetchHotelList()
+      this.fetchBmHotelList()
     },
     methods: {
-      ...mapActions(['fetchHotelList'])
+      ...mapActions(['fetchBmHotelList'])
     }
 }
 </script>

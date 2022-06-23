@@ -23,6 +23,7 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
     @Autowired
     HotelRepository hotelRepository;
 
+    // 사업자 매뉴얼 호텔 등록
     @Override
     public void register(Hotel hotel, List<MultipartFile> files) throws Exception {
 
@@ -68,12 +69,41 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
         hotelRepository.save(hotel);
     }
 
-    /*
+    // 사업자 매뉴얼 호텔 리스트
     @Override
-    public List<Hotel> list() {
-        log.info("HotelServiceIMPL list");
-        return hotelRepository.findAll(Sort.by(Sort.Direction.DESC, "hotelNo"));
-    }*/
+    public List<Hotel> bmHotelList() {
+        return hotelRepository.findAll(Sort.by(Sort.Direction.DESC, "HotelNo"));
+    }
+
+    // 사업자 매뉴얼 호텔 읽기
+    @Override
+    public Hotel bmHotelRead(Integer hotelNo) {
+        log.info("hotelNo" + hotelNo);
+        Optional<Hotel> maybeReadBoard = hotelRepository.findById(Long.valueOf(hotelNo));
+
+        if (maybeReadBoard.equals(Optional.empty())) {
+            log.info("Can't read board!");
+            return null;
+        }
+
+        return maybeReadBoard.get();
+    }
+
+    // 사업자 매뉴얼 호텔 수정
+    @Override
+    public void bmhotelModify(Hotel hotel) {
+        hotelRepository.save(hotel);
+    }
+
+    // 사업자 매뉴얼 호텔 삭제
+    @Override
+    public void bmhotelRemove(Integer hotelNo) {
+        hotelRepository.deleteById(Long.valueOf(hotelNo));
+    }
+
+
+    // ---------------------------------------------------------------------------------------------------------------
+
 
 
     public List<Hotel> random () {
@@ -85,31 +115,10 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
 
 
 
-    @Override
-    public Hotel mRead(Integer hotelNo) {
-        Optional<Hotel> maybeReadBoard = hotelRepository.findById(Long.valueOf(hotelNo));
-        //Optional: null일 수도 있는 객체를 감싸는 일종의 Wrapper 클래스
-        /*
-        optional 변수 내부에는 null이 아닌 T 객체가 있을 수도 있고 null이 있을 수도 있습니다.
-        따라서, Optional 클래스는 여러 가지 API를 제공하여 null일 수도 있는 객체를 다룰 수 있도록 돕습니다
-         */
-        log.info("HotelServiceIMPL readOK");
-        if (maybeReadBoard.equals(Optional.empty())) {
-            log.info("Can't read board!");
-            return null;
-        }
 
-        return maybeReadBoard.get();
 
-    }
 
-    @Override
-    public void modify(Hotel hotel) {
-        hotelRepository.save(hotel);
-    }
 
-    @Override
-    public void remove(Integer hotelNo) {
-        hotelRepository.deleteById(Long.valueOf(hotelNo));
-    }
+
+
 }

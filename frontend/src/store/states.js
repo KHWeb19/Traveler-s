@@ -4,4 +4,7 @@ export default {
     hotelType: [],
     hotels: [],
     hotel: null,
+
+    bmhotels: [],
+    bmhotel: null,
 }

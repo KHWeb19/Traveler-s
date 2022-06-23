@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
     name: 'TagSearch',
@@ -40,22 +41,20 @@ export default {
                 '반려동물',
                 '온천'
             ],
-            searchList: [],
         }
     },
     methods : {
         search(info) {
-            console.log(this.hotels)
-            this.searchList = []
-            for(let i = 0; i < this.hotels.length; i++){
-                for(let j = 0; j < this.hotels[i].hotelInfo.length; j++){
-                    if(this.hotels[i].hotelInfo[j] == info){
-                        this.searchList.push(this.hotels[i])
-                }
-               
-                }
-            }
-            console.log(this.searchList)
+            const keyWord = info
+            console.log(keyWord)
+            axios.post('http://localhost:7777/search',  { keyWord })
+                    .then((res) => {
+                        console.log("검색 성공")
+                        console.log(res.data)
+                        
+                        this.$router.push({name: '',
+                                    params: { searchList: res.data} })
+                    })
              
         }
     },

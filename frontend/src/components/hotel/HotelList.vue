@@ -5,38 +5,44 @@
 <table>
   <colgroup>
     <col class="select">
-    <col class="no">
+    <col class="hotelNo">
     <col class="hotelName">
+    <col class="Address">
     <col class="date">
   </colgroup>
   <thead>
     <tr>
       <th><input class="check all" type="checkbox"></th>
       <th>번호</th>
-      <th>제목</th>
+      <th>숙소명</th>
+      <th>위치</th>
       <th>게시일</th>
     </tr>
   </thead>
   <tbody>
         <tr v-if="!hotels || (Array.isArray(hotels) && hotels.length === 0)">
-            <td colspan="4">
+            <td colspan="5">
                 숙소를 등록해주세요.
             </td>
         </tr>
         <tr v-else v-for="hotel in hotels" :key="hotel.hotelNo">
-            <td align="center">
+          <td><input class="check all" type="checkbox"></td>
+            <td>
                 {{ hotel.hotelNo }}
             </td>
-            <td align="left">
+            <td>
                 <router-link :to="{ name: 'HotelReadPage',
                                     params: { hotelNo: hotel.hotelNo.toString() } }">
                     {{ hotel.hotelName }}
                 </router-link>
             </td>
-            <td align="right">
-                {{ hotel.totalAddress }}
+            <td>
+                <router-link :to="{ name: 'HotelReadPage',
+                                    params: { hotelNo: hotel.hotelNo.toString() } }">
+                    {{ hotel.totalAddress }}
+                </router-link>
             </td>
-            <td align="center">
+            <td>
                 {{ hotel.regDate }}
             </td>
         </tr>
@@ -108,15 +114,15 @@ tr:nth-of-type(odd) {
 
 /* 컬럼의 너비 */
 .select {width: 3%;}
-.no {width: 15%;}
-.title {/* 나머지가 자동으로 맞춰집니다. */}
-.writer {width: 20%;}
+.hotelNo {width: 5%;}
+.hotelName {width: 20%;}
+.Address { /* 자동으로 맞춰집니다 */ }
 .date {width: 15%;}
 
 /* 컬럼의 정렬 */
 tr td:nth-child(1){text-align:center;}
 tr td:nth-child(2){text-align:center;}
-tr td:nth-child(3){text-align:left;}
+tr td:nth-child(3){text-align:center;}
 tr td:nth-child(4){text-align:center;}
 tr td:nth-child(5){text-align:center;}
 
