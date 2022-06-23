@@ -24,7 +24,7 @@ export default {
             const { hotelName, hotelInfo, hotelIntro,  postcode, totalAddress , files, writer } = payload
 
             let formData = new FormData()
-            let hotel = {
+            let bmhotel = {
                     hotelName,
                     hotelInfo,
                     hotelIntro,
@@ -33,7 +33,7 @@ export default {
                     writer
             }
 
-            formData.append('hotel',new Blob([JSON.stringify(hotel)],{type: "application/json"}))
+            formData.append('bmhotel',new Blob([JSON.stringify(bmhotel)],{type: "application/json"}))
             
             for (let i = 0; i <  files.length; i++) {
                 formData.append('files',files[i].file)
@@ -47,7 +47,7 @@ export default {
             .then(() => {
                 alert('등록 되었습니다.')
                 this.$router.push({
-                    name: 'HotelListPage'
+                    name: 'BHotelListPage'
                 })
             })
             .catch(() => {
