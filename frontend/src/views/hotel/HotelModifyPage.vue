@@ -1,6 +1,6 @@
 <template>
   <div>
-    <hotel-modify-form v-if="hotel" :hotel="hotel" @submit="onSubmit"/>
+    <hotel-modify-form v-if="bmHotel" :bmHotel="bmHotel" @submit="onSubmit"/>
     <p v-else>안뜨고있는거임 하.....</p>
   </div>
 </template>
@@ -14,6 +14,7 @@ import HotelModifyForm from '@/components/hotel/HotelModifyForm.vue'
 export default {
     components: {
         HotelModifyForm,
+
     },
     props: {
         hotelNo: {
@@ -22,10 +23,10 @@ export default {
         }
     },
     computed: {
-        ...mapState(['hotel'])
+        ...mapState(['bmHotel'])
     },
     methods: {
-        ...mapActions(['fetchHotel']),
+        ...mapActions(['fetchBmHotel']),
         onSubmit (payload) {
             const { hotelName, hotelInfo, files } = payload
 
@@ -44,7 +45,7 @@ export default {
         }
     },
     created () {
-        this.fetchHotel(this.hotelNo)
+        this.fetchBmHotel(this.hotelNo)
                 .catch(() => {
                     alert('DB 조회 실패')
                     this.$router.back()
