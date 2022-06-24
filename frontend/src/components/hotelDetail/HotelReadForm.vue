@@ -168,7 +168,6 @@
 
 </div>
 </template>
-
 <script>
 import KakaoMapApi from '@/components/hotelDetail/KakaoMapApi.vue'
 import RoomReadForm from './RoomReadForm.vue'

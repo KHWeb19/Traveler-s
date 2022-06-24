@@ -6,6 +6,7 @@ import com.example.demo.entity.room.Room;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -20,6 +21,7 @@ import java.util.List;
 @Entity
 @ToString(exclude = {"rooms"})
 @Table(name = "hotel")
+@NoArgsConstructor
 public class Hotel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -92,6 +94,8 @@ public class Hotel {
     @UpdateTimestamp
     private Date updDate;
 
+
+
     public List<String> getHotelInfo() {
         List<String> list = new ArrayList<>();
         if (hotelInfo != null) {
@@ -124,6 +128,19 @@ public class Hotel {
             return this;
         }
 
+    }
+    public Hotel(String hotelName, String hotelIntro, String hotelInfo, String totalAddress, String postcode,
+                 String hotelImgPath1, String hotelImgPath2, String hotelImgPath3, String hotelImgPath4, String hotelImgPath5) {
+        this.hotelName = hotelName;
+        this.hotelIntro = hotelIntro;
+        this.hotelInfo = hotelInfo;
+        this.postcode = postcode;
+        this.totalAddress = totalAddress;
+        this.hotelImgPath1 = hotelImgPath1;
+        this.hotelImgPath2 = hotelImgPath2;
+        this.hotelImgPath3 = hotelImgPath3;
+        this.hotelImgPath4 = hotelImgPath4;
+        this.hotelImgPath5 = hotelImgPath5;
     }
 
 }

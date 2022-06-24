@@ -13,7 +13,6 @@
                     </td>
                 </tr>
             </table>
-
             <table id="inCard" style="width: 42%; height: 190px;">
                 <tr>
                     <td>
@@ -62,7 +61,6 @@
                     </td>
                 </tr>
             </table>
-
         </v-row>
         </v-col>        
     </v-card>
