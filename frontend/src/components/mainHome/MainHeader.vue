@@ -1,8 +1,12 @@
 <template>
   <v-container>
     <v-app-bar app color="#ffffff" height="90px">
+      <v-col v-if="!isLoggedIn">
+      <v-app-bar-nav-icon id="BarBtn" @click="drawer = false"></v-app-bar-nav-icon>
+      </v-col>
+      <v-col v-else>
       <v-app-bar-nav-icon id="BarBtn" @click="drawer = true"></v-app-bar-nav-icon>
-      <v-spacer />
+      </v-col>
       <v-col id="HomeButton" @click="home">
         <img src="@/assets/TeamLogo.jpg" />
       </v-col>
@@ -36,75 +40,55 @@
     </v-app-bar>
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <v-list nav dense>
+
         <v-list-item-group v-model="group">
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
+          <v-list-item href="/mypage">
             <v-list-item-title>마이페이지</v-list-item-title>
           </v-list-item>
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
+          <v-list-item href="">
             <v-list-item-title>위시리스트</v-list-item-title>
           </v-list-item>
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
+          <v-list-item href="">
             <v-list-item-title>예약 내역 확인</v-list-item-title>
           </v-list-item>
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
+        </v-list-item-group>
+
+        <v-list-item-group v-model="group">
+        <v-list-item href="/mypage">
+            <v-list-item-title>마이페이지</v-list-item-title>
+          </v-list-item>
+          <v-list-item href="">
+            <v-list-item-title>위시리스트</v-list-item-title>
+          </v-list-item>
+          <v-list-item href="">
+            <v-list-item-title>예약 내역 확인</v-list-item-title>
+          </v-list-item>
+          <v-list-item href="">
             <v-list-item-title>관리자 메뉴얼</v-list-item-title>
           </v-list-item>
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
+          <v-list-item href="">
             <v-list-item-title>예약관리</v-list-item-title>
           </v-list-item>
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
+          <v-list-item href="/roomRegister">
             <v-list-item-title>객실등록</v-list-item-title>
           </v-list-item>
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
+          <v-list-item href="">
             <v-list-item-title>객실설정</v-list-item-title>
           </v-list-item>
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
+          <v-list-item href="">
             <v-list-item-title>요금설정</v-list-item-title>
           </v-list-item>
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
+          <v-list-item href="">
             <v-list-item-title>숙박관리</v-list-item-title>
           </v-list-item>
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
+          <v-list-item href="/HotelListPage">
             <v-list-item-title>숙소관리</v-list-item-title>
           </v-list-item>
-          <v-list-item>
-            <v-list-item-icon>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-icon>
+          <v-list-item href="">
             <v-list-item-title>객실관리</v-list-item-title>
           </v-list-item>
-
         </v-list-item-group>
+
       </v-list>
     </v-navigation-drawer>
   </v-container>
@@ -117,10 +101,16 @@ import router from '@/router'
 export default {
   name: "MainHeader",
 
-  data: () => ({
-    drawer: false,
-    group: null,
-  }),
+  props: ["userInfo"],
+
+  data() {
+    return {
+      drawer: false,
+      group: null,
+      loginCheck: true,
+
+    }
+  },
 
   computed: {
 
@@ -133,6 +123,12 @@ export default {
     },
     home() {
       (window.location.pathname !== '/') ? router.push('/') : router.go(0)
+    },
+    checkLogin () {
+      this.loginCheck = true
+      const login = this.login
+      console.log(login)
+      this.$emit('checkLogin',login)
     }
   }
 }
