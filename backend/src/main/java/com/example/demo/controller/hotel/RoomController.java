@@ -81,6 +81,14 @@ public class RoomController {
         roomService.bmRoomRemove(roomNo);
     }
 
+    @PostMapping("/bm/deleteRooms")
+    public void deleteRooms (
+            @RequestBody List<Long> rooms) {
+        log.info("roomRemove()" + rooms);
+
+        roomService.bmRoomsRemove(rooms);
+    }
+
 
 
 }

@@ -11,7 +11,8 @@
       <router-link :to="{ name: 'RoomRegisterPage', params: {hotelNo : this.hotelNo.toString()} }" class="btn"><v-btn>객실등록</v-btn></router-link>
 
       <br>
-    <room-list :roomList="roomList"/>
+    <room-list :roomList="roomList"
+                @deleteRooms="deleteRooms"/>
   </div>
 </template>
 
@@ -53,6 +54,20 @@ export default {
             
             })
         },
+        deleteRooms(payload){
+          
+            const rooms = payload
+      
+            axios.post('http://localhost:7777/room/bm/deleteRooms', rooms)
+                        .then(() => {
+                            alert('삭제 되었습니다.')
+                            this.$router.go()
+                        })
+                        .catch(() => {
+                            alert('실패했습니다.')
+                        })
+
+        }
     }
 }
 </script>

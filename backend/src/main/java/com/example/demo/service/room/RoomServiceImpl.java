@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -190,6 +191,44 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
 
 
         roomRepository.deleteById(Long.valueOf(roomNo));
+    }
+
+    @Override
+    public void bmRoomsRemove(List<Long> roomNo) {
+        for(int i = 0 ; i < roomNo.size(); i++) {
+            Optional<Room> roomInfo = roomRepository.findById(roomNo.get(i));
+
+            if (roomInfo.get().getRoomImgPath1() != null) {
+                fileRemove(roomInfo.get().getRoomImgPath1(), path);
+            }
+            if (roomInfo.get().getRoomImgPath2() != null) {
+                fileRemove(roomInfo.get().getRoomImgPath2(), path);
+            }
+            if (roomInfo.get().getRoomImgPath3() != null) {
+                fileRemove(roomInfo.get().getRoomImgPath3(), path);
+            }
+            if (roomInfo.get().getRoomImgPath4() != null) {
+                fileRemove(roomInfo.get().getRoomImgPath4(), path);
+            }
+            if (roomInfo.get().getRoomImgPath5() != null) {
+                fileRemove(roomInfo.get().getRoomImgPath5(), path);
+            }
+            if (roomInfo.get().getRoomImgPath6() != null) {
+                fileRemove(roomInfo.get().getRoomImgPath6(), path);
+            }
+            if (roomInfo.get().getRoomImgPath7() != null) {
+                fileRemove(roomInfo.get().getRoomImgPath7(), path);
+            }
+            if (roomInfo.get().getRoomImgPath8() != null) {
+                fileRemove(roomInfo.get().getRoomImgPath8(), path);
+            }
+            if (roomInfo.get().getRoomImgPath9() != null) {
+                fileRemove(roomInfo.get().getRoomImgPath9(), path);
+            }
+
+
+            roomRepository.deleteById(roomNo.get(i));
+        }
     }
 
 }
