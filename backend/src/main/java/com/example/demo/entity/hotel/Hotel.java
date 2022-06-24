@@ -129,6 +129,7 @@ public class Hotel {
         }
 
     }
+
     public Hotel(String hotelName, String hotelIntro, String hotelInfo, String writer, String totalAddress, String postcode,
                  String hotelImgPath1, String hotelImgPath2, String hotelImgPath3, String hotelImgPath4, String hotelImgPath5) {
         this.hotelName = hotelName;

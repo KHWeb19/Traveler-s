@@ -39,7 +39,7 @@ public class MyPageController {
         User user = optionalUser.get();
         log.info("User: {}", user.toString());
 
-        MyPageResponse myPageResponse = new MyPageResponse(user.getName(), user.getEmail(), user.getProfile_path());
+        MyPageResponse myPageResponse = new MyPageResponse(user.getName(), user.getEmail(), user.getProfile_path(), user.getRoles());
 
         return new ResponseEntity<MyPageResponse>(myPageResponse, HttpStatus.OK);
     }
