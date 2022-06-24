@@ -43,7 +43,7 @@ axios.interceptors.response.use((response)=>{return response}, async (error) =>
             router.push({name: "home"})
         }
         else {
-            // 다른로직으로 로직이 실패해도 access_token이 삭제될수 있음
+            // 주의 다른로직으로 실패해도 access_token이 삭제될수 있음
             localStorage.removeItem("access_token")
         }
         

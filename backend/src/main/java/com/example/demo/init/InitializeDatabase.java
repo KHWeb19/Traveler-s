@@ -6,8 +6,6 @@ import com.example.demo.entity.member.User;
 import com.example.demo.repository.hotel.HotelRepository;
 import com.example.demo.repository.member.UserRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -17,7 +15,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class initializeDatabase implements CommandLineRunner {
+public class InitializeDatabase implements CommandLineRunner {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
