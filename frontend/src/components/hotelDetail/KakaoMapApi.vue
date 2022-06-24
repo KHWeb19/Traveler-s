@@ -8,6 +8,11 @@
 <script>
 export default {
     name: 'KakaoMap',
+    props : {
+        mHotel:{
+            type:Array
+        }
+    },
     data() {
         return{
             map: null,
@@ -22,12 +27,11 @@ export default {
                 level: 3, // 지도의 확대 레벨
             }
             const map = new kakao.maps.Map(container, options)
-            console.log(this.map)
             this.geocoder = new kakao.maps.services.Geocoder()
             console.log(this.geocoder)
             
-            
-            this.geocoder.addressSearch('서울 관악구 봉천동 1685-27 203호', function(result, status) {
+            const hotelName = this.mHotel.hotelName
+            this.geocoder.addressSearch(this.mHotel.totalAddress, function(result, status) {
                 console.log(kakao.maps.services.Status.OK)
                 if (status === kakao.maps.services.Status.OK) {
                       
@@ -42,7 +46,8 @@ export default {
 
                     // 인포윈도우로 장소에 대한 설명을 표시합니다
                     const infowindow = new kakao.maps.InfoWindow({
-                        content: '<div style="width:150px;text-align:center;padding:6px 0;">우리집</div>'
+                       
+                        content: `<div style="width:150px;text-align:center;padding:6px 0;">${hotelName} </div>`
                     })
                     infowindow.open(map, marker)
 
