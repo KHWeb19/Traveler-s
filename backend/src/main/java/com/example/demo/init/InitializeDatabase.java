@@ -35,7 +35,8 @@ public class InitializeDatabase implements CommandLineRunner {
         userRepository.save(user);
         List<Hotel> hotels = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
-            Hotel hotel = new Hotel(String.format("Hotel#%d", i),"hotelIntro", "totalAddress", "postcode",
+            Hotel hotel = new Hotel(String.format("Hotel#%d", i),"hotelIntro", "오션뷰,테라스,수영장,전기차충전,공항근처,골프장,무료주차,바베큐그릴,반려동물,온천",
+                    "전남 진도군 조도면 대마도길 8대마도호텔", "58958",
                     String.format("hotel%d-1.jpg", i), String.format("hotel%d-2.jpg", i), String.format("hotel%d-3.jpg", i),
                     String.format("hotel%d-4.jpg", i), String.format("hotel%d-5.jpg", i));
             hotels.add(hotel);
