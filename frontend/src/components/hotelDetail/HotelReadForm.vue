@@ -90,7 +90,7 @@
                         <h3>숙소 위치</h3>
                         <p>{{mHotel.totalAddress}}</p>
                     <br>
-                        <kakao-map-api/>
+                        <kakao-map-api :mHotel="mHotel"/>
                     <br>
                 </td>
                 </tr>
