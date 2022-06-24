@@ -4,7 +4,7 @@ import HomeView from '../views/HomeView.vue'
 
 import store from '@/store'
 
-import HotelReadPage from '@/views/hotelDetail/HotelReadPage.vue'
+import MHotelReadPage from '@/views/hotelDetail/HotelReadPage.vue'
 import states from '@/store/states'
 
 import BHotelModifyPage from '@/views/hotel/HotelModifyPage.vue'
@@ -87,10 +87,10 @@ const routes = [
     component: () => import('../views/hotel/RoomRegisterPage.vue')
   },
   {
-    path: '/hotelReadPage/:hotelNo',
-    name: 'HotelReadPage',
+    path: '/mHotelReadPage/:hotelNo',
+    name: 'MHotelReadPage',
     components: {
-      default: HotelReadPage
+      default: MHotelReadPage
     },
     props: {
       default: true
