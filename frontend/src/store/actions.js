@@ -72,17 +72,5 @@ export default {
                 commit(GET_HOTEL_TYPE, res.data)
             }))
     },
-    fetchBmHotelList ({ commit }) {
-        return axios.get('http://localhost:7777/hotel/bm/list')
-                .then((res) => {
-                    commit(FETCH_BM_HOTEL_LIST, res.data)
-                })
-    },
-    fetchBmHotel ({ commit }, hotelNo) {
-        return axios.get(`http://localhost:7777/hotel/bm/${hotelNo}`)
-                .then((res) => {
-                    commit(FETCH_BM_HOTEL, res.data)
-                })
-    },
 
 }
