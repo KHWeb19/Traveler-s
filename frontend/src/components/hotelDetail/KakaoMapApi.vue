@@ -55,21 +55,45 @@ export default {
                     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
                     map.setCenter(coords)
                 } 
-            });    
+            })
+        },
+        kakao () {
+                if(!window.kakao || !window.kakao.maps){
+                    const script = document.createElement("script")
+                    /* global kakao */
+                    script.onload = () => kakao.maps.load(this.initMap);
+                    script.src= "https://dapi.kakao.com/v2/maps/sdk.js?appkey=ec61fc18851964c845de3db938cfd080&libraries=services&autoload=false"
+                    document.head.appendChild(script);
+                
+                    }else{
+                        this.initMap()
+                    }
+                    return
+
         }
     },
-    watch: {
+
+    mounted () {
+            this.$watch('mHotel', function(){
+                console.log('watch')
+                this.kakao()
+                return
+            })
+            console.log('new')
+            this.kakao()      
+    }
+    /*watch: {
         mHotel: function() {
             if(!window.kakao || !window.kakao.maps){
-                const script = document.createElement("script")
-                /* global kakao */
-                script.onload = () => kakao.maps.load(this.initMap);
+                const script = document.createElement("script")*/
+                
+              /*  script.onload = () => kakao.maps.load(this.initMap);
                 script.src= "https://dapi.kakao.com/v2/maps/sdk.js?appkey=ec61fc18851964c845de3db938cfd080&libraries=services&autoload=false"
                 document.head.appendChild(script);
             }else{
                 this.initMap()
             }
         }
-    }
+    }*/
 }
 </script>
