@@ -18,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString(exclude = {"hotel"})
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
