@@ -11,5 +11,6 @@ import java.util.List;
 public interface RoomService {
     public void register (RoomRequest roomRequest, List<MultipartFile> files) throws Exception;
     public List<RoomResponse> findHotel(String email);
+    public List<Room> findRoomList(Long hotelNo);
 }
 

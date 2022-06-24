@@ -10,6 +10,7 @@
         <div>
             <label class="hotelNameLabel">* 호텔이름</label>
              <select  class="hotel-select" v-model="hotelNo">
+                <option :value="''" >호텔을 선택하세요.</option>
                 <option v-for="(hotel, idx) in hotelType" :key="idx" :value="hotel.hotelNo" > {{hotel.hotelName}}</option>
             </select>
         <div>
@@ -40,7 +41,7 @@
             <input type="checkbox" name="roominfo" v-model="roomInfo" value="wifi">와이파이
         </label>
         <label>
-            <input type="checkbox" name="roominfo" v-model="roomInfo" value="freeParking">무료 주차
+            <input type="checkbox" name="roominfo" v-model="roomInfo" value="freeParking">무료주차
         </label>
         <label>
             <input type="checkbox" name="roominfo" v-model="roomInfo" value="bbqGrill">바베큐그릴
@@ -108,7 +109,7 @@
     </div>
     
     <v-btn type="submit" class="btn1">저장하기</v-btn>
-    <router-link :to="{ name: 'home' }" ><v-btn class="btn2">취소</v-btn></router-link>
+    <router-link :to="{ name: 'RoomListPage' }" ><v-btn class="btn2">취소</v-btn></router-link>
 
 
 </form>

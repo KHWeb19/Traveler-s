@@ -7,7 +7,8 @@ import store from '@/store'
 import HotelReadPage from '@/views/hotelDetail/HotelReadPage.vue'
 import states from '@/store/states'
 
-
+import BHotelModifyPage from '@/views/hotel/HotelModifyPage.vue'
+import BHotelReadPage from '@/views/hotel/HotelReadPage.vue'
 
 Vue.use(VueRouter)
 
@@ -38,14 +39,34 @@ const routes = [
     component: () => import('../views/member/OAuth2Redirect.vue')
   },
   {
-    path: '/HotelListPage',
-    name: 'HotelListPage',
+    path: '/BHotelListPage',
+    name: 'BHotelListPage',
     component: () => import('../views/hotel/HotelListPage.vue')
   },
   {
-    path: '/hotelRegister',
-    name: 'HotelRegisterPage',
+    path: '/BHotelRegisterPage',
+    name: 'BHotelRegisterPage',
     component: () => import('../views/hotel/HotelRegisterPage.vue')
+  },
+  {
+    path: '/BHotelReadPage/:hotelNo',
+    name: 'BHotelReadPage',
+    components: {
+      default: BHotelReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/BHotelModifyPage/:hotelNo',
+    name: 'BHotelModifyPage',
+    components: {
+      default: BHotelModifyPage
+    },
+    props: {
+      default: true
+    }
   },
   {
     path: '/mypage',

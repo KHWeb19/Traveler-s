@@ -25,25 +25,26 @@
                 숙소를 등록해주세요.
             </td>
         </tr>
-        <tr v-else v-for="hotel in bmHotels" :key="hotel.hotelNo">
+        <tr v-else v-for="bmHotel in bmHotels" :key="bmHotel.hotelNo">
+
           <td><input class="check all" type="checkbox"></td>
             <td>
-                {{ hotel.hotelNo }}
+                {{ bmHotel.hotelNo }}
             </td>
             <td>
-                <router-link :to="{ name: 'HotelReadPage',
-                                    params: { hotelNo: hotel.hotelNo.toString() } }">
-                    {{ hotel.hotelName }}
+                <router-link :to="{ name: 'BHotelReadPage',
+                                    params: { hotelNo: bmHotel.hotelNo.toString() } }">
+                    {{ bmHotel.hotelName }}
                 </router-link>
             </td>
             <td>
-                <router-link :to="{ name: 'HotelReadPage',
-                                    params: { hotelNo: hotel.hotelNo.toString() } }">
-                    {{ hotel.totalAddress }}
+                <router-link :to="{ name: 'BHotelReadPage',
+                                    params: { hotelNo: bmHotel.hotelNo.toString() } }">
+                    {{ bmHotel.totalAddress }}
                 </router-link>
             </td>
             <td>
-                {{ hotel.regDate }}
+                {{ bmHotel.regDate }}
             </td>
         </tr>
   </tbody>
@@ -73,9 +74,6 @@ export default {
       type: Array
     }
   },
-  created () {
-      console.log(this.bmHotels)
-  }
 }
 </script>
 

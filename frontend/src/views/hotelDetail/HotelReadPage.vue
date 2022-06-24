@@ -2,7 +2,7 @@
     <div align="center">
 
         <h1>호텔 상세보기 페이지</h1>
-        <hotel-read-form v-if="hotel" :hotel="hotel"/>
+        <hotel-read-form v-if="mHotel" :mHotel="mHotel"/>
         <p v-else> 로딩중......</p>
     </div>
 </template>
@@ -23,17 +23,17 @@ export default {
         HotelReadForm
     },
     computed: {
-        ...mapState(['hotel'])
+        ...mapState(['mHotel'])
     },
     created () {
-        this.fetchHotel(this.hotelNo)
+        this.fetchMHotel(this.hotelNo)
                 .catch(() => {
                     alert('숙소 상세보기 요청 실패!')
                     this.$router.push()
                 })
     },
     methods: {
-        ...mapActions(['fetchHotel']),        
+        ...mapActions(['fetchMHotel']),        
     }
 }
 </script>
