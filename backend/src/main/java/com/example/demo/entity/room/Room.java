@@ -65,6 +65,13 @@ public class Room {
     @UpdateTimestamp
     private Date updDate;
 
+    public void addHotelToRoom(Hotel hotel){
+        if (this.hotel != null){
+            this.hotel.getRooms().remove(this);
+        }
+        this.hotel = hotel;
+        hotel.getRooms().add(this);
+    }
 
 }
 
