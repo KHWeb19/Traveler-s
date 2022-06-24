@@ -126,12 +126,7 @@ import router from '@/router';
 
 export default {
   name: "MyPageForm",
-  props: {
-    userInfo: {
-      type: Object,
-      require: true,
-    },
-  },
+  props: { userInfo: Object},
   data() {
     return {
       password: "",

@@ -184,8 +184,11 @@ public class UserController {
                 } catch (Exception exception) {
                     log.info("* ERROR WHILE DECODING");
                     response.setHeader("error", exception.getMessage());
-                    //response.setStatus(UNAUTHORIZED.value());
-                    response.setStatus(FORBIDDEN.value());
+                    CookieUtils.deleteCookie(request, response, "refresh_token");
+                    httpSession.removeAttribute("key");
+                    log.info("** DELETED REFRESH TOKEN");
+                    response.setStatus(UNAUTHORIZED.value());
+                    //response.setStatus(FORBIDDEN.value());
                     Map<String, String> error = new HashMap<>();
                     error.put("error_message", exception.getMessage());
                     response.setContentType(APPLICATION_JSON_VALUE);

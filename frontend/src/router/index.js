@@ -4,7 +4,8 @@ import HomeView from '../views/HomeView.vue'
 
 import store from '@/store'
 
-import HotelReadPage from '@/views/hotelDetail/HotelReadPage.vue'
+import MHotelReadPage from '@/views/hotelDetail/HotelReadPage.vue'
+import states from '@/store/states'
 
 import BHotelModifyPage from '@/views/hotel/HotelModifyPage.vue'
 import BHotelReadPage from '@/views/hotel/HotelReadPage.vue'
@@ -74,6 +75,14 @@ const routes = [
   {
     path: '/mypage',
     name: 'MyPage',
+    beforeEnter: (to, from, next) => {
+      if (states.isLoggedIn){
+        next()
+      }else{
+      alert("로그인이 필요한 페이지입니다")
+      next({path: '/login'})}
+    }
+    ,
     component: () => import('../views/mypage/MyPage.vue')
   },
   {
@@ -87,10 +96,10 @@ const routes = [
     }
   },
   {
-    path: '/hotelReadPage/:hotelNo',
-    name: 'HotelReadPage',
+    path: '/mHotelReadPage/:hotelNo',
+    name: 'MHotelReadPage',
     components: {
-      default: HotelReadPage
+      default: MHotelReadPage
     },
     props: {
       default: true

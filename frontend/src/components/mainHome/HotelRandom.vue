@@ -26,9 +26,10 @@
             <v-card-text class="address">
               {{ mHotel.totalAddress }}
             </v-card-text>
-            <span class="hotel_info">
-              {{ "#" + mHotel.hotelInfo[i] }}
-            </span>
+            <span id="tagSpan2" v-for="(item, i) in mHotel.hotelInfo" :key="i" class="hotel_info">
+                                            {{ "#" + item }}
+                                            <!-- i 번째 item를 출력  -->
+                                        </span> 
           </v-card>
         </v-col>
       </div>
@@ -46,7 +47,7 @@ export default {
   },
   methods: {
     readHotel(hotelNo) {
-            this.$router.push({ name:'HotelReadPage', params: { hotelNo: hotelNo.toString() } })      
+            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: hotelNo.toString() } })      
     }
   },
 }
