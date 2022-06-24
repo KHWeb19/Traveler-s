@@ -48,7 +48,7 @@
 
                 <tr> <!-- 객실 란 컴포넌트 분리하여 작업 중!-->
                 <td>
-                    <room-read-form/>
+                    <room-read-form v-if="mRoom" :mRoom="mRoom"/>
                     <br>
                 </td>
                 </tr>
