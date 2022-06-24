@@ -129,12 +129,13 @@ public class Hotel {
         }
 
     }
-    public Hotel(String hotelName, String hotelIntro, String writer, String hotelInfo, String totalAddress, String postcode,
+
+    public Hotel(String hotelName, String hotelIntro, String hotelInfo, String writer, String totalAddress, String postcode,
                  String hotelImgPath1, String hotelImgPath2, String hotelImgPath3, String hotelImgPath4, String hotelImgPath5) {
         this.hotelName = hotelName;
         this.hotelIntro = hotelIntro;
-        this.writer = writer;
         this.hotelInfo = hotelInfo;
+        this.writer = writer;
         this.postcode = postcode;
         this.totalAddress = totalAddress;
         this.hotelImgPath1 = hotelImgPath1;

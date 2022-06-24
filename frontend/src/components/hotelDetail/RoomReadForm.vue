@@ -16,18 +16,18 @@
             <table id="inCard" style="width: 42%; height: 190px;">
                 <tr>
                     <td>
-                        <p>{{room.roomName}}</p>
+                        <p>{{mRoom.roomName}}</p>
                     </td>
                 </tr>
                 <tr> 
                     <td>
-                        <p>{{room.personnel}}</p>
+                        <p>{{mRoom.personnel}}</p>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <v-row >
-                             <span id="tagSpan1" v-for="(item, i) in room.hotelInfo" :key="i" class="hotel_info">
+                             <span id="tagSpan1" v-for="(item, i) in mRoom.roomInfo" :key="i" class="hotel_info">
                                             {{ "#" + item }}
                              </span>
                         </v-row>
@@ -43,7 +43,7 @@
                                 <tr>
                                     <td>
                                         <v-btn id="button"
-                                        @click="roomDetail(room.boardNo, room.id)"
+                                        @click="roomDetail(mRoom.boardNo, mRoom.id)"
                                         >
                                         상세보기</v-btn>
                                     </td>
@@ -65,6 +65,12 @@
         </v-col>        
     </v-card>
 </template>
+
+<script>
+export default {
+    
+}
+</script>
 
 
 <style scoped>

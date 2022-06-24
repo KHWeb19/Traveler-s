@@ -1,8 +1,8 @@
 <template>
     <v-col class="MainSearch">
         <v-col>
-            <v-btn><a href="/HotelListPage">HotelListPage</a></v-btn><p />
-            <v-btn><a href="/hotelRegister">hotelRegister</a></v-btn><p />
+            <v-btn><a href="/BHotelListPage">HotelListPage</a></v-btn><p />
+            <v-btn><a href="/BHotelRegisterPage">hotelRegister</a></v-btn><p />
             <v-btn><a href="/mypage">mypage</a></v-btn><p />
             <v-btn><a href="/roomRegister">roomRegister</a></v-btn><p />
         </v-col>
