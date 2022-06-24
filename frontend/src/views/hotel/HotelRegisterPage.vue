@@ -24,7 +24,7 @@ export default {
             const { hotelName, hotelInfo, hotelIntro,  postcode, totalAddress , files, writer } = payload
 
             let formData = new FormData()
-            let bmhotel = {
+            let hotel = {
                     hotelName,
                     hotelInfo,
                     hotelIntro,
@@ -33,7 +33,7 @@ export default {
                     writer
             }
 
-            formData.append('bmhotel',new Blob([JSON.stringify(bmhotel)],{type: "application/json"}))
+            formData.append('hotel',new Blob([JSON.stringify(hotel)],{type: "application/json"}))
             
             for (let i = 0; i <  files.length; i++) {
                 formData.append('files',files[i].file)
