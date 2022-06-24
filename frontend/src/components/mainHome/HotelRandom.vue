@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     readHotel(hotelNo) {
-            this.$router.push({ name:'HotelReadPage', params: { hotelNo: hotelNo.toString() } })      
+            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: hotelNo.toString() } })      
     }
   },
 }
