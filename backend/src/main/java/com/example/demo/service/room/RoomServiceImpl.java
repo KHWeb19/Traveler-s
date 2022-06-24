@@ -27,9 +27,10 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
     private final RoomRepository roomRepository;
     private final HotelRepository hotelRepository;
 
+    String path = "roomImg";
     @Override
     public void register(RoomRequest roomRequest, List<MultipartFile> files) throws Exception {
-        String path = "roomImg";
+
         List<String> filePathList = new ArrayList<>();
         log.info("hotelNo : " + roomRequest.getHotelNo());
         Optional<Hotel> hotelOptional = hotelRepository.findByHotelNo(roomRequest.getHotelNo());
@@ -103,4 +104,92 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
 
         return  roomRepository.findAllRoomByHotelNo(hotelNo);
     }
+
+    @Override
+    public Room bmRoomRead(Integer roomNo) {
+
+        Optional<Room> maybeReadBoard = roomRepository.findById(Long.valueOf(roomNo));
+        log.info("ROOMREAD : " + maybeReadBoard);
+        if (maybeReadBoard.equals(Optional.empty())) {
+            log.info("Can't read board!");
+            return null;
+        }
+
+        return maybeReadBoard.get();
+    }
+
+    @Override
+    public Room bmRoomModify(Room room, List<MultipartFile> files) {
+        Optional<Room> roomInfo = roomRepository.findById(room.getRoomNo());
+        Hotel hotel = roomInfo.get().getHotel();
+        //어떻게 못하겠다 나의 한계
+        if(roomInfo.get().getRoomImgPath1() != null){fileRemove(roomInfo.get().getRoomImgPath1(), path);}
+        if(roomInfo.get().getRoomImgPath2() != null){fileRemove(roomInfo.get().getRoomImgPath2(), path);}
+        if(roomInfo.get().getRoomImgPath3() != null){fileRemove(roomInfo.get().getRoomImgPath3(), path);}
+        if(roomInfo.get().getRoomImgPath4() != null){fileRemove(roomInfo.get().getRoomImgPath4(), path);}
+        if(roomInfo.get().getRoomImgPath5() != null){fileRemove(roomInfo.get().getRoomImgPath5(), path);}
+        if(roomInfo.get().getRoomImgPath6() != null){fileRemove(roomInfo.get().getRoomImgPath6(), path);}
+        if(roomInfo.get().getRoomImgPath7() != null){fileRemove(roomInfo.get().getRoomImgPath7(), path);}
+        if(roomInfo.get().getRoomImgPath8() != null){fileRemove(roomInfo.get().getRoomImgPath8(), path);}
+        if(roomInfo.get().getRoomImgPath9() != null){fileRemove(roomInfo.get().getRoomImgPath9(), path);}
+        //이것도 나의 한계
+        room.setHotel(hotel);
+
+        List<String> filePathList = new ArrayList<>();
+        fileUpload(files, path, filePathList);
+        log.info("filePathList : " + filePathList);
+        //이것도 나의 한계
+        for (int i = 0; i < filePathList.size(); i++) {
+            switch (i) {
+                case 0:
+                    room.setRoomImgPath1(filePathList.get(i));
+                    break;
+                case 1:
+                    room.setRoomImgPath2(filePathList.get(i));
+                    break;
+                case 2:
+                    room.setRoomImgPath3(filePathList.get(i));
+                    break;
+                case 3:
+                    room.setRoomImgPath4(filePathList.get(i));
+                    break;
+                case 4:
+                    room.setRoomImgPath5(filePathList.get(i));
+                    break;
+                case 5:
+                    room.setRoomImgPath6(filePathList.get(i));
+                    break;
+                case 6:
+                    room.setRoomImgPath7(filePathList.get(i));
+                    break;
+                case 7:
+                    room.setRoomImgPath8(filePathList.get(i));
+                    break;
+                case 8:
+                    room.setRoomImgPath9(filePathList.get(i));
+                    break;
+            }
+        }
+         return roomRepository.save(room);
+
+    }
+
+    @Override
+    public void bmRoomRemove(Integer roomNo) {
+        Optional<Room> roomInfo = roomRepository.findById(Long.valueOf(roomNo));
+
+        if(roomInfo.get().getRoomImgPath1() != null){fileRemove(roomInfo.get().getRoomImgPath1(), path);}
+        if(roomInfo.get().getRoomImgPath2() != null){fileRemove(roomInfo.get().getRoomImgPath2(), path);}
+        if(roomInfo.get().getRoomImgPath3() != null){fileRemove(roomInfo.get().getRoomImgPath3(), path);}
+        if(roomInfo.get().getRoomImgPath4() != null){fileRemove(roomInfo.get().getRoomImgPath4(), path);}
+        if(roomInfo.get().getRoomImgPath5() != null){fileRemove(roomInfo.get().getRoomImgPath5(), path);}
+        if(roomInfo.get().getRoomImgPath6() != null){fileRemove(roomInfo.get().getRoomImgPath6(), path);}
+        if(roomInfo.get().getRoomImgPath7() != null){fileRemove(roomInfo.get().getRoomImgPath7(), path);}
+        if(roomInfo.get().getRoomImgPath8() != null){fileRemove(roomInfo.get().getRoomImgPath8(), path);}
+        if(roomInfo.get().getRoomImgPath9() != null){fileRemove(roomInfo.get().getRoomImgPath9(), path);}
+
+
+        roomRepository.deleteById(Long.valueOf(roomNo));
+    }
+
 }

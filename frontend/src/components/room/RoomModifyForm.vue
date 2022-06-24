@@ -7,17 +7,10 @@
             <h3>기본정보</h3>
             <p class="roomName">*은 필수 입력사항입니다.</p>
             <hr>
-        <div>
-            <!-- <label class="hotelNameLabel">* 호텔이름</label>
-             <select  class="hotel-select" v-model="hotelNo">
-                <option :value="''" >호텔을 선택하세요.</option>
-                <option v-for="(hotel, idx) in hotelType" :key="idx" :value="hotel.hotelNo" > {{hotel.hotelName}}</option>
-            </select> -->
-        <div>
             <label class="roomTypeLabel">* 객실유형</label>
             <input type="text" class="roomTypeBox" v-model="roomType" placeholder="객실유형을 입력해주세요."/>
         </div>
-         </div>
+         <div>
             <label class="roomNameLabel">* 객실가격</label>
             <input type="text" class="roomNameBox" v-model="price" placeholder="가격을 입력해주세요."/>
         </div>
@@ -26,6 +19,7 @@
             <input class="numberBox" v-model="personnel" type="number" min="1" max="100" step="1">
         </div>
     </div>
+  
     <!-- 시설정보 -->
     <div class="roomInfo">
         <h3>시설정보</h3>
@@ -117,18 +111,23 @@
 
 <script>
 export default {
-    name: 'RegisterForm',
+    name: 'RoomRegisterForm',
+     props: {
+        bmRoom: {
+            type: Object,
+            require: true,
+        },
+    },
     data () {
         return {
-            roomType: '',
-            roomInfo: [],
-            price: '',
+            roomType: this.bmRoom.roomType,
+            roomInfo: this.bmRoom.roomInfo,
+            price: this.bmRoom.price,
             files: [],
             notImage: ['','','','','','','','',''],
             fileNum: 0,
             totalAddress:'',
-            personnel: '',
-            hotelNo : ''
+            personnel: this.bmRoom.personnel
         }
     },
     methods: {
@@ -137,8 +136,9 @@ export default {
                 alert('사진은 5장 이상 첨부해주세요')
             }else{
               
+                
                 const { price, roomType, personnel,roomInfo, files } = this
-                this.$emit('submit', { price, roomType, personnel, roomInfo, files})
+                this.$emit('submit', { price, roomType, personnel, roomInfo, files })
             }
         },
            handleFilesUpload () {
@@ -184,8 +184,9 @@ export default {
         },
     },
     watch: {
-        price : function() {
-            return this.price = this.price.replace(/[^0-9]/g, '')
+        price : function (){
+            
+            return this.price = this.price.replace(/[^0-9]/, '')
             }
     }
 

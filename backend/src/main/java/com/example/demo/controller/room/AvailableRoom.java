@@ -13,7 +13,6 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@ToString(exclude = "room")
 public class AvailableRoom {
 
     @Id

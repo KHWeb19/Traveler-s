@@ -4,6 +4,7 @@ import com.example.demo.entity.room.Room;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,5 +37,14 @@ public abstract class FileUpload {
         }
 
         }
+
+    public void fileRemove(String fileName, String path){
+
+        File file = new File("../frontend/src/assets/" + path + "/" + fileName);
+
+        if (file.exists()) {
+            file.delete();
+        }
+    }
     }
 

@@ -8,7 +8,7 @@
             <option v-for="(hotel, idx) in hotelType" :key="idx" :value="hotel.hotelNo"> {{hotel.hotelName}}</option>
         </select>
     
-      <router-link :to="{ name: 'RoomRegisterPage' }" class="btn"><v-btn>객실등록</v-btn></router-link>
+      <router-link :to="{ name: 'RoomRegisterPage', params: {hotelNo : this.hotelNo.toString()} }" class="btn"><v-btn>객실등록</v-btn></router-link>
 
       <br>
     <room-list :roomList="roomList"/>
@@ -41,7 +41,9 @@ export default {
     methods: {
         ...mapActions(["getHotelType"]),
         getRoomList(event){
-            console.log(event.target.value)
+          
+            this.hotelNo = event.target.value
+            console.log(this.hotelNo)
             const hotelNo = event.target.value
             console.log(hotelNo)
             axios.post('http://localhost:7777/room/bm/list', { hotelNo })
@@ -50,7 +52,7 @@ export default {
                 this.roomList = res.data
             
             })
-        }
+        },
     }
 }
 </script>

@@ -54,6 +54,33 @@ public class RoomController {
         return roomService.findRoomList(roomRequest.getHotelNo());
     }
 
+    @GetMapping("/bm/{roomNo}")
+    public Room bmHotelRead (
+            @PathVariable("roomNo") Integer roomNo) {
+        log.info("business member Room Read()" + roomNo);
+        return roomService.bmRoomRead(roomNo);
+    }
+
+    @PutMapping("/bm/{roomNo}")
+    public Room bmRoomModify (
+            @PathVariable("roomNo") Integer roomNo,
+            @Validated @RequestPart(value="roomRequest") Room room,
+            @RequestPart(value = "files") List<MultipartFile> files) {
+        log.info("business member Hotel Modify(): " + room);
+        log.info("files :" + files);
+
+        room.setRoomNo(Long.valueOf(roomNo));
+        return roomService.bmRoomModify(room, files);
+    }
+
+    @DeleteMapping("/bm/{roomNo}")
+    public void bmRoomRemove (
+            @PathVariable("roomNo") Integer roomNo) {
+        log.info("roomRemove()");
+
+        roomService.bmRoomRemove(roomNo);
+    }
+
 
 
 }

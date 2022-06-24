@@ -9,6 +9,10 @@ import HotelReadPage from '@/views/hotelDetail/HotelReadPage.vue'
 import BHotelModifyPage from '@/views/hotel/HotelModifyPage.vue'
 import BHotelReadPage from '@/views/hotel/HotelReadPage.vue'
 
+import BRoomReadPage from '@/views/room/RoomReadPage.vue'
+import BRoomModifyPage from '@/views/room/RoomModifyPage.vue'
+import RoomRegisterPage from '@/views/hotel/RoomRegisterPage.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -75,7 +79,12 @@ const routes = [
   {
     path: '/roomRegister',
     name: 'RoomRegisterPage',
-    component: () => import('../views/hotel/RoomRegisterPage.vue')
+    components: {
+      default: RoomRegisterPage
+    },
+    props: {
+      default: true
+    }
   },
   {
     path: '/hotelReadPage/:hotelNo',
@@ -92,7 +101,31 @@ const routes = [
     name: 'SearchPage',
     component: () => import('../views/searchpage/SearchPage.vue')
   },
-
+  {
+    path: '/BRoomListPage',
+    name: 'BRoomListPage',
+    component: () => import('../views/room/RoomListPage.vue')
+  },
+  {
+    path: '/BRoomReadPage/:roomNo',
+    name: 'BRoomReadPage',
+    components: {
+      default: BRoomReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/BRoomModifyPage/:roomNo',
+    name: 'BRoomModifyPage',
+    components: {
+      default: BRoomModifyPage
+    },
+    props: {
+      default: true
+    }
+  },
 ]
 
 const router = new VueRouter({

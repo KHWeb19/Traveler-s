@@ -8,6 +8,8 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class RoomRequest {
+
+    Long roomNo;
     Long price;
     String roomType;
     List<String> roomInfo;
@@ -16,7 +18,8 @@ public class RoomRequest {
     String writer;
 
 
-    public RoomRequest (Long price ,String roomType ,int personnel ,Long hotelNo , List<String> roomInfo) {
+    public RoomRequest (Long roomNo ,Long price ,String roomType ,int personnel ,Long hotelNo , List<String> roomInfo) {
+        this.roomNo = roomNo;
         this.price = price;
         this.roomType = roomType;
         this.roomInfo = roomInfo;

@@ -26,7 +26,10 @@
         <tr v-else v-for="(room ,idx) in roomList" :key="idx">
           <td><input class="check all" type="checkbox"></td>
             <td>
+                 <router-link :to="{ name: 'BRoomReadPage',
+                                    params: { roomNo: room.roomNo.toString() } }">
                 {{ room.roomType }}
+                 </router-link>
             </td>
             <td>
                 {{ room.price }}
