@@ -174,7 +174,7 @@ import KakaoMapApi from '@/components/hotelDetail/KakaoMapApi.vue'
 import RoomReadForm from './RoomReadForm.vue'
 
 export default {
-    name: 'HotelReadForm',
+    name: 'MHotelReadForm',
     components: {
         KakaoMapApi,
         RoomReadForm
