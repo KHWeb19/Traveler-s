@@ -9,6 +9,7 @@ import com.example.demo.repository.room.RoomRepository;
 import com.example.demo.utility.fileUpload.FileUpload;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,8 +39,8 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
         fileUpload(files,path,filePathList);
 
         Room room = Room.builder()
-                .roomName(roomRequest.getRoomName())
                 .roomType(roomRequest.getRoomType())
+                .price(roomRequest.getPrice())
                 .roomInfo(roomRequest.getRoomInfo())
                 .personnel(roomRequest.getPersonnel())
                 .hotel(hotel)
@@ -95,5 +96,11 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
         }
 
         return ceoHotel;
+    }
+
+    @Override
+    public List<Room> findRoomList(Long hotelNo) {
+
+        return  roomRepository.findAllRoomByHotelNo(hotelNo);
     }
 }

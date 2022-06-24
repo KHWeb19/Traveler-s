@@ -38,7 +38,7 @@ public class HotelController {
     //사업자 매뉴얼 페이지 호텔 목록
     @GetMapping("/bm/list")
     public List<Hotel> bmHotelList () {
-        log.info("jpaBoardList()");
+        log.info("bmHotelList()");
 
         return hotelService.bmHotelList();
     }

@@ -2,9 +2,11 @@ export default {
     isLoggedIn: false,
     user: [],
     hotelType: [],
-    hotels: [],
-    hotel: null,
 
-    bmhotels: [],
-    bmhotel: null,
+    mHotels: [],
+    mHotel: null,
+
+    bmHotels: [],
+    bmHotel: null,
+    bmRooms: []
 }

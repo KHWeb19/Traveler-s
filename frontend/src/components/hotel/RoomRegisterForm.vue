@@ -10,15 +10,16 @@
         <div>
             <label class="hotelNameLabel">* 호텔이름</label>
              <select  class="hotel-select" v-model="hotelNo">
+                <option :value="''" >호텔을 선택하세요.</option>
                 <option v-for="(hotel, idx) in hotelType" :key="idx" :value="hotel.hotelNo" > {{hotel.hotelName}}</option>
             </select>
-        </div>
-            <label class="roomNameLabel">* 객실이름</label>
-            <input type="text" class="roomNameBox" v-model="roomName" placeholder="객실명을 입력해주세요."/>
-        </div>
         <div>
             <label class="roomTypeLabel">* 객실유형</label>
             <input type="text" class="roomTypeBox" v-model="roomType" placeholder="객실유형을 입력해주세요."/>
+        </div>
+         </div>
+            <label class="roomNameLabel">* 객실가격</label>
+            <input type="text" class="roomNameBox" v-model="price" placeholder="가격을 입력해주세요."/>
         </div>
         <div>
             <label class="perssonel"> *객실인원</label> 
@@ -40,7 +41,7 @@
             <input type="checkbox" name="roominfo" v-model="roomInfo" value="wifi">와이파이
         </label>
         <label>
-            <input type="checkbox" name="roominfo" v-model="roomInfo" value="freeParking">무료 주차
+            <input type="checkbox" name="roominfo" v-model="roomInfo" value="freeParking">무료주차
         </label>
         <label>
             <input type="checkbox" name="roominfo" v-model="roomInfo" value="bbqGrill">바베큐그릴
@@ -108,7 +109,7 @@
     </div>
     
     <v-btn type="submit" class="btn1">저장하기</v-btn>
-    <router-link :to="{ name: 'home' }" ><v-btn class="btn2">취소</v-btn></router-link>
+    <router-link :to="{ name: 'RoomListPage' }" ><v-btn class="btn2">취소</v-btn></router-link>
 
 
 </form>
@@ -125,9 +126,9 @@ export default {
     },
     data () {
         return {
-            roomName: '',
             roomType: '',
             roomInfo: [],
+            price: '',
             files: [],
             notImage: ['','','','','','','','',''],
             fileNum: 0,
@@ -143,8 +144,8 @@ export default {
             }else{
               
                 console.log(this.hotelType)
-                const { roomName, roomType, personnel,roomInfo, files, hotelNo } = this
-                this.$emit('submit', { roomName, roomType, personnel, roomInfo, files , hotelNo})
+                const { price, roomType, personnel,roomInfo, files, hotelNo } = this
+                this.$emit('submit', { price, roomType, personnel, roomInfo, files , hotelNo})
             }
         },
            handleFilesUpload () {
@@ -187,9 +188,14 @@ export default {
             this.files.splice(index,1)
             this.fileNum -= 1
             console.log(this.files)
-        }
+        },
+    },
+    watch: {
+        price : function() {
+            return this.price = this.price.replace(/[^0-9]/g, '')
+            }
     }
- 
+
 }
 </script>
 

@@ -47,4 +47,13 @@ public class RoomController {
         return roomService.findHotel(writer);
     }
 
+    @PostMapping("/bm/list")
+    public List<Room> bmRoomList (@RequestBody RoomRequest roomRequest) {
+        log.info("bmRoomList()" + roomRequest.getHotelNo());
+
+        return roomService.findRoomList(roomRequest.getHotelNo());
+    }
+
+
+
 }
