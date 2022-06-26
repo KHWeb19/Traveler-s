@@ -2,16 +2,16 @@
   <v-container>
     <section>
       <div class="row">
-        <v-col v-for="hotel in searchList" :key="hotel.hotelNo" cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
-          <v-card @click="readHotel(hotel.hotelNo)">
+        <v-col v-for="mHotel in searchList" :key="mHotel.hotelNo" cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
+          <v-card @click="readHotel(mHotel.hotelNo)">
             <img id="HotelImg" style="height: 200px; width: 260px;"
-              :src="require(`@/assets/hotelImg/${hotel.hotelImgPath1}`)" />
-            <v-card-title id="hotelName" class="justify-center">{{ hotel.hotelName }}</v-card-title>
+              :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath1}`)" />
+            <v-card-title id="hotelName" class="justify-center">{{ mHotel.hotelName }}</v-card-title>
             <v-divider></v-divider>
             <v-card-text class="address">
-              {{ hotel.hotelAddress }}
+              {{ mHotel.hotelAddress }}
             </v-card-text>
-            <span class="hotel_info" v-for="(info , i) in hotel.hotelInfo" :key="i">
+            <span class="hotel_info" v-for="(info , i) in mHotel.hotelInfo" :key="i">
               {{ "#" + info }}
             </span>
           </v-card>
@@ -22,24 +22,39 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
   name: 'DetailSearch',
   props: {
-    hotels: {
+    searchList: {
       type: Array
     }
   },
   data() {
-    return {
-      searchList: []
-    }
+        return {
+            word: ''
+        }
   },
   methods: {
     readHotel(hotelNo) {
-            this.$router.push({ name:'HotelReadPage', params: { hotelNo: hotelNo.toString() } })      
-    }
-  },
+            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: hotelNo.toString() } })      
+    },
+    search() {
+        const { word } = this;
+        axios.post("http://localhost:7777/search/tagSearch", { word })
+            .then((res) => {
+            console.log(res.data);
+            alert("검색 완료");
+            this.$router.push({ name: 'MSearchPage', params: { searchList: res.data, word: this.word },
+                })
+                .catch(() => {});
+            })
+            .catch(() => {
+            alert("검색 실패");
+        });    
+    },
+  }
 }
 
 

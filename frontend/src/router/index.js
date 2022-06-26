@@ -6,7 +6,7 @@ import store from '@/store'
 import states from '@/store/states'
 
 import MHotelReadPage from '@/views/hotelDetail/HotelReadPage.vue'
-import SearchPage from '@/views/search/SearchPage.vue'
+import SearchPage from '@/views/searchpage/SearchPage.vue'
 
 import BHotelModifyPage from '@/views/hotel/HotelModifyPage.vue'
 import BHotelReadPage from '@/views/hotel/HotelReadPage.vue'
@@ -107,8 +107,8 @@ const routes = [
     }
   },
   {
-    path: '/SearchPage/:word',
-    name: 'SearchPage',
+    path: '/MSearchPage/:word',
+    name: 'MSearchPage',
     components: {
       default: SearchPage
     },

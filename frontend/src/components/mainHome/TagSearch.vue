@@ -52,7 +52,7 @@ export default {
                         console.log("검색 성공")
                         console.log(res.data)
                         
-                        this.$router.push({name: 'SearchPage',
+                        this.$router.push({name: 'MSearchPage',
                                     params: { searchList: res.data, word } })
                     .catch(() => {});
                 })

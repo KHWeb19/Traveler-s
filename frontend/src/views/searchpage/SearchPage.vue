@@ -2,7 +2,7 @@
 	<div align="center" class="home_wrap">
 		<v-container>
 			<v-row>
-				<MainSearch />
+				<main-search />
 			</v-row>
 		</v-container>
 		<v-container>
@@ -13,13 +13,11 @@
 
 <script>
 
-import MainSearch from '@/components/mainHome/MainSearch.vue';
-import DetailSearch from '@/components/detailSearch/DetailSearch.vue';
-
-import { mapState, mapActions } from 'vuex'
-import axios from 'axios';
+import MainSearch from '@/components/mainHome/MainSearch.vue'
+import DetailSearch from '@/components/detailSearch/DetailSearch.vue'
 
 export default {
+	name: 'MSearchPage',
 	components: {
 		MainSearch,
 		DetailSearch
