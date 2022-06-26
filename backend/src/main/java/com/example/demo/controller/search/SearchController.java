@@ -23,7 +23,7 @@ public class SearchController {
     @PostMapping("/tagSearch")
     public List<Hotel> tagSearch (@RequestBody KeyWordRequest keyWord) {
         log.info("tagSearch()");
-        String word = keyWord.getKeyWord();
+        String word = keyWord.getWord();
 
 
         return hotelService.searchList(word);
