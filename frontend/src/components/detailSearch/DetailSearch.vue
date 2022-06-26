@@ -2,7 +2,7 @@
   <v-container>
     <section>
       <div class="row">
-        <v-col v-for="mHotel in searchList" :key="mHotel.hotelNo" cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
+        <v-col v-for="mHotel in paginatedData" :key="mHotel.hotelNo" cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
           <v-card @click="readHotel(mHotel.hotelNo)">
             <img id="HotelImg" style="height: 200px; width: 260px;"
               :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath1}`)" />
@@ -18,6 +18,35 @@
         </v-col>
       </div>
     </section>
+
+    <template>
+        <v-container justify="center" >
+         <v-row>
+            <v-col>
+            <div class="btn-cover" align="center">
+                <v-btn
+                    :disabled="pageNum === 0"
+                    @click="prevPage"
+                    class="page-btn">
+                이전
+                </v-btn>
+                <span class="page-count"
+                >{{ pageNum + 1 }} / {{ pageCount }} 페이지</span
+                >
+                <v-btn
+                    :disabled="pageNum >= pageCount - 1"
+                    @click="nextPage"
+                    class="page-btn"
+                >
+                다음
+                </v-btn>
+            </div>
+            </v-col>
+         </v-row>
+        </v-container>
+    </template>
+
+
   </v-container>
 </template>
 
@@ -29,11 +58,21 @@ export default {
   props: {
     searchList: {
       type: Array
+    },
+    listArray: {
+      type: Array,
+      required: true,
+    },
+    pageSize: {
+      type: Number,
+      required: false,
+      default: 4,
     }
   },
   data() {
         return {
-            word: ''
+            word: '',
+            pageNum: 0,
         }
   },
   methods: {
@@ -54,7 +93,27 @@ export default {
             alert("검색 실패");
         });    
     },
-  }
+    nextPage() {
+        this.pageNum += 1;
+    },
+    prevPage() {
+        this.pageNum -= 1;
+    },
+  },
+  computed: {
+      pageCount() {
+          let listLeng = this.listArray.length,
+              listSize = this.pageSize,
+              page = Math.floor(listLeng / listSize);
+          if (listLeng % listSize > 0) page += 1;
+          return page;
+      },
+      paginatedData() {
+          const start = this.pageNum * this.pageSize,
+              end = start + this.pageSize;
+          return this.listArray.slice(start, end);
+      },
+  },
 }
 
 

@@ -6,13 +6,13 @@
 			</v-row>
 		</v-container>
 		<v-container>
-			<detail-search :searchList="searchList"/>
+			<detail-search :searchList="searchList"
+							:list-array="pageArray"/>
 		</v-container>
 	</div>
 </template>
 
 <script>
-
 import MainSearch from '@/components/mainHome/MainSearch.vue'
 import DetailSearch from '@/components/detailSearch/DetailSearch.vue'
 
@@ -24,9 +24,12 @@ export default {
 		
 	},
    props: {
-       searchList: {
-           type:Array
-       }
+		searchList: {
+			type:Array
+		},
+		pageArray: {
+			type:Array
+		},
    },
    data () {
         return {
@@ -34,11 +37,7 @@ export default {
     }
    }
 };
-
 </script>
 
-
-
 <style scoped>
-
 </style>

@@ -7,12 +7,6 @@
                 <v-btn v-for="(info, idx) in hotelInfo" :key="idx" @click="search(info)" rounded class="button1 b-color rot-1">#{{info}}</v-btn>
             </v-row>
         </section>
-        <v-carousel cycle hide-delsimiters class="cover">
-        <v-carousel-item  v-for="(lit,idx) in searchList" :key="idx" :src="require(`@/assets/hotelImg/${list.hotelImgPath1}`)"  >
-            <v-row class="img" align="center" justify="center" >
-            </v-row>
-        </v-carousel-item>
-         </v-carousel>
         <v-divider></v-divider>                     
     </v-container>
 </template>
@@ -23,7 +17,7 @@ import axios from 'axios'
 export default {
     name: 'TagSearch',
     props: {
-        hotels: {
+        mHotels: {
             type: Array
         }
     },
@@ -53,7 +47,7 @@ export default {
                         console.log(res.data)
                         
                         this.$router.push({name: 'MSearchPage',
-                                    params: { searchList: res.data, word } })
+                                    params: { searchList: res.data, word, pageArray: res.data } })
                     .catch(() => {});
                 })
                 .catch(() => {
