@@ -3,9 +3,10 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 import store from '@/store'
+import states from '@/store/states'
 
 import MHotelReadPage from '@/views/hotelDetail/HotelReadPage.vue'
-import states from '@/store/states'
+import SearchPage from '@/views/search/SearchPage.vue'
 
 import BHotelModifyPage from '@/views/hotel/HotelModifyPage.vue'
 import BHotelReadPage from '@/views/hotel/HotelReadPage.vue'
@@ -106,10 +107,15 @@ const routes = [
     }
   },
   {
-    path: '/search',
+    path: '/SearchPage/:word',
     name: 'SearchPage',
-    component: () => import('../views/searchpage/SearchPage.vue')
-  },
+    components: {
+      default: SearchPage
+    },
+    props: {
+      default: true
+    }
+  }, 
   {
     path: '/BRoomListPage',
     name: 'BRoomListPage',
@@ -134,7 +140,7 @@ const routes = [
     props: {
       default: true
     }
-  },
+  }, 
 ]
 
 const router = new VueRouter({

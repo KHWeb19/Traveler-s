@@ -45,16 +45,20 @@ export default {
     },
     methods : {
         search(info) {
-            const keyWord = info
-            console.log(keyWord)
-            axios.post('http://localhost:7777/search',  { keyWord })
+            const word = info;
+            console.log(word)
+            axios.post('http://localhost:7777/search/tagSearch',  { word })
                     .then((res) => {
                         console.log("검색 성공")
                         console.log(res.data)
                         
-                        this.$router.push({name: '',
-                                    params: { searchList: res.data} })
-                    })
+                        this.$router.push({name: 'SearchPage',
+                                    params: { searchList: res.data, word } })
+                    .catch(() => {});
+                })
+                .catch(() => {
+                alert("검색 실패");
+            });
              
         }
     },
