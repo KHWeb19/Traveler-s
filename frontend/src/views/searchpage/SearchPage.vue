@@ -6,7 +6,7 @@
 			</v-row>
 		</v-container>
 		<v-container>
-			<DetailSearch :hotels="hotels" :list-array="pageArray"/>
+			<detail-search :searchList="searchList"/>
 		</v-container>
 	</div>
 </template>
@@ -25,29 +25,15 @@ export default {
 		DetailSearch
 		
 	},
+   props: {
+       searchList: {
+           type:Array
+       }
+   },
    data () {
-	return {
-		pageArray: [],
-	}
-   },
-   computed: {
-	...mapState(['hotels'])
-   },
-   mounted () {
-	this.fetchHotelList()
-   },
-   methods: {
-	...mapActions(['fetchHotelList', 'fetchHotel']),
-   },
-   created(){
-      axios
-        .get("http://localhost:7777/hotel/mainList")
-        .then((res) => {
-        this.pageArray = res.data;
-        })
-        .catch((err) => {
-        console.log(err);
-		});
+        return {
+            word: ''
+    }
    }
 };
 
