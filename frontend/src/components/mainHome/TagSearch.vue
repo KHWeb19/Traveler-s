@@ -2,9 +2,18 @@
     <v-container fluid>
         <v-divider></v-divider>
         <section>
-            <v-card-title class="justify-center" style="font-size:3em">테마 검색</v-card-title>
-            <v-row align="center" justify="center">
-                <v-btn v-for="(info, idx) in hotelInfo" :key="idx" @click="search(info)" rounded class="button1 b-color rot-1">#{{info}}</v-btn>
+            <v-card-title 
+            id="TagName"
+            style="font-size:3em">
+            테마 검색
+            </v-card-title>
+            <v-row justify="center">
+                <v-btn v-for="(info, idx) in hotelInfo" 
+                :key="idx" 
+                @click="search(info)" 
+                rounded 
+                class="button1 b-color rot-1">#{{ info }}
+                </v-btn>
             </v-row>
         </section>
         <v-divider></v-divider>                     
@@ -102,5 +111,8 @@ export default {
 }
 .section{
     margin: 2%;
+}
+#TagName {
+    justify-content: center;
 }
 </style>

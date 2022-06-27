@@ -37,7 +37,6 @@ public class MyPageController {
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> optionalUser = userService.findByEmail(email);
         User user = optionalUser.get();
-        log.info("User: {}", user.toString());
 
         MyPageResponse myPageResponse = new MyPageResponse(user.getName(), user.getEmail(), user.getProfile_path(), user.getRoles());
 

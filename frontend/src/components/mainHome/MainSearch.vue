@@ -1,11 +1,5 @@
 <template>
     <v-col class="MainSearch">
-        <v-col>
-            <v-btn><a href="/BHotelListPage">HotelListPage</a></v-btn><p />
-            <v-btn><a href="/BHotelRegisterPage">hotelRegister</a></v-btn><p />
-            <v-btn><a href="/mypage">mypage</a></v-btn><p />
-            <v-btn><a href="/roomRegister">roomRegister</a></v-btn><p />
-        </v-col>
         <v-row>
             <v-col cols="12" xs="12" sm="6" md="4">
                 <v-menu class="menu1" v-model="calendar" :close-on-content-click="false" transition="scale-transition"

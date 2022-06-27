@@ -1,6 +1,8 @@
 package com.example.demo.entity.member;
 
+import com.example.demo.entity.hotel.Hotel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,7 +20,6 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-@ToString
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +45,11 @@ public class User {
     @Builder.Default
     private List<Role> roles = new ArrayList<>();
 
+    @Builder.Default
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Hotel> hotels= new ArrayList<>();
+
     public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
@@ -54,4 +60,5 @@ public class User {
         this.getRoles().add(role);
         role.getUsers().add(this);
     }
+
 }

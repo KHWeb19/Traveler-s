@@ -39,10 +39,10 @@
                 <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${bmHotel.hotelImgPath3}`)"/>
                 <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${bmHotel.hotelImgPath4}`)"/>
                 <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${bmHotel.hotelImgPath5}`)"/>
-                <v-if="bmHotel.hotelImgPath6" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath6}`)">
-                <v-if="bmHotel.hotelImgPath6" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath7}`)">
-                <v-if="bmHotel.hotelImgPath6" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath8}`)">
-                <v-if="bmHotel.hotelImgPath6" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath9}`)">
+                <img v-if="bmHotel.hotelImgPath6" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath6}`)">
+                <img v-if="bmHotel.hotelImgPath6" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath7}`)">
+                <img v-if="bmHotel.hotelImgPath6" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath8}`)">
+                <img v-if="bmHotel.hotelImgPath6" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath9}`)">
                 </v-container>
             </div>
         </div>

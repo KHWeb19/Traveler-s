@@ -3,8 +3,10 @@ package com.example.demo.service.room;
 import com.example.demo.dto.hotel.RoomRequest;
 import com.example.demo.dto.hotel.RoomResponse;
 import com.example.demo.entity.hotel.Hotel;
+import com.example.demo.entity.member.User;
 import com.example.demo.entity.room.Room;
 import com.example.demo.repository.hotel.HotelRepository;
+import com.example.demo.repository.member.UserRepository;
 import com.example.demo.repository.room.RoomRepository;
 import com.example.demo.utility.fileUpload.FileUpload;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +29,7 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
 
     private final RoomRepository roomRepository;
     private final HotelRepository hotelRepository;
+    private final UserRepository userRepository;
 
     String path = "roomImg";
     @Override
@@ -87,9 +90,11 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
     }
 
     @Override
-    public List<RoomResponse> findHotel(String writer) {
-        log.info("writer : " + writer);
-        List<Hotel> hotelList = hotelRepository.findByWriter(writer);
+    public List<RoomResponse> findHotel(String email) {
+        log.info("email : " + email);
+        Optional<User> optionalUser = userRepository.findByEmailWithHotels(email);
+        User user = optionalUser.get();
+        List<Hotel> hotelList = user.getHotels();
         List<RoomResponse> ceoHotel = new ArrayList<>();
         RoomResponse roomResponse;
         for(Hotel hotel : hotelList){
