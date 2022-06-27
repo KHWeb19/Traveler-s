@@ -56,9 +56,9 @@ export default {
                         { title: '객실등록', to: '/roomRegister' },
                         { title: '객실설정', to: '' },
                         { title: '요금설정', to: '' },
-                        { title: '호텔등록', to: '/hotelRegister'},
+                        { title: '호텔등록', to: '/BHotelRegisterPage'},
                         { title: '숙박관리', to: '' },
-                        { title: '숙소관리', to: '/HotelListPage' },
+                        { title: '숙소관리', to: '/BHotelListPage' },
                         { title: '객실관리', to: '' },
                     ]
                 }
