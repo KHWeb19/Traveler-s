@@ -1,6 +1,6 @@
 export default {
     isLoggedIn: false,
-    user: [],
+    user: {},
     hotelType: [],
 
     mHotels: [],
@@ -8,5 +8,6 @@ export default {
 
     bmHotels: [],
     bmHotel: null,
-    bmRooms: []
+
+    bmRoom: null
 }

@@ -2,17 +2,17 @@
     <div align="center">
 
         <h1>호텔 상세보기 페이지</h1>
-        <hotel-read-form v-if="mHotel" :mHotel="mHotel"/>
+        <m-hotel-read-form v-if="mHotel" :mHotel="mHotel"/>
         <p v-else> 로딩중......</p>
     </div>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
-import HotelReadForm from '@/components/hotelDetail/HotelReadForm.vue'
+import MHotelReadForm from '@/components/hotelDetail/HotelReadForm.vue'
 
 export default {
-    name: 'HotelReadPage',
+    name: 'MHotelReadPage',
     props: {
         hotelNo: {
             type: String,
@@ -20,7 +20,7 @@ export default {
         }
     },
     components: {
-        HotelReadForm
+        MHotelReadForm
     },
     computed: {
         ...mapState(['mHotel'])

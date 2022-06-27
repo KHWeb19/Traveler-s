@@ -8,11 +8,11 @@
             <p class="roomName">*은 필수 입력사항입니다.</p>
             <hr>
         <div>
-            <label class="hotelNameLabel">* 호텔이름</label>
+            <!-- <label class="hotelNameLabel">* 호텔이름</label>
              <select  class="hotel-select" v-model="hotelNo">
                 <option :value="''" >호텔을 선택하세요.</option>
                 <option v-for="(hotel, idx) in hotelType" :key="idx" :value="hotel.hotelNo" > {{hotel.hotelName}}</option>
-            </select>
+            </select> -->
         <div>
             <label class="roomTypeLabel">* 객실유형</label>
             <input type="text" class="roomTypeBox" v-model="roomType" placeholder="객실유형을 입력해주세요."/>
@@ -109,7 +109,7 @@
     </div>
     
     <v-btn type="submit" class="btn1">저장하기</v-btn>
-    <router-link :to="{ name: 'RoomListPage' }" ><v-btn class="btn2">취소</v-btn></router-link>
+    <router-link :to="{ name: 'BRoomListPage' }" ><v-btn class="btn2">취소</v-btn></router-link>
 
 
 </form>
@@ -117,13 +117,7 @@
 
 <script>
 export default {
-    name: 'HotelRegisterForm',
-     props: {
-        hotelType: {
-            type: Array,
-            require: true,
-        },
-    },
+    name: 'RegisterForm',
     data () {
         return {
             roomType: '',
@@ -143,9 +137,8 @@ export default {
                 alert('사진은 5장 이상 첨부해주세요')
             }else{
               
-                console.log(this.hotelType)
-                const { price, roomType, personnel,roomInfo, files, hotelNo } = this
-                this.$emit('submit', { price, roomType, personnel, roomInfo, files , hotelNo})
+                const { price, roomType, personnel,roomInfo, files } = this
+                this.$emit('submit', { price, roomType, personnel, roomInfo, files})
             }
         },
            handleFilesUpload () {

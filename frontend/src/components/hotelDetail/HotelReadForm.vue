@@ -48,7 +48,7 @@
 
                 <tr> <!-- 객실 란 컴포넌트 분리하여 작업 중!-->
                 <td>
-                    <room-read-form/>
+                    <room-read-form v-if="mRoom" :mRoom="mRoom"/>
                     <br>
                 </td>
                 </tr>
@@ -90,7 +90,7 @@
                         <h3>숙소 위치</h3>
                         <p>{{mHotel.totalAddress}}</p>
                     <br>
-                        <kakao-map-api/>
+                        <kakao-map-api :mHotel="mHotel"/>
                     <br>
                 </td>
                 </tr>
@@ -168,13 +168,12 @@
 
 </div>
 </template>
-
 <script>
 import KakaoMapApi from '@/components/hotelDetail/KakaoMapApi.vue'
 import RoomReadForm from './RoomReadForm.vue'
 
 export default {
-    name: 'HotelReadForm',
+    name: 'MHotelReadForm',
     components: {
         KakaoMapApi,
         RoomReadForm

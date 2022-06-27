@@ -6,7 +6,8 @@ import {
   SET_USER,
   GET_HOTEL_TYPE,
   FETCH_BM_HOTEL_LIST,
-  FETCH_BM_HOTEL
+  FETCH_BM_HOTEL,
+  FETCH_BM_ROOM
 
 } from "./mutation-types";
 
@@ -65,12 +66,21 @@ export default {
             .then((res => {
                 commit(SET_USER, res.data)
             }))
+            .catch(() => {
+                router.push({path: "/login"})
+                alert("내 정보를 읽어오는데 실패했습니다")})
     },
     getHotelType({commit}){
         axios.get("http://localhost:7777/room/getHotelType")
             .then((res => {
                 commit(GET_HOTEL_TYPE, res.data)
             }))
+    },
+    fetchBmRoom ({ commit }, roomNo) {
+        return axios.get(`http://localhost:7777/room/bm/${roomNo}`)
+                .then((res) => {
+                    commit(FETCH_BM_ROOM, res.data)
+                })
     },
 
 }

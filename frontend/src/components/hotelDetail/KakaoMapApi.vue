@@ -8,6 +8,12 @@
 <script>
 export default {
     name: 'KakaoMap',
+    props : {
+        mHotel:{
+            type: Object,
+            required: true
+        }
+    },
     data() {
         return{
             map: null,
@@ -22,12 +28,11 @@ export default {
                 level: 3, // 지도의 확대 레벨
             }
             const map = new kakao.maps.Map(container, options)
-            console.log(this.map)
             this.geocoder = new kakao.maps.services.Geocoder()
             console.log(this.geocoder)
-            
-            
-            this.geocoder.addressSearch('서울 관악구 봉천동 1685-27 203호', function(result, status) {
+            console.log('init' + this.hotel)
+            const hotel = this.mHotel
+            this.geocoder.addressSearch(hotel.totalAddress, function(result, status) {
                 console.log(kakao.maps.services.Status.OK)
                 if (status === kakao.maps.services.Status.OK) {
                       
@@ -42,26 +47,53 @@ export default {
 
                     // 인포윈도우로 장소에 대한 설명을 표시합니다
                     const infowindow = new kakao.maps.InfoWindow({
-                        content: '<div style="width:150px;text-align:center;padding:6px 0;">우리집</div>'
+                       
+                        content: `<div style="width:150px;text-align:center;padding:6px 0;">${hotel.hotelName} </div>`
                     })
                     infowindow.open(map, marker)
 
                     // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
                     map.setCenter(coords)
                 } 
-            });    
+            })
+        },
+        kakao () {
+                if(!window.kakao || !window.kakao.maps){
+                    const script = document.createElement("script")
+                    /* global kakao */
+                    script.onload = () => kakao.maps.load(this.initMap);
+                    script.src= "https://dapi.kakao.com/v2/maps/sdk.js?appkey=ec61fc18851964c845de3db938cfd080&libraries=services&autoload=false"
+                    document.head.appendChild(script);
+                
+                    }else{
+                        this.initMap()
+                    }
+                    return
+
         }
     },
-    mounted() {
-        if(!window.kakao || !window.kakao.maps){
-            const script = document.createElement("script")
-             /* global kakao */
-            script.onload = () => kakao.maps.load(this.initMap);
-            script.src= "https://dapi.kakao.com/v2/maps/sdk.js?appkey=ec61fc18851964c845de3db938cfd080&libraries=services&autoload=false"
-            document.head.appendChild(script);
-        }else{
-            this.initMap()
-        }
+
+    mounted () {
+            this.$watch('mHotel', function(){
+                console.log('watch')
+                this.kakao()
+                return
+            })
+            console.log('new')
+            this.kakao()      
     }
+    /*watch: {
+        mHotel: function() {
+            if(!window.kakao || !window.kakao.maps){
+                const script = document.createElement("script")*/
+                
+              /*  script.onload = () => kakao.maps.load(this.initMap);
+                script.src= "https://dapi.kakao.com/v2/maps/sdk.js?appkey=ec61fc18851964c845de3db938cfd080&libraries=services&autoload=false"
+                document.head.appendChild(script);
+            }else{
+                this.initMap()
+            }
+        }
+    }*/
 }
 </script>

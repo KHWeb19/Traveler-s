@@ -3,11 +3,17 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 import store from '@/store'
+import states from '@/store/states'
 
-import HotelReadPage from '@/views/hotelDetail/HotelReadPage.vue'
+import MHotelReadPage from '@/views/hotelDetail/HotelReadPage.vue'
+import SearchPage from '@/views/searchpage/SearchPage.vue'
 
 import BHotelModifyPage from '@/views/hotel/HotelModifyPage.vue'
 import BHotelReadPage from '@/views/hotel/HotelReadPage.vue'
+
+import BRoomReadPage from '@/views/room/RoomReadPage.vue'
+import BRoomModifyPage from '@/views/room/RoomModifyPage.vue'
+import RoomRegisterPage from '@/views/hotel/RoomRegisterPage.vue'
 
 Vue.use(VueRouter)
 
@@ -70,29 +76,71 @@ const routes = [
   {
     path: '/mypage',
     name: 'MyPage',
+    beforeEnter: (to, from, next) => {
+      if (states.isLoggedIn){
+        next()
+      }else{
+      alert("로그인이 필요한 페이지입니다")
+      next({path: '/login'})}
+    }
+    ,
     component: () => import('../views/mypage/MyPage.vue')
   },
   {
     path: '/roomRegister',
     name: 'RoomRegisterPage',
-    component: () => import('../views/hotel/RoomRegisterPage.vue')
-  },
-  {
-    path: '/hotelReadPage/:hotelNo',
-    name: 'HotelReadPage',
     components: {
-      default: HotelReadPage
+      default: RoomRegisterPage
     },
     props: {
       default: true
     }
   },
   {
-    path: '/search',
-    name: 'SearchPage',
-    component: () => import('../views/searchpage/SearchPage.vue')
+    path: '/mHotelReadPage/:hotelNo',
+    name: 'MHotelReadPage',
+    components: {
+      default: MHotelReadPage
+    },
+    props: {
+      default: true
+    }
   },
-
+  {
+    path: '/MSearchPage/:word',
+    name: 'MSearchPage',
+    components: {
+      default: SearchPage
+    },
+    props: {
+      default: true
+    }
+  }, 
+  {
+    path: '/BRoomListPage',
+    name: 'BRoomListPage',
+    component: () => import('../views/room/RoomListPage.vue')
+  },
+  {
+    path: '/BRoomReadPage/:roomNo',
+    name: 'BRoomReadPage',
+    components: {
+      default: BRoomReadPage
+    },
+    props: {
+      default: true
+    }
+  },
+  {
+    path: '/BRoomModifyPage/:roomNo',
+    name: 'BRoomModifyPage',
+    components: {
+      default: BRoomModifyPage
+    },
+    props: {
+      default: true
+    }
+  }, 
 ]
 
 const router = new VueRouter({

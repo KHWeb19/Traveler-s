@@ -1,26 +1,33 @@
 <template>
   <div>
-    <room-register-form @submit="onSubmit"
-                        :hotelType="hotelType"/>
+    <room-register-form @submit="onSubmit"/>
   </div>
 </template>
 
 <script>
 import RoomRegisterForm from '@/components/hotel/RoomRegisterForm.vue'
 import axios from 'axios'
-import { mapActions, mapState } from 'vuex'
+//import { mapActions, mapState } from 'vuex'
 export default {
     name: 'RoomRegisterPage',
     components: {
         RoomRegisterForm,
     },
+    props: {
+        hotelNo:{
+            type: String
+        }
+    },
     computed: {
-        ...mapState(["hotelType"])
+        //...mapState(["hotelType"])
     },
     methods: {
-        ...mapActions(["getHotelType"]),
+        //...mapActions(["getHotelType"]),
         onSubmit (payload) {
-            const { price, roomType, personnel, roomInfo, files ,hotelNo } = payload
+            
+            const hotelNo = this.hotelNo
+            console.log("register" + hotelNo)
+            const { price, roomType, personnel, roomInfo, files } = payload
             let formData = new FormData()
             let room = {
                    price, 
@@ -47,7 +54,7 @@ export default {
             .then(() => {
                 alert('등록 되었습니다.')
                 this.$router.push({
-                    name: 'RoomListPage'
+                    name: 'BRoomListPage'
                 })
             })
             .catch(() => {
@@ -56,7 +63,7 @@ export default {
         }
     },
     mounted() {
-        this.getHotelType()
+        //this.getHotelType()
     
     },
 }

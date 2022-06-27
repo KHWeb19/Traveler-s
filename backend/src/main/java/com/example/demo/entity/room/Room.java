@@ -18,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@ToString(exclude = {"hotel"})
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,6 +66,13 @@ public class Room {
     @UpdateTimestamp
     private Date updDate;
 
+    public void addHotelToRoom(Hotel hotel){
+        if (this.hotel != null){
+            this.hotel.getRooms().remove(this);
+        }
+        this.hotel = hotel;
+        hotel.getRooms().add(this);
+    }
 
 }
 

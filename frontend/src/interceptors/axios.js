@@ -32,14 +32,20 @@ axios.interceptors.response.use((response)=>{return response}, async (error) =>
                 localStorage.setItem("access_token", data.access_token)
                 originalRequest.headers['Authorization'] = `Bearer ${data.access_token}`
                 return axios(originalRequest)
-            }
+            } 
         }
         else if (error.response.status === 403){
             alert("해당 요청에 대한 권한이 없습니다")
             router.push({name:"home"})
         }
-    console.log("End of response interceptor ", error)    
-    return error    
+        else if (error.response.status === 404){
+            alert("404 Page not found")
+            router.push({name: "home"})
+        }
+        else {
+            // 주의 다른로직으로 실패해도 access_token이 삭제될수 있음
+            //localStorage.removeItem("access_token")
+        }
+        
     }
-    
 )
