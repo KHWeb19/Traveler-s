@@ -20,6 +20,5 @@ public interface HotelService {
 
     public List<Hotel> random ();
     public Hotel mRead (Integer hotelNo);
-    public List<Hotel> searchList(String word);
 
 }

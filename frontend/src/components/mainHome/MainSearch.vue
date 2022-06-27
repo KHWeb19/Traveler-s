@@ -2,25 +2,28 @@
     <v-col class="MainSearch">
         <v-row>
             <v-col cols="12" xs="12" sm="6" md="4">
-                <v-menu class="menu1" v-model="calendar" :close-on-content-click="false" transition="scale-transition"
+                <v-menu class="menu1" :close-on-content-click="false" transition="scale-transition"
                     offset-y>
                     <template v-slot:activator="{ on, attrs }">
-                        <v-text-field class="DateSearch" v-model="dateRangeText" label="날짜 선택"
-                            prepend-icon="mdi-calendar" v-bind="attrs" @blur="date = parseDate(dateFormatted)" v-on="on"
+                        <v-text-field class="DateSearch"  label="날짜 선택" v-model="planDate"
+                            prepend-icon="mdi-calendar" v-bind="attrs" v-on="on"
                             rounded solo readonly></v-text-field>
                     </template>
-                    <v-date-picker v-model="dates" range></v-date-picker>
+                    <v-date-picker v-model="dates" 
+                                    :min="new Date().toISOString().substr(0, 10)" range
+                                    >
+                    </v-date-picker>
                 </v-menu>
             </v-col>
             <v-col cols="12" xs="12" sm="6" md="4">
-                <v-select :items="items" prepend-icon="mdi-bed" label="인원 선택" class="PickPeople" rounded solo>
+                <v-select v-model="personnel" :items="items" item-value="value" prepend-icon="mdi-bed" label="인원 선택" class="PickPeople" rounded solo>
                 </v-select>
             </v-col>
             <v-col cols="12" xs="12" sm="12" md="4">
-                <v-text-field class="CitySearch" prepend-icon="mdi-city-variant-outline" label="도시 입력" rounded solo
+                <v-text-field v-model="city" class="CitySearch" prepend-icon="mdi-city-variant-outline" label="도시 입력" rounded solo
                     type="city">
                     <template #append>
-                        <v-btn @click="searchPage(/*이부분에 날자정보, 인원수, 도시검색정보 넣어야되는게 맞나요.,.? */)" type="submit" value="Subscribe">
+                        <v-btn @click="searchPage()" type="submit" value="Subscribe">
                             검색하기
                         </v-btn>
                     </template>
@@ -31,6 +34,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
     name: 'MainSearch',
@@ -42,18 +46,44 @@ export default {
     component: {
     },
     data: () => ({
-        dates: ['2022-06-13', '2022-06-13'],
+        dates: [],
         items: ['1', '2', '3', '4'],
         value: null,
+        personnel: '',
+        city:''
     }),
     computed: {
-        dateRangeText() {
+        planDate () {
+            if(this.dates.length == 2) {
+                if(this.dates[0] >= this.dates[1]){
+                    alert ('다시 선택하세요')
+                    this.initDates()
+                }
+            }
             return this.dates.join(' ~ ')
         },
     },
     methods: {
-        searchPage(/*이부분에 날자정보, 인원수, 도시검색정보 넣어야하는게 맞는건지..? */) {
-            this.$router.push({name:'DetailSearch'},/*params:{ 위에 데이터 투스트링으로???}*/)
+        searchPage() {
+            console.log(this.dates)
+            const { dates, personnel , city} = this
+            axios.post('http://localhost:7777/search/commonSearch', {dates, personnel, city})
+                    .then((res) => {
+                        console.log("검색 성공")
+                        console.log(res.data)
+                        
+                        
+                        this.$router.push({name: 'CommonSearchPage',
+                                    params: { searchList: res.data } })
+                    .catch(() => {});
+                })
+                .catch(() => {
+                alert("검색 실패");
+            });
+           
+        },
+        initDates() {
+            return this.dates = []
         }
     },
 }

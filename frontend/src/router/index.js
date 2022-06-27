@@ -7,6 +7,7 @@ import states from '@/store/states'
 
 import MHotelReadPage from '@/views/hotelDetail/HotelReadPage.vue'
 import SearchPage from '@/views/searchpage/SearchPage.vue'
+import CommonSearchPage from '@/views/searchpage/CommonSearchPage.vue'
 
 import BHotelModifyPage from '@/views/hotel/HotelModifyPage.vue'
 import BHotelReadPage from '@/views/hotel/HotelReadPage.vue'
@@ -136,6 +137,16 @@ const routes = [
     name: 'BRoomModifyPage',
     components: {
       default: BRoomModifyPage
+    },
+    props: {
+      default: true
+    }
+  }, 
+  {
+    path: '/commonSearchPage',
+    name: 'CommonSearchPage',
+    components: {
+      default: CommonSearchPage
     },
     props: {
       default: true
