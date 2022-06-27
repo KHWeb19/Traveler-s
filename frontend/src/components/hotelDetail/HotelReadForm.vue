@@ -5,159 +5,135 @@
 
             <table style="width: 80%">
 
-                <tr>
-                <td>
+                <tr  align="right">
+                    <td colspan="2">
+                        <v-btn id="likeBtn" @click="like" style="box-shadow:none"> 
+                           <v-icon color="#ccbce3"> mdi-cards-heart </v-icon>
+                        </v-btn>
+                        <span> <!--{{ mHotel.likeCnt }}--> 5 </span>
+                        
+                        &ensp;
+                    </td>
+                </tr>
+
+                <tr> <!-- 호텔 이미지 슬라이드 -->
+                <td colspan="2">
                     <div class="slide-9img">
-                        <v-container style="padding: 0px">
-                            <v-carousel cycle hide-delimiters class="cover">
-                            <v-carousel-item :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath1}`)"/>
-                            <v-carousel-item :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath2}`)"/>
-                            <v-carousel-item :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath3}`)"/>
-                            <v-carousel-item :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath4}`)"/>
-                            <v-carousel-item :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath5}`)"/>
-                            <v-carousel-item v-if="mHotel.hotelImgPath6" :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath6}`)"/>
-                            <v-carousel-item v-if="mHotel.hotelImgPath7" :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath7}`)"/>
-                            <v-carousel-item v-if="mHotel.hotelImgPath8" :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath8}`)"/>
-                            <v-carousel-item v-if="mHotel.hotelImgPath9" :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath9}`)"/>
-                            </v-carousel>
-                        </v-container>
+                            <v-container style="padding: 0px">
+                                <v-carousel cycle hide-delimiters class="cover">
+                                <v-carousel-item :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath1}`)"/>
+                                <v-carousel-item :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath2}`)"/>
+                                <v-carousel-item :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath3}`)"/>
+                                <v-carousel-item :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath4}`)"/>
+                                <v-carousel-item :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath5}`)"/>
+                                <v-carousel-item v-if="mHotel.hotelImgPath6" :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath6}`)"/>
+                                <v-carousel-item v-if="mHotel.hotelImgPath7" :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath7}`)"/>
+                                <v-carousel-item v-if="mHotel.hotelImgPath8" :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath8}`)"/>
+                                <v-carousel-item v-if="mHotel.hotelImgPath9" :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath9}`)"/>
+                                </v-carousel>
+                            </v-container>
                     </div>
                 </td>
                 </tr>
 
                 <br>
 
-                <tr>
-                <td>
-                    <h1>{{mHotel.hotelName}}</h1> <!-- 숙소 이름 -->
-                    <p>{{mHotel.hotelIntro}}</p> <!-- 숙소 한줄 소개 -->
-                </td>
-                </tr>
-
-                <br>
-
-                <tr> <!-- 검색 조건 -->
-                <td>
-                    <h3>검색 조건</h3>
-                    <!-- 객실 선택 -->
-                    <!-- 검색페이지의 달력, 인원수 확인되어야 함. 서치 페이지 재활용하면 됨. -->
-                    
-                </td>
-                </tr>
-
-
-                <tr> <!-- 객실 란 컴포넌트 분리하여 작업 중!-->
-                <td>
-                    <room-read-form v-if="mRoom" :mRoom="mRoom"/>
-                    <br>
-                </td>
-                </tr>
-
-
-                <hr align="center" style="width: 100%;">
-                
-                <tr> <!-- 이 숙소의 매력 포인트 태그 -->
-                <td>
-                    <br>
-                    <div align="center">
-                    <table style="width: 70%">
-                        <tr>
-                            <td>
-                                <v-col>
-                                       <!-- hotelInfo라는 자료의 데이터 갯수만큼 반복이 된다. data 변수명은 item이라고 해준다.  -->
-                                       <!-- key의 용도는 반복문 돌린 요소를 컴퓨터가 구분하기 위한 것. 반복문 돌면서 변하는 숫자/문자   -->
-                                        <!-- 작명 두개 할 시(데이터 변수, 1씩 증가하는 정수 변수) / 이때 key에는 보통 정수 변수를 입력   -->
-                                    <v-row justify="center">
-                                        <span id="tagSpan2" v-for="(item, i) in mHotel.hotelInfo" :key="i" class="hotel_info">
-                                            {{ "#" + item }}
-                                            <!-- i 번째 item를 출력  -->
-                                        </span>   
-                                    </v-row>
-                                </v-col>
-                            </td>
-                        </tr>
-                    </table>
-                    </div>
-                    <br>
-                </td>
-                </tr>
-
-                <hr>               
-
-                <tr>
-                <td>
-                    <br>
-                        <h3>숙소 위치</h3>
-                        <p>{{mHotel.totalAddress}}</p>
-                    <br>
-                        <kakao-map-api :mHotel="mHotel"/>
-                    <br>
-                </td>
-                </tr>
-
-                <hr>
-
-                <tr> <!-- 사업자명 확인 가능 & 카톡으로 문의하기 -->
-                <td>
-                    <br>
-                    <v-col>
-                    <v-row justify="right">
-                        <table style="margin-left:auto; margin-right: 10px;">
-                            <tr>
-                                <v-img id="myImg" :src="require(`@/assets/hotel.jpg`)"/>
-                            </tr>
-                        </table>
-                        <table style="width: 180px; margin-right: 10px;">
-                            <tr>
-                                <td>
-                                    <h3>{{mHotel.writer}}</h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td text onclick="window.open('https://open.kakao.com/o/siza2rWb')">
-                                    
-                                    <p> <v-icon>mdi-chat-question-outline</v-icon> 카톡으로 문의하기 </p>
-                                </td>
-                            </tr>
-                        </table>
-                    </v-row>
-                    </v-col>
-                </td>
-                </tr>                
-
-                <hr>
-
-                <br>
-                <tr> <!-- 리뷰란 -->
+                <tr><!-- 숙소 이름, 한줄소개, 좋아요 -->
                     <td>
-                        <h3>고객 리뷰</h3>
-                        <br>
+                        <h1>{{mHotel.hotelName}}</h1> 
+                        <p>{{mHotel.hotelIntro}}</p>
+                    </td>
+                    <td>
                         <v-col>
-                        <v-row justify="center">
-                            <table style="width: 95%">
-                                <tr>
-                                    <td>
-                                        <p>★★★★★ &ensp;|&ensp; 고객명</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <p>2022.05.11 &ensp;|&ensp; 객실종류</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td >
-                                        <p>내집처럼 편안하게 머물다 갑니다~~주인분께서 친절하시고 비대면 체크인이라 너무 편안합니다
-                                            따뜻하고 잠자리도 편안 합니다
-                                            맛집도 알려주셔서 맛난곳에서 식사도 해결하고  아들과 둘만의 여행의 좋은 추억이 되었습니다.♡
-                                            다음에 다시 제주도에 오면 다시 꼭 머물고 싶어요</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </v-row>
+                            <v-row>
+                                <table style="margin-left:auto; margin-right: 10px;">
+                                    <tr>
+                                        <v-img id="myImg" :src="require(`@/assets/hotel.jpg`)"/>
+                                    </tr>
+                                </table>
+                                <table style="margin-right: 10px;">
+                                    <tr>
+                                        <td>
+                                            <h3>{{mHotel.writer}}</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td text onclick="window.open('https://open.kakao.com/o/siza2rWb')">
+                                            
+                                            <p> <v-icon>mdi-chat-question-outline</v-icon> 카톡으로 문의하기 </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </v-row>
                         </v-col>
                     </td>
                 </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <hr  align="center" style="width: 100%;">
+                    </td>
+                </tr>
+
+                <tr> <!-- 이 숙소의 매력 포인트 태그 -->
+                    <td colspan="2">
+                        <br>
+                        <div align="center">
+                        <table style="width: 70%">
+                            <tr>
+                                <td>
+                                    <v-col>
+                                        <!-- hotelInfo라는 자료의 데이터 갯수만큼 반복이 된다. data 변수명은 item이라고 해준다.  -->
+                                        <!-- key의 용도는 반복문 돌린 요소를 컴퓨터가 구분하기 위한 것. 반복문 돌면서 변하는 숫자/문자   -->
+                                            <!-- 작명 두개 할 시(데이터 변수, 1씩 증가하는 정수 변수) / 이때 key에는 보통 정수 변수를 입력   -->
+                                        <v-row justify="center">
+                                            <span id="tagSpan2" v-for="(item, i) in mHotel.hotelInfo" :key="i" class="hotel_info">
+                                                {{ "#" + item }}
+                                                <!-- i 번째 item를 출력  -->
+                                            </span>   
+                                        </v-row>
+                                    </v-col>
+                                </td>
+                            </tr>
+                        </table>
+                        </div>
+                        <br>
+                </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <hr  align="center" style="width: 100%;">
+                    </td>
+                </tr>               
+
+                <tr>
+                <td colspan="2">
+                    <br>
+                        <h3>숙소 위치</h3>
+                        <p>{{mHotel.totalAddress}}</p>
+                </td>
+                </tr>
+                    <td colspan="2" align="center">
+                        <kakao-map-api :mHotel="mHotel"/>
+                        <br>
+                    </td>
+                <tr>
+                    
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <hr  align="center" style="width: 100%;">
+                    </td>
+                </tr>              
+
+                <tr>
+                    <td colspan="2">
+                        <m-room-read-form :mHotel="mHotel"/>
+                    </td>
+                </tr>    
+
 
             </table>
 
@@ -168,29 +144,56 @@
 
 </div>
 </template>
+
 <script>
 import KakaoMapApi from '@/components/hotelDetail/KakaoMapApi.vue'
-import RoomReadForm from './RoomReadForm.vue'
+import MRoomReadForm from '@/components/hotelDetail/RoomReadForm.vue'
+
+import axios from 'axios';
 
 export default {
-    name: 'MHotelReadForm',
+    name: 'HotelReadForm',
     components: {
         KakaoMapApi,
-        RoomReadForm
+       MRoomReadForm,
     },
     data() {
         return {
             hotelInfo: [],
+            pageArray: [],
         }
     },
     props: {
         mHotel: {
             type: Object,
             required: true
-        }
+        },
+    },
+    created() {
+        this.hotelNo = this.mHotel.hotelNo
+        this.who = this.$store.state.userInfo.id //이 부분 변경 필요하면 해주세요.
     },
     methods: {
-
+        like () {
+            const { hotelNo, who } = this
+            console.log(hotelNo, who)
+            if (this.iLike == true ){
+                alert("이미 좋아요 하셨습니다 !")
+            } else {
+            axios.post(`http://localhost:7777/hotel/${hotelNo}/like`, {who})
+                 .then((res) => {
+                    if (res.data == false) {
+                    alert("이미 좋아요 하셨습니다!")
+                } else {
+                    alert("좋아요")
+                    history.go(0)
+                }
+            })
+            .catch(() => {
+                alert ('좋아요 실패 문제발생 !')
+            })
+            }
+        }        
     }
 }
 
@@ -223,4 +226,8 @@ export default {
     height: 55px;
     border-radius: 25px;
 }
+/*table{
+    border-collapse:collapse;
+    border: 1px solid black;
+} */
 </style>
