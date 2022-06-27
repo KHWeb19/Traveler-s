@@ -14,7 +14,6 @@
 	</div>
 </template>
 
-
 <script>
 import MainSearch from '@/components/mainHome/MainSearch.vue'
 import HotelRandom from '@/components/mainHome/HotelRandom.vue';
@@ -56,8 +55,6 @@ export default {
 };
 
 </script>
-
-
 
 <style scoped>
 
