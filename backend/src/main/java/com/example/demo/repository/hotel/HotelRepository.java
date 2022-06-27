@@ -18,7 +18,7 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
 
     List<Hotel> findByWriter(@Param("writer") String writer);
 
-    List<Hotel> findByHotelInfoContaining(String keyWord);
+    List<Hotel> findByHotelInfoContaining(String word);
 }
 
 
