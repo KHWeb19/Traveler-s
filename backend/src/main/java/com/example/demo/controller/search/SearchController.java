@@ -14,16 +14,16 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping
+@RequestMapping("/search")
 @RequiredArgsConstructor
 public class SearchController {
 
     private final HotelService hotelService;
 
-    @PostMapping("/search")
+    @PostMapping("/tagSearch")
     public List<Hotel> tagSearch (@RequestBody KeyWordRequest keyWord) {
         log.info("tagSearch()");
-        String word = keyWord.getKeyWord();
+        String word = keyWord.getWord();
 
 
         return hotelService.searchList(word);

@@ -129,8 +129,8 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
     }
 
     @Override
-    public List<Hotel> searchList(String keyWord) {
-        List<Hotel> findSearchList = hotelRepository.findByHotelInfoContaining(keyWord);
+    public List<Hotel> searchList(String word) {
+        List<Hotel> findSearchList = hotelRepository.findByHotelInfoContaining(word);
 
         log.info("findSearchList : " + findSearchList);
 
