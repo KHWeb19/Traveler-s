@@ -21,7 +21,7 @@ export default {
     methods: {
          ...mapActions(["setUser"]),
         onSubmit (payload) {
-            const { hotelName, hotelInfo, hotelIntro,  postcode, totalAddress , files, writer } = payload
+            const { hotelName, hotelInfo, hotelIntro,  postcode, totalAddress , files } = payload
 
             let formData = new FormData()
             let hotel = {
@@ -30,7 +30,6 @@ export default {
                     hotelIntro,
                     postcode,
                     totalAddress,
-                    writer
             }
 
             formData.append('hotel',new Blob([JSON.stringify(hotel)],{type: "application/json"}))

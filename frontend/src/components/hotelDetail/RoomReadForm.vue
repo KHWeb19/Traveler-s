@@ -1,3 +1,5 @@
+es (81 sloc)  2.67 KB
+
 <template>
     <v-card :elevation="hover ? 16:2" class="{ 'on-hover': hover }" 
         align = "center"

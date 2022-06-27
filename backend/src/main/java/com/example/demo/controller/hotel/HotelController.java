@@ -4,10 +4,13 @@ import com.example.demo.controller.hotel.response.HotelResponse;
 import com.example.demo.dto.hotel.HotelRequest;
 
 import com.example.demo.entity.hotel.Hotel;
+import com.example.demo.entity.member.User;
 import com.example.demo.service.hotel.HotelService;
+import com.example.demo.service.member.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -22,7 +26,10 @@ import java.util.List;
 public class HotelController {
 
     @Autowired
-    HotelService hotelService;
+    private HotelService hotelService;
+
+    @Autowired
+    private UserService userService;
 
     //사업자 매뉴얼 페이지 호텔 등록
     @PostMapping(value="/hotelRegister", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
@@ -32,7 +39,13 @@ public class HotelController {
 
         log.info("files :" + files);
 
+        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userService.findByEmailWithHotels(email).get();
+
+        hotel.addUserToHotel(user);
+
         hotelService.register(hotel, files);
+
     }
 
     //사업자 매뉴얼 페이지 호텔 목록

@@ -110,7 +110,8 @@
                         <table style="width: 180px; margin-right: 10px;">
                             <tr>
                                 <td>
-                                    <h3>{{mHotel.writer}}</h3>
+                                    <!--여기 writer-->
+                                    <h3>{{mHotel}}</h3>
                                 </td>
                             </tr>
                             <tr>
