@@ -1,4 +1,6 @@
 <template>
+<v-main>
+		<v-app>
 	<div align="center" class="home_wrap">
 		<v-container>
 			<v-row>
@@ -9,6 +11,8 @@
 			<common-search :searchList="searchList"/>
 		</v-container>
 	</div>
+	</v-app>
+</v-main>
 </template>
 
 <script>
