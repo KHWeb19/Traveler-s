@@ -128,18 +128,4 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
         return maybeReadBoard.get();
     }
 
-    @Override
-    public List<Hotel> searchList(String word) {
-        List<Hotel> findSearchList = hotelRepository.findByHotelInfoContaining(word);
-
-        log.info("findSearchList : " + findSearchList);
-
-        return findSearchList;
-    }
-
-
-
-
-
-
 }
