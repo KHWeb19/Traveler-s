@@ -1,7 +1,5 @@
 <template>
-<!-- 사이드 바 -->
 <div class="board-list">
-  <!-- <v-text-field v-model="searchkeyword" dense outlined class="searchkeyword"/> -->
 <table>
   <colgroup>
     <col class="select">
@@ -25,7 +23,7 @@
                 숙소를 등록해주세요.
             </td>
         </tr>
-        <tr v-else v-for="bmHotel in bmHotels" :key="bmHotel.hotelNo">
+        <tr v-else v-for="bmHotel in paginatedData" :key="bmHotel.hotelNo">
 
           <td><input class="check all" type="checkbox"></td>
             <td>
@@ -49,31 +47,66 @@
         </tr>
   </tbody>
 </table>
-<div class="page-box">
-  <a class="btn" href="#">&lt;&lt;</a>
-  <a class="btn" href="#">&lt;</a>
-  
-  <!--  숫자 버튼  -->
-  <a class="btn number" href="#">1</a>
-  <a class="btn number" href="#">2</a>
-  <a class="btn number on" href="#">3</a>
-  <a class="btn number" href="#">4</a>
-  <a class="btn number" href="#">5</a>
-  
-  <a class="btn" href="#">&gt;</a>
-  <a class="btn" href="#">&gt;&gt;</a>
-</div>
-</div>
-</template>
 
+<div class="page-box">
+        <div class="btn-cover">
+            <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
+                이전
+            </button>
+            <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
+            <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
+                다음
+            </button>
+        </div>
+  </div>
+
+</div>
+
+</template>
 <script>
+
 export default {
   name: 'HotelList',
   props: {
     bmHotels: {
-      type: Array
+      type: Array,
+      required: true
+    },
+    pageSize: {
+      type: Number,
+      required: false,
+      default: 5
     }
   },
+  data () {
+    return {
+      pageNum: 0,
+      hotelNo: '',
+    }
+  },
+  computed: {
+    pageCount () {
+                let listLeng = this.bmHotels.length,
+                    listSize = this.pageSize,
+                    page = Math.floor(listLeng / listSize);
+                if (listLeng % listSize > 0) page += 1
+                return page;
+            },
+            paginatedData () {
+                const start = this.pageNum * this.pageSize,
+                        end = start + this.pageSize;
+                return this.bmHotels.slice(start, end);
+                
+            }
+  },
+  methods: {
+            nextPage () {
+            this.pageNum += 1;
+            },
+            prevPage () {
+            this.pageNum -= 1;
+            },
+}
 }
 </script>
 
