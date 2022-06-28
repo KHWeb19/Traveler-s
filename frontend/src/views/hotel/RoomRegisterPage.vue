@@ -7,7 +7,7 @@
 <script>
 import RoomRegisterForm from '@/components/hotel/RoomRegisterForm.vue'
 import axios from 'axios'
-//import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
     name: 'RoomRegisterPage',
     components: {
@@ -19,10 +19,10 @@ export default {
         }
     },
     computed: {
-        //...mapState(["hotelType"])
+        ...mapState(["hotelType"])
     },
     methods: {
-        //...mapActions(["getHotelType"]),
+        ...mapActions(["getHotelType"]),
         onSubmit (payload) {
             
             const hotelNo = this.hotelNo
@@ -63,7 +63,7 @@ export default {
         }
     },
     mounted() {
-        //this.getHotelType()
+        this.getHotelType()
     
     },
 }

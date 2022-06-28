@@ -1,19 +1,22 @@
 <template>
-	<div align="center" class="home_wrap">
-		<v-container>
-			<v-row>
-				<main-search/>
-			</v-row>
-		</v-container>
-		<hotel-random :mHotels="mHotels" :list-array="pageArray"/>
-		<v-container>
-			<v-row>
-				<tag-search :mHotels="mHotels"/>
-			</v-row>
-		</v-container>
-	</div>
+	<v-main>
+		<v-app>
+			<div align="center" class="home_wrap">
+				<v-container>
+					<v-row>
+						<main-search/>
+					</v-row>
+				</v-container>
+				<hotel-random :mHotels="mHotels" :list-array="pageArray"/>
+				<v-container>
+					<v-row>
+						<tag-search :mHotels="mHotels"/>
+					</v-row>
+				</v-container>
+			</div>
+		</v-app>
+	</v-main>
 </template>
-
 
 <script>
 import MainSearch from '@/components/mainHome/MainSearch.vue'
@@ -56,8 +59,6 @@ export default {
 };
 
 </script>
-
-
 
 <style scoped>
 

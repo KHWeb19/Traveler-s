@@ -2,8 +2,11 @@ package com.example.demo.entity.hotel;
 
 
 import com.example.demo.dto.hotel.HotelConvert;
+import com.example.demo.entity.member.User;
 import com.example.demo.entity.room.Room;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +22,7 @@ import java.util.List;
 
 @Data
 @Entity
-@ToString(exclude = {"rooms"})
+@ToString(exclude = {"rooms", "user"})
 @Table(name = "hotel")
 @NoArgsConstructor
 public class Hotel {
@@ -94,7 +97,17 @@ public class Hotel {
     @UpdateTimestamp
     private Date updDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    private User user;
 
+    public void addUserToHotel(User user){
+        if (this.user != null){
+            this.user.getHotels().remove(this);
+        }
+        this.user = user;
+        this.user.getHotels().add(this);
+    }
 
     public List<String> getHotelInfo() {
         List<String> list = new ArrayList<>();
@@ -130,12 +143,11 @@ public class Hotel {
 
     }
 
-    public Hotel(String hotelName, String hotelIntro, String hotelInfo, String writer, String totalAddress, String postcode,
+    public Hotel(String hotelName, String hotelIntro, String hotelInfo, String totalAddress, String postcode,
                  String hotelImgPath1, String hotelImgPath2, String hotelImgPath3, String hotelImgPath4, String hotelImgPath5) {
         this.hotelName = hotelName;
         this.hotelIntro = hotelIntro;
         this.hotelInfo = hotelInfo;
-        this.writer = writer;
         this.postcode = postcode;
         this.totalAddress = totalAddress;
         this.hotelImgPath1 = hotelImgPath1;
