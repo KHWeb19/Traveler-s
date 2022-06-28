@@ -33,6 +33,9 @@ export default {
   methods: {
     ...mapActions(["fetchMHotel", "setUser"]),
   },
+  mounted() {
+    this.setUser();
+  },
 };
 </script>
 

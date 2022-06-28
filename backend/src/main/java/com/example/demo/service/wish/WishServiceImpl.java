@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,14 +27,15 @@ public class WishServiceImpl implements WishService{
     private HotelRepository hotelRepository;
 
     @Override
-    public boolean addWish(Wish wish , Long hotelNo) {
-
+    public boolean addWish(User user , Long hotelNo) {
+        Wish wish = new Wish();
         Optional<Hotel> findBoard =hotelRepository.findById(hotelNo);
-        log.info("getBoardNo: " + wish);
+        log.info("getHotelNo: " + hotelNo);
 
-        wish.setHotel(findBoard.get());
 
-        if (wishRepository.findHotelNoByIdAndHotelHotelNo(wish.getId(), hotelNo).isEmpty()) {
+        if (wishRepository.findHotelNoByIdAndHotelHotelNo(user.getId(), hotelNo).isEmpty()) {
+            wish.setHotel(findBoard.get());
+            wish.setUser(user);
             wishRepository.save(wish);
             return true;
         }
@@ -46,5 +47,18 @@ public class WishServiceImpl implements WishService{
     @Override
     public void deleteWish(Long wishNo) {
         wishRepository.deleteById(wishNo);
+    }
+
+    @Override
+    public List<Hotel> findHotel(Long id) {
+        List<Wish> wish = wishRepository.findByUserNo(id);
+
+        List<Hotel> hotelList = new ArrayList<>();
+
+        for(Wish wish2 : wish){
+            hotelList.add(wish2.getHotel());
+        }
+        log.info("hotelList : " + hotelList);
+        return hotelList;
     }
 }

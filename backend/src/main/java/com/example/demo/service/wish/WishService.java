@@ -9,7 +9,9 @@ import java.util.List;
 public interface WishService {
 
 
-    boolean addWish(Wish wish, Long hotelNo);
+    boolean addWish(User user, Long hotelNo);
 
     void deleteWish(Long wishNo);
+
+    public List<Hotel> findHotel(Long id);
 }

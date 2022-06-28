@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Builder
 @Data
@@ -20,11 +22,10 @@ public class Wish {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long wishNo;
 
-
-    @Column
-    private Long id;
-
-
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name= "id")
+    private User user;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Hotel hotel;
