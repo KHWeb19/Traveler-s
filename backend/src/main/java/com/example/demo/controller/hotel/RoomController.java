@@ -7,6 +7,7 @@ import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.member.User;
 import com.example.demo.entity.room.Room;
 import com.example.demo.service.hotel.HotelService;
+import com.example.demo.service.member.UserService;
 import com.example.demo.service.room.RoomService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,7 @@ public class RoomController {
 
 
     private final RoomService roomService;
+    private final UserService userService;
 
     @PostMapping(value="/register", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
     public void roomRegister (@Validated @RequestPart(value="roomRequest") RoomRequest roomRequest,
@@ -42,9 +44,9 @@ public class RoomController {
 
     @GetMapping("/getHotelType")
     public List<RoomResponse> getHotelType(){
-        String writer = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        return roomService.findHotel(writer);
+        return roomService.findHotel(email);
     }
 
     @PostMapping("/bm/list")
