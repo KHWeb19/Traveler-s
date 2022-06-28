@@ -10,7 +10,7 @@
   </colgroup>
   <thead>
     <tr>
-      <th><input class="check all" type="checkbox"></th>
+      <th><input class="check all" type="checkbox" v-model="allDeleteHotels"></th>
       <th>번호</th>
       <th>숙소명</th>
       <th>위치</th>
@@ -25,7 +25,7 @@
         </tr>
         <tr v-else v-for="bmHotel in paginatedData" :key="bmHotel.hotelNo">
 
-          <td><input class="check all" type="checkbox"></td>
+          <td><input class="check all" type="checkbox" v-model="deleteHotels" :value="bmHotel.hotelNo" ></td>
             <td>
                 {{ bmHotel.hotelNo }}
             </td>
@@ -47,6 +47,7 @@
         </tr>
   </tbody>
 </table>
+<v-btn @click="deleteHotel()">삭제</v-btn>
 
 <div class="page-box">
         <div class="btn-cover">
@@ -80,11 +81,28 @@ export default {
   },
   data () {
     return {
+      deleteHotels: [],
       pageNum: 0,
       hotelNo: '',
     }
   },
   computed: {
+    allDeleteHotels : {
+       get: function () {
+        return this.bmHotels ? this.deleteHotels.length == this.bmHotels.length : false
+       },
+       set : function (value) {
+            let deleteHotels = [];
+
+            if (value) {
+                this.bmHotels.forEach(function (bmHotels){
+                    deleteHotels.push(bmHotels.hotelNo)
+                })
+            }
+
+            this.deleteHotels = deleteHotels
+       }
+    },
     pageCount () {
                 let listLeng = this.bmHotels.length,
                     listSize = this.pageSize,
@@ -100,6 +118,11 @@ export default {
             }
   },
   methods: {
+    deleteHotel () {
+        console.log(this.deleteHotels)
+        const deleteHotels = this.deleteHotels
+         this.$emit('deleteHotels', deleteHotels)
+    },
             nextPage () {
             this.pageNum += 1;
             },

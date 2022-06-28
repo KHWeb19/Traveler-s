@@ -182,7 +182,6 @@ methods: {
  created () {
     this.hotelName = this.bmHotel.hotelName
     this.hotelInfo = this.bmHotel.hotelInfo
-    this.files = this.bmHotel.files
 }
 }
 </script>
