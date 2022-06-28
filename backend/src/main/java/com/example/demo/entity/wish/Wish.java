@@ -2,6 +2,7 @@ package com.example.demo.entity.wish;
 
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.member.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,11 +20,15 @@ public class Wish {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long wishNo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
 
-    @ManyToOne(fetch =FetchType.LAZY)
+    @Column
+    private Long id;
+
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
     private Hotel hotel;
+
 
 
 }

@@ -1,13 +1,14 @@
 export default {
-    isLoggedIn: false,
-    user: {},
-    hotelType: [],
+  isLoggedIn: false,
+  user: {},
 
-    mHotels: [],
-    mHotel: null,
+  hotelType: [],
 
-    bmHotels: [],
-    bmHotel: null,
+  mHotels: [],
+  mHotel: null,
 
-    bmRoom: null
-}
+  bmHotels: [],
+  bmHotel: null,
+
+  bmRoom: null,
+};

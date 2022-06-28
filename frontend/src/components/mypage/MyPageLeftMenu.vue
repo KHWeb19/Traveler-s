@@ -1,23 +1,23 @@
 <template>
   <div>
-    <div class="left_menu" style="margin-top: 20px;">
+    <div class="left_menu" style="margin-top: 20px">
       <v-col>
         <v-row>
           <v-col>
             <v-row>
               <v-layout>
                 <img
-                v-if="userInfo.profile_path"
-                :src="require(`@/assets/img/${this.userInfo.profile_path}`)"
-                id="imageBefore"
-                class="proimg"
-              />
-                
+                  v-if="userInfo.profile_path"
+                  :src="require(`@/assets/img/${this.userInfo.profile_path}`)"
+                  id="imageBefore"
+                  class="proimg"
+                />
               </v-layout>
             </v-row>
           </v-col>
           <ul>
             <p>{{ userInfo.name }}</p>
+            <p>{{ userInfo.id }}</p>
             <br />
             <br />
             <br />

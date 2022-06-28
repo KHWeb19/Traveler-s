@@ -75,6 +75,7 @@
           </tr>
 
           <br />
+          <v-btn @click="wish" style="box-shadow: none"> 위시 </v-btn>
 
           <tr>
             <!-- 검색 조건 -->
@@ -223,6 +224,7 @@
 <script>
 import KakaoMapApi from "@/components/hotelDetail/KakaoMapApi.vue";
 import RoomReadForm from "./RoomReadForm.vue";
+import axios from "axios";
 export default {
   name: "MHotelReadForm",
   components: {
@@ -232,6 +234,7 @@ export default {
   data() {
     return {
       hotelInfo: [],
+      id: "",
     };
   },
   props: {
@@ -239,8 +242,36 @@ export default {
       type: Object,
       required: true,
     },
+    userInfo: {},
   },
-  methods: {},
+  created() {
+    if (this.userInfo != null) {
+      this.hotelNo = this.mHotel.hotelNo;
+      this.id = this.userInfo.id;
+    }
+  },
+  methods: {
+    wish() {
+      if (this.userInfo != null) {
+        const { hotelNo, id } = this;
+        console.log(hotelNo, id);
+        axios
+          .post(`http://localhost:7777/wish/${hotelNo}/save`, {
+            id,
+          })
+          .then((res) => {
+            if (res.data) {
+              alert("저장 성공");
+            } else {
+              alert("이미 등록");
+            }
+          })
+          .catch(() => {
+            alert("등록 실패");
+          });
+      }
+    },
+  },
 };
 </script>
 
