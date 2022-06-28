@@ -37,12 +37,13 @@
                 </tr>
 
                 <br>
-
+                
                 <tr><!-- 숙소 이름, 한줄소개, 좋아요 -->
                     <td>
                         <h1>{{mHotel.hotelName}}</h1> 
                         <p>{{mHotel.hotelIntro}}</p>
                     </td>
+
                     <td>
                         <v-col>
                             <v-row>
