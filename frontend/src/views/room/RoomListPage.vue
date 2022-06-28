@@ -8,7 +8,9 @@
             <option v-for="(hotel, idx) in hotelType" :key="idx" :value="hotel.hotelNo"> {{hotel.hotelName}}</option>
         </select>
     
-      <router-link :to="{ name: 'RoomRegisterPage', params: {hotelNo : this.hotelNo.toString()} }" class="btn"><v-btn>객실등록</v-btn></router-link>
+      <router-link 
+      v-if="hotelNo"
+      :to="{ name: 'RoomRegisterPage', params: {hotelNo : this.hotelNo.toString()} }" class="btn"><v-btn>객실등록</v-btn></router-link>
 
       <br>
     <room-list :roomList="roomList"

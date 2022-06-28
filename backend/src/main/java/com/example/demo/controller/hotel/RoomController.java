@@ -56,6 +56,13 @@ public class RoomController {
         return roomService.findRoomList(roomRequest.getHotelNo());
     }
 
+    @GetMapping("/bm/list")
+    public List<Room> jpaBoardList () {
+        log.info("bmRoomList()");
+
+        return roomService.bmRoomList();
+    }
+
     @GetMapping("/bm/{roomNo}")
     public Room bmHotelRead (
             @PathVariable("roomNo") Integer roomNo) {
