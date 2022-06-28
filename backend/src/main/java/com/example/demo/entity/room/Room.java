@@ -3,7 +3,9 @@ package com.example.demo.entity.room;
 import com.example.demo.controller.room.AvailableRoom;
 import com.example.demo.dto.hotel.HotelConvert;
 import com.example.demo.entity.hotel.Hotel;
+import com.example.demo.entity.reservation.reservationroom.ReservationRoom;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -65,6 +67,10 @@ public class Room {
 
     @UpdateTimestamp
     private Date updDate;
+
+    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = false)
+    @JsonManagedReference
+    private List<ReservationRoom> reservationRooms;
 
     public void addHotelToRoom(Hotel hotel){
         if (this.hotel != null){

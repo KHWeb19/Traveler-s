@@ -111,7 +111,7 @@
                             <tr>
                                 <td>
                                     <!--여기 writer-->
-                                    <h3>{{mHotel}}</h3>
+                                    <h3>{{mHotel.writer}}</h3>
                                 </td>
                             </tr>
                             <tr>

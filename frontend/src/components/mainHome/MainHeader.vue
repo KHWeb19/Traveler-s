@@ -12,7 +12,7 @@
       </v-sheet>
     </v-col>
     <LoginForm />
-    <v-navigation-drawer disable-resize-watcher temporary app v-model="drawer">
+    <v-navigation-drawer disable-resize-watcher temporary app hide-overlay v-model="drawer">
       <NavDrawer />
     </v-navigation-drawer>
   </v-app-bar>

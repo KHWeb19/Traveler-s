@@ -1,6 +1,8 @@
 package com.example.demo.service.hotel;
 
 
+import com.example.demo.controller.hotel.response.HotelResponse;
+import com.example.demo.dto.hotel.HotelResponseWithWriter;
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.member.User;
 import com.example.demo.repository.hotel.HotelRepository;
@@ -8,16 +10,13 @@ import com.example.demo.repository.member.UserRepository;
 import com.example.demo.utility.fileUpload.FileUpload;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Slf4j
 @Service
@@ -74,11 +73,6 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
         hotelRepository.save(hotel);
     }
 
-    // 사업자 매뉴얼 호텔 리스트
-    //여기가 존나 이상한거지 왜냐면 user info에 맞는 hotel list를 가져와야되는데 hotelrepo에서 그냥 findall로 때려버리니까 이상한거야
-    // 비지니스. 사업자가 야 나 이메일 ceo인데 음 그 내가 관리하고있는 숙소리스트 좀 뽑아줘 이거거든
-    // 그니까 해야되는건 2번호텔 주세요가 아니라 저 OO인데 제 호텔리스트 주세요 라는거야
-    // 그러면 어떻게되냐 list<hotel>을 반환을 하는건 맞아 근데 user의 관계주인이 hotel인데
     @Override
     public List<Hotel> bmHotelList() {
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -125,19 +119,41 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
         return randomResults;
     }
 
-    public Hotel mRead(Integer hotelNo) {
-        Optional<Hotel> maybeReadBoard = hotelRepository.findById(Long.valueOf(hotelNo));
+    public HotelResponseWithWriter mRead(Integer hotelNo) {
+        Optional<Hotel> maybeReadBoard = hotelRepository.findByIdWithUser(Long.valueOf(hotelNo));
         //Optional: null일 수도 있는 객체를 감싸는 일종의 Wrapper 클래스
         /*
         optional 변수 내부에는 null이 아닌 T 객체가 있을 수도 있고 null이 있을 수도 있습니다.
         따라서, Optional 클래스는 여러 가지 API를 제공하여 null일 수도 있는 객체를 다룰 수 있도록 돕습니다
          */
         log.info("HotelServiceIMPL readOK");
+
         if (maybeReadBoard.equals(Optional.empty())) {
             log.info("Can't read board!");
             return null;
         }
-        return maybeReadBoard.get();
+
+        Hotel hotel = maybeReadBoard.get();
+        HotelResponseWithWriter hotelResponseWithWriter = HotelResponseWithWriter.builder().
+                hotelInfo(hotel.getHotelInfo())
+                .hotelImgPath1(hotel.getHotelImgPath1())
+                .hotelImgPath2(hotel.getHotelImgPath2())
+                .hotelImgPath3(hotel.getHotelImgPath3())
+                .hotelImgPath4(hotel.getHotelImgPath4())
+                .hotelImgPath5(hotel.getHotelImgPath5())
+                .hotelImgPath6(hotel.getHotelImgPath6())
+                .hotelIntro(hotel.getHotelIntro())
+                .hotelNo(hotel.getHotelNo())
+                .hotelName(hotel.getHotelName())
+                .openKakaotalk(hotel.getOpenKakaotalk())
+                .postcode(hotel.getPostcode())
+                .regDate(hotel.getRegDate())
+                .updDate(hotel.getUpdDate())
+                .totalAddress(hotel.getTotalAddress())
+                .writer(hotel.getUser().getEmail())
+                .build();
+
+        return hotelResponseWithWriter;
     }
 
 }
