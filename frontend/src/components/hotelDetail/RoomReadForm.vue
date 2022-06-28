@@ -9,7 +9,7 @@
             <tr> <!-- 객실 란 컴포넌트 분리하여 작업 중!-->
                 <td>
                     <v-container>
-                        <v-col v-for="(item, i) in roomList" :key="i">
+                        <v-col v-for="mHotel in mHotels" :key="mHotel.roomNo">
                         <v-card :elevation="hover ? 16:2" class="{ 'on-hover': hover }" 
                             align = "center"
                             style="margin: 10px; width: 100%; height: 200px;">
@@ -20,28 +20,27 @@
                                 <table id="inCard" style="width: 30%; height: 200px;">
                                     <tr>
                                         <td>
-                                            <v-img  width="300px" height="160px"  :src="require(`@/assets/roomImg/${item.roomImgPath1}`)"/>
+                                            <v-img  width="300px" height="160px" :src="require(`@/assets/hotel.jpg`)"/>
                                         </td>
                                     </tr>
                                 </table>
                                 <table id="inCard" style="width: 42%; height: 190px;">
                                     <tr>
                                         <td>
-                                            <p>{{item.roomType}}</p>
+                                            <p>{{mHotel.roomType}}</p>
                                         </td>
                                     </tr>
                                     <tr> 
                                         <td>
-                                            <p>{{item.personnel}}</p>
+                                            <p>{{mHotel.personnel}}</p>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             <v-row >
-                                                <span id="tagSpan1" v-for="(item, i) in item.roomInfo" :key="i" class="hotel_info">
-                                            {{ "#" + item }}
-                                            <!-- i 번째 item를 출력  -->
-                                        </span> 
+                                                <span id="tagSpan1">
+                                                    욕조
+                                                </span>
                                             </v-row>
                                         </td>
                                     </tr>
@@ -53,45 +52,17 @@
                                             <v-col>
                                                 <v-row justify="right">
                                                     <tr>
-                                                        <v-dialog width="700px">
-                                                        <template v-slot:activator="{ on }">
-                                                            <v-btn
-                                                                    :elevation="hover ? 16:2" v-on="on" dark>
-                                                            상세보기
-                                                            </v-btn>
-                                                        </template>
-
-
-                                                            <!-- slide를 넣어서 객실 사진 전부를 확인할 수 있도록 한다. -->
-                                                                <div class="slide-10d">
-                                                                        <v-container style="padding: 0px">
-                                                                            <v-carousel cycle hide-delimiters class="cover">
-                                                                            <v-carousel-item :src="require(`@/assets/roomImg/${item.roomImgPath1}`)"/>
-                                                                            <v-carousel-item :src="require(`@/assets/roomImg/${item.roomImgPath2}`)"/>
-                                                                            <v-carousel-item :src="require(`@/assets/roomImg/${item.roomImgPath3}`)"/>
-                                                                            <v-carousel-item :src="require(`@/assets/roomImg/${item.roomImgPath4}`)"/>
-                                                                            <v-carousel-item :src="require(`@/assets/roomImg/${item.roomImgPath5}`)"/>
-                                                                            <v-carousel-item v-if="roomList.roomImgPath6" :src="require(`@/assets/roomImg/${item.roomImgPath6}`)"/>
-                                                                            <v-carousel-item v-if="roomList.roomImgPath7" :src="require(`@/assets/roomImg/${item.roomImgPath7}`)"/>
-                                                                            <v-carousel-item v-if="roomList.roomImgPath8" :src="require(`@/assets/roomImg/${item.roomImgPath8}`)"/>
-                                                                            <v-carousel-item v-if="roomList.roomImgPath9" :src="require(`@/assets/roomImg/${item.roomImgPath9}`)"/>
-                                                                            </v-carousel>
-                                                                        </v-container>
-                                                                </div>
-                                                            <br>
-                                                                <v-card-actions>
-                                                                    <v-spacer></v-spacer>
-                                                                    <v-btn>
-                                                                        닫기
-                                                                    </v-btn>
-                                                                </v-card-actions>
-                                                    </v-dialog>
+                                                        <td>
+                                                            <v-btn id="button"
+                                                            @click="roomDetail(mRoom.roomNo, mRoom.id)"
+                                                            >
+                                                            상세보기</v-btn>
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <br>
                                                             <v-btn id="button"
-                                                            @click="goReserv(mRoom.hotelNo, mRoom.roomNo)"
+                                                            @click="goRegister()"
                                                             >
                                                             예약하기</v-btn>
                                                         </td>
@@ -114,23 +85,8 @@
 </template>
 
 <script>
-
-
 export default {
-    name: 'MRoomReadForm',
-    components: {
-
-    },
-    props: {
-        roomList: {
-            type: Array
-        }
-    },
-    methods: {
-        goReserv () {
-
-        },
-    },
+    name: 'MRoomReadForm', 
 }
 </script>
 
