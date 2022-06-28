@@ -123,7 +123,7 @@ props: {
 data () {
     return {
         hotelName: '',
-        hotelInfo: [],
+        hotelInfo: this.bmHotel.hotelInfo,
         files: [],
         notImage: ['','','','','','','','',''],
         fileNum: 0,
@@ -131,8 +131,12 @@ data () {
 },
 methods: {
     onSubmit () {
-        const { hotelName, hotelInfo, files } = this
-        this.$emit('submit', { hotelName, hotelInfo, files })
+        if(this.files.length < 5){
+                alert('사진은 5장 이상 첨부해주세요')
+            } else {
+        const { hotelName, hotelInfo, hotelIntro, postcode, totalAddress,  files } = this
+        this.$emit('submit', { hotelName, hotelInfo, hotelIntro, postcode, totalAddress, files })
+        }
     },
     handleFilesUpload () {
             if(this.$refs.files.files.length > 9){
@@ -161,13 +165,24 @@ methods: {
                 this.$refs.files.value = ''
             }  
            },
-},
-created () {
+           chooseFile() {
+                document.getElementById("files").click()
+        },
+        cancelFile() {
+            this.files = ''
+            this.fileNum = 0
+        },
+        imgCancel(index) {
+            //인덱스 어디부터 하나 삭제
+            this.files.splice(index,1)
+            this.fileNum -= 1
+            console.log(this.files)
+        }
+    },
+ created () {
     this.hotelName = this.bmHotel.hotelName
-    /*this.hotelInfo = this.hotelInfo
-    this.files = this.files
-    this.notImage = this.notImage
-    this.fileNum = this. fileNum*/
+    this.hotelInfo = this.bmHotel.hotelInfo
+    this.files = this.bmHotel.files
 }
 }
 </script>
