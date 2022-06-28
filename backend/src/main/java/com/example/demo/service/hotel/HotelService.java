@@ -2,6 +2,7 @@ package com.example.demo.service.hotel;
 
 import com.example.demo.dto.hotel.HotelRequest;
 import com.example.demo.entity.hotel.Hotel;
+import com.example.demo.entity.member.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileNotFoundException;
@@ -19,6 +20,5 @@ public interface HotelService {
 
     public List<Hotel> random ();
     public Hotel mRead (Integer hotelNo);
-    public List<Hotel> searchList(String searchWord);
 
 }

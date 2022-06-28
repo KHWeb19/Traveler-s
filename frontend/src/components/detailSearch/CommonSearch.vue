@@ -2,7 +2,7 @@
   <v-container>
     <section>
       <div class="row">
-        <v-col v-for="mHotel in paginatedData" :key="mHotel.hotelNo" cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
+        <v-col v-for="(mHotel , idx) in paginatedData" :key="idx" cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
           <v-card @click="readHotel(mHotel.hotelNo)">
             <img id="HotelImg" style="height: 200px; width: 260px;"
               :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath1}`)" />
@@ -51,17 +51,13 @@
 </template>
 
 <script>
-import axios from 'axios'
+
 
 export default {
   name: 'DetailSearch',
   props: {
     searchList: {
       type: Array
-    },
-    listArray: {
-      type: Array,
-      required: true,
     },
     pageSize: {
       type: Number,
@@ -79,20 +75,6 @@ export default {
     readHotel(hotelNo) {
             this.$router.push({ name:'MHotelReadPage', params: { hotelNo: hotelNo.toString() } })      
     },
-    search() {
-        const { word } = this;
-        axios.post("http://localhost:7777/search/tagSearch", { word })
-            .then((res) => {
-            console.log(res.data);
-            alert("검색 완료");
-            this.$router.push({ name: 'MSearchPage', params: { searchList: res.data, word: this.word },
-                })
-                .catch(() => {});
-            })
-            .catch(() => {
-            alert("검색 실패");
-        });    
-    },
     nextPage() {
         this.pageNum += 1;
     },
@@ -102,16 +84,17 @@ export default {
   },
   computed: {
       pageCount() {
-          let listLeng = this.listArray.length,
+          let listLeng = this.searchList.length,
               listSize = this.pageSize,
               page = Math.floor(listLeng / listSize);
           if (listLeng % listSize > 0) page += 1;
           return page;
       },
       paginatedData() {
+        console.log(this.searchList)
           const start = this.pageNum * this.pageSize,
               end = start + this.pageSize;
-          return this.listArray.slice(start, end);
+          return this.searchList.slice(start, end);
       },
   },
 }

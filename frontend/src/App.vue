@@ -1,13 +1,9 @@
 <template>
-	<v-app>
 		<v-main style="width: 100%">
-			<!-- <MainHeader/>-->
       <MainHeader/>
-			<router-view class="page"/>
+			<router-view id="routermain" class="page"/>
       <MainFooter/>
-			<!-- <MainFooter/>-->
 		</v-main>
-	</v-app>
 </template>
 
 <script>

@@ -88,6 +88,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByEmail(email);
     }
     @Override
+    public Optional<User> findByEmailWithHotels(String email) { return userRepository.findByEmailWithHotels(email); }
+
+    @Override
     public String emailDuplicationCheck(String email) {
         String message;
 

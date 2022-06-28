@@ -1,4 +1,6 @@
 <template>
+<v-main>
+		<v-app>
 	<div align="center" class="home_wrap">
 		<v-container>
 			<v-row>
@@ -6,35 +8,28 @@
 			</v-row>
 		</v-container>
 		<v-container>
-			<detail-search :searchList="searchList"
-							:list-array="pageArray"/>
+			<common-search :searchList="searchList"/>
 		</v-container>
 	</div>
+	</v-app>
+</v-main>
 </template>
 
 <script>
 import MainSearch from '@/components/mainHome/MainSearch.vue'
-import DetailSearch from '@/components/detailSearch/DetailSearch.vue'
+import CommonSearch from '@/components/detailSearch/CommonSearch.vue'
 
 export default {
-	name: 'MSearchPage',
+	name: 'CommonSearchPage',
 	components: {
 		MainSearch,
-		DetailSearch
+		CommonSearch
 		
 	},
    props: {
 		searchList: {
 			type:Array
-		},
-		pageArray: {
-			type:Array
-		},
-   },
-   data () {
-        return {
-            word: ''
-    }
+		}
    }
 };
 </script>

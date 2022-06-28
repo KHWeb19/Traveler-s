@@ -12,7 +12,7 @@
   </colgroup>
   <thead>
     <tr>
-      <th><input class="check all" type="checkbox"></th>
+      <th><input class="check all" type="checkbox" v-model="allDeleteRooms"></th>
       <th>객실명</th>
       <th>가격</th>
     </tr>
@@ -24,7 +24,7 @@
             </td>
         </tr>
         <tr v-else v-for="(room ,idx) in roomList" :key="idx">
-          <td><input class="check all" type="checkbox"></td>
+          <td><input class="check all" type="checkbox" v-model="deleteRooms" :value="room.roomNo" ></td>
             <td>
                  <router-link :to="{ name: 'BRoomReadPage',
                                     params: { roomNo: room.roomNo.toString() } }">
@@ -37,6 +37,7 @@
         </tr>
   </tbody>
 </table>
+<v-btn @click="deleteRoom()">삭제</v-btn>
 <div class="page-box">
   <a class="btn" href="#">&lt;&lt;</a>
   <a class="btn" href="#">&lt;</a>
@@ -61,6 +62,38 @@ export default {
   props : {
     roomList:{
         type: Array
+    }
+  },
+  data () {
+    return {
+        deleteRooms: [],
+ 
+    }
+  },
+  methods : {
+    deleteRoom () {
+        console.log(this.deleteRooms)
+        const deleteRooms = this.deleteRooms
+         this.$emit('deleteRooms', deleteRooms)
+    }
+
+  },
+  computed: {
+    allDeleteRooms : {
+       get: function () {
+        return this.roomList ? this.deleteRooms.length == this.roomList.length : false
+       },
+       set : function (value) {
+            let deleteRooms = [];
+
+            if (value) {
+                this.roomList.forEach(function (roomList){
+                    deleteRooms.push(roomList.roomNo)
+                })
+            }
+
+            this.deleteRooms = deleteRooms
+       }
     }
   }
 }

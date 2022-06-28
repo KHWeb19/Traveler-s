@@ -16,6 +16,7 @@ public interface UserService {
     Optional<User> findByEmail(String email);
     String emailDuplicationCheck(String email);
     String mobileDuplicationCheck(MobileRequest mobile);
+    Optional<User> findByEmailWithHotels(String email);
 
     void saveUser(User user);
 }

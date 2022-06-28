@@ -1,152 +1,152 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import HomeView from '../views/HomeView.vue'
 
-import store from "@/store";
+import store from '@/store'
 
-import MHotelReadPage from "@/views/hotelDetail/HotelReadPage.vue";
-import states from "@/store/states";
+import MHotelReadPage from '@/views/hotelDetail/HotelReadPage.vue'
+import states from '@/store/states'
 
-import BHotelModifyPage from "@/views/hotel/HotelModifyPage.vue";
-import BHotelReadPage from "@/views/hotel/HotelReadPage.vue";
+import BHotelModifyPage from '@/views/hotel/HotelModifyPage.vue'
+import BHotelReadPage from '@/views/hotel/HotelReadPage.vue'
 
-import BRoomReadPage from "@/views/room/RoomReadPage.vue";
-import BRoomModifyPage from "@/views/room/RoomModifyPage.vue";
-import RoomRegisterPage from "@/views/hotel/RoomRegisterPage.vue";
+import BRoomReadPage from '@/views/room/RoomReadPage.vue'
+import BRoomModifyPage from '@/views/room/RoomModifyPage.vue'
+import RoomRegisterPage from '@/views/hotel/RoomRegisterPage.vue'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
   {
-    path: "/",
-    name: "home",
-    component: HomeView,
+    path: '/',
+    name: 'home',
+    component: HomeView
   },
   {
-    path: "/about",
-    name: "about",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+    path: '/about',
+    name: 'about',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
   },
   {
-    path: "/login",
-    name: "login",
-    component: () => import("../views/member/MemberLogin.vue"),
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/member/MemberLogin.vue')
   },
   {
-    path: "/signup",
-    name: "SignUp",
-    component: () => import("@/views/member/MemberSignUp.vue"),
+    path: '/signup',
+    name: 'SignUp',
+    component: () => import('@/views/member/MemberSignUp.vue')
   },
   {
-    path: "/oauth2/redirect",
-    name: "OAuth2Redirect",
-    component: () => import("../views/member/OAuth2Redirect.vue"),
+    path: '/oauth2/redirect',
+    name: 'OAuth2Redirect',
+    component: () => import('../views/member/OAuth2Redirect.vue')
   },
   {
-    path: "/BHotelListPage",
-    name: "BHotelListPage",
-    component: () => import("../views/hotel/HotelListPage.vue"),
+    path: '/BHotelListPage',
+    name: 'BHotelListPage',
+    component: () => import('../views/hotel/HotelListPage.vue')
   },
   {
-    path: "/BHotelRegisterPage",
-    name: "BHotelRegisterPage",
-    component: () => import("../views/hotel/HotelRegisterPage.vue"),
+    path: '/BHotelRegisterPage',
+    name: 'BHotelRegisterPage',
+    component: () => import('../views/hotel/HotelRegisterPage.vue')
   },
   {
-    path: "/BHotelReadPage/:hotelNo",
-    name: "BHotelReadPage",
+    path: '/BHotelReadPage/:hotelNo',
+    name: 'BHotelReadPage',
     components: {
-      default: BHotelReadPage,
+      default: BHotelReadPage
     },
     props: {
-      default: true,
-    },
+      default: true
+    }
   },
   {
-    path: "/BHotelModifyPage/:hotelNo",
-    name: "BHotelModifyPage",
+    path: '/BHotelModifyPage/:hotelNo',
+    name: 'BHotelModifyPage',
     components: {
-      default: BHotelModifyPage,
+      default: BHotelModifyPage
     },
     props: {
-      default: true,
-    },
+      default: true
+    }
   },
   {
-    path: "/mypage",
-    name: "MyPage",
+    path: '/mypage',
+    name: 'MyPage',
     beforeEnter: (to, from, next) => {
-      if (states.isLoggedIn) {
-        next();
-      } else {
-        alert("로그인이 필요한 페이지입니다");
-        next({ path: "/login" });
-      }
-    },
-    component: () => import("../views/mypage/MyPage.vue"),
+      if (states.isLoggedIn){
+        next()
+      }else{
+      alert("로그인이 필요한 페이지입니다")
+      next({path: '/login'})}
+    }
+    ,
+    component: () => import('../views/mypage/MyPage.vue')
   },
   {
-    path: "/roomRegister",
-    name: "RoomRegisterPage",
+    path: '/roomRegister',
+    name: 'RoomRegisterPage',
     components: {
-      default: RoomRegisterPage,
+      default: RoomRegisterPage
     },
     props: {
-      default: true,
-    },
+      default: true
+    }
   },
   {
-    path: "/mHotelReadPage/:hotelNo",
-    name: "MHotelReadPage",
+    path: '/mHotelReadPage/:hotelNo',
+    name: 'MHotelReadPage',
     components: {
-      default: MHotelReadPage,
+      default: MHotelReadPage
     },
     props: {
-      default: true,
-    },
+      default: true
+    }
   },
   {
-    path: "/search",
-    name: "SearchPage",
-    component: () => import("../views/searchpage/SearchPage.vue"),
+    path: '/search',
+    name: 'SearchPage',
+    component: () => import('../views/searchpage/SearchPage.vue')
   },
   {
-    path: "/BRoomListPage",
-    name: "BRoomListPage",
-    component: () => import("../views/room/RoomListPage.vue"),
+    path: '/BRoomListPage',
+    name: 'BRoomListPage',
+    component: () => import('../views/room/RoomListPage.vue')
   },
   {
-    path: "/BRoomReadPage/:roomNo",
-    name: "BRoomReadPage",
+    path: '/BRoomReadPage/:roomNo',
+    name: 'BRoomReadPage',
     components: {
-      default: BRoomReadPage,
+      default: BRoomReadPage
     },
     props: {
-      default: true,
-    },
+      default: true
+    }
   },
   {
-    path: "/BRoomModifyPage/:roomNo",
-    name: "BRoomModifyPage",
+    path: '/BRoomModifyPage/:roomNo',
+    name: 'BRoomModifyPage',
     components: {
-      default: BRoomModifyPage,
+      default: BRoomModifyPage
     },
     props: {
-      default: true,
-    },
+      default: true
+    }
   },
-];
+]
 
 const router = new VueRouter({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
-  routes,
-});
+  routes
+})
 
-router.beforeEach(function (to, from, next) {
-  store.dispatch("validate_login");
-  next();
-});
 
-export default router;
+router.beforeEach(function(to,from,next){
+  store.dispatch("validate_login")
+  next()
+})
+
+export default router

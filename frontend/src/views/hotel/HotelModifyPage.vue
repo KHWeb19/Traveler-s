@@ -35,7 +35,7 @@ export default {
                     .then(res => {
                         alert('수정되었습니다.')
                         this.$router.push({
-                            name: 'HotelReadPage',
+                            name: 'BHotelReadPage',
                             params: { hotelNo: res.data.hotelNo.toString() }
                         })
                     })

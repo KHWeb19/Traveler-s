@@ -2,11 +2,14 @@ package com.example.demo.service.hotel;
 
 
 import com.example.demo.entity.hotel.Hotel;
+import com.example.demo.entity.member.User;
 import com.example.demo.repository.hotel.HotelRepository;
+import com.example.demo.repository.member.UserRepository;
 import com.example.demo.utility.fileUpload.FileUpload;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +24,10 @@ import java.util.UUID;
 public class HotelServiceImpl extends FileUpload implements HotelService {
 
     @Autowired
-    HotelRepository hotelRepository;
+    private HotelRepository hotelRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     // 사업자 매뉴얼 호텔 등록
     @Override
@@ -65,14 +71,20 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
 
         }
 
-
         hotelRepository.save(hotel);
     }
 
     // 사업자 매뉴얼 호텔 리스트
+    //여기가 존나 이상한거지 왜냐면 user info에 맞는 hotel list를 가져와야되는데 hotelrepo에서 그냥 findall로 때려버리니까 이상한거야
+    // 비지니스. 사업자가 야 나 이메일 ceo인데 음 그 내가 관리하고있는 숙소리스트 좀 뽑아줘 이거거든
+    // 그니까 해야되는건 2번호텔 주세요가 아니라 저 OO인데 제 호텔리스트 주세요 라는거야
+    // 그러면 어떻게되냐 list<hotel>을 반환을 하는건 맞아 근데 user의 관계주인이 hotel인데
     @Override
     public List<Hotel> bmHotelList() {
-        return hotelRepository.findAll(Sort.by(Sort.Direction.DESC, "HotelNo"));
+        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.findByEmailWithHotels(email).get();
+        return user.getHotels();
+
     }
 
     // 사업자 매뉴얼 호텔 읽기
@@ -127,19 +139,5 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
         }
         return maybeReadBoard.get();
     }
-
-    @Override
-    public List<Hotel> searchList(String keyWord) {
-        List<Hotel> findSearchList = hotelRepository.findByHotelInfoContaining(keyWord);
-
-        log.info("findSearchList : " + findSearchList);
-
-        return findSearchList;
-    }
-
-
-
-
-
 
 }

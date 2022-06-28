@@ -3,8 +3,10 @@ package com.example.demo.service.room;
 import com.example.demo.dto.hotel.RoomRequest;
 import com.example.demo.dto.hotel.RoomResponse;
 import com.example.demo.entity.hotel.Hotel;
+import com.example.demo.entity.member.User;
 import com.example.demo.entity.room.Room;
 import com.example.demo.repository.hotel.HotelRepository;
+import com.example.demo.repository.member.UserRepository;
 import com.example.demo.repository.room.RoomRepository;
 import com.example.demo.utility.fileUpload.FileUpload;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,7 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
 
     private final RoomRepository roomRepository;
     private final HotelRepository hotelRepository;
+    private final UserRepository userRepository;
 
     String path = "roomImg";
     @Override
@@ -86,9 +90,11 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
     }
 
     @Override
-    public List<RoomResponse> findHotel(String writer) {
-        log.info("writer : " + writer);
-        List<Hotel> hotelList = hotelRepository.findByWriter(writer);
+    public List<RoomResponse> findHotel(String email) {
+        log.info("email : " + email);
+        Optional<User> optionalUser = userRepository.findByEmailWithHotels(email);
+        User user = optionalUser.get();
+        List<Hotel> hotelList = user.getHotels();
         List<RoomResponse> ceoHotel = new ArrayList<>();
         RoomResponse roomResponse;
         for(Hotel hotel : hotelList){
@@ -190,6 +196,44 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
 
 
         roomRepository.deleteById(Long.valueOf(roomNo));
+    }
+
+    @Override
+    public void bmRoomsRemove(List<Long> roomNo) {
+        for(int i = 0 ; i < roomNo.size(); i++) {
+            Optional<Room> roomInfo = roomRepository.findById(roomNo.get(i));
+
+            if (roomInfo.get().getRoomImgPath1() != null) {
+                fileRemove(roomInfo.get().getRoomImgPath1(), path);
+            }
+            if (roomInfo.get().getRoomImgPath2() != null) {
+                fileRemove(roomInfo.get().getRoomImgPath2(), path);
+            }
+            if (roomInfo.get().getRoomImgPath3() != null) {
+                fileRemove(roomInfo.get().getRoomImgPath3(), path);
+            }
+            if (roomInfo.get().getRoomImgPath4() != null) {
+                fileRemove(roomInfo.get().getRoomImgPath4(), path);
+            }
+            if (roomInfo.get().getRoomImgPath5() != null) {
+                fileRemove(roomInfo.get().getRoomImgPath5(), path);
+            }
+            if (roomInfo.get().getRoomImgPath6() != null) {
+                fileRemove(roomInfo.get().getRoomImgPath6(), path);
+            }
+            if (roomInfo.get().getRoomImgPath7() != null) {
+                fileRemove(roomInfo.get().getRoomImgPath7(), path);
+            }
+            if (roomInfo.get().getRoomImgPath8() != null) {
+                fileRemove(roomInfo.get().getRoomImgPath8(), path);
+            }
+            if (roomInfo.get().getRoomImgPath9() != null) {
+                fileRemove(roomInfo.get().getRoomImgPath9(), path);
+            }
+
+
+            roomRepository.deleteById(roomNo.get(i));
+        }
     }
 
 }
