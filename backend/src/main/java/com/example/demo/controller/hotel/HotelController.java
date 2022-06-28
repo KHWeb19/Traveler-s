@@ -5,6 +5,7 @@ import com.example.demo.dto.hotel.HotelRequest;
 
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.member.User;
+import com.example.demo.entity.room.Room;
 import com.example.demo.service.hotel.HotelService;
 import com.example.demo.service.member.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -68,8 +69,11 @@ public class HotelController {
     @PutMapping("/bm/{hotelNo}")
     public Hotel bmhotelModify (
             @PathVariable("hotelNo") Integer hotelNo,
-            @RequestBody Hotel hotel) {
+            @Validated @RequestPart(value="hotel") Hotel hotel,
+            @RequestPart(value = "files") List<MultipartFile> files)
+            {
         log.info("business member Hotel Modify(): " + hotel);
+        log.info("files :" + files);
 
         hotel.setHotelNo(Long.valueOf(hotelNo));
         hotelService.bmhotelModify(hotel);

@@ -8,11 +8,11 @@
             <p class="roomName">*은 필수 입력사항입니다.</p>
             <hr>
         <div>
-            <!-- <label class="hotelNameLabel">* 호텔이름</label>
-             <select  class="hotel-select" v-model="hotelNo">
+            <!--<label class="hotelNameLabel">* 호텔이름</label>
+            <select  class="hotel-select" v-model="hotelNo">
                 <option :value="''" >호텔을 선택하세요.</option>
                 <option v-for="(hotel, idx) in hotelType" :key="idx" :value="hotel.hotelNo" > {{hotel.hotelName}}</option>
-            </select> -->
+            </select>-->
         <div>
             <label class="roomTypeLabel">* 객실유형</label>
             <input type="text" class="roomTypeBox" v-model="roomType" placeholder="객실유형을 입력해주세요."/>
@@ -32,31 +32,31 @@
         <hr>
         <div class="roomInfobox">
         <label>
-            <input type="checkbox" name="roominfo" v-model="roomInfo" value="oceanView">오션뷰
+            <input type="checkbox" name="roominfo" v-model="roomInfo" value="오션뷰">오션뷰
         </label>
         <label>
-            <input type="checkbox" name="roominfo" v-model="roomInfo" value="kitchen">주방
+            <input type="checkbox" name="roominfo" v-model="roomInfo" value="주방">주방
         </label>
         <label>
-            <input type="checkbox" name="roominfo" v-model="roomInfo" value="wifi">와이파이
+            <input type="checkbox" name="roominfo" v-model="roomInfo" value="와이파이">와이파이
         </label>
         <label>
-            <input type="checkbox" name="roominfo" v-model="roomInfo" value="freeParking">무료주차
+            <input type="checkbox" name="roominfo" v-model="roomInfo" value="무료주차">무료주차
         </label>
         <label>
-            <input type="checkbox" name="roominfo" v-model="roomInfo" value="bbqGrill">바베큐그릴
+            <input type="checkbox" name="roominfo" v-model="roomInfo" value="바베큐그릴">바베큐그릴
         </label>
         <label>
-            <input type="checkbox" name="roominfo" v-model="roomInfo" value="swimmingPool">수영장
+            <input type="checkbox" name="roominfo" v-model="roomInfo" value="수영장">수영장
         </label>
         <label>
-            <input type="checkbox" name="roominfo" v-model="roomInfo" value="showerRoom">샤워실
+            <input type="checkbox" name="roominfo" v-model="roomInfo" value="샤워실">샤워실
         </label>
         <label>
-            <input type="checkbox" name="roominfo" v-model="roomInfo" value="pet">반려동물
+            <input type="checkbox" name="roominfo" v-model="roomInfo" value="반려동물">반려동물
         </label>
         <label>
-            <input type="checkbox" name="roominfo" v-model="roomInfo" value="spa">온천
+            <input type="checkbox" name="roominfo" v-model="roomInfo" value="온천">온천
         </label>
         </div>
     </div>
