@@ -40,9 +40,9 @@
                 <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${bmHotel.hotelImgPath4}`)"/>
                 <v-img width="100px" height="100px" :src="require(`@/assets/hotelImg/${bmHotel.hotelImgPath5}`)"/>
                 <img v-if="bmHotel.hotelImgPath6" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath6}`)">
-                <img v-if="bmHotel.hotelImgPath6" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath7}`)">
-                <img v-if="bmHotel.hotelImgPath6" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath8}`)">
-                <img v-if="bmHotel.hotelImgPath6" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath9}`)">
+                <img v-if="bmHotel.hotelImgPath7" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath7}`)">
+                <img v-if="bmHotel.hotelImgPath8" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath8}`)">
+                <img v-if="bmHotel.hotelImgPath9" :src="require(`@/assets/hotelImg/${hotel.hotelImgPath9}`)">
                 </v-container>
             </div>
         </div>
