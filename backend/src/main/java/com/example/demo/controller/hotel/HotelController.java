@@ -5,6 +5,7 @@ import com.example.demo.controller.hotel.response.HotelResponse;
 import com.example.demo.dto.hotel.HotelResponseWithWriter;
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.member.User;
+import com.example.demo.entity.room.Room;
 import com.example.demo.service.hotel.HotelService;
 import com.example.demo.service.member.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -66,11 +67,13 @@ public class HotelController {
     @PutMapping("/bm/{hotelNo}")
     public Hotel bmhotelModify (
             @PathVariable("hotelNo") Integer hotelNo,
-            @RequestBody Hotel hotel) {
+            @Validated @RequestPart(value="hotel") Hotel hotel,
+            @RequestPart(value = "files") List<MultipartFile> files) {
         log.info("business member Hotel Modify(): " + hotel);
+        log.info("files :" + files);
 
         hotel.setHotelNo(Long.valueOf(hotelNo));
-        hotelService.bmhotelModify(hotel);
+        hotelService.bmhotelModify(hotel, files);
 
         return hotel;
     }
@@ -82,6 +85,14 @@ public class HotelController {
         log.info("hotelRemove()");
 
         hotelService.bmhotelRemove(hotelNo);
+    }
+
+    @PostMapping("/bm/deleteHotels")
+    public void deleteHotels (
+            @RequestBody List<Long> hotels) {
+        log.info("roomRemove()" + hotels);
+
+        hotelService.bmHotelsRemove(hotels);
     }
 
 // ---------------------------------------------------------------------------------------------------------------------

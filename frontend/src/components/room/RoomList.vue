@@ -23,7 +23,7 @@
                 객실을 등록해주세요.
             </td>
         </tr>
-        <tr v-else v-for="(room ,idx) in roomList" :key="idx">
+        <tr v-else v-for="(room ,idx) in paginatedData" :key="idx">
           <td><input class="check all" type="checkbox" v-model="deleteRooms" :value="room.roomNo" ></td>
             <td>
                  <router-link :to="{ name: 'BRoomReadPage',
@@ -38,20 +38,19 @@
   </tbody>
 </table>
 <v-btn @click="deleteRoom()">삭제</v-btn>
+
 <div class="page-box">
-  <a class="btn" href="#">&lt;&lt;</a>
-  <a class="btn" href="#">&lt;</a>
-  
-  <!--  숫자 버튼  -->
-  <a class="btn number" href="#">1</a>
-  <a class="btn number" href="#">2</a>
-  <a class="btn number on" href="#">3</a>
-  <a class="btn number" href="#">4</a>
-  <a class="btn number" href="#">5</a>
-  
-  <a class="btn" href="#">&gt;</a>
-  <a class="btn" href="#">&gt;&gt;</a>
-</div>
+        <div class="btn-cover">
+            <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
+                이전
+            </button>
+            <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }}</span>
+            <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
+                다음
+            </button>
+        </div>
+  </div>
+
 </div>
 </template>
 
@@ -61,13 +60,20 @@ export default {
   name: 'RoomList',
   props : {
     roomList:{
-        type: Array
+        type: Array,
+        required: true
+    },
+    pageSize: {
+      type: Number,
+      required: false,
+      default: 5
     }
   },
   data () {
     return {
         deleteRooms: [],
- 
+        pageNum: 0,
+        roomNo: ''
     }
   },
   methods : {
@@ -75,7 +81,13 @@ export default {
         console.log(this.deleteRooms)
         const deleteRooms = this.deleteRooms
          this.$emit('deleteRooms', deleteRooms)
-    }
+    },
+    nextPage () {
+            this.pageNum += 1;
+            },
+    prevPage () {
+            this.pageNum -= 1;
+            },
 
   },
   computed: {
@@ -94,7 +106,20 @@ export default {
 
             this.deleteRooms = deleteRooms
        }
-    }
+    },
+    pageCount () {
+                let listLeng = this.roomList.length,
+                    listSize = this.pageSize,
+                    page = Math.floor(listLeng / listSize);
+                if (listLeng % listSize > 0) page += 1
+                return page;
+            },
+    paginatedData () {
+                const start = this.pageNum * this.pageSize,
+                        end = start + this.pageSize;
+                return this.roomList.slice(start, end);
+                
+            }
   }
 }
 </script>

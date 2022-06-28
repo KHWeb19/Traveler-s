@@ -55,7 +55,7 @@ public class RoomController {
 
         return roomService.findRoomList(roomRequest.getHotelNo());
     }
-
+    
     @GetMapping("/bm/{roomNo}")
     public Room bmHotelRead (
             @PathVariable("roomNo") Integer roomNo) {

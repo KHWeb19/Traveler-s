@@ -5,6 +5,7 @@ import com.example.demo.controller.hotel.response.HotelResponse;
 import com.example.demo.dto.hotel.HotelResponseWithWriter;
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.member.User;
+import com.example.demo.entity.room.Room;
 import com.example.demo.repository.hotel.HotelRepository;
 import com.example.demo.repository.member.UserRepository;
 import com.example.demo.utility.fileUpload.FileUpload;
@@ -27,12 +28,13 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
 
     @Autowired
     private UserRepository userRepository;
+    String path = "hotelImg";
 
     // 사업자 매뉴얼 호텔 등록
     @Override
     public void register(Hotel hotel, List<MultipartFile> files) throws Exception {
 
-        String path = "hotelImg";
+
         List<String> filePathList = new ArrayList<>();
 
         fileUpload(files,path,filePathList);
@@ -97,14 +99,114 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
 
     // 사업자 매뉴얼 호텔 수정
     @Override
-    public void bmhotelModify(Hotel hotel) {
-        hotelRepository.save(hotel);
+    public Hotel bmhotelModify(Hotel hotel1, List<MultipartFile> files) {
+        Optional<Hotel> hotelInfo = hotelRepository.findById(hotel1.getHotelNo());
+        Hotel hotel = hotelInfo.get();
+        //어떻게 못하겠다 나의 한계
+        if(hotelInfo.get().getHotelImgPath1() != null){fileRemove(hotelInfo.get().getHotelImgPath1(), path);}
+        if(hotelInfo.get().getHotelImgPath2() != null){fileRemove(hotelInfo.get().getHotelImgPath2(), path);}
+        if(hotelInfo.get().getHotelImgPath3() != null){fileRemove(hotelInfo.get().getHotelImgPath3(), path);}
+        if(hotelInfo.get().getHotelImgPath4() != null){fileRemove(hotelInfo.get().getHotelImgPath4(), path);}
+        if(hotelInfo.get().getHotelImgPath5() != null){fileRemove(hotelInfo.get().getHotelImgPath5(), path);}
+        if(hotelInfo.get().getHotelImgPath6() != null){fileRemove(hotelInfo.get().getHotelImgPath6(), path);}
+        if(hotelInfo.get().getHotelImgPath7() != null){fileRemove(hotelInfo.get().getHotelImgPath7(), path);}
+        if(hotelInfo.get().getHotelImgPath8() != null){fileRemove(hotelInfo.get().getHotelImgPath8(), path);}
+        if(hotelInfo.get().getHotelImgPath9() != null){fileRemove(hotelInfo.get().getHotelImgPath9(), path);}
+        //이것도 나의 한계
+
+        List<String> filePathList = new ArrayList<>();
+        fileUpload(files, path, filePathList);
+        log.info("filePathList : " + filePathList);
+        //이것도 나의 한계
+        for (int i = 0; i < filePathList.size(); i++) {
+            switch (i) {
+                case 0:
+                    hotel.setHotelImgPath1(filePathList.get(i));
+                    break;
+                case 1:
+                    hotel.setHotelImgPath2(filePathList.get(i));
+                    break;
+                case 2:
+                    hotel.setHotelImgPath3(filePathList.get(i));
+                    break;
+                case 3:
+                    hotel.setHotelImgPath4(filePathList.get(i));
+                    break;
+                case 4:
+                    hotel.setHotelImgPath5(filePathList.get(i));
+                    break;
+                case 5:
+                    hotel.setHotelImgPath6(filePathList.get(i));
+                    break;
+                case 6:
+                    hotel.setHotelImgPath7(filePathList.get(i));
+                    break;
+                case 7:
+                    hotel.setHotelImgPath8(filePathList.get(i));
+                    break;
+                case 8:
+                    hotel.setHotelImgPath9(filePathList.get(i));
+                    break;
+            }
+        }
+        return hotelRepository.save(hotel);
     }
 
     // 사업자 매뉴얼 호텔 삭제
     @Override
     public void bmhotelRemove(Integer hotelNo) {
+
+        Optional<Hotel> hotelInfo = hotelRepository.findById(Long.valueOf(hotelNo));
+
+        if(hotelInfo.get().getHotelImgPath1() != null){fileRemove(hotelInfo.get().getHotelImgPath1(), path);}
+        if(hotelInfo.get().getHotelImgPath2() != null){fileRemove(hotelInfo.get().getHotelImgPath2(), path);}
+        if(hotelInfo.get().getHotelImgPath3() != null){fileRemove(hotelInfo.get().getHotelImgPath3(), path);}
+        if(hotelInfo.get().getHotelImgPath4() != null){fileRemove(hotelInfo.get().getHotelImgPath4(), path);}
+        if(hotelInfo.get().getHotelImgPath5() != null){fileRemove(hotelInfo.get().getHotelImgPath5(), path);}
+        if(hotelInfo.get().getHotelImgPath6() != null){fileRemove(hotelInfo.get().getHotelImgPath6(), path);}
+        if(hotelInfo.get().getHotelImgPath7() != null){fileRemove(hotelInfo.get().getHotelImgPath7(), path);}
+        if(hotelInfo.get().getHotelImgPath8() != null){fileRemove(hotelInfo.get().getHotelImgPath8(), path);}
+        if(hotelInfo.get().getHotelImgPath9() != null){fileRemove(hotelInfo.get().getHotelImgPath9(), path);}
+
         hotelRepository.deleteById(Long.valueOf(hotelNo));
+    }
+
+    @Override
+    public void bmHotelsRemove(List<Long> hotelNo) {
+        for(int i = 0 ; i < hotelNo.size(); i++) {
+            Optional<Hotel> hotelInfo = hotelRepository.findById(hotelNo.get(i));
+
+            if (hotelInfo.get().getHotelImgPath1() != null) {
+                fileRemove(hotelInfo.get().getHotelImgPath1(), path);
+            }
+            if (hotelInfo.get().getHotelImgPath2() != null) {
+                fileRemove(hotelInfo.get().getHotelImgPath2(), path);
+            }
+            if (hotelInfo.get().getHotelImgPath3() != null) {
+                fileRemove(hotelInfo.get().getHotelImgPath3(), path);
+            }
+            if (hotelInfo.get().getHotelImgPath4() != null) {
+                fileRemove(hotelInfo.get().getHotelImgPath4(), path);
+            }
+            if (hotelInfo.get().getHotelImgPath5() != null) {
+                fileRemove(hotelInfo.get().getHotelImgPath5(), path);
+            }
+            if (hotelInfo.get().getHotelImgPath6() != null) {
+                fileRemove(hotelInfo.get().getHotelImgPath6(), path);
+            }
+            if (hotelInfo.get().getHotelImgPath7() != null) {
+                fileRemove(hotelInfo.get().getHotelImgPath7(), path);
+            }
+            if (hotelInfo.get().getHotelImgPath8() != null) {
+                fileRemove(hotelInfo.get().getHotelImgPath8(), path);
+            }
+            if (hotelInfo.get().getHotelImgPath9() != null) {
+                fileRemove(hotelInfo.get().getHotelImgPath9(), path);
+            }
+
+
+            hotelRepository.deleteById(hotelNo.get(i));
+        }
     }
 
 

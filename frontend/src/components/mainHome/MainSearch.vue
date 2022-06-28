@@ -10,7 +10,7 @@
                             rounded solo readonly></v-text-field>
                     </template>
                     <v-date-picker v-model="dates" 
-                                    :min="new Date().toISOString().substr(0, 10)" range
+                                    :min="new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10)" range
                                     >
                     </v-date-picker>
                 </v-menu>
