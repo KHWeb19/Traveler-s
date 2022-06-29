@@ -4,10 +4,14 @@ import com.example.demo.controller.hotel.response.HotelResponse;
 import com.example.demo.dto.hotel.HotelRequest;
 
 import com.example.demo.entity.hotel.Hotel;
+import com.example.demo.entity.member.User;
+import com.example.demo.entity.room.Room;
 import com.example.demo.service.hotel.HotelService;
+import com.example.demo.service.member.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -22,7 +27,10 @@ import java.util.List;
 public class HotelController {
 
     @Autowired
-    HotelService hotelService;
+    private HotelService hotelService;
+
+    @Autowired
+    private UserService userService;
 
     //사업자 매뉴얼 페이지 호텔 등록
     @PostMapping(value="/hotelRegister", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
@@ -32,7 +40,13 @@ public class HotelController {
 
         log.info("files :" + files);
 
+        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userService.findByEmailWithHotels(email).get();
+
+        hotel.addUserToHotel(user);
+
         hotelService.register(hotel, files);
+
     }
 
     //사업자 매뉴얼 페이지 호텔 목록
@@ -55,11 +69,13 @@ public class HotelController {
     @PutMapping("/bm/{hotelNo}")
     public Hotel bmhotelModify (
             @PathVariable("hotelNo") Integer hotelNo,
-            @RequestBody Hotel hotel) {
+            @Validated @RequestPart(value="hotel") Hotel hotel,
+            @RequestPart(value = "files") List<MultipartFile> files) {
         log.info("business member Hotel Modify(): " + hotel);
+        log.info("files :" + files);
 
         hotel.setHotelNo(Long.valueOf(hotelNo));
-        hotelService.bmhotelModify(hotel);
+        hotelService.bmhotelModify(hotel, files);
 
         return hotel;
     }
@@ -71,6 +87,14 @@ public class HotelController {
         log.info("hotelRemove()");
 
         hotelService.bmhotelRemove(hotelNo);
+    }
+
+    @PostMapping("/bm/deleteHotels")
+    public void deleteHotels (
+            @RequestBody List<Long> hotels) {
+        log.info("roomRemove()" + hotels);
+
+        hotelService.bmHotelsRemove(hotels);
     }
 
 // ---------------------------------------------------------------------------------------------------------------------

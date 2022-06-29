@@ -16,9 +16,9 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
     public List<Hotel> randomPick(Integer randNum);
     Optional<Hotel> findByHotelNo(@Param("hotelNo") Long hotelNo);
 
-    List<Hotel> findByWriter(@Param("writer") String writer);
-
     List<Hotel> findByHotelInfoContaining(String word);
+
+    List<Hotel> findByTotalAddressContaining(String address);
 }
 
 

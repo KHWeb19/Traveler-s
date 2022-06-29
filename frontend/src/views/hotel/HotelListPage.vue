@@ -4,7 +4,8 @@
       <span class="page-count">전체</span>
       <router-link :to="{ name: 'BHotelRegisterPage' }" class="btn"><v-btn>숙소등록</v-btn></router-link>
       <br>
-    <hotel-list :bmHotels="bmHotels"/>
+    <hotel-list :bmHotels="bmHotels"
+                    @deleteHotels="deleteHotels"/>
   </div>
 </template>
 
@@ -12,6 +13,7 @@
 
 import HotelList from '@/components/hotel/HotelList.vue'
 import { mapState, mapActions } from 'vuex'
+import axios from 'axios'
 
 export default {
     name: 'HotelListPage',
@@ -25,7 +27,22 @@ export default {
       this.fetchBmHotelList()
     },
     methods: {
-      ...mapActions(['fetchBmHotelList'])
+      ...mapActions(['fetchBmHotelList']),
+
+      deleteHotels(payload){
+          
+            const hotels = payload
+      
+            axios.post('http://localhost:7777/hotel/bm/deleteHotels', hotels)
+                        .then(() => {
+                            alert('삭제 되었습니다.')
+                            this.$router.go()
+                        })
+                        .catch(() => {
+                            alert('실패했습니다.')
+                        })
+
+        }
     }
 }
 </script>

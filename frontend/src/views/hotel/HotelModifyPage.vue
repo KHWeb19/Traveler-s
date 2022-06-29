@@ -28,14 +28,33 @@ export default {
     methods: {
         ...mapActions(['fetchBmHotel']),
         onSubmit (payload) {
-            const { hotelName, hotelInfo, files } = payload
+            const { hotelName, hotelInfo, hotelIntro, postcode, totalAddress, files } = payload
+
+            let formData = new FormData()
+            let hotel = {
+                   hotelName,
+                    hotelInfo,
+                    hotelIntro,
+                    postcode,
+                    totalAddress,
+            }
+
+            formData.append('hotel',new Blob([JSON.stringify(hotel)],{type: "application/json"}))
+            
+            for (let i = 0; i <  files.length; i++) {
+                formData.append('files',files[i].file)
+            }
+
+            console.log(files)
 
             axios.put(`http://localhost:7777/hotel/bm/${this.hotelNo}`,
-                { hotelName, hotelInfo, files })
+                formData,{headers: {
+                    'Content-Type' : 'multipart/form-data'
+                }})
                     .then(res => {
                         alert('수정되었습니다.')
                         this.$router.push({
-                            name: 'HotelReadPage',
+                            name: 'BHotelReadPage',
                             params: { hotelNo: res.data.hotelNo.toString() }
                         })
                     })
