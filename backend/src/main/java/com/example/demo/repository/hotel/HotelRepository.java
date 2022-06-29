@@ -23,6 +23,9 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
     @Query("select h from Hotel h join fetch h.user where h.hotelNo = :hotelNo")
     Optional<Hotel> findByIdWithUser(Long hotelNo);
 
+    @Query("select h from Hotel h join fetch h.rooms where h.hotelNo = :hotelNo")
+    Optional<Hotel> findByIdWithRooms(Long hotelNo);
+
 }
 
 

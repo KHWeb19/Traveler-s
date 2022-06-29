@@ -43,14 +43,14 @@ public class RoomController {
     }
 
     @PostMapping("/bm/list")
-    public List<Room> bmRoomList (@RequestBody RoomRequest roomRequest) {
+    public List<RoomResponseDTO> bmRoomList (@RequestBody RoomRequest roomRequest) {
         log.info("bmRoomList()" + roomRequest.getHotelNo());
 
         return roomService.findRoomList(roomRequest.getHotelNo());
     }
     
     @GetMapping("/bm/{roomNo}")
-    public Room bmHotelRead (
+    public RoomResponseDTO bmHotelRead (
             @PathVariable("roomNo") Integer roomNo) {
         log.info("business member Room Read()" + roomNo);
         return roomService.bmRoomRead(roomNo);

@@ -11,8 +11,8 @@ import java.util.List;
 public interface RoomService {
     public void register (RoomRequest roomRequest, List<MultipartFile> files) throws Exception;
     public List<RoomResponse> findHotel(String email);
-    public List<Room> findRoomList(Long hotelNo);
-    public Room bmRoomRead(Integer roomNo);
+    public List<RoomResponseDTO> findRoomList(Long hotelNo);
+    public RoomResponseDTO bmRoomRead(Integer roomNo);
     public Room bmRoomModify(Room Room, List<MultipartFile> files);
     public void bmRoomRemove(Integer roomNo);
     public void bmRoomsRemove(List<Long> roomNo);

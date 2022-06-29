@@ -80,7 +80,7 @@ public class Hotel {
     @Column
     private String hotelImgPath9;
 
-    @JsonIgnore
+    @JsonManagedReference
     @OneToMany(mappedBy = "hotel", fetch = FetchType.EAGER,  cascade = CascadeType.ALL)
     private List<Room> rooms = new ArrayList<>();
 

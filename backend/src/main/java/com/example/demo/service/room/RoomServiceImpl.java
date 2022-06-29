@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.example.demo.dto.hotel.RoomResponseDTO.roomBuilder;
+
 @RequiredArgsConstructor
 @Slf4j
 @Service
@@ -104,22 +106,24 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
     }
 
     @Override
-    public List<Room> findRoomList(Long hotelNo) {
+    public List<RoomResponseDTO> findRoomList(Long hotelNo) {
+        Optional<Hotel> hotel = hotelRepository.findByIdWithRooms(hotelNo);
+        List<Room> rooms = hotel.get().getRooms();
 
-        return  roomRepository.findAllRoomByHotelNo(hotelNo);
+        return roomBuilder(rooms);
     }
 
     @Override
-    public Room bmRoomRead(Integer roomNo) {
+    public RoomResponseDTO bmRoomRead(Integer roomNo) {
 
         Optional<Room> maybeReadBoard = roomRepository.findById(Long.valueOf(roomNo));
-        log.info("ROOMREAD : " + maybeReadBoard);
+
         if (maybeReadBoard.equals(Optional.empty())) {
             log.info("Can't read board!");
             return null;
         }
 
-        return maybeReadBoard.get();
+        return roomBuilder(maybeReadBoard.get());
     }
 
     @Override
@@ -242,26 +246,8 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
        Optional<Hotel> optionalHotel = hotelRepository.findByHotelNo(hotelNo);
        Hotel hotel = optionalHotel.get();
        List<Room> rooms = hotel.getRooms();
-       List<RoomResponseDTO> roomRequestDTOList = rooms.stream().map(r -> RoomResponseDTO.builder()
-               .roomNo(r.getRoomNo())
-               .roomImgPath1(r.getRoomImgPath1())
-               .roomImgPath2(r.getRoomImgPath2())
-               .roomImgPath3(r.getRoomImgPath3())
-               .roomImgPath4(r.getRoomImgPath4())
-               .roomImgPath5(r.getRoomImgPath5())
-               .roomImgPath6(r.getRoomImgPath6())
-               .roomImgPath7(r.getRoomImgPath7())
-               .roomImgPath8(r.getRoomImgPath8())
-               .roomImgPath9(r.getRoomImgPath9())
-               .price(r.getPrice())
-               .roomType(r.getRoomType())
-               .roomInfo(r.getRoomInfo())
-               .personnel(r.getPersonnel())
-               .hotel(r.getHotel())
-               .build()
-       ).collect(Collectors.toList());
 
-       return roomRequestDTOList;
+       return roomBuilder(rooms);
    }
     
     
