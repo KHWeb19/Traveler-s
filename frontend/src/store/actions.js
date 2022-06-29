@@ -26,6 +26,7 @@ export default {
     fetchMHotel ({ commit }, hotelNo) {
         return axios.get(`http://localhost:7777/hotel/mRead/${hotelNo}`)
                 .then((res) => {
+                    console.log("fetchMhotel: ", res.data)
                     commit(FETCH_M_HOTEL, res.data)
                 })
     },

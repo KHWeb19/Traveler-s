@@ -3,13 +3,14 @@
     <h2>숙소 읽기</h2>
     <hotel-read v-if="bmHotel" :bmHotel="bmHotel"/>
     <p v-else>로딩중 입니다.</p>
+    
     <router-link :to="{ name: 'BHotelModifyPage', params: { hotelNo } }">
             수정
         </router-link>
      <button @click="onDelete">삭제</button>
      <router-link :to="{ name: 'BHotelListPage' }">
             목록
-        </router-link>
+    </router-link>   
 </div>
 </template>
 
