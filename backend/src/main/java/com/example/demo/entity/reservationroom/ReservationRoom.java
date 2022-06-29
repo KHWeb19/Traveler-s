@@ -1,4 +1,4 @@
-package com.example.demo.entity.reservation.reservationroom;
+package com.example.demo.entity.reservationroom;
 
 import com.example.demo.entity.reservation.Reservation;
 import com.example.demo.entity.room.Room;

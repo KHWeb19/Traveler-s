@@ -1,9 +1,8 @@
 package com.example.demo.entity.room;
 
-import com.example.demo.controller.room.AvailableRoom;
 import com.example.demo.dto.hotel.HotelConvert;
 import com.example.demo.entity.hotel.Hotel;
-import com.example.demo.entity.reservation.reservationroom.ReservationRoom;
+import com.example.demo.entity.reservationroom.ReservationRoom;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
@@ -11,7 +10,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

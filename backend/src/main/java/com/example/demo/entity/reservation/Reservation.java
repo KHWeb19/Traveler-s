@@ -1,7 +1,7 @@
 package com.example.demo.entity.reservation;
 
 import com.example.demo.entity.member.User;
-import com.example.demo.entity.reservation.reservationroom.ReservationRoom;
+import com.example.demo.entity.reservationroom.ReservationRoom;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
