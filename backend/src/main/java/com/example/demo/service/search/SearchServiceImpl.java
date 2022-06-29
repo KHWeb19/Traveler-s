@@ -26,7 +26,7 @@ public class SearchServiceImpl implements SearchService {
     public List<HotelResponse> tagSearchList(String word) {
         List<Hotel> findSearchList = hotelRepository.findByHotelInfoContainingWithUser(word);
 
-        log.info("findSearchList : " + findSearchList);
+        log.info("findSearchList : ");
 
         return hotelBuilder(findSearchList);
     }
