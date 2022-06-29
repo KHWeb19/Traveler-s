@@ -1,8 +1,8 @@
 package com.example.demo.controller.hotel;
 
 import com.example.demo.dto.hotel.RoomRequest;
-import com.example.demo.dto.hotel.RoomResponseDTO;
 import com.example.demo.dto.hotel.RoomResponse;
+import com.example.demo.dto.hotel.HotelResponse;
 import com.example.demo.entity.room.Room;
 import com.example.demo.service.member.UserService;
 import com.example.demo.service.room.RoomService;
@@ -36,36 +36,35 @@ public class RoomController {
     }
 
     @GetMapping("/getHotelType")
-    public List<RoomResponse> getHotelType(){
+    public List<HotelResponse> getHotelType(){
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         return roomService.findHotel(email);
     }
 
     @PostMapping("/bm/list")
-    public List<RoomResponseDTO> bmRoomList (@RequestBody RoomRequest roomRequest) {
+    public List<RoomResponse> bmRoomList (@RequestBody RoomRequest roomRequest) {
         log.info("bmRoomList()" + roomRequest.getHotelNo());
 
         return roomService.findRoomList(roomRequest.getHotelNo());
     }
     
     @GetMapping("/bm/{roomNo}")
-    public RoomResponseDTO bmHotelRead (
+    public RoomResponse bmHotelRead (
             @PathVariable("roomNo") Integer roomNo) {
         log.info("business member Room Read()" + roomNo);
         return roomService.bmRoomRead(roomNo);
     }
 
     @PutMapping("/bm/{roomNo}")
-    public Room bmRoomModify (
+    public RoomResponse bmRoomModify (
             @PathVariable("roomNo") Integer roomNo,
-            @Validated @RequestPart(value="roomRequest") Room room,
+            @Validated @RequestPart(value="roomRequest") RoomRequest roomRequest,
             @RequestPart(value = "files") List<MultipartFile> files) {
-        log.info("business member Hotel Modify(): " + room);
+        log.info("business member Hotel Modify(): " + roomRequest);
         log.info("files :" + files);
 
-        room.setRoomNo(Long.valueOf(roomNo));
-        return roomService.bmRoomModify(room, files);
+        return roomService.bmRoomModify(roomRequest, files , roomNo);
     }
 
     @DeleteMapping("/bm/{roomNo}")
@@ -87,7 +86,7 @@ public class RoomController {
     //---------------------------------------------------------------------------------------------------------------
 
     @PostMapping("/mem/list")
-    public List<RoomResponseDTO> mRoomList (@RequestBody RoomRequest roomRequest) { //주석
+    public List<RoomResponse> mRoomList (@RequestBody RoomRequest roomRequest) { //주석
         log.info("hotel's roomList" + roomRequest.getHotelNo());
 
         return roomService.findMRoomList(roomRequest.getHotelNo());

@@ -7,10 +7,7 @@ import com.example.demo.entity.room.Room;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -20,6 +17,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+@Builder
+@AllArgsConstructor
 @Data
 @Entity
 @ToString(exclude = {"rooms", "user"})
@@ -33,9 +32,6 @@ public class Hotel {
     @Column(length = 20, nullable = false)
     private String hotelName;
 
-    //@Convert(converter = HotelConvert.class)
-    //private List<String> hotelInfo;
-
     @Column(name = "hotelInfo")
     private String hotelInfo;
 
@@ -44,23 +40,10 @@ public class Hotel {
 
     @Column(nullable = false)
     private String postcode;
-      /*
-    @Column(nullable = false)
-    private String address;
-
-    @Column(nullable = false)
-    private String detailAddress;
-
-    // 참고항목
-    @Column(nullable = false)
-    private String extraAddress;
-    */
 
     @Column(nullable = false)
     private String totalAddress;
 
-    /*@Convert(converter = HotelConvert.class)
-    private List<String> filePath;*/
     @Column(nullable = false) // default 255
     private String hotelImgPath1;
     @Column(nullable = false)
@@ -81,7 +64,7 @@ public class Hotel {
     private String hotelImgPath9;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "hotel", fetch = FetchType.EAGER,  cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "hotel", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
     private List<Room> rooms = new ArrayList<>();
 
     @Column

@@ -1,8 +1,8 @@
 package com.example.demo.service.room;
 
 import com.example.demo.dto.hotel.RoomRequest;
-import com.example.demo.dto.hotel.RoomResponseDTO;
 import com.example.demo.dto.hotel.RoomResponse;
+import com.example.demo.dto.hotel.HotelResponse;
 import com.example.demo.entity.room.Room;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,14 +10,14 @@ import java.util.List;
 
 public interface RoomService {
     public void register (RoomRequest roomRequest, List<MultipartFile> files) throws Exception;
-    public List<RoomResponse> findHotel(String email);
-    public List<RoomResponseDTO> findRoomList(Long hotelNo);
-    public RoomResponseDTO bmRoomRead(Integer roomNo);
-    public Room bmRoomModify(Room Room, List<MultipartFile> files);
+    public List<HotelResponse> findHotel(String email);
+    public List<RoomResponse> findRoomList(Long hotelNo);
+    public RoomResponse bmRoomRead(Integer roomNo);
+    public RoomResponse bmRoomModify(RoomRequest roomRequest, List<MultipartFile> files, Integer roomNo);
     public void bmRoomRemove(Integer roomNo);
     public void bmRoomsRemove(List<Long> roomNo);
 
     //----------------------------------------------------------
-    public List<RoomResponseDTO> findMRoomList(Long hotelNo); //주석
+    public List<RoomResponse> findMRoomList(Long hotelNo); //주석
 }
 

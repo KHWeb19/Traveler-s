@@ -14,7 +14,6 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
     @Transactional
     @Query(value = "select * from hotel order by rand() limit ?1", nativeQuery = true)
     public List<Hotel> randomPick(Integer randNum);
-    Optional<Hotel> findByHotelNo(@Param("hotelNo") Long hotelNo);
 
     List<Hotel> findByHotelInfoContaining(String word);
 
