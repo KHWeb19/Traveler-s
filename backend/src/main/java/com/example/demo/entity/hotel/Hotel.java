@@ -33,10 +33,6 @@ public class Hotel {
     @Column(length = 20, nullable = false)
     private String hotelName;
 
-    @Column
-    private String writer;
-
-
     //@Convert(converter = HotelConvert.class)
     //private List<String> hotelInfo;
 

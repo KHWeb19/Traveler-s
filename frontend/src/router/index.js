@@ -151,7 +151,12 @@ const routes = [
     props: {
       default: true
     }
-  }, 
+  },
+  {
+    path: '/reservationTest',
+    name: 'ReservationTest',
+    component: () => import("../views/reservation/ReservationTest.vue")
+  } 
 ]
 
 const router = new VueRouter({

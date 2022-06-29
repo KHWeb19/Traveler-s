@@ -1,6 +1,7 @@
 package com.example.demo.service.room;
 
 import com.example.demo.dto.hotel.RoomRequest;
+import com.example.demo.dto.hotel.RoomResponseDTO;
 import com.example.demo.dto.hotel.RoomResponse;
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.member.User;
@@ -11,16 +12,13 @@ import com.example.demo.repository.room.RoomRepository;
 import com.example.demo.utility.fileUpload.FileUpload;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -239,9 +237,31 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
    //--------------------------------------------------------
 
    @Override
-   public List<Room> findMRoomList(Long hotelNo) { //주석
+   public List<RoomResponseDTO> findMRoomList(Long hotelNo) { //주석
 
-       return  roomRepository.findAllRoomByHotelNo(hotelNo);
+       Optional<Hotel> optionalHotel = hotelRepository.findByHotelNo(hotelNo);
+       Hotel hotel = optionalHotel.get();
+       List<Room> rooms = hotel.getRooms();
+       List<RoomResponseDTO> roomRequestDTOList = rooms.stream().map(r -> RoomResponseDTO.builder()
+               .roomNo(r.getRoomNo())
+               .roomImgPath1(r.getRoomImgPath1())
+               .roomImgPath2(r.getRoomImgPath2())
+               .roomImgPath3(r.getRoomImgPath3())
+               .roomImgPath4(r.getRoomImgPath4())
+               .roomImgPath5(r.getRoomImgPath5())
+               .roomImgPath6(r.getRoomImgPath6())
+               .roomImgPath7(r.getRoomImgPath7())
+               .roomImgPath8(r.getRoomImgPath8())
+               .roomImgPath9(r.getRoomImgPath9())
+               .price(r.getPrice())
+               .roomType(r.getRoomType())
+               .roomInfo(r.getRoomInfo())
+               .personnel(r.getPersonnel())
+               .hotel(r.getHotel())
+               .build()
+       ).collect(Collectors.toList());
+
+       return roomRequestDTOList;
    }
     
     

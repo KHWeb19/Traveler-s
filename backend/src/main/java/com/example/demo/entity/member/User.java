@@ -1,6 +1,7 @@
 package com.example.demo.entity.member;
 
 import com.example.demo.entity.hotel.Hotel;
+import com.example.demo.entity.reservation.Reservation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
@@ -49,6 +50,11 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Hotel> hotels= new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Reservation> reservations = new ArrayList<>();
 
     public User(String name, String email, String password) {
         this.name = name;
