@@ -6,17 +6,7 @@
 
         <table style="width: 80%">
           <tr align="right">
-            <td colspan="2">
-              <v-btn id="likeBtn" @click="like" style="box-shadow: none">
-                <v-icon color="#ccbce3"> mdi-cards-heart </v-icon>
-              </v-btn>
-              <span>
-                <!--{{ mHotel.likeCnt }}-->
-                5
-              </span>
-
-              &ensp;
-            </td>
+            <td colspan="2"></td>
           </tr>
 
           <tr>
@@ -24,7 +14,12 @@
             <td colspan="2">
               <div class="slide-9img">
                 <v-container style="padding: 0px">
-                  <v-carousel cycle hide-delimiters class="cover">
+                  <v-carousel
+                    v-if="Object.keys(mHotel).length !== 0"
+                    cycle
+                    hide-delimiters
+                    class="cover"
+                  >
                     <v-carousel-item
                       :src="
                         require(`@/assets/hotelImg/${mHotel.hotelImgPath1}`)
@@ -78,6 +73,7 @@
                 </v-container>
               </div>
             </td>
+            \
           </tr>
 
           <br />
@@ -99,7 +95,6 @@
                     <tr>
                       <td>
                         <h3>{{ mHotel.writer }}</h3>
-                        <!-- 이 부분이 fetchjoin을 이용해서 user를 받아오게 해야한다? -->
                       </td>
                     </tr>
                     <tr>
@@ -145,7 +140,7 @@
                             class="hotel_info"
                           >
                             {{ "#" + item }}
-                            <!-- i 번째 item를 출력  -->
+                            <!-- i 번째 item를 출력 -->
                           </span>
                         </v-row>
                       </v-col>
@@ -171,7 +166,10 @@
             </td>
           </tr>
           <td colspan="2" align="center">
-            <kakao-map-api :mHotel="mHotel" />
+            <kakao-map-api
+              v-if="Object.keys(mHotel).length !== 0"
+              :mHotel="mHotel"
+            />
             <br />
           </td>
           <tr></tr>
@@ -190,7 +188,6 @@
 
 <script>
 import KakaoMapApi from "@/components/hotelDetail/KakaoMapApi.vue";
-import axios from "axios";
 export default {
   name: "HotelReadForm",
   components: {
@@ -211,26 +208,7 @@ export default {
   created() {
     this.hotelNo = this.mHotel.hotelNo;
   },
-  methods: {
-    wish() {
-      if (this.userInfo != null) {
-        const { hotelNo } = this;
-        console.log(this.mHotel.hotelNo);
-        axios
-          .post(`http://localhost:7777/wish/${hotelNo}/save`, {})
-          .then((res) => {
-            if (res.data) {
-              alert("저장 성공");
-            } else {
-              alert("이미 등록");
-            }
-          })
-          .catch(() => {
-            alert("등록 실패");
-          });
-      }
-    },
-  },
+  methods: {},
 };
 </script>
 
