@@ -239,7 +239,7 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
    //--------------------------------------------------------
 
    @Override
-   public List<Room> findMRoomList(Long hotelNo) {
+   public List<Room> findMRoomList(Long hotelNo) { //주석
 
        return  roomRepository.findAllRoomByHotelNo(hotelNo);
    }

@@ -1,7 +1,7 @@
 <template>
 <div align="center">
     <v-container>
-            <form @submit="getRoomList()">
+            <form @submit="getRoomList()"> <!-- 주석 -->
 
             <table style="width: 80%">
 
@@ -54,11 +54,11 @@
                                 <table style="margin-right: 10px;">
                                     <tr>
                                         <td>
-                                            <h3>{{mHotel.writer}}</h3>
+                                            <h3>{{mHotel.writer}}</h3> <!-- 이 부분이 fetchjoin을 이용해서 user를 받아오게 해야한다? -->
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td text onclick="window.open('https://open.kakao.com/o/siza2rWb')">
+                                        <td text onclick="window.open('https://open.kakao.com/o/sBJqEEme')">
                                             
                                             <p> <v-icon>mdi-chat-question-outline</v-icon> 카톡으로 문의하기 </p>
                                         </td>
