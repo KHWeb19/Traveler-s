@@ -1,5 +1,6 @@
 package com.example.demo.controller.search;
 
+import com.example.demo.dto.hotel.HotelResponse;
 import com.example.demo.dto.search.KeyWordRequest;
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.service.hotel.HotelService;
@@ -22,7 +23,7 @@ public class SearchController {
     private final SearchService searchService;
 
     @PostMapping("/tagSearch")
-    public List<Hotel> tagSearch (@RequestBody KeyWordRequest keyWord) {
+    public List<HotelResponse> tagSearch (@RequestBody KeyWordRequest keyWord) {
         log.info("tagSearch()");
 
         return searchService.tagSearchList(keyWord.getWord());

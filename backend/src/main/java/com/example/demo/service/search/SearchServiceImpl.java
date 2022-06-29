@@ -1,5 +1,6 @@
 package com.example.demo.service.search;
 
+import com.example.demo.dto.hotel.HotelResponse;
 import com.example.demo.dto.search.KeyWordRequest;
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.repository.hotel.HotelRepository;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.demo.dto.hotel.HotelResponse.hotelBuilder;
+
 @RequiredArgsConstructor
 @Slf4j
 @Service
@@ -20,12 +23,12 @@ public class SearchServiceImpl implements SearchService {
     private final RoomRepository roomRepository;
 
     @Override
-    public List<Hotel> tagSearchList(String word) {
-        List<Hotel> findSearchList = hotelRepository.findByHotelInfoContaining(word);
+    public List<HotelResponse> tagSearchList(String word) {
+        List<Hotel> findSearchList = hotelRepository.findByHotelInfoContainingWithUser(word);
 
         log.info("findSearchList : " + findSearchList);
 
-        return findSearchList;
+        return hotelBuilder(findSearchList);
     }
 
     @Override

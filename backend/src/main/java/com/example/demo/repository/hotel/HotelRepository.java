@@ -11,11 +11,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
-    @Transactional
+
     @Query(value = "select * from hotel order by rand() limit ?1", nativeQuery = true)
     public List<Hotel> randomPick(Integer randNum);
 
-    List<Hotel> findByHotelInfoContaining(String word);
+    @Query("select h from Hotel h join fetch h.user where h.hotelInfo like concat('%',:word,'%')")
+    List<Hotel> findByHotelInfoContainingWithUser(String word);
 
     List<Hotel> findByTotalAddressContaining(String address);
 

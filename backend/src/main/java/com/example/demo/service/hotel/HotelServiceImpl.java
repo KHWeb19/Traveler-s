@@ -66,7 +66,7 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
     @Override
     public HotelResponse bmHotelRead(Integer hotelNo) {
         log.info("hotelNo" + hotelNo);
-        Optional<Hotel> maybeReadBoard = hotelRepository.findById(Long.valueOf(hotelNo));
+        Optional<Hotel> maybeReadBoard = hotelRepository.findByIdWithUser(Long.valueOf(hotelNo));
 
         if (maybeReadBoard.equals(Optional.empty())) {
             log.info("Can't read board!");
@@ -79,7 +79,7 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
     // 사업자 매뉴얼 호텔 수정
     @Override
     public HotelResponse bmHotelModify(HotelRequest hotelRequest, List<MultipartFile> files, Integer hotelNo) {
-        Optional<Hotel> hotelInfo = hotelRepository.findById(Long.valueOf(hotelNo));
+        Optional<Hotel> hotelInfo = hotelRepository.findByIdWithUser(Long.valueOf(hotelNo));
         Hotel hotel = hotelInfo.get();
         //어떻게 못하겠다 나의 한계
         hotelImgPathRemove(hotelInfo, path);
