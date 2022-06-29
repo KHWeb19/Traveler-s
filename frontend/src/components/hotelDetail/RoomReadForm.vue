@@ -15,7 +15,7 @@
                             style="margin: 10px; width: 100%; height: 200px;">
 
                         <v-col>
-                            <v-row justify="center">
+                            <v-row>
                             
                                 <table id="inCard" style="width: 30%; height: 200px;">
                                     <tr>
@@ -46,12 +46,12 @@
                                         </td>
                                     </tr>
                                 </table>
-                                <pr></pr>
+                                
                                 <table id="inCard" style="width: 10%; height: 190px;">
                                     <tr>
                                         <td>
                                             <v-col>
-                                                <v-row justify="right">
+                                                <v-row>
                                                     <tr>
                                                         <v-dialog width="700px">
                                                             <template v-slot:activator="{ on }">
