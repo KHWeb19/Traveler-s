@@ -1,7 +1,6 @@
 package com.example.demo.entity.member;
 
 import com.example.demo.entity.hotel.Hotel;
-import com.example.demo.entity.wish.Wish;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
@@ -46,17 +45,10 @@ public class User {
     @Builder.Default
     private List<Role> roles = new ArrayList<>();
 
-
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Hotel> hotels= new ArrayList<>();
-
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
-    private List<Wish> wish= new ArrayList<>();
-
 
     public User(String name, String email, String password) {
         this.name = name;

@@ -3,9 +3,11 @@ import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
 
 import store from "@/store";
+import states from "@/store/states";
 
 import MHotelReadPage from "@/views/hotelDetail/HotelReadPage.vue";
-import states from "@/store/states";
+import SearchPage from "@/views/searchpage/SearchPage.vue";
+import CommonSearchPage from "@/views/searchpage/CommonSearchPage.vue";
 
 import BHotelModifyPage from "@/views/hotel/HotelModifyPage.vue";
 import BHotelReadPage from "@/views/hotel/HotelReadPage.vue";
@@ -109,9 +111,14 @@ const routes = [
     },
   },
   {
-    path: "/search",
-    name: "SearchPage",
-    component: () => import("../views/searchpage/SearchPage.vue"),
+    path: "/MSearchPage/:word",
+    name: "MSearchPage",
+    components: {
+      default: SearchPage,
+    },
+    props: {
+      default: true,
+    },
   },
   {
     path: "/BRoomListPage",
@@ -137,6 +144,21 @@ const routes = [
     props: {
       default: true,
     },
+  },
+  {
+    path: "/commonSearchPage",
+    name: "CommonSearchPage",
+    components: {
+      default: CommonSearchPage,
+    },
+    props: {
+      default: true,
+    },
+  },
+  {
+    path: "/reservationTest",
+    name: "ReservationTest",
+    component: () => import("../views/reservation/ReservationTest.vue"),
   },
   {
     path: "/wishlistpage",

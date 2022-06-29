@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService {
     public String emailDuplicationCheck(String email) {
         String message;
 
-        Optional<User> checkEmail = userRepository.checkEmail(email);
+        Optional<User> checkEmail = userRepository.findByEmail(email);
         if (!checkEmail.equals(Optional.empty())) {
             message = "이메일 중복입니다";
 
@@ -106,7 +106,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String mobileDuplicationCheck(MobileRequest mobile) {
 
-        Optional<User> checkMobile = userRepository.checkMobile(mobile.getMobile());
+        Optional<User> checkMobile = userRepository.findByMobile(mobile.getMobile());
         if (!checkMobile.equals(Optional.empty())) {
             String message = new String("이미 인증된 전화번호입니다");
 

@@ -136,7 +136,7 @@ export default {
     methods: {
         signUp () {
             const validate = this.$refs.form.validate();
-            const role = (this.radioGroup == '개인' ? 'ROLE_USER' : 'ROLE_CEO')
+            const role = (this.role == '개인' ? 'ROLE_USER' : 'ROLE_CEO')
             if(validate && this.certification == true ){
                 const {email, password, name, mobile} = this
                 this.$emit('signUp', {email, password, name, mobile, role})

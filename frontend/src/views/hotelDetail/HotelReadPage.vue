@@ -1,15 +1,20 @@
 <template>
   <div align="center">
-    <h1>호텔 상세보기 페이지</h1>
-    <m-hotel-read-form v-if="mHotel" :mHotel="mHotel" :userInfo="user" />
-    <p v-else>로딩중......</p>
+    <m-hotel-read-form :mHotel="mHotel" />
+    <!-- HotelReadPage로 옮긴다면 kakaoMapAPI위치는 여기에
+      <m-search-bar-form/>  -->
+    <!---<m-room-read-form :roomList="roomList"/>-->
+    <!-- 주석 -->
+    <!-- <m-review-read-form :mReview="mReview"/>
+        <p v-else> 로딩중......</p> -->
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
 import MHotelReadForm from "@/components/hotelDetail/HotelReadForm.vue";
-
+//import MRoomReadForm from '@/components/hotelDetail/RoomReadForm.vue'
+import axios from "axios";
 export default {
   name: "MHotelReadPage",
   props: {
@@ -18,23 +23,33 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      roomList: [],
+    };
+  },
   components: {
     MHotelReadForm,
+    //MRoomReadForm,
   },
   computed: {
-    ...mapState(["mHotel", "user"]),
+    ...mapState(["mHotel"]),
   },
   created() {
+    const hotelNo = this.hotelNo;
     this.fetchMHotel(this.hotelNo).catch(() => {
       alert("숙소 상세보기 요청 실패!");
       this.$router.push();
-    });
+    }),
+      axios
+        .post("http://localhost:7777/room/mem/list", { hotelNo })
+        .then((res) => {
+          console.log(res);
+          this.roomList = res.data;
+        });
   },
   methods: {
-    ...mapActions(["fetchMHotel", "setUser"]),
-  },
-  mounted() {
-    this.setUser();
+    ...mapActions(["fetchMHotel"]),
   },
 };
 </script>
