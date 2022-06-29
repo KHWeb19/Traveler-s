@@ -1,48 +1,47 @@
 <template>
-    <footer class="site-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 col-md-6">
-                    <h6>사업자 정보</h6>
-                    <p>
+    <v-footer id="footer">
+        <v-container id="footcol" fluid>
+            <v-divider></v-divider>
+            <v-row id="insidefild">
+                <v-col cols="12" xs="12" sm="6" md="5">
+                    <v-list-item-title id="title">사업자 정보</v-list-item-title>
+                    <v-text>
                         since 2022 어쩌고 저쩌고...우리 회사의 간단한 소개가 적혀있다..
-                    </p>
-                </div>
-                <div class="col-sm-3 col-xs-3 col-md-3">
-                    <h6> 고객문의</h6>
-                    <p>
+                    </v-text>
+                </v-col>
+                <v-col cols="12" xs="12" sm="6" md="3">
+                    <v-list-item-title id="title"> 고객문의</v-list-item-title>
+                    <v-text>
                         TEL : 000-000-0000<br>
                         Email : 000000@gmail.com
-                    </p>
-                </div>
-                <div class="col-sm-3 col-xs-3 col-md-3">
-                    <h6>SNS</h6>
-                    <ul class="footer-links">
-                        <a href="https://www.facebook.com/" target="_blank">
-                            <img width="30" height="30" src="@/assets/footer/Facebook.png">
-                        </a>
-                        &nbsp;
-                        <a href="https://www.instagram.com/?hl=ko" target="_blank">
-                            <img width="30" height="30" src="@/assets/footer/Instagram.png">
-                        </a>
-                        &nbsp;
-                        <a href="https://www.kakaocorp.com/page/service/service/KakaoTalk?lang=ko" target="_blank">
-                            <img width="30" height="30" src="@/assets/footer/KakaoTalk.png">
-                        </a>
-                        &nbsp;
-                        <a href="https://youtube.com/?lang=ko" target="_blank">
-                            <img width="30" height="30" src="@/assets/footer/youtube.png">
-                        </a>
-                    </ul>
-                </div>
-            </div>
-            <hr>
-        </div>
-    </footer>
+                    </v-text>
+                </v-col>
+                <v-col cols="12" xs="12" sm="6" md="3">
+                    <v-list-item-title id="title">SNS</v-list-item-title>
+                    <v-list-item id="snslink" justify="center">
+                        <div id="snsfild" href="https://www.facebook.com/" target="_blank">
+                            <img id="snsimg" src="@/assets/footer/Facebook.png">
+                        </div>
+                        <div id="snsfild" href="https://www.instagram.com/?hl=ko" target="_blank">
+                            <img id="snsimg" src="@/assets/footer/Instagram.png">
+                        </div>
+                        <div id="snsfild"  href="https://www.kakaocorp.com/page/service/service/KakaoTalk?lang=ko" target="_blank">
+                            <img id="snsimg" src="@/assets/footer/KakaoTalk.png">
+                        </div>
+                        <div id="snsfild" href="https://youtube.com/?lang=ko" target="_blank">
+                            <img id="snsimg" src="@/assets/footer/youtube.png">
+                        </div>
+                    </v-list-item>
+                </v-col>
+            </v-row>
+            <v-divider></v-divider>
+        </v-container>
+    </v-footer>
 </template>
 
 <style scoped>
-.site-footer {
+
+#footer {
     background-color: rgb(255, 255, 255);
     padding: 0px;
     font-size: 15px;
@@ -50,43 +49,45 @@
     color: rgb(0, 0, 0);
 }
 
-.site-footer hr {
-    border-top-color: rgb(0, 0, 0);
-    opacity: 0.5;
-    size : 100%;
+#footcol {
+    justify-content: space-around;
+    margin-left: 6%;
+    margin-right: 6%;
+    margin-top: 0%;
+    margin-bottom: 0%;
 }
 
-.site-footer h6 {
+#insidefild {
+    justify-content: space-around;
+    margin-bottom: 3px;
+    margin-top: 5px;
+}
+
+#title {
     color: rgb(0, 0, 0);
     font-size: 16px;
     text-transform: uppercase;
     margin-top: 5px;
+    justify-content: center;
 }
 
-.site-footer h8 {
-    color: rgb(0, 0, 0);
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-top: 5px;
-
-}
-
-.footer-links {
+#snslink {
     padding-left: 0;
-    list-style: none;
-    margin-right: 20px;
-    margin-bottom: 0px;
+    margin: 0px;
+    padding: 0px;
+    width: 200px;
 }
 
-.footer-links a {
-    color: rgb(0, 0, 0);
+#snsfild {
+    widows: 45px;
+    height: 45px;
+    padding: 2px;
+    margin: 2px;
 }
-
-.footer-links li {
-    display: block
-}
-
-.footer-links.inline li {
-    display: inline-block
+#snsimg {
+    widows: 45px;
+    height: 45px;
+    max-width: 45px;
+    min-width: 45px;
 }
 </style>

@@ -15,9 +15,7 @@
                 class="button1 b-color rot-1">#{{ info }}
                 </v-btn>
             </v-row>
-        </section>
-
-        <v-divider></v-divider>                     
+        </section>                    
     </v-container>
 </template>
 
