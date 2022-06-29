@@ -1,8 +1,8 @@
 package com.example.demo.controller.hotel;
 
 import com.example.demo.controller.hotel.response.HotelResponse;
-import com.example.demo.dto.hotel.HotelRequest;
 
+import com.example.demo.dto.hotel.HotelResponseWithWriter;
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.member.User;
 import com.example.demo.entity.room.Room;
@@ -16,10 +16,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -118,10 +116,11 @@ public class HotelController {
     }
 
     @GetMapping("/mRead/{hotelNo}") //고객 페이지쪽 호텔 상세보기
-    public Hotel mHotelRead (
+    public HotelResponseWithWriter mHotelRead (
             @PathVariable("hotelNo") Integer hotelNo) {
         log.info("memberHotelRead()");
-        return hotelService.mRead(hotelNo);
+        HotelResponseWithWriter hotelResponseWithWriter = hotelService.mRead(hotelNo);
+        return hotelResponseWithWriter;
     }
 
     //search 넣기
