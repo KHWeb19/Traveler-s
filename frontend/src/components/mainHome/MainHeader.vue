@@ -1,8 +1,6 @@
 <template>
   <v-app-bar app color="#ffffff" height="90px">
-    <v-col id="BarBtn" v-if="!isLoggedIn">
-      <v-app-bar-nav-icon />
-    </v-col>
+    <v-col id="BarBtn" v-if="!isLoggedIn" />
     <v-col id="BarBtn" v-else>
       <v-app-bar-nav-icon @click="drawer = !drawer" />
     </v-col>
@@ -12,14 +10,18 @@
       </v-sheet>
     </v-col>
     <LoginForm />
-    <v-navigation-drawer disable-resize-watcher temporary app v-model="drawer">
-      <NavDrawer />
+    <v-navigation-drawer disable-resize-watcher 
+                         temporary 
+                         app 
+                         hide-overlay
+                         v-model="drawer">
+      <NavDrawer :userInfo="user"/>
     </v-navigation-drawer>
   </v-app-bar>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import router from '@/router'
 
 import LoginForm from './LoginForm.vue'
@@ -27,7 +29,7 @@ import NavDrawer from './NavDrawer.vue';
 
 export default {
   name: "MainHeader",
-
+  
   components: {
     LoginForm,
     NavDrawer,
@@ -41,7 +43,8 @@ export default {
     };
   },
   computed: {
-    ...mapState(["isLoggedIn"])
+    ...mapState(["isLoggedIn"]),
+    ...mapState(["user"])
   },
   methods: {
     onClickLogout() {
@@ -55,8 +58,12 @@ export default {
       const login = this.login
       console.log(login)
       this.$emit('checkLogin', login)
-    }
+    },
+    ...mapActions(["setUser"])
   },
+  mounted() {
+    this.setUser();
+  }
 }
 
 </script>
@@ -71,9 +78,11 @@ export default {
   margin: 0;
   padding: 0;
   color: rgb(255, 255, 255);
+  margin-bottom: 0%;
 }
 
 .v-card {
+
   margin-bottom: 10px;
 }
 
