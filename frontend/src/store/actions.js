@@ -1,6 +1,8 @@
 import {
   FETCH_M_HOTEL_LIST,
   FETCH_M_HOTEL,
+  FETCH_M_ROOM_LIST,
+  FETCH_M_ROOM,  
   IS_LOGGEDIN,
   NOT_LOGGEDIN,
   SET_USER,
@@ -27,6 +29,18 @@ export default {
                     commit(FETCH_M_HOTEL, res.data)
                 })
     },
+    fetchMRoomList ({ commit }) {
+        return axios.get('http://localhost:7777/room/mem/list')
+                .then((res) => {
+                    commit(FETCH_M_ROOM_LIST, res.data)
+                })
+    },
+    fetchMRoom ({ commit }, roomNo) {
+        return axios.get(`http://localhost:7777/room/mem/${roomNo}`)
+                .then((res) => {
+                    commit(FETCH_M_ROOM, res.data)
+                })
+    },    
     fetchBmHotelList ({ commit }) {
         return axios.get('http://localhost:7777/hotel/bm/list')
                 .then((res) => {

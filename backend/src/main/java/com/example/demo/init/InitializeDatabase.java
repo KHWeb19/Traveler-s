@@ -28,9 +28,9 @@ public class InitializeDatabase implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Role roleAdmin = new Role("ADMIN");
-        Role roleCEO = new Role("CEO");
-        Role roleUser = new Role("USER");
+        Role roleAdmin = new Role("ROLE_ADMIN");
+        Role roleCEO = new Role("ROLE_CEO");
+        Role roleUser = new Role("ROLE_USER");
         User userAdmin = User.builder().email("admin@gmail.com")
                 .password(passwordEncoder.encode("password"))
                 .name("admin")

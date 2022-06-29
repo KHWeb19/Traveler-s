@@ -19,6 +19,10 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
     List<Hotel> findByHotelInfoContaining(String word);
 
     List<Hotel> findByTotalAddressContaining(String address);
+
+    @Query("select h from Hotel h join fetch h.user where h.hotelNo = :hotelNo")
+    Optional<Hotel> findByIdWithUser(Long hotelNo);
+
 }
 
 
