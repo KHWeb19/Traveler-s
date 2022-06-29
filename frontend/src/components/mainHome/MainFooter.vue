@@ -1,92 +1,223 @@
 <template>
-    <footer class="site-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12 col-md-6">
-                    <h6>사업자 정보</h6>
-                    <p>
-                        since 2022 어쩌고 저쩌고...우리 회사의 간단한 소개가 적혀있다..
-                    </p>
-                </div>
-                <div class="col-sm-3 col-xs-3 col-md-3">
-                    <h6> 고객문의</h6>
-                    <p>
-                        TEL : 000-000-0000<br>
-                        Email : 000000@gmail.com
-                    </p>
-                </div>
-                <div class="col-sm-3 col-xs-3 col-md-3">
-                    <h6>SNS</h6>
-                    <ul class="footer-links">
-                        <a href="https://www.facebook.com/" target="_blank">
-                            <img width="30" height="30" src="@/assets/footer/Facebook.png">
-                        </a>
-                        &nbsp;
-                        <a href="https://www.instagram.com/?hl=ko" target="_blank">
-                            <img width="30" height="30" src="@/assets/footer/Instagram.png">
-                        </a>
-                        &nbsp;
-                        <a href="https://www.kakaocorp.com/page/service/service/KakaoTalk?lang=ko" target="_blank">
-                            <img width="30" height="30" src="@/assets/footer/KakaoTalk.png">
-                        </a>
-                        &nbsp;
-                        <a href="https://youtube.com/?lang=ko" target="_blank">
-                            <img width="30" height="30" src="@/assets/footer/youtube.png">
-                        </a>
-                    </ul>
-                </div>
-            </div>
-            <hr>
-        </div>
-    </footer>
+<footer>
+<div class="footBtm">
+    <div class="footInner">
+      <ul class="footMenu">
+        <li><a href="#" role="button">개인정보처리방침</a></li>
+        <li><a href="#" role="button">이용약관</a></li>
+      </ul>
+      <p class="txtFoot">
+        <span>(주)TRAVELER'S 대표이사 : 이상훈</span>
+        <span>사업자등록번호 : 100-10-10000</span>
+        <span>
+					통신판매신고 제2022-에디로봇-00호
+				</span>
+        <span>관광사업자 등록번호 : 제2022-07호</span>
+      </p>
+      <p class="txtFoot" style="margin:0">
+        <span>서울특별시 강남구 강남구 테헤란로14길 6</span>
+      </p>
+      <p class="txtFoot02">
+        (주)TRAVELER'S는 숙박 상품에 대하여 통신판매중개자로서 통신판매의 당사자가 아니며 해당상품의 거래정보 및 거래 등에 대해 책임을 지지 않습니다.
+        <br>
+        (주)TRAVELER'S는 렌터카 파트너사가 제공하는 일부 렌터카에 대하여 통신판매중개자의 지위를 가지며, 해당 상품, 상품정보, 거래에 관한 의무와 책임은 판매자에게 있습니다.
+      </p>
+      <p class="txtCopy">
+        <span>Copyright ⓒ TRAVELER'S All Rights Reserved</span>
+      </p>
+    </div>
+  </div>
+</footer>
 </template>
 
+<script>
+export default {
+
+}
+</script>
+
 <style scoped>
-.site-footer {
-    background-color: rgb(255, 255, 255);
-    padding: 0px;
-    font-size: 15px;
-    line-height: 25px;
-    color: rgb(0, 0, 0);
+p, ul, ol, li, button, div, footer, span {
+    margin: 0;
+    padding: 0;
+    color: #606060;
+    font-family: Pretendard,-apple-system,BlinkMacSystemFont,Open Sans,Helvetica Neue,sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    word-break: keep-all;
+    word-wrap: break-word;
+    white-space: normal;
 }
 
-.site-footer hr {
-    border-top-color: rgb(0, 0, 0);
-    opacity: 0.5;
-    size : 100%;
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
 }
 
-.site-footer h6 {
-    color: rgb(0, 0, 0);
-    font-size: 16px;
-    text-transform: uppercase;
-    margin-top: 5px;
+footer {
+    position: relative;
+    height: 304px;
+    border-top: 1px solid #EAEAEA;
+    text-align: center;
+    z-index: 1;
+    background: #18225c;
 }
 
-.site-footer h8 {
-    color: rgb(0, 0, 0);
-    font-size: 13px;
-    text-transform: uppercase;
-    margin-top: 5px;
-
+footer .footBtm .footInner {
+    padding: 60px 72px 0 72px;
 }
 
-.footer-links {
-    padding-left: 0;
+footer .footInner {
+    position: relative;
+    width: 1280px;
+    margin: 0 auto;
+    padding: 0 72px;
+    text-align: left;
+    z-index: 2;
+}
+
+footer .footBtm .footMenu {
+    margin-left: -9px;
+}
+
+ul {
     list-style: none;
-    margin-right: 20px;
-    margin-bottom: 0px;
+    display: block;
 }
 
-.footer-links a {
-    color: rgb(0, 0, 0);
+ul:after, ol:after {
+    content: '';
+    display: block;
+    clear: both;
 }
 
-.footer-links li {
-    display: block
+li {
+  float: left;
+  font-family: Pretendard,-apple-system,BlinkMacSystemFont,Open Sans,Helvetica Neue,sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #606060;
+  font-weight: 400;
+  font-size: 1.0rem;
 }
 
-.footer-links.inline li {
-    display: inline-block
+a {
+    color: inherit;
+    text-decoration: none;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
+
+footer .footBtm .footMenu>li:first-child a {
+    color: #fff;
+    font-weight: 600;
+}
+
+footer .footBtm .footMenu>li>a {
+    position: relative;
+    padding: 0 8px 0 9px;
+    color: rgba(255,255,255,0.6);
+    line-height: 29px;
+    font-weight: 400;
+}
+
+footer .footBtm .footMenu>li>a:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 1px;
+    height: 14px;
+    margin-top: -8px;
+    background: rgba(255,255,255,0.5);
+}
+
+footer .footBtm .footMenu>li:first-child a:before {
+    display: none;
+}
+
+footer .footBtm .txtFoot {
+    margin-top: 19px;
+    color: rgba(255,255,255,0.6);
+}
+
+footer .footBtm .txtFoot span {
+    display: inline-block;
+    position: relative;
+    padding: 0 8px 0 9px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.3em;
+    font-size: 0.8rem;
+}
+
+footer .footBtm .txtFoot span:first-child {
+    padding-left: 0;
+}
+
+footer .footBtm .txtFoot span .btns {
+    border: 1px solid rgba(255,255,255,0.5);
+    padding: 5px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    margin-left: 4px;
+}
+
+footer .footBtm .txtFoot span:first-child:before {
+    display: none;
+}
+
+footer .footBtm .txtFoot span:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 1px;
+    height: 10px;
+    margin-top: -5px;
+    background: rgba(255,255,255,0.2);
+}
+
+/*footer .footBtm .txtFoot span .btns {
+    border: 1px solid rgba(255,255,255,0.5);
+    padding: 5px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    margin-left: 4px;
+}*/
+
+footer .footBtm .txtFoot02, footer .footBtm .txtFoot03 {
+    margin-top: 20px;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.8rem;
+    line-height: 1.5em;
+}
+
+footer .footBtm .txtCopy {
+    margin-top: 22px;
+    color: #fff;
+    font-size: 1.6rem;
+}
+
+footer .footBtm .txtCopy span {
+    display: inline-block;
+    position: relative;
+    padding: 0 8px 0 9px;
+    color: rgba(255,255,255,0.6);
+    font-size:  0.8rem;
+    line-height: 1.3em;
+}
+
+footer .footBtm .txtCopy span:first-child {
+    padding-left: 0;
+}
+
 </style>
