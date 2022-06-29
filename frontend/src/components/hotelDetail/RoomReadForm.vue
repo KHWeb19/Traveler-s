@@ -10,7 +10,7 @@
                 <td>
                     <v-container>
                        <v-col v-for="(item, i) in roomList" :key="i">
-                        <v-card :elevation="hover ? 16:2" class="{ 'on-hover': hover }" 
+                        <v-card
                             align = "center"
                             style="margin: 10px; width: 100%; height: 200px;">
 
@@ -54,13 +54,12 @@
                                                 <v-row justify="right">
                                                     <tr>
                                                         <v-dialog width="700px">
-                                                        <template v-slot:activator="{ on }">
-                                                            <v-btn
-                                                                    :elevation="hover ? 16:2" v-on="on" dark>
-                                                            상세보기
-                                                            </v-btn>
-                                                        </template>
-
+                                                            <template v-slot:activator="{ on }">
+                                                                <v-btn
+                                                                        v-on="on" dark>
+                                                                상세보기
+                                                                </v-btn>
+                                                            </template>
 
                                                             <!-- slide를 넣어서 객실 사진 전부를 확인할 수 있도록 한다. -->
                                                                 <div class="slide-10d">
@@ -99,8 +98,10 @@
                                                 <!-- 근데 또 위에처럼 시나리오를 잡으면 2박이 아닌 무수한 경우에는 어떻게 하는거야... -->
                                                 <!-- 이 중간 날짜들을 체크할 수 있는 방법... ID, 닉네임 유효성 검사한 사람들 코드를 좀 봐야할듯 -->
 
+                                    <!-- <v-btn v-if="체크인날짜 <= 예약테이블.예약date < 마지막 숙박일" 인 경우> 예약불가 <v-btn/>  -->
+
                                     <!-- <v-btn v-if="check가 true면"> 예약불가 <v-btn/>  -->
-                                                <!-- created에서 엑시오스 요청. 지금 검색된 내가 원한느 숙박날짜와 같은 날짜+같은 객실이 이미 예약 테이블에 포함되어 있는지 확인한다.
+                                                <!-- created에서 엑시오스 요청. 지금 검색된 내가 원하는 숙박날짜와 같은 날짜+같은 객실이 이미 예약 테이블에 포함되어 있는지 확인한다.
                                                     이미 같은 날짜+같은 객실이 DB에 있다면 check라는 bool타입 변수를 true로 변경해준다.-->
                                                 <!-- 근데 이...중간의 여러 날짜를 체크할 수 있는 방법이 뭔지 모르겠다. ...1박이 아닌 경우를 어떻게 해야하나
                                                      검사 자체는 spring에서 for문 반복 돌려서 검사를 하면 모두 검사가 될 것 같긴 한데.
@@ -129,7 +130,7 @@
 
 
 export default {
-    name: 'MRoomReadForm',
+    name: 'RoomReadForm',
     components: {
 
     },
