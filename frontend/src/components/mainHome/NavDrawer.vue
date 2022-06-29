@@ -1,8 +1,8 @@
 <template>
   <v-col>
-    <v-col id="test" v-for="(index, i) in userInfo.roles" :key="i">
-      <v-list v-if="index.name == USER"><!--USER / CEO-->
-        <v-list-group v-for="(item, n) in items" :key="n" v-model="item.active" no-action>
+    <v-col v-for="(index, i) in userInfo.roles" :key="i">
+      <v-list v-if="index.name == 'CEO'">
+         <v-list-group v-for="(item, n) in items" :key="n" v-model="item.active" no-action>
           <template v-slot:activator>
             <v-list-item-content>
               <v-list-item-title v-text="item.title"></v-list-item-title>
@@ -79,12 +79,5 @@ export default {
 </script>
 
 <style scoped>
-
-#test {
-  color: black;
-}
-#test2 {
-  color: red;
-}
 
 </style>
