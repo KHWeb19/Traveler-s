@@ -236,4 +236,13 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
         }
     }
 
+   //--------------------------------------------------------
+
+   @Override
+   public List<Room> findMRoomList(Long hotelNo) {
+
+       return  roomRepository.findAllRoomByHotelNo(hotelNo);
+   }
+    
+    
 }

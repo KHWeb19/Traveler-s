@@ -91,6 +91,13 @@ public class RoomController {
         roomService.bmRoomsRemove(rooms);
     }
 
+    //---------------------------------------------------------------------------------------------------------------
 
+    @PostMapping("/mem/list")
+    public List<Room> mRoomList (@RequestBody RoomRequest roomRequest) {
+        log.info("hotel's roomList" + roomRequest.getHotelNo());
+
+        return roomService.findMRoomList(roomRequest.getHotelNo());
+    }
 
 }

@@ -1,7 +1,9 @@
 import {
     FETCH_M_HOTEL_LIST,
     FETCH_M_HOTEL,
-  
+    FETCH_M_ROOM_LIST,
+    FETCH_M_ROOM,
+    
     FETCH_BM_HOTEL_LIST,
     FETCH_BM_HOTEL,
 
@@ -25,6 +27,12 @@ export default {
     },
     [FETCH_M_HOTEL] (state, mHotel) {
         state.mHotel = mHotel
+    },
+    [FETCH_M_ROOM_LIST] (state, mRooms) {
+        state.mRooms = mRooms
+    },
+    [FETCH_M_ROOM] (state, mRoom) {
+        state.mRoom = mRoom
     },
     [GET_HOTEL_TYPE] (state, hotelType){
         state.hotelType = hotelType

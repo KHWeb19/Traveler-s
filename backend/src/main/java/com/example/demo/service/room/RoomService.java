@@ -16,5 +16,8 @@ public interface RoomService {
     public Room bmRoomModify(Room Room, List<MultipartFile> files);
     public void bmRoomRemove(Integer roomNo);
     public void bmRoomsRemove(List<Long> roomNo);
+
+    //----------------------------------------------------------
+    public List<Room> findMRoomList(Long hotelNo);
 }
 
