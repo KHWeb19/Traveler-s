@@ -14,7 +14,6 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
     @Transactional
     @Query(value = "select * from hotel order by rand() limit ?1", nativeQuery = true)
     public List<Hotel> randomPick(Integer randNum);
-    Optional<Hotel> findByHotelNo(@Param("hotelNo") Long hotelNo);
 
     List<Hotel> findByHotelInfoContaining(String word);
 
@@ -22,6 +21,9 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
 
     @Query("select h from Hotel h join fetch h.user where h.hotelNo = :hotelNo")
     Optional<Hotel> findByIdWithUser(Long hotelNo);
+
+    @Query("select h from Hotel h join fetch h.rooms where h.hotelNo = :hotelNo")
+    Optional<Hotel> findByIdWithRooms(Long hotelNo);
 
 }
 
