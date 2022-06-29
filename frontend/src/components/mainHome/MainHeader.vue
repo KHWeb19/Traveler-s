@@ -62,7 +62,9 @@ export default {
     ...mapActions(["setUser"])
   },
   mounted() {
-    this.setUser();
+    if(this.$store.state.isLoggedIn ==true){
+      this.setUser();
+      }
   }
 }
 
