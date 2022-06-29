@@ -3,9 +3,10 @@
         <m-hotel-read-form :mHotel="mHotel"/>
         <!-- HotelReadPage로 옮긴다면 kakaoMapAPI위치는 여기에
       <m-search-bar-form/>  -->
-        <m-room-read-form :roomList="roomList"/>--> <!-- 주석 -->
-    <!--<m-review-read-form :mReview="mReview"/>-->
-        <!--<p v-else> 로딩중......</p> -->
+        <m-room-read-form :roomList="roomList"/> <!-- 주석 -->
+    <!-- <m-review-read-form :mReview="mReview"/>
+        <p v-else> 로딩중......</p> -->
+
     </div>
 </template>
 
