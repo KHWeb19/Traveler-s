@@ -14,6 +14,9 @@
 					</v-row>
 				</v-container>
 			</div>
+			<footer>
+				<main-footer-top/>
+			</footer>
 		</v-app>
 	</v-main>
 </template>
@@ -22,6 +25,7 @@
 import MainSearch from '@/components/mainHome/MainSearch.vue'
 import HotelRandom from '@/components/mainHome/HotelRandom.vue';
 import TagSearch from '@/components/mainHome/TagSearch.vue';
+import MainFooterTop from '@/components/mainHome/MainFooterTop.vue';
 
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios';
@@ -30,7 +34,8 @@ export default {
 	components: {
 		MainSearch,
 		HotelRandom,
-		TagSearch
+		TagSearch,
+		MainFooterTop
 	},
    data () {
 	return {
