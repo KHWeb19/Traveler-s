@@ -1,6 +1,7 @@
 package com.example.demo.controller.wish;
 
 
+import com.example.demo.dto.wish.WishResponse;
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.member.User;
 import com.example.demo.entity.wish.Wish;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -49,11 +52,11 @@ public class WishController {
     }
 
     @GetMapping("/HotelList")
-    public List<Hotel> listHotel(){
+    public List<WishResponse> listHotel(){
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> optionalUser = userService.findByEmail(email);
         User user = optionalUser.get();
-        return wishService.findHotel(user.getId());
+        return wishService.findWish(user.getId());
     }
 
 }

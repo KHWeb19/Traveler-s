@@ -2,6 +2,7 @@ package com.example.demo.entity.wish;
 
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.member.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,12 +23,13 @@ public class Wish {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long wishNo;
 
-    @JsonIgnore
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference
+    @OneToOne(fetch = FetchType.LAZY)
     private Hotel hotel;
 
 

@@ -17,7 +17,6 @@
           </v-col>
           <ul>
             <p>{{ userInfo.name }}</p>
-            <p>{{ userInfo.id }}</p>
             <br />
             <br />
             <br />

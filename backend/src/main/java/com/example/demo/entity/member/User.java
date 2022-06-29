@@ -46,13 +46,15 @@ public class User {
     @Builder.Default
     private List<Role> roles = new ArrayList<>();
 
+
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Hotel> hotels= new ArrayList<>();
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Wish> wish= new ArrayList<>();
 
 

@@ -1,5 +1,6 @@
 package com.example.demo.service.wish;
 
+import com.example.demo.dto.wish.WishResponse;
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.member.User;
 import com.example.demo.entity.wish.Wish;
@@ -13,5 +14,5 @@ public interface WishService {
 
     void deleteWish(Long wishNo);
 
-    public List<Hotel> findHotel(Long id);
+    public List<WishResponse> findWish(Long id);
 }

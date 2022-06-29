@@ -1,16 +1,19 @@
 package com.example.demo.service.wish;
 
 
+import com.example.demo.dto.wish.WishResponse;
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.member.User;
 import com.example.demo.entity.wish.Wish;
 import com.example.demo.repository.hotel.HotelRepository;
+import com.example.demo.repository.member.UserRepository;
 import com.example.demo.repository.wish.WishRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,7 +21,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 @Service
-public class WishServiceImpl implements WishService{
+public class WishServiceImpl implements WishService {
 
     @Autowired
     private WishRepository wishRepository;
@@ -26,10 +29,13 @@ public class WishServiceImpl implements WishService{
     @Autowired
     private HotelRepository hotelRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
-    public boolean addWish(User user , Long hotelNo) {
+    public boolean addWish(User user, Long hotelNo) {
         Wish wish = new Wish();
-        Optional<Hotel> findBoard =hotelRepository.findById(hotelNo);
+        Optional<Hotel> findBoard = hotelRepository.findById(hotelNo);
         log.info("getHotelNo: " + hotelNo);
 
 
@@ -43,22 +49,24 @@ public class WishServiceImpl implements WishService{
     }
 
 
-
     @Override
     public void deleteWish(Long wishNo) {
         wishRepository.deleteById(wishNo);
     }
 
+    @Transactional
     @Override
-    public List<Hotel> findHotel(Long id) {
-        List<Wish> wish = wishRepository.findByUserNo(id);
+    public List<WishResponse> findWish(Long id) {
+        Optional<User> user = userRepository.findByIDWithWish(id);
 
-        List<Hotel> hotelList = new ArrayList<>();
-
-        for(Wish wish2 : wish){
-            hotelList.add(wish2.getHotel());
+        List<WishResponse> wishList = new ArrayList<>();
+        WishResponse wishResponse;
+        log.info("wish :" + user.get().getWish());
+        for (Wish wish2 : user.get().getWish()) {
+            wishResponse = new WishResponse(wish2.getHotel().getHotelName(), wish2.getHotel().getTotalAddress());
+            wishList.add(wishResponse);
         }
-        log.info("hotelList : " + hotelList);
-        return hotelList;
+        log.info("wishList : " + wishList);
+        return wishList;
     }
 }

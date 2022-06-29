@@ -76,6 +76,7 @@
 
           <br />
           <v-btn @click="wish" style="box-shadow: none"> 위시 </v-btn>
+          <v-btn @click="list" style="box-shadow: none"> 리스트 </v-btn>
           <tr>
             <!-- 검색 조건 -->
             <td>
@@ -265,6 +266,14 @@ export default {
             alert("등록 실패");
           });
       }
+    },
+    list() {
+      axios.get("http://localhost:7777/wish/HotelList").then((res) => {
+        if (res.data) {
+          console.log(res.data);
+          alert("리스트");
+        }
+      });
     },
   },
 };
