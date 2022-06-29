@@ -73,7 +73,7 @@ export default {
         }
     },
 
-    mounted () {
+    created () {
             this.$watch('mHotel', function(){
                 console.log('watch')
                 this.kakao()
