@@ -14,7 +14,7 @@
                 <td colspan="2">
                     <div class="slide-9img">
                             <v-container style="padding: 0px">
-                                <v-carousel v-if="mHotel.hotelImgPath1" cycle hide-delimiters class="cover">
+                                <v-carousel v-if="Object.keys(mHotel).length !== 0" cycle hide-delimiters class="cover">
                                     <v-carousel-item :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath1}`)"/>
                                     <v-carousel-item :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath2}`)"/>
                                     <v-carousel-item :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath3}`)"/>
@@ -107,7 +107,7 @@
                 </td>
                 </tr>
                     <td colspan="2" align="center">
-                        <kakao-map-api :mHotel="mHotel"/>
+                        <kakao-map-api v-if="Object.keys(mHotel).length !== 0" :mHotel="mHotel"/>
                         <br>
                     </td>
                 <tr>
