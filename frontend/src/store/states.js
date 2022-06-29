@@ -4,7 +4,7 @@ export default {
     hotelType: [],
 
     mHotels: [],
-    mHotel: null,
+    mHotel: {},
     mRooms: [],
     mRoom: null,
 
