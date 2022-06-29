@@ -94,7 +94,7 @@ public class RoomController {
     //---------------------------------------------------------------------------------------------------------------
 
     @PostMapping("/mem/list")
-    public List<Room> mRoomList (@RequestBody RoomRequest roomRequest) {
+    public List<Room> mRoomList (@RequestBody RoomRequest roomRequest) { //주석
         log.info("hotel's roomList" + roomRequest.getHotelNo());
 
         return roomService.findMRoomList(roomRequest.getHotelNo());
