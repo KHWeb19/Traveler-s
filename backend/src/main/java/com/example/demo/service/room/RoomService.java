@@ -1,8 +1,8 @@
 package com.example.demo.service.room;
 
 import com.example.demo.dto.hotel.RoomRequest;
+import com.example.demo.dto.hotel.RoomResponseDTO;
 import com.example.demo.dto.hotel.RoomResponse;
-import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.room.Room;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,6 +18,6 @@ public interface RoomService {
     public void bmRoomsRemove(List<Long> roomNo);
 
     //----------------------------------------------------------
-    public List<Room> findMRoomList(Long hotelNo); //주석
+    public List<RoomResponseDTO> findMRoomList(Long hotelNo); //주석
 }
 
