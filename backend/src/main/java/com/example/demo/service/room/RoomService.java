@@ -18,6 +18,6 @@ public interface RoomService {
     public void bmRoomsRemove(List<Long> roomNo);
 
     //----------------------------------------------------------
-    public List<Room> findMRoomList(Long hotelNo);
+    public List<Room> findMRoomList(Long hotelNo); //주석
 }
 
