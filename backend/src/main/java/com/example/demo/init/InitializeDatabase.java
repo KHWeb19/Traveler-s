@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+/*@Component
 @RequiredArgsConstructor
 public class InitializeDatabase implements CommandLineRunner {
 
@@ -93,5 +93,10 @@ public class InitializeDatabase implements CommandLineRunner {
         hotelRepository.saveAll(hotels);
         roomRepository.saveAll(rooms);
         System.out.println("CommandLine Runner");
-        }
-}
+
+    }
+}*/
+
+
+
+

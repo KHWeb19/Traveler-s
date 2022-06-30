@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import RoomRegisterForm from '@/components/hotel/RoomRegisterForm.vue'
+import RoomRegisterForm from '@/components/room/RoomRegisterForm.vue'
 import axios from 'axios'
 import { mapActions, mapState } from 'vuex'
 export default {
