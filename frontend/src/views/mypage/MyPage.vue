@@ -26,6 +26,7 @@ export default {
     MyPageProfileForm,
     MyPageLeftMenuVue,
   },
+
   computed: {
     ...mapState(["user"]),
   },
