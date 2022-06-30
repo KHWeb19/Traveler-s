@@ -68,7 +68,6 @@
                                   <template v-slot:activator="{ on }">
                                     <v-btn v-on="on" dark> 상세보기 </v-btn>
                                   </template>
-
                                   <!-- slide를 넣어서 객실 사진 전부를 확인할 수 있도록 한다. -->
                                   <div class="slide-10d">
                                     <v-container style="padding: 0px">
