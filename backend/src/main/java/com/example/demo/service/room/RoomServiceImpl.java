@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.example.demo.dto.hotel.RoomResponse.roomBuilder;
+
 //import static com.example.demo.dto.hotel.RoomResponse.roomBuilder;
 
 @RequiredArgsConstructor
@@ -82,18 +84,7 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
         if(!hotel.equals(Optional.empty())) {
             List<Room> rooms = hotel.get().getRooms();
 
-            List<RoomResponse> roomResponse = rooms.stream().map(r -> RoomResponse.builder()
-                    .roomNo(r.getRoomNo())
-                    .roomInfo(r.getRoomInfo())
-                    .roomImage(r.getRoomImages())
-                    .price(r.getPrice())
-                    .roomType(r.getRoomType())
-                    .roomInfo(r.getRoomInfo())
-                    .personnel(r.getPersonnel())
-                    .build()
-            ).collect(Collectors.toList());
-
-            return roomResponse;
+            return roomBuilder(rooms);
         }
         return new ArrayList<RoomResponse>();
     }
@@ -107,18 +98,9 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
             log.info("Can't read board!");
             return null;
         }
-        Room r = maybeReadBoard.get();
-        RoomResponse roomResponse = RoomResponse.builder()
-                .roomNo(r.getRoomNo())
-                .roomType(r.getRoomType())
-                .roomInfo(r.getRoomInfo())
-                .roomImage(r.getRoomImages())
-                .price(r.getPrice())
-                .personnel(r.getPersonnel())
-                .regDate(r.getRegDate())
-                .build();
+        Room room = maybeReadBoard.get();
 
-        return roomResponse;
+        return roomBuilder(room);
     }
 
     @Override
@@ -177,17 +159,6 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
        Hotel hotel = optionalHotel.get();
        List<Room> rooms = hotel.getRooms();
 
-       List<RoomResponse> roomResponse = rooms.stream().map(r -> RoomResponse.builder()
-               .roomNo(r.getRoomNo())
-               .roomInfo(r.getRoomInfo())
-               .roomImage(r.getRoomImages())
-               .price(r.getPrice())
-               .roomType(r.getRoomType())
-               .roomInfo(r.getRoomInfo())
-               .personnel(r.getPersonnel())
-               .build()
-       ).collect(Collectors.toList());
-
-       return roomResponse;
+       return roomBuilder(rooms);
    }
 }
