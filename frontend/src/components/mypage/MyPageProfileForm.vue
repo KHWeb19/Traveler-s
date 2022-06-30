@@ -1,7 +1,7 @@
 <template>
   <v-container style="padding: 0px; margin-top: 20px">
     <v-card class="right">
-      <div style="display: flex; justify-content: center; padding-top: 120px">
+      <div style="display: flex; justify-content: center">
         <v-form ref="form" lazy-validation>
           <table>
             <br />
