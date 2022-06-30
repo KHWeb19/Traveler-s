@@ -29,7 +29,7 @@ public class Wish {
     private User user;
 
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     private Hotel hotel;
 
 
