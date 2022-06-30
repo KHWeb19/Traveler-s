@@ -1,7 +1,7 @@
 <template>
-  <v-container style="padding: 0px; margin-top: 20px;">
+  <v-container style="padding: 0px; margin-top: 20px">
     <v-card class="right">
-      <div style="display: flex; justify-content: center">
+      <div style="display: flex; justify-content: center; padding-top: 120px">
         <v-form ref="form" lazy-validation>
           <table>
             <br />
@@ -19,9 +19,10 @@
                     height: 35px;
                     padding: 5px;
                   "
-                  type="text">
-                  {{userInfo.name}}
-                  </div>
+                  type="text"
+                >
+                  {{ userInfo.name }}
+                </div>
               </td>
             </tr>
             <tr>
@@ -50,9 +51,9 @@
                     padding: 5px;
                   "
                   type="text"
-                  >{{userInfo.email}}
+                >
+                  {{ userInfo.email }}
                 </div>
-
               </td>
             </tr>
             <br />
@@ -66,11 +67,15 @@
                   type="password"
                   v-model="password"
                   :rules="passwordRules"
-                  style="width: 300px;"
-                /> 
+                  style="width: 300px"
+                />
               </td>
               <td>
-                <v-btn @click="updatePassword" style="width: 80px; margin: 10px; padding: 5px;">변경</v-btn>
+                <v-btn
+                  @click="updatePassword"
+                  style="width: 80px; margin: 10px; padding: 5px"
+                  >변경</v-btn
+                >
               </td>
             </tr>
             <br />
@@ -99,7 +104,7 @@
             <br />
             <br />
           </table>
-          <img :src="preview" style="width: 200px; text-align: center;" />
+          <img :src="preview" style="width: 200px; text-align: center" />
           <div style="text-align: center; padding-top: 26px">
             <br />
             <v-btn
@@ -122,11 +127,11 @@
 
 <script>
 import axios from "axios";
-import router from '@/router';
+import router from "@/router";
 
 export default {
   name: "MyPageForm",
-  props: { userInfo: Object},
+  props: { userInfo: Object },
   data() {
     return {
       password: "",
@@ -138,37 +143,38 @@ export default {
       memberEmail: this.userInfo.email,
 
       passwordRules: [
-                            v => !! v || '비밀번호를 작성해주세요.',
-                            v =>  /^[a-zA-Z0-9]*$/.test(v) || '영문+숫자로만 입력해주세요',
-                            v => /(?=.*[0-9])(?=.*[a-zA-ZS])/.test(v) || "영문+숫자를 섞어주세요",
-                            v => !(v && v.length < 8) || '8자리이상으로해주세요' ,
-                            v => !(v && v.length > 15) || '15자리를 넘길수없습니다.' 
-            ]
+        (v) => !!v || "비밀번호를 작성해주세요.",
+        (v) => /^[a-zA-Z0-9]*$/.test(v) || "영문+숫자로만 입력해주세요",
+        (v) => /(?=.*[0-9])(?=.*[a-zA-ZS])/.test(v) || "영문+숫자를 섞어주세요",
+        (v) => !(v && v.length < 8) || "8자리이상으로해주세요",
+        (v) => !(v && v.length > 15) || "15자리를 넘길수없습니다.",
+      ],
     };
   },
   methods: {
     updatePassword() {
-      if (this.$refs.form.validate()){
+      if (this.$refs.form.validate()) {
         this.$emit("updatePassword", this.password);
       }
-
     },
     selectFile(e) {
       this.file = e.target.files[0];
       this.preview = URL.createObjectURL(this.file);
     },
 
-    saveProfileImage(){
-      let formData = new FormData()
-      formData.append('multipartFile', this.file)
-      axios.post('http://localhost:7777/changeProfileImage', formData, {
-        headers: {
-                    'Content-Type': 'multipart/form-data'
-                }})
-      .then(() => {
-        console.log('통신성공')
-        router.push("/")
-    })
+    saveProfileImage() {
+      let formData = new FormData();
+      formData.append("multipartFile", this.file);
+      axios
+        .post("http://localhost:7777/changeProfileImage", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then(() => {
+          console.log("통신성공");
+          router.push("/");
+        });
     },
     management() {
       alert("권한이 없습니다.");
