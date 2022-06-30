@@ -6,7 +6,13 @@
 
         <table style="width: 80%">
           <tr align="right">
-            <td colspan="2"></td>
+            <td colspan="2">
+              <v-btn>
+                <!--이 태그 안에 @click=""해서 작업하시면 됩니다. -->
+                <v-icon @click="wish" color="#ccbce3"> mdi-cards-heart </v-icon>
+              </v-btn>
+              &ensp;
+            </td>
           </tr>
 
           <tr>
@@ -73,7 +79,6 @@
                 </v-container>
               </div>
             </td>
-            \
           </tr>
 
           <br />
@@ -82,8 +87,6 @@
             <td>
               <h1>{{ mHotel.hotelName }}</h1>
               <p>{{ mHotel.hotelIntro }}</p>
-              <v-btn @click="wish">위시</v-btn>
-              <v-btn @click="list">리스트</v-btn>
             </td>
             <td>
               <v-col>
@@ -134,7 +137,7 @@
                         <!-- hotelInfo라는 자료의 데이터 갯수만큼 반복이 된다. data 변수명은 item이라고 해준다.  -->
                         <!-- key의 용도는 반복문 돌린 요소를 컴퓨터가 구분하기 위한 것. 반복문 돌면서 변하는 숫자/문자   -->
                         <!-- 작명 두개 할 시(데이터 변수, 1씩 증가하는 정수 변수) / 이때 key에는 보통 정수 변수를 입력   -->
-                        <v-row justify="center">
+                        <v-row>
                           <span
                             id="tagSpan2"
                             v-for="(item, i) in mHotel.hotelInfo"
@@ -229,12 +232,6 @@ export default {
             alert("등록 실패");
           });
       }
-    },
-    list() {
-      axios.get("http://localhost:7777/wish/HotelList").then((res) => {
-        if (res.data) console.log(res.data);
-        alert("리스트");
-      });
     },
   },
 };

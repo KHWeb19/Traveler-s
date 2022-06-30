@@ -53,8 +53,9 @@ export default {
                 }})
                     .then(res => {
                         alert('수정되었습니다.')
+                        console.log(res.data.roomNo)
                         this.$router.push({
-                            name: 'RoomReadPage',
+                            name: 'BRoomReadPage',
                             params: { roomNo: res.data.roomNo.toString() }
                         })
                     })
