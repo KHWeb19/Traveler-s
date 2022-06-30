@@ -90,9 +90,9 @@
                                                         <td>
                                                             <br>
                                                             <v-btn id="button"
-                                                            @click="goReserv(mRoom.hotelNo, mRoom.roomNo)"
+                                                            @click="goReserv(item.roomNo)"
                                                             >
-                                                            예약하기</v-btn>
+                                                            {{item.roomNo}}</v-btn>
                                                         </td>
                                     <!-- <v-btn v-if="체크인날짜 || 예약테이블.예약date || 마지막 숙박일" 인 경우> 예약불가 <v-btn/>  -->
                                                 <!-- 근데 또 위에처럼 시나리오를 잡으면 2박이 아닌 무수한 경우에는 어떻게 하는거야... -->
@@ -127,6 +127,7 @@
 </template>
 
 <script>
+import router from '@/router'
 
 
 export default {
@@ -140,8 +141,8 @@ export default {
         }
     },
     methods: {
-        goReserv () {
-
+        goReserv (payload) {
+            router.push({path: "/reservationTest"}, {params: {reservationNumber: payload}})
         },
     },
 }

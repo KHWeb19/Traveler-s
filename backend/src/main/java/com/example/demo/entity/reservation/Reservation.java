@@ -1,22 +1,22 @@
 package com.example.demo.entity.reservation;
 
 import com.example.demo.entity.member.User;
-import com.example.demo.entity.reservationroom.ReservationRoom;
+import com.example.demo.entity.room.Room;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
-@NoArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
 public class Reservation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,7 +33,14 @@ public class Reservation {
     @JsonBackReference
     private User user;
 
-    @OneToMany (mappedBy = "reservation", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
-    @JsonManagedReference
-    private List<ReservationRoom> reservationRooms;
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JsonBackReference
+    private Room room;
+
+    public Reservation(Long price, ReservationStatus status, User user, Room room) {
+        this.price = price;
+        this.status = status;
+        this.user = user;
+        this.room = room;
+    }
 }

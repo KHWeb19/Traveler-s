@@ -2,7 +2,7 @@ package com.example.demo.entity.room;
 
 import com.example.demo.dto.hotel.HotelConvert;
 import com.example.demo.entity.hotel.Hotel;
-import com.example.demo.entity.reservationroom.ReservationRoom;
+import com.example.demo.entity.reservation.Reservation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
@@ -66,9 +66,9 @@ public class Room {
     @UpdateTimestamp
     private Date updDate;
 
-    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = false)
+    @OneToMany (mappedBy = "room", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = false)
     @JsonManagedReference
-    private List<ReservationRoom> reservationRooms;
+    private List<Reservation> reservations;
 
     public void addHotelToRoom(Hotel hotel){
         if (this.hotel != null){
