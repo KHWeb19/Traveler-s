@@ -1,11 +1,8 @@
 package com.example.demo.controller.hotel;
 
-import com.example.demo.controller.hotel.response.HotelResponse;
-
-import com.example.demo.dto.hotel.HotelResponseWithWriter;
-import com.example.demo.entity.hotel.Hotel;
+import com.example.demo.dto.hotel.HotelRequest;
+import com.example.demo.dto.hotel.HotelResponse;
 import com.example.demo.entity.member.User;
-import com.example.demo.entity.room.Room;
 import com.example.demo.service.hotel.HotelService;
 import com.example.demo.service.member.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +13,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -32,24 +28,22 @@ public class HotelController {
 
     //사업자 매뉴얼 페이지 호텔 등록
     @PostMapping(value="/hotelRegister", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_JSON_VALUE})
-    public void hotelRegister (@Validated @RequestPart(value="hotel") Hotel hotel,
+    public void hotelRegister (@Validated @RequestPart(value="hotel") HotelRequest hotelRequest,
                                @RequestPart(value = "files") List<MultipartFile> files) throws Exception {
-        log.info("hotelRegister()" + hotel);
+        log.info("hotelRegister()" + hotelRequest);
 
         log.info("files :" + files);
 
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userService.findByEmailWithHotels(email).get();
 
-        hotel.addUserToHotel(user);
-
-        hotelService.register(hotel, files);
+        hotelService.register(hotelRequest, files, user);
 
     }
 
     //사업자 매뉴얼 페이지 호텔 목록
     @GetMapping("/bm/list")
-    public List<Hotel> bmHotelList () {
+    public List<HotelResponse> bmHotelList () {
         log.info("bmHotelList()");
 
         return hotelService.bmHotelList();
@@ -57,7 +51,7 @@ public class HotelController {
 
     //사업자 매뉴얼 페이지 호텔 읽기
     @GetMapping("/bm/{hotelNo}")
-    public Hotel bmHotelRead (
+    public HotelResponse bmHotelRead (
             @PathVariable("hotelNo") Integer hotelNo) {
         log.info("business member Hotel Read()");
         return hotelService.bmHotelRead(hotelNo);
@@ -65,26 +59,23 @@ public class HotelController {
 
     //사업자 매뉴얼 페이지 호텔 수정
     @PutMapping("/bm/{hotelNo}")
-    public Hotel bmhotelModify (
+    public HotelResponse bmHotelModify (
             @PathVariable("hotelNo") Integer hotelNo,
-            @Validated @RequestPart(value="hotel") Hotel hotel,
+            @Validated @RequestPart(value="hotel") HotelRequest hotelRequest,
             @RequestPart(value = "files") List<MultipartFile> files) {
-        log.info("business member Hotel Modify(): " + hotel);
+        log.info("business member Hotel Modify(): " + hotelRequest);
         log.info("files :" + files);
 
-        hotel.setHotelNo(Long.valueOf(hotelNo));
-        hotelService.bmhotelModify(hotel, files);
-
-        return hotel;
+        return hotelService.bmHotelModify(hotelRequest, files , hotelNo);
     }
 
     //사업자 매뉴얼 페이지 호텔 삭제
     @DeleteMapping("/bm/{hotelNo}")
-    public void bmhotelRemove (
+    public void bmHotelRemove (
             @PathVariable("hotelNo") Integer hotelNo) {
         log.info("hotelRemove()");
 
-        hotelService.bmhotelRemove(hotelNo);
+        hotelService.bmHotelRemove(hotelNo);
     }
 
     @PostMapping("/bm/deleteHotels")
@@ -99,28 +90,18 @@ public class HotelController {
 
 
     @GetMapping("/mainList")
-    public List<Hotel> hotelMainList () { //메인 페이지에서 호텔 list 불러오기
+    public List<HotelResponse> hotelMainList () { //메인 페이지에서 호텔 list 불러오기
         log.info("HotelRandom()");
 
-        List<Hotel> randomHotel = hotelService.random(); //randHotel을 추리는 작업을 hotelService안의 random이 실행한다.
-        List<HotelResponse> responses = new ArrayList<>();
-
-        for(Hotel hotel : randomHotel) {
-            responses.add(new HotelResponse(
-                    hotel.getHotelImgPath1(), hotel.getHotelName(), hotel.getTotalAddress(), hotel.getHotelInfo()
-            ));
-        }
-
-
-        return randomHotel;
+        return  hotelService.random(); //randHotel을 추리는 작업을 hotelService안의 random이 실행한다.
     }
 
     @GetMapping("/mRead/{hotelNo}") //고객 페이지쪽 호텔 상세보기
-    public HotelResponseWithWriter mHotelRead (
+    public HotelResponse mHotelRead (
             @PathVariable("hotelNo") Integer hotelNo) {
         log.info("memberHotelRead()");
-        HotelResponseWithWriter hotelResponseWithWriter = hotelService.mRead(hotelNo);
-        return hotelResponseWithWriter;
+
+        return hotelService.mRead(hotelNo);
     }
 
     //search 넣기
