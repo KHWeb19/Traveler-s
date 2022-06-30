@@ -2,6 +2,7 @@ package com.example.demo.dto.hotel;
 
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.room.Room;
+import com.example.demo.entity.room.RoomImage;
 import lombok.*;
 
 import java.util.Date;
@@ -10,6 +11,8 @@ import java.util.stream.Collectors;
 
 @Getter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RoomResponse {
 
     private Long roomNo;
@@ -18,20 +21,11 @@ public class RoomResponse {
     private int personnel;
     private List<String> roomInfo;
     private Hotel hotel;
-    private String roomImgPath1;
-    private String roomImgPath2;
-    private String roomImgPath3;
-    private String roomImgPath4;
-    private String roomImgPath5;
-    private String roomImgPath6;
-    private String roomImgPath7;
-    private String roomImgPath8;
-    private String roomImgPath9;
-
+    private List<RoomImage> roomImage;
     private Date regDate;
     private Date updDate;
 
-    public static List<RoomResponse> roomBuilder(List<Room> rooms) {
+    /*public static List<RoomResponse> roomBuilder(List<Room> rooms) {
         List<RoomResponse> roomRequestDTOList = rooms.stream().map(r -> RoomResponse.builder()
                 .roomNo(r.getRoomNo())
                 .roomImgPath1(r.getRoomImgPath1())
@@ -73,6 +67,6 @@ public class RoomResponse {
 
 
         return roomRequestDTOList;
-    }
+    }*/
 
 }

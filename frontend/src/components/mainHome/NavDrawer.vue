@@ -1,7 +1,7 @@
 <template>
   <v-col>
     <v-col v-for="(index, i) in userInfo.roles" :key="i">
-      <v-list v-if="index.name == 'CEO'">
+      <v-list v-if="index.name == 'ROLE_CEO'">
         <v-list-group
           v-for="(item, n) in items"
           :key="n"
@@ -79,7 +79,7 @@ export default {
             { title: "예약관리", to: "" },
             { title: "호텔등록", to: "/BHotelRegisterPage" },
             { title: "숙소관리", to: "/BHotelListPage" },
-            { title: "객실관리", to: "" },
+            { title: "객실관리", to: "/BRoomListPage" },
           ],
         },
       ],

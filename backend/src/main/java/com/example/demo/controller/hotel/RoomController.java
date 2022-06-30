@@ -49,7 +49,7 @@ public class RoomController {
         return roomService.findRoomList(roomRequest.getHotelNo());
     }
     
-    @GetMapping("/bm/{roomNo}")
+   @GetMapping("/bm/{roomNo}")
     public RoomResponse bmHotelRead (
             @PathVariable("roomNo") Integer roomNo) {
         log.info("business member Room Read()" + roomNo);
@@ -57,7 +57,7 @@ public class RoomController {
     }
 
     @PutMapping("/bm/{roomNo}")
-    public RoomResponse bmRoomModify (
+    public Long bmRoomModify (
             @PathVariable("roomNo") Integer roomNo,
             @Validated @RequestPart(value="roomRequest") RoomRequest roomRequest,
             @RequestPart(value = "files") List<MultipartFile> files) {

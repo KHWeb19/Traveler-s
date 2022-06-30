@@ -13,11 +13,11 @@ public interface RoomService {
     public List<HotelResponse> findHotel(String email);
     public List<RoomResponse> findRoomList(Long hotelNo);
     public RoomResponse bmRoomRead(Integer roomNo);
-    public RoomResponse bmRoomModify(RoomRequest roomRequest, List<MultipartFile> files, Integer roomNo);
+    public Long bmRoomModify(RoomRequest roomRequest, List<MultipartFile> files, Integer roomNo);
     public void bmRoomRemove(Integer roomNo);
     public void bmRoomsRemove(List<Long> roomNo);
 
     //----------------------------------------------------------
-    public List<RoomResponse> findMRoomList(Long hotelNo); //주석
+    public List<RoomResponse> findMRoomList(Long hotelNo);
 }
 
