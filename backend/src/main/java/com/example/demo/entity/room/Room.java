@@ -2,15 +2,17 @@ package com.example.demo.entity.room;
 
 import com.example.demo.dto.hotel.HotelConvert;
 import com.example.demo.entity.hotel.Hotel;
-import com.example.demo.entity.reservationroom.ReservationRoom;
+
+import com.example.demo.entity.reservation.Reservation;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -66,9 +68,10 @@ public class Room {
     @UpdateTimestamp
     private Date updDate;
 
-    @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = false)
+    @OneToMany (mappedBy = "room", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = false)
     @JsonManagedReference
-    private List<ReservationRoom> reservationRooms;
+    @Builder.Default
+    private List<Reservation> reservations = new ArrayList<>();
 
     public void addHotelToRoom(Hotel hotel){
         if (this.hotel != null){
