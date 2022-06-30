@@ -65,6 +65,7 @@ public class Hotel {
 
     @JsonManagedReference
     @OneToMany(mappedBy = "hotel", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
+    @Builder.Default
     private List<Room> rooms = new ArrayList<>();
 
     @Column
