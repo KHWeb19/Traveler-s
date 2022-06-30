@@ -1,7 +1,7 @@
 <template>
   <v-col>
     <v-col v-for="(index, i) in userInfo.roles" :key="i">
-      <v-list v-if="index.name == 'CEO'">
+      <v-list v-if="index.name == 'ROLE_CEO'">
         <v-list-group
           v-for="(item, n) in items"
           :key="n"
