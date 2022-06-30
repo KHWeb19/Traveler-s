@@ -1,40 +1,37 @@
 <template>
   <v-container style="padding: 0px; margin-top: 20px">
     <v-card class="right">
-      <div style="display: flex; justify-content: center">
+      <div style="display: flex; justify-content: center; padding-top: 120px">
         <v-form ref="form" lazy-validation> </v-form>
-        <table border="1">
+        <table border="2">
           <tr class="tb1">
-            <th align="center" width="100">번호</th>
             <th align="center" width="150">호텔 이름</th>
             <th align="center" width="640">호텔 주소</th>
+            <th align="center" width="150">취소</th>
           </tr>
           <tr
             v-if="
-              !jpaBoards || (Array.isArray(jpaBoards) && jpaBoards.length === 0)
+              !wishLists || (Array.isArray(wishLists) && wishLists.length === 0)
             "
           >
             <td colspan="4">현재 등록된 게시물이 없습니다!</td>
           </tr>
-          <tr v-else v-for="board in jpaBoards" :key="board.boardNo">
+          <tr v-else v-for="wishList in wishLists" :key="wishList.hotelNo">
             <td align="center">
-              {{ board.boardNo }}
+              {{ wishList.hotelName }}
             </td>
             <td align="left">
               <router-link
                 :to="{
-                  name: 'JpaBoardReadPage',
-                  params: { boardNo: board.boardNo.toString() },
+                  name: 'MHotelReadPage',
+                  params: {},
                 }"
               >
-                {{ board.title }}
+                {{ wishList.totalAddress }}
               </router-link>
             </td>
-            <td align="right">
-              {{ board.writer }}
-            </td>
-            <td align="center">
-              {{ board.regDate }}
+            <td>
+              <v-btn @click="dewish">취소</v-btn>
             </td>
           </tr>
         </table>
@@ -44,8 +41,24 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "MyPageWish",
+
+  props: {
+    wishLists: {
+      type: Array,
+    },
+
+    methods: {
+      dewish() {
+        axios.get("http://localhost:7777/wish/HotelList").then((res) => {
+          if (res.data) console.log(res.data);
+          alert("리스트");
+        });
+      },
+    },
+  },
 };
 </script>
 
