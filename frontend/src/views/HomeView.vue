@@ -55,6 +55,7 @@ export default {
       axios
         .get("http://localhost:7777/hotel/mainList")
         .then((res) => {
+			console.log(res.data)
         this.pageArray = res.data;
         })
         .catch((err) => {

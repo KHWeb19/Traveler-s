@@ -81,14 +81,13 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
     public HotelResponse bmHotelModify(HotelRequest hotelRequest, List<MultipartFile> files, Integer hotelNo) {
         Optional<Hotel> hotelInfo = hotelRepository.findByIdWithUser(Long.valueOf(hotelNo));
         Hotel hotel = hotelInfo.get();
-        //어떻게 못하겠다 나의 한계
-        hotelImgPathRemove(hotelInfo, path);
-        //이것도 나의 한계
+
+        hotelImgPathRemove(hotel, path);
 
         List<String> filePathList = new ArrayList<>();
         fileUpload(files, path, filePathList);
         log.info("filePathList : " + filePathList);
-        //이것도 나의 한계
+
         addHotelImgPath(hotel, filePathList);
         hotelRepository.save(hotel);
         return hotelBuilder(hotel);
@@ -100,7 +99,7 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
 
         Optional<Hotel> hotelInfo = hotelRepository.findById(Long.valueOf(hotelNo));
 
-        hotelImgPathRemove(hotelInfo, path);
+        hotelImgPathRemove(hotelInfo.get(), path);
 
         hotelRepository.deleteById(Long.valueOf(hotelNo));
     }
@@ -110,7 +109,8 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
         for(int i = 0 ; i < hotelNo.size(); i++) {
             Optional<Hotel> hotelInfo = hotelRepository.findById(hotelNo.get(i));
 
-            hotelImgPathRemove(hotelInfo, path);
+            //수정필요한부분
+            //hotelImgPathRemove(hotelInfo, path);
 
             hotelRepository.deleteById(hotelNo.get(i));
         }
@@ -127,12 +127,12 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
 
         List<HotelResponse> responses = new ArrayList<>();
 
+
         for(Hotel hotel : randomResults) {
             responses.add(new HotelResponse(
-                    hotel.getHotelNo(), hotel.getHotelImgPath1(), hotel.getHotelName(), hotel.getTotalAddress(), hotel.getHotelInfo()
+                    hotel.getHotelNo(), hotel.getHotelImages().get(0).getPath(), hotel.getHotelName(), hotel.getTotalAddress(), hotel.getHotelInfo()
             ));
         }
-
         return responses;
     }
 

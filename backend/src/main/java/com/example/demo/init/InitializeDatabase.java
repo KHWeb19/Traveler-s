@@ -1,6 +1,7 @@
 package com.example.demo.init;
 
 import com.example.demo.entity.hotel.Hotel;
+import com.example.demo.entity.hotel.HotelImage;
 import com.example.demo.entity.member.Role;
 import com.example.demo.entity.member.User;
 import com.example.demo.entity.room.Room;
@@ -55,11 +56,22 @@ public class InitializeDatabase implements CommandLineRunner {
         List<Hotel> hotels = new ArrayList<>();
         List<Room> rooms = new ArrayList<>();
 
-        for (int i = 1; i <= 6; i++) {
-            Hotel hotel = new Hotel(String.format("Hotel#%d", i),"hotelIntro", "오션뷰,테라스,수영장,전기차충전,공항근처,골프장,무료주차,바베큐그릴,반려동물,온천",
-                    "전남 진도군 조도면 대마도길 8대마도호텔", "58958",
-                    String.format("hotel%d-1.jpg", i), String.format("hotel%d-2.jpg", i), String.format("hotel%d-3.jpg", i),
-                    String.format("hotel%d-4.jpg", i), String.format("hotel%d-5.jpg", i));
+        for (int i = 1; i <= 6; i++){
+
+            Hotel hotel = Hotel.builder()
+                    .hotelName(String.format("Hotel%d", i))
+                    .hotelIntro("hotelIntro")
+                    .hotelInfo(List.of("오션뷰,테라스,수영장,전기차충전,공항근처,골프장,무료주차,바베큐그릴,반려동물,온천"))
+                    .totalAddress("전남 진도군 조도면 대마도길 8대마도호텔")
+                    .postcode("58958")
+                    .build();
+
+            for (int j = 1; j <= 5; j++) {
+                HotelImage hotelImage = HotelImage.builder().path(String.format("hotel%d-%d.jpg", i, j))
+                        .hotel(hotel)
+                        .build();
+                hotel.addHotelImageToHotel(hotelImage);
+            }
             hotel.addUserToHotel(userCEO);
             hotels.add(hotel);
             for (int j = 1; j <=5 ; j++) {
@@ -81,5 +93,5 @@ public class InitializeDatabase implements CommandLineRunner {
         hotelRepository.saveAll(hotels);
         roomRepository.saveAll(rooms);
         System.out.println("CommandLine Runner");
-    }
+        }
 }
