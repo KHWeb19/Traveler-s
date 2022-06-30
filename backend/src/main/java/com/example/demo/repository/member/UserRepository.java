@@ -20,6 +20,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
         Optional<User> findByEmailWithHotels(String email);
 
         @Query("select u from User u join fetch u.wish where u.id = :id")
-        Optional<User> findByIDWithWish(Long id);
+        Optional<User> findByIDWithWishAndWithHotel(Long id);
 }
 

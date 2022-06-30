@@ -82,6 +82,8 @@
             <td>
               <h1>{{ mHotel.hotelName }}</h1>
               <p>{{ mHotel.hotelIntro }}</p>
+              <v-btn @click="wish">위시</v-btn>
+              <v-btn @click="list">리스트</v-btn>
             </td>
             <td>
               <v-col>
@@ -188,6 +190,7 @@
 
 <script>
 import KakaoMapApi from "@/components/hotelDetail/KakaoMapApi.vue";
+import axios from "axios";
 export default {
   name: "HotelReadForm",
   components: {
@@ -208,7 +211,32 @@ export default {
   created() {
     this.hotelNo = this.mHotel.hotelNo;
   },
-  methods: {},
+  methods: {
+    wish() {
+      {
+        const { hotelNo } = this;
+        console.log(this.mHotel.hotelNo);
+        axios
+          .post(`http://localhost:7777/wish/${hotelNo}/save`, {})
+          .then((res) => {
+            if (res.data) {
+              alert("저장 성공");
+            } else {
+              alert("이미 등록");
+            }
+          })
+          .catch(() => {
+            alert("등록 실패");
+          });
+      }
+    },
+    list() {
+      axios.get("http://localhost:7777/wish/HotelList").then((res) => {
+        if (res.data) console.log(res.data);
+        alert("리스트");
+      });
+    },
+  },
 };
 </script>
 

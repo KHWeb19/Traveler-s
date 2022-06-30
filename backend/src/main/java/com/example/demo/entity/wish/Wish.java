@@ -28,7 +28,7 @@ public class Wish {
     @JoinColumn(name= "id")
     private User user;
 
-    @JsonBackReference
+
     @OneToOne(fetch = FetchType.LAZY)
     private Hotel hotel;
 

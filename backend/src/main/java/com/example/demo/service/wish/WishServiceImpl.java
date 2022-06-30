@@ -4,6 +4,7 @@ package com.example.demo.service.wish;
 import com.example.demo.dto.wish.WishResponse;
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.member.User;
+import com.example.demo.entity.room.Room;
 import com.example.demo.entity.wish.Wish;
 import com.example.demo.repository.hotel.HotelRepository;
 import com.example.demo.repository.member.UserRepository;
@@ -57,7 +58,7 @@ public class WishServiceImpl implements WishService {
     @Transactional
     @Override
     public List<WishResponse> findWish(Long id) {
-        Optional<User> user = userRepository.findByIDWithWish(id);
+        Optional<User> user = userRepository.findByIDWithWishAndWithHotel(id);
 
         List<WishResponse> wishList = new ArrayList<>();
         WishResponse wishResponse;
@@ -69,4 +70,17 @@ public class WishServiceImpl implements WishService {
         log.info("wishList : " + wishList);
         return wishList;
     }
+
+    @Override
+    public Wish wishRead(Long wishNo) {
+        Optional<Wish> maybeReadWish = wishRepository.findById(wishNo);
+        log.info("Wishread : " + maybeReadWish);
+        if (maybeReadWish.equals(Optional.empty())) {
+            log.info("Can't read board!");
+            return null;
+        }
+
+        return maybeReadWish.get();
+    }
+
 }

@@ -3,6 +3,41 @@
     <v-card class="right">
       <div style="display: flex; justify-content: center">
         <v-form ref="form" lazy-validation> </v-form>
+        <table border="1">
+          <tr class="tb1">
+            <th align="center" width="100">번호</th>
+            <th align="center" width="150">호텔 이름</th>
+            <th align="center" width="640">호텔 주소</th>
+          </tr>
+          <tr
+            v-if="
+              !jpaBoards || (Array.isArray(jpaBoards) && jpaBoards.length === 0)
+            "
+          >
+            <td colspan="4">현재 등록된 게시물이 없습니다!</td>
+          </tr>
+          <tr v-else v-for="board in jpaBoards" :key="board.boardNo">
+            <td align="center">
+              {{ board.boardNo }}
+            </td>
+            <td align="left">
+              <router-link
+                :to="{
+                  name: 'JpaBoardReadPage',
+                  params: { boardNo: board.boardNo.toString() },
+                }"
+              >
+                {{ board.title }}
+              </router-link>
+            </td>
+            <td align="right">
+              {{ board.writer }}
+            </td>
+            <td align="center">
+              {{ board.regDate }}
+            </td>
+          </tr>
+        </table>
       </div>
     </v-card>
   </v-container>
@@ -40,6 +75,9 @@ export default {
   width: 600px;
   height: 848px;
   background: rgb(250, 250, 250);
+}
+.tb1 {
+  background: #ffe082;
 }
 
 ul a {

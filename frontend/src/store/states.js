@@ -12,4 +12,7 @@ export default {
   bmHotel: null,
 
   bmRoom: null,
+
+  wishLists: [],
+  wishList: null,
 };

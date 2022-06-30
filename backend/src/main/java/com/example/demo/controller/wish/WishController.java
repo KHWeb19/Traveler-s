@@ -4,6 +4,7 @@ package com.example.demo.controller.wish;
 import com.example.demo.dto.wish.WishResponse;
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.member.User;
+import com.example.demo.entity.room.Room;
 import com.example.demo.entity.wish.Wish;
 import com.example.demo.service.member.UserService;
 import com.example.demo.service.wish.WishService;
@@ -56,7 +57,9 @@ public class WishController {
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> optionalUser = userService.findByEmail(email);
         User user = optionalUser.get();
+        log.info("WishResponse " );
         return wishService.findWish(user.getId());
     }
+
 
 }

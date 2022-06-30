@@ -99,7 +99,6 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
             roomResponse = new RoomResponse(hotel.getHotelNo(),hotel.getHotelName());
             ceoHotel.add(roomResponse);
         }
-
         return ceoHotel;
     }
 
