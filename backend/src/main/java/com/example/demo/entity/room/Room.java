@@ -12,6 +12,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -69,7 +70,8 @@ public class Room {
 
     @OneToMany (mappedBy = "room", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = false)
     @JsonManagedReference
-    private List<Reservation> reservations;
+    @Builder.Default
+    private List<Reservation> reservations = new ArrayList<>();
 
     public void addHotelToRoom(Hotel hotel){
         if (this.hotel != null){
