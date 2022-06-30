@@ -1,6 +1,5 @@
 <template>
-    <div>
-        <v-container class="container">
+        <v-container class="container" justify="center">
             <v-form ref="form" lazy-validation>
                 <h2>회원가입</h2>
                 <v-radio-group v-model="role" row>
@@ -79,7 +78,6 @@
                 </div>
             </v-form>
         </v-container> 
-    </div>
 </template>
 
 <script>
