@@ -52,6 +52,7 @@ public class User {
     @JsonManagedReference
     private List<Hotel> hotels= new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Wish> wish= new ArrayList<>();

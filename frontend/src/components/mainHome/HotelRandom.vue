@@ -6,7 +6,7 @@
         <v-col v-for="mHotel in mHotels" :key="mHotel.hotelNo" cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
           <v-card @click="readHotel(mHotel.hotelNo)">
             <img id="HotelImg" style="height: 200px; width: 260px;"
-              :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath1}`)" />
+              :src="require(`@/assets/hotelImg/${mHotel.hotelImages[0]}`)" />
             <v-card-title id="hotelName" >{{ mHotel.hotelName }}</v-card-title>
             <!-- <v-card-text>
             별점 이쪽을 잘모르겠네요.. 시간되면 진행하는걸로! (좋아요 누적?)
