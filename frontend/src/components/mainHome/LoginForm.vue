@@ -1,6 +1,6 @@
 <template>
      <v-col id="Login">
-        <v-sheet class="UserSpace" v-if="!isLoggedIn">
+        <v-sheet class="UserSpace1" v-if="!isLoggedIn">
           <div>
             <ul>
               <li id="LBotton"><a href="/login">
@@ -12,7 +12,7 @@
             </ul>
           </div>
         </v-sheet>
-        <v-sheet class="UserSpace" v-else>
+        <v-sheet class="UserSpace2" v-else>
           <div>
             <ul>
               <li id="LBotton">
@@ -52,34 +52,63 @@ export default {
 </script>
 
 <style scoped>
-.UserSpace {
+.UserSpace1{
+  position: absolute;
+    width: 200px;
+    padding: 0;
+    margin-top: 3px;
+    justify-content: space-between;
+    align-items: center;
+}
+.UserSpace2 {
     position: absolute;
     width: 200px;
+    margin-top: 9px;
     padding: 0;
     justify-content: space-between;
     align-items: center;
 }
-
-.UserSpace ul {
+.UserSpace1 ul {
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    margin-right: 1%;
+}
+.UserSpace2 ul {
     display: flex;
     justify-content: right;
     align-items: right;
     margin-right: 1%;
 }
 
-.UserSpace ul li {
+.UserSpace1 ul li {
     list-style: none;
     padding-top: 0;
 }
-
-.UserSpace ul li a {
+.UserSpace2 ul li {
+    list-style: none;
+    padding-top: 0;
+}
+.UserSpace1 ul li a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    position: relative;
+    font-size: 30px;
+}
+.UserSpace2 ul li a {
     text-decoration: none;
     color: rgb(0, 0, 0);
     position: relative;
     font-size: 30px;
 }
 
-.UserSpace-top {
+.UserSpace1-top {
+    position: absolute;
+    top: 1em;
+    list-style: none;
+    right: 2em;
+}
+.UserSpace2-top {
     position: absolute;
     top: 1em;
     list-style: none;
