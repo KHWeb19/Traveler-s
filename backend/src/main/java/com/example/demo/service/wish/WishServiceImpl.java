@@ -34,31 +34,32 @@ public class WishServiceImpl implements WishService {
     private UserRepository userRepository;
 
     @Override
-    public boolean addWish(User user, Long hotelNo) {
-        Wish wish = new Wish();
-        Optional<Hotel> findBoard = hotelRepository.findById(hotelNo);
+    public boolean addWish(User user, Integer hotelNo) {
+        Optional<Hotel> findBoard = hotelRepository.findById(Long.valueOf(hotelNo));
         log.info("getHotelNo: " + hotelNo);
 
+        Wish wish = Wish.builder()
+                        .hotel(findBoard.get())
+                                .user(user)
+                                        .build();
 
-        if (wishRepository.findHotelNoByIdAndHotelHotelNo(user.getId(), hotelNo).isEmpty()) {
-            wish.setHotel(findBoard.get());
-            wish.setUser(user);
-            wishRepository.save(wish);
-            return true;
-        }
+        wishRepository.save(wish);
+
+        return true;
+    }
+    @Override
+    public boolean deleteWish(User user,Integer hotelNo) {
+        //음 뭔가...
+        Optional<Wish> wish = wishRepository.findByUserIdAndHotelNo(user.getId(), Long.valueOf(hotelNo));
+
+        wishRepository.deleteById(wish.get().getWishNo());
+
         return false;
     }
 
-
-    @Override
-    public void deleteWish(Long wishNo) {
-        wishRepository.deleteById(wishNo);
-    }
-
-    @Transactional
     @Override
     public List<WishResponse> findWish(Long id) {
-        Optional<User> user = userRepository.findByIDWithWishAndWithHotel(id);
+        Optional<User> user = userRepository.findByIDWithWish(id);
 
         List<WishResponse> wishList = new ArrayList<>();
         WishResponse wishResponse;

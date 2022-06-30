@@ -48,7 +48,7 @@ public class SecurityConfig {
                 .authorizeRequests((authz ->
                         authz.antMatchers("/h2-console/**", "/login", "/user/register", "/oauth2/authorize/**",
                                         "/oauth2/callback/**","/","/kakaoLogin","/check-number", "/refreshtoken",
-                                        "/hotel/**","/hotel/**/**","/room/**","/room/**/**","/search/**","/getUser").permitAll()
+                                        "/hotel/**","/hotel/**/**","/room/**","/room/**/**","/search/**","/getUser","wish/**/**").permitAll()
                                 .antMatchers("/hotel/hotelRegister", "/hotel/bm/**").hasRole("CEO")
                                 //.antMatchers(GET, "/listall").hasAnyAuthority("ROLE_USER")
                                 .anyRequest().authenticated())
