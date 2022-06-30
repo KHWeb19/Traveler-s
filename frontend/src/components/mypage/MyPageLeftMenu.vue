@@ -1,18 +1,17 @@
 <template>
   <div>
-    <div class="left_menu" style="margin-top: 20px;">
+    <div class="left_menu" style="margin-top: 20px">
       <v-col>
         <v-row>
           <v-col>
             <v-row>
               <v-layout>
                 <img
-                v-if="userInfo.profile_path"
-                :src="require(`@/assets/img/${this.userInfo.profile_path}`)"
-                id="imageBefore"
-                class="proimg"
-              />
-                
+                  v-if="userInfo.profile_path"
+                  :src="require(`@/assets/img/${this.userInfo.profile_path}`)"
+                  id="imageBefore"
+                  class="proimg"
+                />
               </v-layout>
             </v-row>
           </v-col>
@@ -27,7 +26,7 @@
             <br />
 
             <li>
-              <router-link :to="{ name: '', params: {} }">
+              <router-link :to="{ name: 'WishListPage', params: {} }">
                 <strong style="text-align: center"> 위시리스트 </strong>
               </router-link>
             </li>
@@ -58,7 +57,10 @@
 
 <script>
 export default {
-  props: ["userInfo"],
+  props: {
+    userInfo: {},
+  },
+
   methods: {
     management() {
       alert("권한이 없습니다.");
