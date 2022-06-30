@@ -14,7 +14,7 @@ import BHotelReadPage from "@/views/hotel/HotelReadPage.vue";
 
 import BRoomReadPage from "@/views/room/RoomReadPage.vue";
 import BRoomModifyPage from "@/views/room/RoomModifyPage.vue";
-import RoomRegisterPage from "@/views/hotel/RoomRegisterPage.vue";
+import RoomRegisterPage from "@/views/room/RoomRegisterPage.vue";
 
 import WishListPage from "@/views/mypage/WishListPage.vue";
 

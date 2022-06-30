@@ -19,13 +19,11 @@
                   <v-row>
                     <table id="inCard" style="width: 30%; height: 200px">
                       <tr>
-                        <td>
+                        <td>                      
                           <v-img
                             width="300px"
                             height="160px"
-                            :src="
-                              require(`@/assets/roomImg/${item.roomImgPath1}`)
-                            "
+                            :src= "require(`@/assets/roomImg/${item.roomImage[0]}`)"
                           />
                         </td>
                       </tr>
@@ -76,55 +74,8 @@
                                         hide-delimiters
                                         class="cover"
                                       >
-                                        <v-carousel-item
-                                          :src="
-                                            require(`@/assets/roomImg/${item.roomImgPath1}`)
-                                          "
-                                        />
-                                        <v-carousel-item
-                                          :src="
-                                            require(`@/assets/roomImg/${item.roomImgPath2}`)
-                                          "
-                                        />
-                                        <v-carousel-item
-                                          :src="
-                                            require(`@/assets/roomImg/${item.roomImgPath3}`)
-                                          "
-                                        />
-                                        <v-carousel-item
-                                          :src="
-                                            require(`@/assets/roomImg/${item.roomImgPath4}`)
-                                          "
-                                        />
-                                        <v-carousel-item
-                                          :src="
-                                            require(`@/assets/roomImg/${item.roomImgPath5}`)
-                                          "
-                                        />
-                                        <v-carousel-item
-                                          v-if="roomList.roomImgPath6"
-                                          :src="
-                                            require(`@/assets/roomImg/${item.roomImgPath6}`)
-                                          "
-                                        />
-                                        <v-carousel-item
-                                          v-if="roomList.roomImgPath7"
-                                          :src="
-                                            require(`@/assets/roomImg/${item.roomImgPath7}`)
-                                          "
-                                        />
-                                        <v-carousel-item
-                                          v-if="roomList.roomImgPath8"
-                                          :src="
-                                            require(`@/assets/roomImg/${item.roomImgPath8}`)
-                                          "
-                                        />
-                                        <v-carousel-item
-                                          v-if="roomList.roomImgPath9"
-                                          :src="
-                                            require(`@/assets/roomImg/${item.roomImgPath9}`)
-                                          "
-                                        />
+                                        <v-carousel-item v-for="(image, index) in item.roomImage" :key="index"
+                                        :src="require(`@/assets/roomImg/${image}`)" />
                                       </v-carousel>
                                     </v-container>
                                   </div>

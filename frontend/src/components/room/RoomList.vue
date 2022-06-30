@@ -18,12 +18,7 @@
     </tr>
   </thead>
   <tbody>
-        <tr v-if="!roomList || (Array.isArray(roomList) && roomList.length === 0)">
-            <td colspan="3">
-                객실을 등록해주세요.
-            </td>
-        </tr>
-        <tr v-else v-for="(room ,idx) in paginatedData" :key="idx">
+        <tr v-for="(room ,idx) in paginatedData" :key="idx">
           <td><input class="check all" type="checkbox" v-model="deleteRooms" :value="room.roomNo" ></td>
             <td>
                  <router-link :to="{ name: 'BRoomReadPage',
@@ -59,9 +54,8 @@
 export default {
   name: 'RoomList',
   props : {
-    roomList:{
+    bmRoomList:{
         type: Array,
-        required: true
     },
     pageSize: {
       type: Number,
@@ -93,14 +87,14 @@ export default {
   computed: {
     allDeleteRooms : {
        get: function () {
-        return this.roomList ? this.deleteRooms.length == this.roomList.length : false
+        return this.bmRoomList ? this.deleteRooms.length == this.bmRoomList.length : false
        },
        set : function (value) {
             let deleteRooms = [];
 
             if (value) {
-                this.roomList.forEach(function (roomList){
-                    deleteRooms.push(roomList.roomNo)
+                this.bmRoomList.forEach(function (bmRoomList){
+                    deleteRooms.push(bmRoomList.roomNo)
                 })
             }
 
@@ -108,7 +102,7 @@ export default {
        }
     },
     pageCount () {
-                let listLeng = this.roomList.length,
+                let listLeng = this.bmRoomList.length,
                     listSize = this.pageSize,
                     page = Math.floor(listLeng / listSize);
                 if (listLeng % listSize > 0) page += 1
@@ -117,7 +111,7 @@ export default {
     paginatedData () {
                 const start = this.pageNum * this.pageSize,
                         end = start + this.pageSize;
-                return this.roomList.slice(start, end);
+                return this.bmRoomList.slice(start, end);
                 
             }
   }

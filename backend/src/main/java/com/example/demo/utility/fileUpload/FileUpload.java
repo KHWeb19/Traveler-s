@@ -3,6 +3,7 @@ package com.example.demo.utility.fileUpload;
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.hotel.HotelImage;
 import com.example.demo.entity.room.Room;
+import com.example.demo.entity.room.RoomImage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -52,72 +53,26 @@ public abstract class FileUpload {
         }
     }
 
-    public void roomImgPathRemove(Optional<Room> roomInfo, String path) {
 
-        if (roomInfo.get().getRoomImgPath1() != null) {
-            fileRemove(roomInfo.get().getRoomImgPath1(), path);
-        }
-        if (roomInfo.get().getRoomImgPath2() != null) {
-            fileRemove(roomInfo.get().getRoomImgPath2(), path);
-        }
-        if (roomInfo.get().getRoomImgPath3() != null) {
-            fileRemove(roomInfo.get().getRoomImgPath3(), path);
-        }
-        if (roomInfo.get().getRoomImgPath4() != null) {
-            fileRemove(roomInfo.get().getRoomImgPath4(), path);
-        }
-        if (roomInfo.get().getRoomImgPath5() != null) {
-            fileRemove(roomInfo.get().getRoomImgPath5(), path);
-        }
-        if (roomInfo.get().getRoomImgPath6() != null) {
-            fileRemove(roomInfo.get().getRoomImgPath6(), path);
-        }
-        if (roomInfo.get().getRoomImgPath7() != null) {
-            fileRemove(roomInfo.get().getRoomImgPath7(), path);
-        }
-        if (roomInfo.get().getRoomImgPath8() != null) {
-            fileRemove(roomInfo.get().getRoomImgPath8(), path);
-        }
-        if (roomInfo.get().getRoomImgPath9() != null) {
-            fileRemove(roomInfo.get().getRoomImgPath9(), path);
-        }
+    public void roomImgPathRemove (Room room, String path) {
+
+        List<RoomImage> imagesToRemove = new ArrayList<>();
+
+        room.getRoomImages().forEach(f -> {
+                    imagesToRemove.add(f);
+                    fileRemove(f.getPath(), path);
+                });
+        imagesToRemove.forEach(image -> room.removeRoomImageFromRoom(image));
 
     }
-
     public void addRoomImgPath(Room room, List<String> filePathList) {
-        for (int i = 0; i < filePathList.size(); i++) {
-            switch (i) {
-                case 0:
-                    room.setRoomImgPath1(filePathList.get(i));
-                    break;
-                case 1:
-                    room.setRoomImgPath2(filePathList.get(i));
-                    break;
-                case 2:
-                    room.setRoomImgPath3(filePathList.get(i));
-                    break;
-                case 3:
-                    room.setRoomImgPath4(filePathList.get(i));
-                    break;
-                case 4:
-                    room.setRoomImgPath5(filePathList.get(i));
-                    break;
-                case 5:
-                    room.setRoomImgPath6(filePathList.get(i));
-                    break;
-                case 6:
-                    room.setRoomImgPath7(filePathList.get(i));
-                    break;
-                case 7:
-                    room.setRoomImgPath8(filePathList.get(i));
-                    break;
-                case 8:
-                    room.setRoomImgPath9(filePathList.get(i));
-                    break;
-            }
 
+        List<RoomImage> roomImages =
+                filePathList.stream().map(f -> RoomImage.builder().path(f).room(room).build()).collect(Collectors.toList());
+
+        roomImages.forEach(image -> room.addRoomImageToRoom(image));
         }
-    }
+
 
     public void addHotelImgPath(Hotel hotel, List<String> filePathList) {
         List<HotelImage> hotelImages = filePathList.stream().map(f -> HotelImage.builder().path(f).hotel(hotel).build()).collect(Collectors.toList());

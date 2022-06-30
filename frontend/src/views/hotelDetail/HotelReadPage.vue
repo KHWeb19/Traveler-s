@@ -47,7 +47,7 @@ export default {
       axios
         .post("http://localhost:7777/room/mem/list", { hotelNo })
         .then((res) => {
-          console.log(res);
+          console.log(res.data);
           this.roomList = res.data;
         });
   },

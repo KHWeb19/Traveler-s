@@ -79,7 +79,7 @@ export default {
             { title: "예약관리", to: "" },
             { title: "호텔등록", to: "/BHotelRegisterPage" },
             { title: "숙소관리", to: "/BHotelListPage" },
-            { title: "객실관리", to: "" },
+            { title: "객실관리", to: "/BRoomListPage" },
           ],
         },
       ],
