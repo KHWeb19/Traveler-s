@@ -82,6 +82,13 @@ public class Hotel {
         }
     }
 
+    public void addRoomToHotel(Room room){
+        this.rooms.add(room);
+        if (room.getHotel() != this){
+            room.setHotel(this);
+        }
+    }
+
     public void removeHotelImageFromHotel(HotelImage hotelImage){
         hotelImages.remove(hotelImage);
         hotelImage.setHotel(null);

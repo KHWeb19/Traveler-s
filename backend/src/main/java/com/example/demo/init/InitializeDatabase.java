@@ -87,6 +87,7 @@ public class InitializeDatabase implements CommandLineRunner {
                         .roomImgPath5(String.format("room%d-5.jpg", j))
                         .hotel(hotel)
                         .build();
+                hotel.addRoomToHotel(room);
                 rooms.add(room);
             }
         }

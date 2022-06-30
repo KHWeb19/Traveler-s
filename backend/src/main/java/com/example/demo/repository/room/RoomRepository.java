@@ -14,6 +14,5 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
 
     @Query("select h from Room h join fetch h.hotel where h.roomNo = :roomNo")
     Optional<Room> findByWithHotelAndWithReservationRooms(Long roomNo);
-
 }
 
