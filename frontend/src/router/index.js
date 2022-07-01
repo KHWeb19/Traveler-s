@@ -6,7 +6,7 @@ import store from "@/store";
 import states from "@/store/states";
 
 import MHotelReadPage from "@/views/hotelDetail/HotelReadPage.vue";
-import SearchPage from "@/views/searchpage/SearchPage.vue";
+import TagSearchPage from "@/views/searchpage/TagSearchPage.vue";
 import CommonSearchPage from "@/views/searchpage/CommonSearchPage.vue";
 
 import BHotelModifyPage from "@/views/hotel/HotelModifyPage.vue";
@@ -111,10 +111,10 @@ const routes = [
     },
   },
   {
-    path: "/MSearchPage/:word",
-    name: "MSearchPage",
+    path: "/TagSearchPage/:word",
+    name: "TagSearchPage",
     components: {
-      default: SearchPage,
+      default: TagSearchPage,
     },
     props: {
       default: true,

@@ -56,8 +56,8 @@ export default {
                         console.log("검색 성공")
                         console.log(res.data)
                         
-                        this.$router.push({name: 'MSearchPage',
-                                    params: { searchList: res.data, word, pageArray: res.data } })
+                        this.$router.push({name: 'TagSearchPage',
+                                    params: { searchList: res.data, word } })
                                     //searchList와 pageArray는 같은 결과가 저장되기 때문에
                                     //차후 최종 확인하였을 때 하나만 필요한 시나리오인 게 확실하다면
                                     //searchList를 삭제하도록 한다.
