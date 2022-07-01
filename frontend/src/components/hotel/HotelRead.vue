@@ -34,7 +34,7 @@
             <hr>
             <div>
                 <v-container>
-                    <v-img v-for="(item, index) in bmHotel.hotelImages" :key=index
+                    <v-img width="100px" height="100px" v-for="(item, index) in bmHotel.hotelImages" :key=index
                     :src="require(`@/assets/hotelImg/${item}`)"></v-img>
                 </v-container>
             </div>

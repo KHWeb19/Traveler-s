@@ -35,7 +35,7 @@
             <hr>
             <div>
                 <v-container v-for="(image , idx) in bmRoom.roomImage" :key="idx">
-                <v-img width="100px" height="100px" :src="require(`@/assets/roomImg/${image.path}`)"/>
+                    <v-img width="100px" height="100px" :src="require(`@/assets/roomImg/${image}`)"/>
                 </v-container>
                 
             </div>

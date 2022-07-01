@@ -6,6 +6,7 @@ import com.example.demo.entity.room.Room;
 import com.example.demo.service.reservation.ReservationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -21,13 +22,13 @@ public class ReservationController {
     private final ReservationService reservationService;
 
     @PostMapping("/makeReservation")
-    public String makeReservation(@RequestBody ReservationRequest reservationRequest){
+    public ResponseEntity<?> makeReservation(@RequestBody ReservationRequest reservationRequest){
         log.info("makeReservation controller: {}", reservationRequest.getId());
         LocalDate date = LocalDate.parse(reservationRequest.getDate());
         log.info("Reservation Date: {}", date);
         reservationService.createReservation(Long.valueOf(reservationRequest.getId()), date);
 
-        return "test...";
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/listReservation")

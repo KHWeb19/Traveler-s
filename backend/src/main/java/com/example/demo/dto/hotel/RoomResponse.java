@@ -21,7 +21,7 @@ public class RoomResponse {
     private int personnel;
     private List<String> roomInfo;
     private Hotel hotel;
-    private List<RoomImage> roomImage;
+    private List<String> roomImage;
     private Date regDate;
     private Date updDate;
 
@@ -29,7 +29,7 @@ public class RoomResponse {
         List<RoomResponse> roomResponse = rooms.stream().map(r -> RoomResponse.builder()
                     .roomNo(r.getRoomNo())
                     .roomInfo(r.getRoomInfo())
-                    .roomImage(r.getRoomImages())
+                    .roomImage(r.getRoomImages().stream().map(image -> image.getPath()).collect(Collectors.toList()))
                     .price(r.getPrice())
                     .roomType(r.getRoomType())
                     .roomInfo(r.getRoomInfo())
@@ -45,7 +45,7 @@ public class RoomResponse {
                 .roomNo(r.getRoomNo())
                 .roomType(r.getRoomType())
                 .roomInfo(r.getRoomInfo())
-                .roomImage(r.getRoomImages())
+                .roomImage(r.getRoomImages().stream().map(image -> image.getPath()).collect(Collectors.toList()))
                 .price(r.getPrice())
                 .personnel(r.getPersonnel())
                 .regDate(r.getRegDate())

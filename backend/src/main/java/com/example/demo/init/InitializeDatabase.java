@@ -5,6 +5,7 @@ import com.example.demo.entity.hotel.HotelImage;
 import com.example.demo.entity.member.Role;
 import com.example.demo.entity.member.User;
 import com.example.demo.entity.room.Room;
+import com.example.demo.entity.room.RoomImage;
 import com.example.demo.repository.hotel.HotelRepository;
 import com.example.demo.repository.member.UserRepository;
 import com.example.demo.repository.room.RoomRepository;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-/*@Component
+@Component
 @RequiredArgsConstructor
 public class InitializeDatabase implements CommandLineRunner {
 
@@ -56,7 +57,7 @@ public class InitializeDatabase implements CommandLineRunner {
         List<Hotel> hotels = new ArrayList<>();
         List<Room> rooms = new ArrayList<>();
 
-        for (int i = 1; i <= 6; i++){
+        for (int i = 1; i <= 6; i++) {
 
             Hotel hotel = Hotel.builder()
                     .hotelName(String.format("Hotel%d", i))
@@ -72,30 +73,31 @@ public class InitializeDatabase implements CommandLineRunner {
                         .build();
                 hotel.addHotelImageToHotel(hotelImage);
             }
-            hotel.addUserToHotel(userCEO);
-            hotels.add(hotel);
-            for (int j = 1; j <=5 ; j++) {
+
+            for (int k = 1; k <= 3; k++){
                 Room room = Room.builder()
                         .price(99999L)
                         .personnel(4)
                         .roomInfo(roomInfo)
                         .roomType("roomType")
-                        .roomImgPath1(String.format("room%d-1.jpg", j))
-                        .roomImgPath2(String.format("room%d-2.jpg", j))
-                        .roomImgPath3(String.format("room%d-3.jpg", j))
-                        .roomImgPath4(String.format("room%d-4.jpg", j))
-                        .roomImgPath5(String.format("room%d-5.jpg", j))
                         .hotel(hotel)
                         .build();
-                rooms.add(room);
+
+                for (int l= 1; l <= 2; l++){
+                    RoomImage roomImage = RoomImage.builder().path(String.format("hotel%d-room%d-%d.jpg", i, k, l))
+                            .room(room)
+                            .build();
+                    room.addRoomImageToRoom(roomImage);
+                }
+                hotel.addRoomToHotel(room);
             }
+            hotel.addUserToHotel(userCEO);
+            hotels.add(hotel);
         }
         hotelRepository.saveAll(hotels);
-        roomRepository.saveAll(rooms);
         System.out.println("CommandLine Runner");
-
     }
-}*/
+}
 
 
 
