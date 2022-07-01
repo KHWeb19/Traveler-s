@@ -54,7 +54,7 @@ public class HotelResponse {
                 .postcode(h.getPostcode())
                 .totalAddress(h.getTotalAddress())
                 .regDate(h.getRegDate())
-                .writer(h.getUser().getEmail())
+                //.writer(h.getUser().getEmail())
                 .build()
         ).collect(Collectors.toList());
 

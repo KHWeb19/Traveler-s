@@ -25,6 +25,10 @@ export default {
 		MainSearch,
 		CommonSearch
 		
+	},data () {
+		return{
+			num : this.$store.state.num
+		}
 	},
    props: {
 		searchList: {

@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,24 +33,16 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
-    public List<Hotel> commonSearchList(KeyWordRequest keyWordRequest) {
-        //그 도시의 호텔 -> 인원수가 되는 방 -> 날짜가 되는 방
-        // 걍 다 구해서 가져와서 중복되는애들을 가져가면 안되나 - ㅅ -
-        List<Hotel> hotelList = new ArrayList<>();
-        List<Hotel> hotelListByAddress = hotelRepository.findByTotalAddressContaining(keyWordRequest.getCity());
+    public List<HotelResponse> commonSearchList(KeyWordRequest keyWordRequest) {
 
-        //인원수가 되는방의 날짜가 되는 방을 또 구해야 되니깐 roomList를 만들어야 되나
-        //고게 맞는듯? ㅎㅅㅎ
-        for(Hotel hotel : hotelListByAddress){
-            for(int i = 0; i < hotel.getRooms().size(); i++){
-                if(hotel.getRooms().get(i).getPersonnel() >= keyWordRequest.getPersonnel()){
-                    hotelList.add(hotel);
-                }
-            }
-        }
+        LocalDate date = LocalDate.parse(keyWordRequest.getDates().get(0));
+        log.info("date : " + date);
+        List<Hotel> hotelList = hotelRepository.Search(keyWordRequest.getCity(), keyWordRequest.getPersonnel(),date);
+
+        log.info("search :" + hotelList);
 
 
-        return hotelList;
+        return hotelBuilder(hotelList);
     }
 
 }

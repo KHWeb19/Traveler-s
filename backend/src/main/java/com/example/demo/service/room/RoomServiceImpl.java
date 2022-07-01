@@ -21,6 +21,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.example.demo.dto.hotel.RoomResponse.roomBuilder;
+import static com.example.demo.dto.reservation.ReservationBuilder.reservationBuilder;
 
 //import static com.example.demo.dto.hotel.RoomResponse.roomBuilder;
 
@@ -54,7 +55,9 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
                 .hotel(hotel)
                 .build();
 
+
         addRoomImgPath(room,filePathList);
+        room.addReservationToRoom(reservationBuilder(room, hotel.getUser()));
         log.info("room : " + room);
 
         roomRepository.save(room);
