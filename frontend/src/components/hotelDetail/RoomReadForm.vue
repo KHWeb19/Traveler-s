@@ -1,14 +1,50 @@
 <template>
-  <v-container>
+  <v-container>    
     <table style="width: 80%">
+
+      <!-- 검색 컴포넌트 분리 원한다면 여기서부터-->
       <tr>
         <td>
           <h1 align="left">객실 소개</h1>
         </td>
+        <!-- 검색창 -->
+        <td align="right" id="searchBar">
+            <v-row>
+              <v-spacer></v-spacer>
+              <!-- 수직상 top에 딱 맞춰져 있어서 검색바랑 버튼이 수평이 안맞아보임. 아마 cols 값 안고쳐서 그런 것도 있는듯 -->
+                <v-col cols="12" xs="6" sm="3" md="3">
+                    <v-menu class="menu1" :close-on-content-click="false" transition="scale-transition"
+                        offset-y>
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-text-field class="DateSearch"  label="날짜 선택" v-model="planDate"
+                                prepend-icon="mdi-calendar" v-bind="attrs" v-on="on"
+                                rounded solo readonly></v-text-field>
+                        </template>
+                        <v-date-picker v-model="dates" 
+                                        :min="new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10)" range
+                                        >
+                        </v-date-picker>
+                    </v-menu>
+                </v-col>
+                <v-col cols="12" xs="12" sm="12" md="2">
+                    <v-select v-model="personnel" :items="items" item-value="value" prepend-icon="mdi-bed" label="인원 선택" class="PickPeople" rounded solo>
+                    </v-select>
+                </v-col>
+                <v-col cols="12" xs="1" sm="1" md="1">
+                    <v-btn @click="searchRoom()" type="submit" value="Subscribe">
+                        검색하기
+                    </v-btn>
+                </v-col>
+
+                &ensp; &ensp; &ensp;
+            </v-row>
+        </td>
       </tr>
-      <tr>
-        <!-- 객실 란 컴포넌트 분리하여 작업 중!-->
-        <td>
+      <!-- 여기까지 주석 혹은 삭제 -->
+
+
+      <tr> <!-- 객실 란-->
+        <td colspan="2">
           <v-container>
             <v-col v-for="(item, i) in roomList" :key="i">
               <v-card
@@ -16,7 +52,8 @@
                 style="margin: 10px; width: 100%; height: 200px"
               >
                 <v-col>
-                  <v-row>
+                  <v-row justify="center"> <!-- justify 에러메세지 뜨더라도 이거 아니면 객실이 전체적으로
+                                                가운데 정렬 될 방법이없기 때문에 이건 지우지 말아주세요... -->
                     <table id="inCard" style="width: 30%; height: 200px">
                       <tr>
                         <td>                      
@@ -131,17 +168,58 @@
 </template>
 
 <script>
+/*import axios from 'axios'*/
+
 export default {
   name: "RoomReadForm",
   components: {},
+    data: () => ({
+        dates: [],
+        items: ['1', '2', '3', '4'],
+        value: null,
+        personnel: '',
+  }),
   props: {
     roomList: {
       type: Array,
     },
   },
+    computed: {
+        planDate () {
+            if(this.dates.length == 2) {
+                if(this.dates[0] >= this.dates[1]){
+                    alert ('다시 선택하세요')
+                    this.initDates()
+                }
+            }
+            return this.dates.join(' ~ ')
+        },
+    },
   methods: {
     goReserv() {},
-  },
+    initDates() {
+        return this.dates = []
+    },
+  /*  searchRoom() {
+        console.log(this.dates)
+        const { dates, personnel , city} = this
+        axios.post('http://localhost:7777/search/commonSearch', {dates, personnel})
+                .then((res) => {
+                    console.log("검색 성공")
+                    console.log(res.data)
+                    
+                    
+                    this.$router.push({name: 'CommonSearchPage',
+                                params: { searchList: res.data } })
+                .catch(() => {});
+            })
+            .catch(() => {
+            alert("검색 실패");
+        });
+        
+    }, */
+
+},
 };
 </script>
 
@@ -156,4 +234,8 @@ export default {
   font-size: 12px;
   color: gray;
 }
+/*table, th, td{
+    border-collapse:collapse;
+    border: 1px solid black;
+} */
 </style>
