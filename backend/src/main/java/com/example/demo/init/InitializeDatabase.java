@@ -17,6 +17,8 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.demo.dto.reservation.ReservationBuilder.reservationBuilder;
+
 @Component
 @RequiredArgsConstructor
 public class InitializeDatabase implements CommandLineRunner {
@@ -82,7 +84,7 @@ public class InitializeDatabase implements CommandLineRunner {
                         .roomType("roomType")
                         .hotel(hotel)
                         .build();
-
+                room.addReservationToRoom(reservationBuilder(room,userCEO));
                 for (int l= 1; l <= 2; l++){
                     RoomImage roomImage = RoomImage.builder().path(String.format("hotel%d-room%d-%d.jpg", i, k, l))
                             .room(room)

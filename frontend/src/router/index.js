@@ -146,7 +146,7 @@ const routes = [
     },
   },
   {
-    path: "/commonSearchPage",
+    path: "/commonSearchPage/:num",
     name: "CommonSearchPage",
     components: {
       default: CommonSearchPage,

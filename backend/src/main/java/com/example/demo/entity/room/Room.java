@@ -81,5 +81,12 @@ public class Room {
         roomImage.setRoom(null);
     }
 
+    public void addReservationToRoom(Reservation reservation){
+        this.reservations.add(reservation);
+        if (reservation.getRoom() != this){
+            reservation.setRoom(this);
+        }
+    }
+
 }
 

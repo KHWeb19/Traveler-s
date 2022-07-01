@@ -31,7 +31,7 @@ public class SearchController {
 
 
     @PostMapping("/commonSearch")
-    public List<Hotel> commonSearch (@RequestBody KeyWordRequest keyWord) {
+    public List<HotelResponse> commonSearch (@RequestBody KeyWordRequest keyWord) {
         log.info("commonSearch()" + keyWord);
 
         return searchService.commonSearchList(keyWord);

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,8 +18,9 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
 
     @Query("select h from Hotel h join fetch h.user where h.hotelInfo like concat('%',:word,'%')")
     List<Hotel> findByHotelInfoContainingWithUser(String word);
-
-    List<Hotel> findByTotalAddressContaining(String address);
+    @Query("select h from Hotel h join h.rooms r join r.reservations b where h.totalAddress like concat('%',:address,'%') " +
+            "and r.personnel >= :personnel and not :date between b.startDate and b.endDate")
+    List<Hotel> Search(String address, int personnel , LocalDate date);
 
     @Query("select h from Hotel h join fetch h.user where h.hotelNo = :hotelNo")
     Optional<Hotel> findByIdWithUser(Long hotelNo);

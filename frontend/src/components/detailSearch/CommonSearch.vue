@@ -5,7 +5,7 @@
         <v-col v-for="(mHotel , idx) in paginatedData" :key="idx" cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
           <v-card @click="readHotel(mHotel.hotelNo)">
             <img id="HotelImg" style="height: 200px; width: 260px;"
-              :src="require(`@/assets/hotelImg/${mHotel.hotelImgPath1}`)" />
+              :src="require(`@/assets/hotelImg/${mHotel.hotelImages[0]}`)" />
             <v-card-title id="hotelName" class="justify-center">{{ mHotel.hotelName }}</v-card-title>
             <v-divider></v-divider>
             <v-card-text class="address">
