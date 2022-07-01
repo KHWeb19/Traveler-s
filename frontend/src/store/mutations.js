@@ -8,7 +8,6 @@ import {
   GET_HOTEL_TYPE,
   FETCH_BM_ROOM,
   FETCH_WISH_LISTS,
-  FETCH_WISH_LIST,
 } from "./mutation-types";
 
 export default {
@@ -47,8 +46,5 @@ export default {
   },
   [FETCH_WISH_LISTS](state, wishLists) {
     state.wishLists = wishLists;
-  },
-  [FETCH_WISH_LIST](state, wishList) {
-    state.wishList = wishList;
   },
 };

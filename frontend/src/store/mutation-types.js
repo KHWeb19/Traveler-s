@@ -10,4 +10,3 @@ export const FETCH_BM_HOTEL = "FETCH_BM_HOTEL";
 export const FETCH_BM_HOTEL_LIST = "FETCH_BM_HOTEL_LIST";
 export const FETCH_BM_ROOM = "FETCH_BM_ROOM";
 export const FETCH_WISH_LISTS = "FETCH_WISH_LISTS";
-export const FETCH_WISH_LIST = "FETCH_WISH_LIST";

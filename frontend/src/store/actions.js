@@ -11,7 +11,6 @@ import {
   FETCH_BM_HOTEL,
   FETCH_BM_ROOM,
   FETCH_WISH_LISTS,
-  FETCH_WISH_LIST,
 } from "./mutation-types";
 
 import axios from "axios";
@@ -103,11 +102,6 @@ export default {
   fetchWishLists({ commit }) {
     axios.get("http://localhost:7777/wish/HotelList").then((res) => {
       commit(FETCH_WISH_LISTS, res.data);
-    });
-  },
-  fetchWishList({ commit }, wishNo) {
-    axios.get(`http://localhost:7777/wish/${wishNo}`).then((res) => {
-      commit(FETCH_WISH_LIST, res.data);
     });
   },
 };
