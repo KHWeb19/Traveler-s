@@ -14,35 +14,8 @@
         <h3>시설정보</h3>
         <hr>
         <div class="hotelInfobox">
-        <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="오션뷰">오션뷰
-        </label>
-        <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="테라스">테라스
-        </label>
-        <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="수영장">수영장
-        </label>
-        <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="전기차충전">전기차충전
-        </label>
-        <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="공항근처">공항근처
-        </label>
-        <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="골프장">골프장
-        </label>
-        <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="무료주차">무료주차
-        </label>
-        <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="바베큐그릴">바베큐그릴
-        </label>
-        <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="반려동물">반려동물
-        </label>
-        <label>
-            <input type="checkbox" name="hotelinfo" v-model="hotelInfo" value="온천">온천
+        <label v-for="(info, idx) in infos" :key="idx">
+            <input type="checkbox" name="roominfo" v-model="hotelInfo" :value="info">{{info}}
         </label>
         </div>
     </div>
@@ -127,6 +100,18 @@ data () {
         files: [],
         notImage: ['','','','','','','','',''],
         fileNum: 0,
+        infos : [
+            "오션뷰",
+            "테라스",
+            "수영장",
+            "전기차충전",
+            "공항근처",
+            "골프장",
+            "무료주차",
+            "바베큐그릴",
+            "반려동물",
+            "온천"
+        ]
     }
 },
 methods: {
