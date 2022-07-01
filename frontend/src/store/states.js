@@ -15,5 +15,4 @@ export default {
   bmRoomList: [],
 
   wishLists: [],
-  wishList: null,
 };

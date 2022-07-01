@@ -1,8 +1,11 @@
 <template>
   <div align="center">
     <m-hotel-read-form :mHotel="mHotel" />
-    <!-- HotelReadPage로 옮긴다면 kakaoMapAPI위치는 여기에   -->
-    <m-search-calender-form/>
+    <!-- <m-search-calender-form/>
+     SearchCalenderForm.vue 해당 컴포넌트 내역을 우선
+     RoomReadForm 내로 이동시켰습니다.
+     검색 작업상 내역을 분리하는 편이 좋다면 주석만 풀어주시면 됩니다.
+    -->
     <m-room-read-form :roomList="roomList" />
     <!-- 주석 -->
     <!-- <m-review-read-form :mReview="mReview"/>
@@ -14,7 +17,7 @@
 import { mapActions, mapState } from "vuex";
 import MHotelReadForm from "@/components/hotelDetail/HotelReadForm.vue";
 import MRoomReadForm from "@/components/hotelDetail/RoomReadForm.vue";
-import MSearchCalenderForm from"@/components/hotelDetail/SearchCalenderForm.vue"
+//import MSearchCalenderForm from"@/components/hotelDetail/SearchCalenderForm.vue"
 
 import axios from "axios";
 export default {
@@ -33,7 +36,7 @@ export default {
   components: {
     MHotelReadForm,
     MRoomReadForm,
-    MSearchCalenderForm
+    //MSearchCalenderForm
 },
   computed: {
     ...mapState(["mHotel"]),

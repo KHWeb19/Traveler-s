@@ -2,38 +2,42 @@
   <v-container style="padding: 0px; margin-top: 20px">
     <v-card class="right">
       <div style="display: flex; justify-content: center; padding-top: 120px">
-        <v-form ref="form" lazy-validation> </v-form>
-        <table border="2">
-          <tr class="tb1">
-            <th align="center" width="150">호텔 이름</th>
-            <th align="center" width="640">호텔 주소</th>
-            <th align="center" width="150">취소</th>
-          </tr>
-          <tr
-            v-if="
-              !wishLists || (Array.isArray(wishLists) && wishLists.length === 0)
-            "
-          >
-            <td colspan="4">현재 등록된 게시물이 없습니다!</td>
-          </tr>
-          <tr v-else v-for="wishList in wishLists" :key="wishList.hotelNo">
-            <td align="center">
-              {{ wishList.hotelName }}
-            </td>
-            <td align="left">
-              <router-link
-                :to="{
-                  name: 'MHotelReadPage',
-                  params: {},
-                }"
-              >
+        <table class="table">
+          <thead style="background: #1890ff; height: 60px">
+            <tr>
+              <th scope="col" align="center" width="150">이름</th>
+              <th scope="col" align="center" width="640">주소</th>
+              <th scope="col" align="center" width="150">삭제</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-if="
+                !wishLists ||
+                (Array.isArray(wishLists) && wishLists.length === 0)
+              "
+            >
+              <td colspan="4">현재 위시가 없습니다!</td>
+            </tr>
+            <tr v-else v-for="wishList in wishLists" :key="wishList.hotelNo">
+              <td align="center">
+                <router-link
+                  :to="{
+                    name: 'MHotelReadPage',
+                    params: { hotelNo: wishList.hotelNo.toString() },
+                  }"
+                >
+                  {{ wishList.hotelName }}
+                </router-link>
+              </td>
+              <td align="center">
                 {{ wishList.totalAddress }}
-              </router-link>
-            </td>
-            <td>
-              <v-btn @click="dewish">취소</v-btn>
-            </td>
-          </tr>
+              </td>
+              <th scope="col">
+                <v-btn @click="deletewish(wishList.hotelNo)">취소</v-btn>
+              </th>
+            </tr>
+          </tbody>
         </table>
       </div>
     </v-card>
@@ -48,15 +52,25 @@ export default {
   props: {
     wishLists: {
       type: Array,
+      required: true,
     },
-
-    methods: {
-      dewish() {
-        axios.get("http://localhost:7777/wish/HotelList").then((res) => {
-          if (res.data) console.log(res.data);
-          alert("리스트");
+  },
+  data() {
+    return {};
+  },
+  methods: {
+    deletewish(payload) {
+      const hotelNo = payload;
+      axios
+        .delete(`http://localhost:7777/wish/${hotelNo}`)
+        .then(() => {
+          alert("삭제되었습니다.");
+          this.$router.go();
+          console.log(this.hotelNo);
+        })
+        .catch(() => {
+          alert("삭제요청실패");
         });
-      },
     },
   },
 };
@@ -104,5 +118,9 @@ ul {
 
 a {
   text-decoration: none;
+}
+td,
+th {
+  border: 1px solid #dbdbdb;
 }
 </style>

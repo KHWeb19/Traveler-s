@@ -65,7 +65,7 @@ public class WishServiceImpl implements WishService {
         WishResponse wishResponse;
         log.info("wish :" + user.get().getWish());
         for (Wish wish2 : user.get().getWish()) {
-            wishResponse = new WishResponse(wish2.getWishNo(),wish2.getHotel().getHotelName(), wish2.getHotel().getTotalAddress());
+            wishResponse = new WishResponse(wish2.getHotel().getHotelNo(),wish2.getWishNo(),wish2.getHotel().getHotelName(), wish2.getHotel().getTotalAddress());
             wishList.add(wishResponse);
         }
         log.info("wishList : " + wishList);
