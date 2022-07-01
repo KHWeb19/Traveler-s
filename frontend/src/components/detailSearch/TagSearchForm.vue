@@ -24,22 +24,28 @@
          <v-row>
             <v-col>
             <div class="btn-cover" align="center">
-                <v-btn
+                <button
                     :disabled="pageNum === 0"
                     @click="prevPage"
                     class="page-btn">
-                이전
-                </v-btn>
+                  <v-icon> mdi-chevron-left </v-icon>
+                </button>
+                
+                &ensp;
+                
                 <span class="page-count"
                 >{{ pageNum + 1 }} / {{ pageCount }} 페이지</span
                 >
-                <v-btn
+
+                &ensp;
+
+                <button
                     :disabled="pageNum >= pageCount - 1"
                     @click="nextPage"
                     class="page-btn"
                 >
-                다음
-                </v-btn>
+                  <v-icon> mdi-chevron-right </v-icon>                  
+                </button>
             </div>
             </v-col>
          </v-row>
