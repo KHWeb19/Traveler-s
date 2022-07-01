@@ -27,55 +27,9 @@
                     hide-delimiters
                     class="cover"
                   >
-                    <v-carousel-item
-                      :src="
-                        require(`@/assets/hotelImg/${mHotel.hotelImgPath1}`)
-                      "
-                    />
-                    <v-carousel-item
-                      :src="
-                        require(`@/assets/hotelImg/${mHotel.hotelImgPath2}`)
-                      "
-                    />
-                    <v-carousel-item
-                      :src="
-                        require(`@/assets/hotelImg/${mHotel.hotelImgPath3}`)
-                      "
-                    />
-                    <v-carousel-item
-                      :src="
-                        require(`@/assets/hotelImg/${mHotel.hotelImgPath4}`)
-                      "
-                    />
-                    <v-carousel-item
-                      :src="
-                        require(`@/assets/hotelImg/${mHotel.hotelImgPath5}`)
-                      "
-                    />
-                    <v-carousel-item
-                      v-if="mHotel.hotelImgPath6"
-                      :src="
-                        require(`@/assets/hotelImg/${mHotel.hotelImgPath6}`)
-                      "
-                    />
-                    <v-carousel-item
-                      v-if="mHotel.hotelImgPath7"
-                      :src="
-                        require(`@/assets/hotelImg/${mHotel.hotelImgPath7}`)
-                      "
-                    />
-                    <v-carousel-item
-                      v-if="mHotel.hotelImgPath8"
-                      :src="
-                        require(`@/assets/hotelImg/${mHotel.hotelImgPath8}`)
-                      "
-                    />
-                    <v-carousel-item
-                      v-if="mHotel.hotelImgPath9"
-                      :src="
-                        require(`@/assets/hotelImg/${mHotel.hotelImgPath9}`)
-                      "
-                    />
+                  <v-carousel-item v-for="(item, index) in mHotel.hotelImages" :key="index" 
+                    :src="require(`@/assets/hotelImg/${item}`)">
+                  </v-carousel-item>
                   </v-carousel>
                 </v-container>
               </div>
@@ -171,14 +125,15 @@
               <p>{{ mHotel.totalAddress }}</p>
             </td>
           </tr>
-          <td colspan="2" align="center">
+          <tr>
+            <td colspan="2" align="center">
             <kakao-map-api
               v-if="Object.keys(mHotel).length !== 0"
               :mHotel="mHotel"
             />
             <br />
           </td>
-          <tr></tr>
+          </tr>
 
           <tr>
             <td colspan="2">
@@ -186,7 +141,6 @@
             </td>
           </tr>
         </table>
-        <br />
       </form>
     </v-container>
   </div>

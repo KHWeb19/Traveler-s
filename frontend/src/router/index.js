@@ -6,7 +6,7 @@ import store from "@/store";
 import states from "@/store/states";
 
 import MHotelReadPage from "@/views/hotelDetail/HotelReadPage.vue";
-import SearchPage from "@/views/searchpage/SearchPage.vue";
+import TagSearchPage from "@/views/searchpage/TagSearchPage.vue";
 import CommonSearchPage from "@/views/searchpage/CommonSearchPage.vue";
 
 import BHotelModifyPage from "@/views/hotel/HotelModifyPage.vue";
@@ -14,7 +14,7 @@ import BHotelReadPage from "@/views/hotel/HotelReadPage.vue";
 
 import BRoomReadPage from "@/views/room/RoomReadPage.vue";
 import BRoomModifyPage from "@/views/room/RoomModifyPage.vue";
-import RoomRegisterPage from "@/views/hotel/RoomRegisterPage.vue";
+import RoomRegisterPage from "@/views/room/RoomRegisterPage.vue";
 
 import WishListPage from "@/views/mypage/WishListPage.vue";
 
@@ -111,10 +111,10 @@ const routes = [
     },
   },
   {
-    path: "/MSearchPage/:word",
-    name: "MSearchPage",
+    path: "/TagSearchPage/:word",
+    name: "TagSearchPage",
     components: {
-      default: SearchPage,
+      default: TagSearchPage,
     },
     props: {
       default: true,

@@ -1,14 +1,35 @@
 <template>
-  <v-container>
+  <v-container>    
     <table style="width: 80%">
+
+      <!-- 검색 컴포넌트 분리 원한다면 여기서부터-->
       <tr>
         <td>
           <h1 align="left">객실 소개</h1>
         </td>
+        <!-- 검색창 -->
+        <td align="right">
+            <v-col cols="12" xs="12" sm="6" md="4">
+              <v-menu class="menu1" :close-on-content-click="false" transition="scale-transition"
+                  offset-y>
+                  <template v-slot:activator="{ on, attrs }">
+                      <v-text-field class="DateSearch"  label="날짜 선택" v-model="planDate"
+                          prepend-icon="mdi-calendar" v-bind="attrs" v-on="on"
+                          rounded solo readonly></v-text-field>
+                  </template>
+                  <v-date-picker v-model="dates" 
+                                  :min="new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10)" range
+                                  >
+                  </v-date-picker>
+              </v-menu>
+          </v-col>
+        </td>
       </tr>
-      <tr>
-        <!-- 객실 란 컴포넌트 분리하여 작업 중!-->
-        <td>
+      <!-- 여기까지 주석 혹은 삭제 -->
+
+
+      <tr> <!-- 객실 란-->
+        <td colspan="2">
           <v-container>
             <v-col v-for="(item, i) in roomList" :key="i">
               <v-card
@@ -19,13 +40,11 @@
                   <v-row>
                     <table id="inCard" style="width: 30%; height: 200px">
                       <tr>
-                        <td>
+                        <td>                      
                           <v-img
                             width="300px"
                             height="160px"
-                            :src="
-                              require(`@/assets/roomImg/${item.roomImgPath1}`)
-                            "
+                            :src= "require(`@/assets/roomImg/${item.roomImage[0]}`)"
                           />
                         </td>
                       </tr>
@@ -76,55 +95,8 @@
                                         hide-delimiters
                                         class="cover"
                                       >
-                                        <v-carousel-item
-                                          :src="
-                                            require(`@/assets/roomImg/${item.roomImgPath1}`)
-                                          "
-                                        />
-                                        <v-carousel-item
-                                          :src="
-                                            require(`@/assets/roomImg/${item.roomImgPath2}`)
-                                          "
-                                        />
-                                        <v-carousel-item
-                                          :src="
-                                            require(`@/assets/roomImg/${item.roomImgPath3}`)
-                                          "
-                                        />
-                                        <v-carousel-item
-                                          :src="
-                                            require(`@/assets/roomImg/${item.roomImgPath4}`)
-                                          "
-                                        />
-                                        <v-carousel-item
-                                          :src="
-                                            require(`@/assets/roomImg/${item.roomImgPath5}`)
-                                          "
-                                        />
-                                        <v-carousel-item
-                                          v-if="roomList.roomImgPath6"
-                                          :src="
-                                            require(`@/assets/roomImg/${item.roomImgPath6}`)
-                                          "
-                                        />
-                                        <v-carousel-item
-                                          v-if="roomList.roomImgPath7"
-                                          :src="
-                                            require(`@/assets/roomImg/${item.roomImgPath7}`)
-                                          "
-                                        />
-                                        <v-carousel-item
-                                          v-if="roomList.roomImgPath8"
-                                          :src="
-                                            require(`@/assets/roomImg/${item.roomImgPath8}`)
-                                          "
-                                        />
-                                        <v-carousel-item
-                                          v-if="roomList.roomImgPath9"
-                                          :src="
-                                            require(`@/assets/roomImg/${item.roomImgPath9}`)
-                                          "
-                                        />
+                                        <v-carousel-item v-for="(image, index) in item.roomImage" :key="index"
+                                        :src="require(`@/assets/roomImg/${image}`)" />
                                       </v-carousel>
                                     </v-container>
                                   </div>
@@ -183,14 +155,31 @@
 export default {
   name: "RoomReadForm",
   components: {},
+    data: () => ({
+        dates: [],
+    }),
   props: {
     roomList: {
       type: Array,
     },
   },
+    computed: {
+        planDate () {
+            if(this.dates.length == 2) {
+                if(this.dates[0] >= this.dates[1]){
+                    alert ('다시 선택하세요')
+                    this.initDates()
+                }
+            }
+            return this.dates.join(' ~ ')
+        },
+    },
   methods: {
     goReserv() {},
-  },
+    initDates() {
+        return this.dates = []
+    }
+},
 };
 </script>
 

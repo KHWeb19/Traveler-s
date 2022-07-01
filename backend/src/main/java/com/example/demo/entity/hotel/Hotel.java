@@ -44,24 +44,10 @@ public class Hotel {
     @Column(nullable = false)
     private String totalAddress;
 
-    @Column(nullable = false) // default 255
-    private String hotelImgPath1;
-    @Column(nullable = false)
-    private String hotelImgPath2;
-    @Column(nullable = false)
-    private String hotelImgPath3;
-    @Column(nullable = false)
-    private String hotelImgPath4;
-    @Column(nullable = false)
-    private String hotelImgPath5;
-    @Column
-    private String hotelImgPath6;
-    @Column
-    private String hotelImgPath7;
-    @Column
-    private String hotelImgPath8;
-    @Column
-    private String hotelImgPath9;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "hotel", fetch = FetchType.EAGER,  cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<HotelImage> hotelImages = new ArrayList<>();
 
     @JsonManagedReference
     @OneToMany(mappedBy = "hotel", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
@@ -87,6 +73,25 @@ public class Hotel {
         }
         this.user = user;
         this.user.getHotels().add(this);
+    }
+
+    public void addHotelImageToHotel(HotelImage hotelImage){
+        this.hotelImages.add(hotelImage);
+        if (hotelImage.getHotel() != this){
+            hotelImage.setHotel(this);
+        }
+    }
+
+    public void addRoomToHotel(Room room){
+        this.rooms.add(room);
+        if (room.getHotel() != this){
+            room.setHotel(this);
+        }
+    }
+
+    public void removeHotelImageFromHotel(HotelImage hotelImage){
+        hotelImages.remove(hotelImage);
+        hotelImage.setHotel(null);
     }
 
     public List<String> getHotelInfo() {
@@ -123,18 +128,12 @@ public class Hotel {
 
     }
 
-    public Hotel(String hotelName, String hotelIntro, String hotelInfo, String totalAddress, String postcode,
-                 String hotelImgPath1, String hotelImgPath2, String hotelImgPath3, String hotelImgPath4, String hotelImgPath5) {
+    public Hotel(String hotelName, String hotelIntro, String hotelInfo, String totalAddress, String postcode) {
         this.hotelName = hotelName;
         this.hotelIntro = hotelIntro;
         this.hotelInfo = hotelInfo;
         this.postcode = postcode;
         this.totalAddress = totalAddress;
-        this.hotelImgPath1 = hotelImgPath1;
-        this.hotelImgPath2 = hotelImgPath2;
-        this.hotelImgPath3 = hotelImgPath3;
-        this.hotelImgPath4 = hotelImgPath4;
-        this.hotelImgPath5 = hotelImgPath5;
     }
 
 }

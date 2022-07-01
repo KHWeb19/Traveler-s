@@ -6,36 +6,31 @@
 			</v-row>
 		</v-container>
 		<v-container>
-			<detail-search :searchList="searchList"
-							:list-array="pageArray"/>
+			<tag-search-form :searchList="searchList"
+							/>
 		</v-container>
 	</div>
 </template>
 
 <script>
 import MainSearch from '@/components/mainHome/MainSearch.vue'
-import DetailSearch from '@/components/detailSearch/DetailSearch.vue'
+import TagSearchForm from '@/components/detailSearch/TagSearchForm.vue'
 
 export default {
 	name: 'MSearchPage',
 	components: {
 		MainSearch,
-		DetailSearch
+		TagSearchForm
 		
 	},
    props: {
 		searchList: {
 			type:Array
 		},
-		pageArray: {
-			type:Array
-		},
+		word: {
+			type:String
+		}
    },
-   data () {
-        return {
-            word: ''
-    }
-   }
 };
 </script>
 

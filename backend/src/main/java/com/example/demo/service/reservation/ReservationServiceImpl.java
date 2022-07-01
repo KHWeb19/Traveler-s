@@ -12,10 +12,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -27,22 +29,58 @@ public class ReservationServiceImpl implements ReservationService{
     private final UserRepository userRepository;
 
     @Override
-    public void createReservation(Long roomId) {
+    public void createReservation(Long roomId, LocalDate date) {
         log.info("createReservation in serviceImpl");
-        Optional<User> optionalUser = userRepository.findByEmail("ceo@gmail.com");
-        User user = optionalUser.get();
+        List<Reservation> reservationList = reservationRepository.findByRoom_RoomNo(roomId);
 
-        Optional<Room> optionalRoom = roomRepository.findById(roomId);
-        Room room = optionalRoom.get();
+        boolean canMakeReservation = true;
 
-        Reservation reservation = new Reservation(2500L, ReservationStatus.PENDING, user, room);
-        reservationRepository.save(reservation);
-        log.info("Created reservation");
+        if (!reservationList.isEmpty()){
+            //private method 인자값 room이 enddate가 date값보다 작은 reservation을 갖고있다면 return true
+            canMakeReservation = validateRoom(reservationList, date);
+        }
+        try {
+            if (!canMakeReservation)
+                throw new IllegalStateException("Cannot make a reservation");
+            Optional<User> optionalUser = userRepository.findByEmail("user@gmail.com");
+            User user = optionalUser.get();
+            Optional<Room> optionalRoom = roomRepository.findById(roomId);
+            Room room = optionalRoom.get();
+
+            Reservation reservation = Reservation.builder()
+                    .price(100000L)
+                    .status(ReservationStatus.PENDING)
+                    .endDate(date)
+                    .room(room)
+                    .user(user)
+                    .build();
+            reservationRepository.save(reservation);
+            log.info("Created reservation");
+
+        }
+        catch (IllegalStateException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public List<Reservation> listReservationWithRoomId(Long id) {
+    public List<Reservation> listReservationWithRoomId(Long id, LocalDate date) {
         List<Reservation> reservations = reservationRepository.findByRoom_RoomNo(id);
-        return reservations;
+        List<Reservation> reservationsWithDate = reservations.stream().filter(f -> f.getEndDate().isBefore(date))
+                .collect(Collectors.toList());
+
+        return reservationsWithDate;
     }
+
+    private boolean validateRoom(List<Reservation> reservations, LocalDate localDate){
+        log.info("validateRoom method");
+        List<Reservation> reservationList = reservations.stream().filter(f -> (f.getEndDate() == null) || f.getEndDate().isBefore(localDate)).collect(Collectors.toList());
+        if (reservationList.isEmpty()){
+            return false;
+        }else {
+            log.info("validateRoom method returning true");
+            return true;
+        }
+    }
+
 }
