@@ -3,6 +3,7 @@ package com.example.demo.service.room;
 import com.example.demo.dto.hotel.RoomRequest;
 import com.example.demo.dto.hotel.HotelResponse;
 import com.example.demo.dto.hotel.RoomResponse;
+import com.example.demo.dto.search.KeyWordRequest;
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.member.User;
 import com.example.demo.entity.room.Room;
@@ -15,15 +16,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static com.example.demo.dto.hotel.RoomResponse.roomBuilder;
-import static com.example.demo.dto.reservation.ReservationBuilder.reservationBuilder;
 
-//import static com.example.demo.dto.hotel.RoomResponse.roomBuilder;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -57,8 +56,6 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
 
 
         addRoomImgPath(room,filePathList);
-        room.addReservationToRoom(reservationBuilder(room, hotel.getUser()));
-        log.info("room : " + room);
 
         roomRepository.save(room);
     }
@@ -156,12 +153,35 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
    //--------------------------------------------------------
 
    @Override
-   public List<RoomResponse> findMRoomList(Long hotelNo) {
-
-       Optional<Hotel> optionalHotel = hotelRepository.findByIdWithRooms(hotelNo);
+   public List<RoomResponse> findMRoomList(KeyWordRequest keyWordRequest) {
+       Optional<Hotel> optionalHotel = hotelRepository.findByIdWithRooms(keyWordRequest.getHotelNo());
        Hotel hotel = optionalHotel.get();
        List<Room> rooms = hotel.getRooms();
 
+       LocalDate date = LocalDate.parse(keyWordRequest.getDates().get(0));
+        //그 호텔의 그 인원수 그날짜에 이용중인 룸 구하기
+       List<Room> checkDateRooms =
+               roomRepository.findByIdAndDateAndPersonnel(keyWordRequest.getHotelNo(),keyWordRequest.getPersonnel(),date);
+        log.info("rooms" + checkDateRooms);
+        List<Room> deleteRooms = new ArrayList<>();
+       if(!checkDateRooms.isEmpty()) {
+           log.info("this");
+           //룸 리스트에 제외되는 룸 같으면 제외 시키기 ...
+           for (Room room : rooms) {
+               for (Room checkDateRoom : checkDateRooms) {
+                   if (room.getRoomNo() == checkDateRoom.getRoomNo()) {
+                       deleteRooms.add(room); // 바로 제거시키면 rooms 변해서 오류생김 그래서 delete에 넣고 제거 ...
+                   }
+               }
+
+           }
+           //포문이 몇개고 하 인생...
+           for(Room room : deleteRooms){
+           rooms.remove(room);
+           }
+           //예약 들어 있는 room제거 후에 hotelReponse builder
+           return roomBuilder(rooms);
+       }
        return roomBuilder(rooms);
    }
 }

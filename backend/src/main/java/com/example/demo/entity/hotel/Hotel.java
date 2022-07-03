@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,6 +18,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @Builder
 @AllArgsConstructor
 @Data
@@ -86,6 +88,16 @@ public class Hotel {
         this.rooms.add(room);
         if (room.getHotel() != this){
             room.setHotel(this);
+        }
+    }
+    public void removeRoomFromHotel(Room room){
+        log.info("rooms" + this.rooms);
+        for(Room r : this.rooms){
+            if(r.getRoomNo() == room.getRoomNo()){
+                this.rooms.remove(r);
+                room.setHotel(null);
+                break;
+            }
         }
     }
 
