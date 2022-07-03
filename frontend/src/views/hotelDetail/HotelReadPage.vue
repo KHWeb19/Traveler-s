@@ -6,7 +6,10 @@
      RoomReadForm 내로 이동시켰습니다.
      검색 작업상 내역을 분리하는 편이 좋다면 주석만 풀어주시면 됩니다.
     -->
-    <m-room-read-form :roomList="roomList" />
+    <m-room-read-form :roomList="roomList"
+                      :checkDate="dates"
+                      :people="personnel"
+                      @searchRoom="searchRoom" />
     <!-- 주석 -->
     <!-- <m-review-read-form :mReview="mReview"/>
         <p v-else> 로딩중......</p> -->
@@ -14,12 +17,12 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+
 import MHotelReadForm from "@/components/hotelDetail/HotelReadForm.vue";
 import MRoomReadForm from "@/components/hotelDetail/RoomReadForm.vue";
+import axios from 'axios';
 //import MSearchCalenderForm from"@/components/hotelDetail/SearchCalenderForm.vue"
 
-import axios from "axios";
 export default {
   name: "MHotelReadPage",
   props: {
@@ -27,36 +30,55 @@ export default {
       type: String,
       required: true,
     },
+    payload: {
+      type: Object
+    },
+    mHotel : {
+      type :Object
+    }
   },
   data() {
     return {
-      roomList: [],
-    };
+      roomList:[],
+      dates: [],
+      personnel: ''
+    }
   },
   components: {
     MHotelReadForm,
     MRoomReadForm,
-    //MSearchCalenderForm
-},
-  computed: {
-    ...mapState(["mHotel"]),
+    //MSearchCalenderForm 
   },
-  created() {
-    const hotelNo = this.hotelNo;
-    this.fetchMHotel(this.hotelNo).catch(() => {
-      alert("숙소 상세보기 요청 실패!");
-      this.$router.push();
-    }),
-      axios
-        .post("http://localhost:7777/room/mem/list", { hotelNo })
+  methods: {
+      searchRoom(payload) {
+        const {dates, personnel} = payload
+        const hotelNo = this.hotelNo
+         axios
+        .post("http://localhost:7777/room/mem/list", { hotelNo, dates, personnel })
         .then((res) => {
           console.log(res.data);
           this.roomList = res.data;
         });
+
+      }
   },
-  methods: {
-    ...mapActions(["fetchMHotel"]),
+  created() {
+    
+    const {dates , personnel} = this.payload
+    this.dates = dates
+    this.personnel = personnel
+    const hotelNo = this.hotelNo;
+      axios
+        .post("http://localhost:7777/room/mem/list", { hotelNo, dates, personnel })
+        .then((res) => {
+          console.log(res.data);
+          this.roomList = res.data;
+        });
+  
+
+    
   },
+
 };
 </script>
 
