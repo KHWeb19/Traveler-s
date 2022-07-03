@@ -8,7 +8,7 @@
           <h1 align="left">객실 소개</h1>
         </td>
         <!-- 검색창 -->
-        <td align="right" id="searchBar">
+       <td align="right" id="searchBar">
             <v-row>
               <v-spacer></v-spacer>
               <!-- 수직상 top에 딱 맞춰져 있어서 검색바랑 버튼이 수평이 안맞아보임. 아마 cols 값 안고쳐서 그런 것도 있는듯 -->
@@ -39,7 +39,7 @@
                 &ensp; &ensp; &ensp;
             </v-row>
         </td>
-      </tr>
+      </tr> 
       <!-- 여기까지 주석 혹은 삭제 -->
 
 
@@ -60,7 +60,7 @@
                           <v-img
                             width="300px"
                             height="160px"
-                            :src= "require(`@/assets/roomImg/${item.roomImage[0]}`)"
+                            :src="require(`@/assets/roomImg/${item.roomImage[0]}`)"
                           />
                         </td>
                       </tr>
@@ -81,11 +81,11 @@
                           <v-row>
                             <span
                               id="tagSpan1"
-                              v-for="(item, i) in item.roomInfo"
+                              v-for="(info, i) in item.roomInfo"
                               :key="i"
                               class="hotel_info"
                             >
-                              {{ "#" + item }}
+                              {{ "#" + info }}
                               <!-- i 번째 item를 출력  -->
                             </span>
                           </v-row>
@@ -183,6 +183,12 @@ export default {
     roomList: {
       type: Array,
     },
+    checkDate: {
+      type : Array
+    },
+    people : {
+      type : String
+    }
   },
     computed: {
         planDate () {
@@ -200,26 +206,23 @@ export default {
     initDates() {
         return this.dates = []
     },
-  /*  searchRoom() {
+   
+    searchRoom() {
         console.log(this.dates)
-        const { dates, personnel , city} = this
-        axios.post('http://localhost:7777/search/commonSearch', {dates, personnel})
-                .then((res) => {
-                    console.log("검색 성공")
-                    console.log(res.data)
-                    
-                    
-                    this.$router.push({name: 'CommonSearchPage',
-                                params: { searchList: res.data } })
-                .catch(() => {});
-            })
-            .catch(() => {
-            alert("검색 실패");
-        });
+        const { dates, personnel } = this
+      this.$emit('searchRoom', {dates, personnel})
         
-    }, */
+    },
 
 },
+ created() {
+      this.dates = this.checkDate
+      this.personnel = this.people
+      console.log(this.checkDate)
+      console.log(this.people)
+      
+  
+    }
 };
 </script>
 

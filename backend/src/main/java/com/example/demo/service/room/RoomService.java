@@ -3,6 +3,7 @@ package com.example.demo.service.room;
 import com.example.demo.dto.hotel.RoomRequest;
 import com.example.demo.dto.hotel.RoomResponse;
 import com.example.demo.dto.hotel.HotelResponse;
+import com.example.demo.dto.search.KeyWordRequest;
 import com.example.demo.entity.room.Room;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,6 +19,6 @@ public interface RoomService {
     public void bmRoomsRemove(List<Long> roomNo);
 
     //----------------------------------------------------------
-    public List<RoomResponse> findMRoomList(Long hotelNo);
+    public List<RoomResponse> findMRoomList(KeyWordRequest keyWordRequest);
 }
 

@@ -12,6 +12,7 @@ public class KeyWordRequest {
     private List<String> dates;
     private int personnel;
     private String city;
+    private Long hotelNo;
 
     public KeyWordRequest(String word){
         this.word = word;

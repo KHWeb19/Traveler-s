@@ -3,7 +3,7 @@
     <section>
       <div class="row">
         <v-col v-for="(mHotel ,idx) in paginatedData" :key="idx" cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
-          <v-card @click="readHotel(mHotel.hotelNo)">
+          <v-card @click="readHotel(mHotel)">
             <img id="HotelImg" style="height: 200px; width: 260px;"
               :src="require(`@/assets/hotelImg/${mHotel.hotelImages[0]}`)" />
             <v-card-title id="hotelName" class="justify-center">{{ mHotel.hotelName }}</v-card-title>
@@ -78,8 +78,11 @@ export default {
         }
   },
   methods: {
-    readHotel(hotelNo) {
-            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: hotelNo.toString() } })      
+    readHotel(mHotel) {
+      const personnel = '2'
+      const dates = [new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10), new Date(Date.now() - new Date().getTimezoneOffset() * 220000).toISOString().substr(0,10)]
+      const payload = { dates, personnel}
+            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: mHotel.hotelNo.toString() , payload, mHotel} })      
     },
     search() {
         const { word } = this;
