@@ -51,21 +51,17 @@ public class SearchServiceImpl implements SearchService {
         List<Room> deleteRooms = new ArrayList<>();
         if(!roomList.isEmpty()) {
             log.info("this");
-            //룸에 매핑된 hotelNo과 hotel의 hotelNo이 같으면 호텔에서 그 room제거
-            for (Hotel hotel : hotelList) {
+              
+                //제거 되야할 룸 들
                 for (Room room : roomList) {
-                    if (hotel.getHotelNo() == room.getHotel().getHotelNo()) {
                         deleteRooms.add(room);
-                    }
-                }
-                //room 다 돌고 hotel 저장 , room 없으면 hotel 저장 안함
-            }
-
+                   }
+            //removeRoomFromHotel에서 hotel이랑 매핑된 애들 deleteRoom애들이랑 roomNo같으면 지워버리기
             for(Hotel hotel: hotelList) {
                 for (Room room : deleteRooms) {
                     hotel.removeRoomFromHotel(room);
                 }
-
+                //룸 다지워지면 호텔 추가 안시켜 버리기
                 if(hotel.getRooms().size() > 0) {
                     hotels.add(hotel);
                 }
