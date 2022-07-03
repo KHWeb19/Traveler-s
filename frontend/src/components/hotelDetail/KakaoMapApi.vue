@@ -30,7 +30,7 @@ export default {
             const map = new kakao.maps.Map(container, options)
             this.geocoder = new kakao.maps.services.Geocoder()
             console.log(this.geocoder)
-            console.log('init' + this.hotel)
+         
             const hotel = this.mHotel
             this.geocoder.addressSearch(hotel.totalAddress, function(result, status) {
                 console.log(kakao.maps.services.Status.OK)
@@ -73,7 +73,7 @@ export default {
         }
     },
 
-    created () {
+    mounted () {
             this.$watch('mHotel', function(){
                 console.log('watch')
                 this.kakao()
