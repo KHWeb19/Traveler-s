@@ -2,12 +2,12 @@
     <div>
         <v-dialog resisten max-width="560px">
             <template v-slot:activator="{ on }">
-                <button
-                        :elevation="hover ? 16:2" v-on="on"  dark>
+                <button v-on="on" dark>
                         <v-icon> mdi-chevron-right </v-icon>
                 </button>
             </template>
 
+            <div>
                 <v-card align="center">
                     <v-card-title>여행자 약관 동의 (필수)</v-card-title>
                     <v-card-text> 
@@ -176,13 +176,13 @@
                     </v-card-actions>
 
                 </v-card>
-
+            </div>
       </v-dialog>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'AgreeDialogOne', 
+    name: 'AgreeDialogOne',
 }
 </script>

@@ -1,61 +1,38 @@
 <template>
     <v-container>
-        <table style="width: 80%">
+        <v-form name="payForm" lazy-validation>
+        <table style="width: 400px;">
             <tr>
-                <td>
-                    <table>
+                <td align="center">
+                    <table style="width: 400px;"> <!-- 예약자 정보 테이블 -->
                         <tr>
-                            <td>
+                            <td id="title1" colspan="2">
                                 <h3>예약자 정보</h3>
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                대표 투숙자
-                            </td>
-                            <td>
-                                김땡땡
-                            </td>
+                            <td id="title2">&ensp; 대표 투숙자 </td>
+                            <td>&ensp; 김땡땡 </td>
                        </tr>
                         <tr>
-                            <td>
-                                숙소 이름
-                            </td>
-                            <td>
-                                hotel#1
-                            </td>
+                            <td id="title2">&ensp; 숙소 이름 </td>
+                            <td>&ensp; hotel#1 </td>
                        </tr>
                         <tr>
-                            <td>
-                                객실명
-                            </td>
-                            <td>
-                                객실 no.2
-                            </td>
+                            <td id="title2">&ensp; 객실명 </td>
+                            <td>&ensp; 객실 no.2 </td>
                         </tr>
                         <tr>
-                            <td>
-                                숙박일
-                            </td>
-                            <td>
-                                2022.06.30 ~ 2022.07.01
-                            </td>
+                            <td id="title2">&ensp; 숙박일 </td>
+                            <td>&ensp; 2022.06.30 ~ 2022.07.01 </td>
                         </tr>
                         <tr>
-                            <td>
-                                숙박 인원
-                            </td>
-                            <td>
-                                4명
-                            </td>
+                            <td id="title2">&ensp; 숙박 인원 </td>
+                            <td>&ensp; 4명 </td>
                         </tr>
                         <tr>
-                            <td>
-                                가격
-                            </td>
-                            <td>
-                                100,000 원
-                            </td>
+                            <td id="title2">&ensp; 가격 </td>
+                            <td>&ensp; 100,000 원 </td>
                         </tr>
                     </table>
                     <br>
@@ -64,46 +41,34 @@
             </tr>
     <hr>
             <tr>
-                <td>
+                <td align="center">
                     <br>
-                    <table>
+                    <table style="width: 400px;"> <!-- 약관 안내 체크 -->
                         <tr>
-                            <td>
+                            <td id="title1" colspan="3">
                                 <h3>약관 안내</h3>
                             </td>                         
                         </tr>
                         <tr>
                             <td>
-                                <input type="checkbox">
+                                <input class="check" type="checkbox" name="agree1">
                             </td>
-                            <td>
-                                여행자 약관 동의 (필수)
-                            </td>
-                            <td>
-                                <agree-dialog-one/>
-                            </td>
+                            <td> &ensp; 여행자 약관 동의 (필수) </td>
+                            <td> <agree-dialog-one/> </td>
                         </tr>
                         <tr>
                             <td>
-                                <input type="checkbox">
+                                <input class="check" type="checkbox" name="agree2">
                             </td>
-                            <td>
-                                개인정보 제공 동의 (필수)
-                            </td>
-                            <td>
-                                <agree-dialog-two/>
-                            </td>
+                            <td> &ensp; 개인정보 제공 동의 (필수) </td>
+                            <td> <agree-dialog-two/> </td>
                         </tr>
                         <tr>
                             <td>
-                                <input type="checkbox">
+                                <input class="check" type="checkbox" name="agree3">
                             </td>
-                            <td>
-                                개인정보 수집 및 이용 동의 (필수)
-                            </td>
-                            <td>
-                                <agree-dialog-three/>
-                            </td>
+                            <td> &ensp; 개인정보 수집 및 이용 동의 (필수) </td>
+                            <td> <agree-dialog-three/> </td>
                         </tr>
                     </table>
                     <br>
@@ -111,27 +76,21 @@
             </tr>
 <hr>
             <tr>
-                <td>
+                <td align="center">
                     <br>
-                    <table>
+                    <table style="width: 400px;">
                         <tr>
-                            <td>
+                            <td id="title1">
                                 <h3>결제 정보</h3>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <form>
-                                    <input type="radio" id="bankBook" name="bankBook" value="bankBook">
-                                    <label for="bankBook">무통장 입금</label><br>
-
-                                    <input type="radio" id="card" name="card" value="card">
-                                    <label for="card">신용/체크카드</label><br>
-
-                                    <input type="radio" id="toss" name="toss" value="toss">
-                                    <label for="toss">토스 결제</label><br>
-
-                                </form>
+                                <v-radio-group v-model="pay">
+                                    <v-radio v-for="kinds in kindOfPay" :key="kinds" :label="`${kinds}`" :value="kinds"
+                                    name="radio">
+                                    </v-radio>
+                                </v-radio-group>
                             </td>
                         </tr>
                     </table>
@@ -139,14 +98,16 @@
                 </td>
             </tr>
             <tr>
-                <td>
+                <td align="center">
                     <br>
-                        <v-btn>
-                            결제하기
+        <!-- 약관 안내 체크에 빠진 것이 없고 + 결제 라디오 버튼 중 한 개를 반드시 선택해야 결제가 가능하다. -->
+                        <v-btn block id="button">
+                            결 제 하 기
                         </v-btn>
                 </td>
             </tr>
         </table>
+        </v-form>
     </v-container>
 </template>
 
@@ -165,19 +126,54 @@ export default {
         },
     data() {
         return {
-            payList: [
-                { index: '0', text: '무통장 입금', icon: 'mdi-card', value: 'bankBook' },
-                { index: '1', text: '신용/체크카드', icon: 'mdi-card', value: 'card' },
-                { index: '2', text: '토스 결제', icon: 'mdi-card', value: 'toss' },
-],
+            pay: '',
+            radioGroup:1,
+            kindOfPay: [
+                '무통장 입금',
+                '신용/체크 카드',
+                '토스 결제'
+            ]
         }
-    }
+    },
 }
 </script>
 
 <style scoped>
-table, th, td{
+td {
+  color: rgb(34, 34, 34);
+  font-size:14px;
+  height: 30px;
+}
+#title1 {
+    color:#18225c;
+    padding: 10px 0px 10px 2px;
+}
+#title2 {
+    color:#6e91b3;
+    background-color: #e4f1f8;
+    font-weight: bold;
+    width: 95px;
+}
+#button {
+    background-color: #54658a;
+    color: #fff;
+    font-weight: bold;
+}
+
+.check {
+  width:15px;
+  height:15px;
+  accent-color: #e63668;
+}
+.radio {
+  width:300px;
+  height:18px;
+  accent-color: #e63668;
+}
+
+/*table, th, td{
     border-collapse:collapse;
     border: 1px solid black;
-}
+}*/
+
 </style>

@@ -2,8 +2,7 @@
     <div>
         <v-dialog resisten max-width="560px">
             <template v-slot:activator="{ on }">
-                <button
-                        :elevation="hover ? 16:2" v-on="on"  dark>
+                <button v-on="on"  dark>
                         <v-icon> mdi-chevron-right </v-icon>
                 </button>
             </template>
