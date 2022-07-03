@@ -40,7 +40,7 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
 
         List<String> filePathList = new ArrayList<>();
         log.info("hotelNo : " + roomRequest.getHotelNo());
-        Optional<Hotel> hotelOptional = hotelRepository.findByIdWithRooms(roomRequest.getHotelNo());
+        Optional<Hotel> hotelOptional = hotelRepository.findById(roomRequest.getHotelNo());
 
         Hotel hotel = hotelOptional.get();
         log.info("hotel :" + hotel);
@@ -56,9 +56,6 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
 
 
         addRoomImgPath(room,filePathList);
-
-        hotel.addRoomToHotel(room);
-        log.info("room : " + room);
 
         roomRepository.save(room);
     }
