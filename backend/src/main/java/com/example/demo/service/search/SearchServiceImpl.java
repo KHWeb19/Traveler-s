@@ -40,27 +40,37 @@ public class SearchServiceImpl implements SearchService {
         LocalDate date = LocalDate.parse(keyWordRequest.getDates().get(0));
 
         Set<Hotel> hotelList = hotelRepository.findByTotalAddressContainingWithRoom(keyWordRequest.getCity(),keyWordRequest.getPersonnel());
-
+        log.info("hotelList : " + hotelList);
         List<Room> roomList = roomRepository.Search(keyWordRequest.getCity() , keyWordRequest.getPersonnel(), date);
+        log.info("roomList : " + roomList);
         //호텔에서 이 룸 제거 해야함 어케하노
         //호텔 리스트에서 룸 뺴내서 해야되나??
         List<Hotel> hotels = new ArrayList<>();
         //인생...
         //일단 예약하려는 날짜에 예약이 들어있으면 if문으로 들어감
+        List<Room> deleteRooms = new ArrayList<>();
         if(!roomList.isEmpty()) {
             log.info("this");
             //룸에 매핑된 hotelNo과 hotel의 hotelNo이 같으면 호텔에서 그 room제거
             for (Hotel hotel : hotelList) {
                 for (Room room : roomList) {
                     if (hotel.getHotelNo() == room.getHotel().getHotelNo()) {
-                        hotel.removeRoomFromHotel(room);
+                        deleteRooms.add(room);
                     }
                 }
                 //room 다 돌고 hotel 저장 , room 없으면 hotel 저장 안함
+            }
+
+            for(Hotel hotel: hotelList) {
+                for (Room room : deleteRooms) {
+                    hotel.removeRoomFromHotel(room);
+                }
+
                 if(hotel.getRooms().size() > 0) {
                     hotels.add(hotel);
                 }
             }
+
             //예약 들어 있는 room제거 후에 hotelReponse builder
             return hotelBuilder(hotels);
         }

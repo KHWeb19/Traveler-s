@@ -99,7 +99,7 @@
                           <v-col>
                             <v-row>
                               <tr>
-                                <v-dialog width="700px">
+                                <v-dialog v-model="dialog" width="700px">
                                   <template v-slot:activator="{ on }">
                                     <v-btn v-on="on" dark> 상세보기 </v-btn>
                                   </template>
@@ -119,7 +119,7 @@
                                   <br />
                                   <v-card-actions>
                                     <v-spacer></v-spacer>
-                                    <v-btn> 닫기 </v-btn>
+                                    <v-btn @click="cancel"> 닫기 </v-btn>
                                   </v-card-actions>
                                 </v-dialog>
                               </tr>
@@ -178,6 +178,7 @@ export default {
         items: ['1', '2', '3', '4'],
         value: null,
         personnel: '',
+        dialog: false
   }),
   props: {
     roomList: {
@@ -205,6 +206,9 @@ export default {
     goReserv() {},
     initDates() {
         return this.dates = []
+    },
+    cancel(){
+      this.dialog = false
     },
    
     searchRoom() {
