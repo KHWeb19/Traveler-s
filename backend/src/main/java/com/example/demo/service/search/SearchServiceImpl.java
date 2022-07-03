@@ -52,15 +52,13 @@ public class SearchServiceImpl implements SearchService {
         if(!roomList.isEmpty()) {
             log.info("this");
             //룸에 매핑된 hotelNo과 hotel의 hotelNo이 같으면 호텔에서 그 room제거
-            for (Hotel hotel : hotelList) {
+
                 for (Room room : roomList) {
-                    if (hotel.getHotelNo() == room.getHotel().getHotelNo()) {
-                        deleteRooms.add(room);
-                    }
+                        deleteRooms.add(room); // room 미리 제거하면 for문 못돌아서 제거할 애들 저장
                 }
                 //room 다 돌고 hotel 저장 , room 없으면 hotel 저장 안함
-            }
 
+            //이게 맞나 싶다 ...
             for(Hotel hotel: hotelList) {
                 for (Room room : deleteRooms) {
                     hotel.removeRoomFromHotel(room);
