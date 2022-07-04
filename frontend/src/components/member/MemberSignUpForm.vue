@@ -2,7 +2,7 @@
     <div>
         <v-container class="container">
             <v-form ref="form" lazy-validation>
-                <h2>회원가입</h2>
+                <p class="titDep2 titDepC">회원가입</p>
                 <v-radio-group v-model="role" row>
                         <v-radio v-for="kinds in kindsOfMember" :key="kinds" :label="`${kinds}`" :value="kinds"> 
                         </v-radio>
@@ -78,14 +78,20 @@
                 </v-btn>
                 </div>
             </v-form>
-        </v-container> 
+        </v-container>
+        <main-footer-top/>
     </div>
 </template>
 
 <script>
 
+import MainFooterTop from '@/components/mainHome/MainFooterTop.vue'
+
 export default {  
     name: 'MemberSignUp',
+    components: {
+        MainFooterTop
+    },
     props: {
         certification:{
             type: Boolean
@@ -164,8 +170,15 @@ export default {
 </script>
 
 <style scoped>
+
+    @font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+}
+
 .container {
     margin-top: 100px;
+    margin-bottom: 100px;
     width:500px;
 }
 .email,
@@ -174,6 +187,7 @@ export default {
 .name{
     width:450px;
 }
+
 .cell-phone{
     width:330px;
     margin-left: 5px;
@@ -195,5 +209,24 @@ export default {
 .phone-number{
     margin-bottom: 30px;
 
+}
+
+[class^=titDep].titDepC {
+    text-align: center;
+}
+
+.titDep2 {
+    margin-bottom: 32px;
+    font-size: 2.0rem;
+    line-height: 1.3;
+    font-family: NanumSquareRound;
+    font-weight: 900;
+}
+
+[class^=titDep] {
+    position: relative;
+    color: #202020;
+    line-height: 1;
+    font-weight: 700;
 }
 </style>
