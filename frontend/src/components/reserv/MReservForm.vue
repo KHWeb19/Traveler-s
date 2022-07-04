@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <v-form name="payForm" lazy-validation>
+        <!-- <v-form>태그가 들어가면 약관동의 다이얼로그가 안뜨네...왜지 그래서 일단 뺐습니다. -->
         <table style="width: 400px;">
             <tr>
                 <td align="center">
@@ -107,23 +107,23 @@
                 </td>
             </tr>
         </table>
-        </v-form>
     </v-container>
 </template>
 
 <script>
 import AgreeDialogOne from '@/components/reserv/AgreeDialogOne.vue'
-import AgreeDialogTwo from '@/components/reserv/AgreeDialogTwo.vue'
 import AgreeDialogThree from '@/components/reserv/AgreeDialogThree.vue'
+import AgreeDialogTwo from '@/components/reserv/AgreeDialogTwo.vue'
 
 
 export default {
     name: 'MReservForm',
     components: {
         AgreeDialogOne,
-        AgreeDialogThree,
-        AgreeDialogTwo
-        },
+        AgreeDialogTwo,
+        AgreeDialogThree
+
+    },
     data() {
         return {
             pay: '',

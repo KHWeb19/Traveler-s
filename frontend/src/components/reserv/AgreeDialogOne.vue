@@ -1,13 +1,13 @@
 <template>
     <div>
-        <v-dialog resisten max-width="560px">
+        <v-dialog v-model="dialog" width="560px">
             <template v-slot:activator="{ on }">
                 <button v-on="on" dark>
                         <v-icon> mdi-chevron-right </v-icon>
                 </button>
             </template>
 
-            <div>
+            <div class="agree">
                 <v-card align="center">
                     <v-card-title>여행자 약관 동의 (필수)</v-card-title>
                     <v-card-text> 
@@ -169,7 +169,7 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn>
+                        <v-btn @click="cancel">
                             확인
                         </v-btn>
                         <v-spacer></v-spacer>
@@ -184,5 +184,13 @@
 <script>
 export default {
     name: 'AgreeDialogOne',
+    data: () => ({
+        dialog: false
+    }),
+    methods: {
+        cancel(){
+            this.dialog = false
+        },
+    }
 }
 </script>
