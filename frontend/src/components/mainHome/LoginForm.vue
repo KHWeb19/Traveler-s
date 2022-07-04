@@ -17,7 +17,7 @@
         <!-- </v-sheet> -->
 
         <!-- (로그인 상태) 로그아웃 버튼 -->
-        <v-sheet class="UserSpace" v-else>
+        <v-sheet class="UserSpace2" v-else>
           <div>
             <ul>
               <li id="LBotton">
@@ -25,7 +25,7 @@
                 </v-card>
               </li>
               <li id="RBotton"><button @click="onClickLogout">
-                  <v-btn>로그아웃</v-btn>
+                  로그아웃
                 </button></li>
             </ul>
           </div>
@@ -81,7 +81,34 @@ export default {
     font-size: 15px;
     line-height: 29px;
 }
+
 .UserSpace ul li a:hover {
+  color: #569aff;
+}
+
+.UserSpace2 {
+    position: absolute;
+}
+
+.UserSpace2 ul {
+    display: flex;
+}
+
+.UserSpace2 ul li {
+    list-style: none;
+}
+
+.UserSpace2 ul li button {
+    text-decoration: none;
+    position: relative;
+    padding: 0 15px;
+    color: #404040;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 29px;
+}
+
+.UserSpace2 ul li button:hover {
   color: #569aff;
 }
 
