@@ -191,8 +191,11 @@ export default {
 }
 
 .login {
-  position: relative;
-
+  position: absolute;
+  display: inline-block;
+  top: 45px;
+  right: 250px;
+  z-index: 10;
+  font-family: NanumSquareRound;
 }
-
 </style>
