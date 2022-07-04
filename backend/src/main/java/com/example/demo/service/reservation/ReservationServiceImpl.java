@@ -37,7 +37,7 @@ public class ReservationServiceImpl implements ReservationService{
 
         if (!reservationList.isEmpty()){
             //private method 인자값 room이 enddate가 date값보다 작은 reservation을 갖고있다면 return true
-            canMakeReservation = validateRoom(reservationList, endDate);
+            canMakeReservation = validateRoom(reservationList, startDate, endDate);
         }
         try {
             if (!canMakeReservation)
@@ -90,15 +90,13 @@ public class ReservationServiceImpl implements ReservationService{
         return reservationsByStatusForCEO;
     }
 
-    private boolean validateRoom(List<Reservation> reservations, LocalDate localDate){
+    private boolean validateRoom(List<Reservation> reservations, LocalDate startDate, LocalDate endDate){
         log.info("validateRoom method");
-        List<Reservation> reservationList = reservations.stream().filter(f -> (f.getEndDate() == null) || f.getEndDate().isBefore(localDate)).collect(Collectors.toList());
-        if (reservationList.isEmpty()){
-            return false;
-        }else {
-            log.info("validateRoom method returning true");
+        Optional<Reservation> optionalReservation = reservations.stream().filter(f -> !(f.getEndDate().isBefore(startDate) && !(f.getStartDate().isAfter(endDate)))).findFirst();
+        if (optionalReservation.isEmpty())
             return true;
-        }
+        log.info("Returning false!!");
+        return false;
     }
 
 }
