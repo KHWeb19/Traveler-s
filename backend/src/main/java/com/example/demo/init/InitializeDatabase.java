@@ -4,16 +4,20 @@ import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.hotel.HotelImage;
 import com.example.demo.entity.member.Role;
 import com.example.demo.entity.member.User;
+import com.example.demo.entity.reservation.Reservation;
+import com.example.demo.entity.reservation.ReservationStatus;
 import com.example.demo.entity.room.Room;
 import com.example.demo.entity.room.RoomImage;
 import com.example.demo.repository.hotel.HotelRepository;
 import com.example.demo.repository.member.UserRepository;
+import com.example.demo.repository.reservation.ReservationRepository;
 import com.example.demo.repository.room.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +29,7 @@ public class InitializeDatabase implements CommandLineRunner {
     private final UserRepository userRepository;
     private final HotelRepository hotelRepository;
     private final RoomRepository roomRepository;
+    private final ReservationRepository reservationRepository;
 
     private String FILE_PATH = "../frontend/src/hotelImg/";
 
@@ -82,7 +87,6 @@ public class InitializeDatabase implements CommandLineRunner {
                         .roomType("roomType")
                         .hotel(hotel)
                         .build();
-
                 for (int l= 1; l <= 2; l++){
                     RoomImage roomImage = RoomImage.builder().path(String.format("hotel%d-room%d-%d.jpg", i, k, l))
                             .room(room)
@@ -90,11 +94,40 @@ public class InitializeDatabase implements CommandLineRunner {
                     room.addRoomImageToRoom(roomImage);
                 }
                 hotel.addRoomToHotel(room);
+                rooms.add(room);
             }
             hotel.addUserToHotel(userCEO);
             hotels.add(hotel);
         }
         hotelRepository.saveAll(hotels);
+        roomRepository.saveAll(rooms);
+        //Room id 1번에 대한 예약테이블 3개 생성
+        Room room = rooms.get(0);
+        Reservation reservation = Reservation.builder()
+                .startDate(LocalDate.parse("2022-07-01"))
+                .endDate(LocalDate.parse("2022-07-07"))
+                .status(ReservationStatus.PENDING)
+                .room(room)
+                .user(userUser)
+                .build();
+        room.addReservationToRoom(reservation);
+        Reservation reservationTwo = Reservation.builder()
+                .startDate(LocalDate.parse("2022-08-01"))
+                .endDate(LocalDate.parse("2022-08-07"))
+                .status(ReservationStatus.RESERVED)
+                .room(room)
+                .user(userUser)
+                .build();
+        room.addReservationToRoom(reservationTwo);
+        Reservation reservationThree = Reservation.builder()
+                .startDate(LocalDate.parse("2022-09-01"))
+                .endDate(LocalDate.parse("2022-09-07"))
+                .status(ReservationStatus.CANCELLED)
+                .room(room)
+                .user(userUser)
+                .build();
+        room.addReservationToRoom(reservationThree);
+        roomRepository.save(room);
         System.out.println("CommandLine Runner");
     }
 }

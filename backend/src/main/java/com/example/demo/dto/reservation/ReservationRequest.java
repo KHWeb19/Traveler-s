@@ -4,6 +4,8 @@ import lombok.Getter;
 
 @Getter
 public class ReservationRequest {
-    private int id;
-    private String date;
+    private int roomId;
+    private String startDate;
+    private String endDate;
+    private String status;
 }
