@@ -66,13 +66,13 @@ public class ReservationController {
         return reservationResponses;
     }
     @GetMapping("/ceo/reservationListWithStatus")
-    public List<Reservation> ceoListAllReservations(@RequestParam String status){
+    public List<ReservationResponse> ceoListAllReservations(@RequestParam String status){
         //String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         String email = "ceo@gmail.com";
         User user = userRepository.findByEmail(email).get();
         List<Reservation> reservations = reservationService.listReservationsByStatusForCEO(user.getId(), status);
         List<ReservationResponse> reservationResponses = ReservationResponse.reservationResponseListBuilder(reservations);
-        return reservations;
+        return reservationResponses;
     }
 
 }
