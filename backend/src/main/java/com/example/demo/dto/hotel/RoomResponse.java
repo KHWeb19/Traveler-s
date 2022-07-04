@@ -7,6 +7,7 @@ import lombok.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
@@ -51,6 +52,21 @@ public class RoomResponse {
                 .regDate(r.getRegDate())
                 .build();
         
+        return roomResponse;
+    }
+
+    public static List<RoomResponse> roomBuilder(Set<Room> rooms) {
+        List<RoomResponse> roomResponse = rooms.stream().map(r -> RoomResponse.builder()
+                .roomNo(r.getRoomNo())
+                .roomInfo(r.getRoomInfo())
+                .roomImage(r.getRoomImages().stream().map(image -> image.getPath()).collect(Collectors.toList()))
+                .price(r.getPrice())
+                .roomType(r.getRoomType())
+                .roomInfo(r.getRoomInfo())
+                .personnel(r.getPersonnel())
+                .build()
+        ).collect(Collectors.toList());
+
         return roomResponse;
     }
 

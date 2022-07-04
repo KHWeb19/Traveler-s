@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface SearchService {
     public List<HotelResponse> tagSearchList(String word);
-    public List<Hotel> commonSearchList(KeyWordRequest keyWordRequest);
+    public List<HotelResponse> commonSearchList(KeyWordRequest keyWordRequest);
 }

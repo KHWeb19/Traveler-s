@@ -8,7 +8,8 @@
 			</v-row>
 		</v-container>
 		<v-container>
-			<common-search :searchList="searchList"/>
+			<common-search :searchList="searchList"
+							:payload="payload"/>
 		</v-container>
 	</div>
 	</v-app>
@@ -25,10 +26,17 @@ export default {
 		MainSearch,
 		CommonSearch
 		
+	},data () {
+		return{
+			num : this.$store.state.num
+		}
 	},
    props: {
 		searchList: {
 			type:Array
+		},
+		payload : {
+			type: Object
 		}
    }
 };

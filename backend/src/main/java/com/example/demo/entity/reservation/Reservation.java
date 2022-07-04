@@ -3,6 +3,7 @@ package com.example.demo.entity.reservation;
 import com.example.demo.entity.member.User;
 import com.example.demo.entity.room.Room;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -33,7 +34,7 @@ public class Reservation {
     private User user;
 
     @ManyToOne (fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonIgnore
     private Room room;
 
 }
