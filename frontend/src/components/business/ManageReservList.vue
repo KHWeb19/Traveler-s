@@ -1,7 +1,7 @@
 <template>
     <v-container>
 
-        <template>
+        <template> <!-- 서치 시간없으면 빼도 OK -->
             <div align="center" style="width: 80%">
             <v-col>
                 <v-row>
@@ -14,7 +14,7 @@
                     hide-details
                     ></v-text-field>
                     <v-col cols="2" md="1">
-                        <v-btn id="searchBtn" @click="search" dark small>
+                        <v-btn id="searchBtn" dark small>
                             <v-icon>
                                 mdi-magnify
                             </v-icon>
@@ -30,39 +30,39 @@
         <div>
             <table style="width: 80%;">
                 <tr>
-                    <th align="center" width="160">체크인 날짜</th>
-                    <th align="center" width="300"  colspan="2">객실명</th>
+                    <th align="center" width="160">체크인</th>
+                    <th align="center" width="160">체크아웃</th>
+                    <th align="center" width="300">객실명</th>
                     <th align="center" width="150">고객명</th>
                     <th align="center" width="150">숙박인원</th>
-                    <th align="center" width="130">  </th>
+                    <th align="center" width="100">  </th>
                 </tr>
 
-                <tr v-if="!reservs || (Array.isArray(reservs) && reservs.length === 0)">
+              <!--  <tr v-if="!reservs || (Array.isArray(reservs) && reservs.length === 0)">
                     <td colspan="5">
                         현재 예약 고객이 없습니다!
                     </td>
-                </tr>
+                </tr> 백 연결하실 때 주석 살리고
+                 아래 v-else v-for="reserv in reservs" :key="reserv.reservNo" 넣어주시면 됩니다.-->
 
-                <tr v-else v-for="reserv in reservs" :key="reserv.reservNo">
+                <tr >
                     <td align="center"> <!-- 체크인 날짜 -->
-                        <span>{{new Date(reserv.check_in).toLocalString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(0, 11)}}</span>
+                        <span>2022-06-07</span>
                     </td>                
-
-                    <td align="center" style="width: 150px">
-                        <v-img v-if="item.roomImg == null" id="roomImg" :src="require(`@/assets/${item.hotelImg}`)"/>
-                        <v-img v-else id="roomImg" :src="require(`@/assets/hotelImage/hotel1.jpg`)"/>
-                    </td>
+                    <td align="center"> <!-- 체크아웃 날짜 -->
+                        <span>2022-06-08</span>
+                    </td> 
 
                     <td align="left"> <!-- 객실명 -->
                     <v-col>                            
-                            <span>{{reserv.room_name}}</span>
+                            <span>객실이름여기에</span>
                     </v-col>
                     </td>
                     <td align="center"> <!-- 고객명 -->
-                        <span>{{reserv.name}}</span>
+                        <span>김땡땡</span>
                     </td>
                     <td align="center"> <!-- 숙박인원 -->
-                        <span>{{reserv.personnel}}</span>
+                        <span>4명</span>
                     </td>
                     <td align="center">
                         <reserv-detail/>
@@ -79,7 +79,7 @@
 
 <script>
 import ReservDetail from '@/components/business/ReservDetail.vue'
-import axios from 'axios'
+//import axios from 'axios'
 
 export default {
     name: 'manageReservList',
@@ -100,7 +100,7 @@ export default {
         readReserv(){
 
         },
-        search() {
+       /* search() {
             const { keyWord } = this;
                 axios.post("http://localhost:7777/reserv/search", { keyWord })
                     .then((res) => {
@@ -112,8 +112,8 @@ export default {
                     })
                     .catch(() => {
                     alert("검색 실패");
-                });
-        },
+                }); 
+        },*/
     },
 }
 </script>
