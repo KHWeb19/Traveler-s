@@ -1,5 +1,6 @@
 package com.example.demo.service.reservation;
 
+import com.example.demo.dto.reservation.ReservationResponse;
 import com.example.demo.entity.member.User;
 import com.example.demo.entity.reservation.Reservation;
 import com.example.demo.entity.reservation.ReservationStatus;
@@ -12,8 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -70,6 +73,22 @@ public class ReservationServiceImpl implements ReservationService{
                 .collect(Collectors.toList());
 
         return reservationsWithDate;
+    }
+
+    @Transactional
+    @Override
+    public List<ReservationResponse> reservationList(Long id) {
+        Optional<User> user =userRepository.findByIDWithReservation(id);
+        List<ReservationResponse> reservationList = new ArrayList<>();
+        ReservationResponse reservationResponse;
+        log.info("reservation() "+ user.get().getReservations());
+        for(Reservation reservation2 : user.get().getReservations()){
+            reservationResponse = new ReservationResponse(reservation2.getId(),reservation2.getRoom().getRoomType(),
+                   reservation2.getStatus(),reservation2.getPrice(),reservation2.getStartDate(),reservation2.getEndDate() );
+            reservationList.add(reservationResponse);
+        }
+        log.info("reservationList : " + reservationList);
+        return reservationList;
     }
 
     private boolean validateRoom(List<Reservation> reservations, LocalDate localDate){

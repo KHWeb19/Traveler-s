@@ -15,4 +15,6 @@ export default {
   bmRoomList: [],
 
   wishLists: [],
+
+  bookingLists: [],
 };
