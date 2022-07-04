@@ -1,7 +1,7 @@
 <template>
    <div align="center">
-      <v-layout justify-center>
-            <v-dialog  v-model="findPw" resisten max-width="800px">
+      <v-layout justify-center> <!-- 쓰는 파일 -->
+            <v-dialog v-model="dialog" width="800px">
                <template v-slot:activator="{ on }">
                <v-btn style="color: black" v-on="on">
                   상세보기
@@ -9,7 +9,7 @@
                </template>
                <v-card align="center">
                   <v-card-title id="title">
-                     {{reserv.name}} 고객님 예약정보
+                     김땡땡 고객님 예약정보
                   </v-card-title>
 
                   <form>
@@ -19,89 +19,61 @@
 
                      <table>
                         <tr>
-                           <td>
-                              예약번호
-                           </td>
+                           <td>예약번호</td>
                            <td>
                               &ensp;
-                              <input type="text" id="cantTouch" value="reserv.reservNo" readonly/>
+                              <input type="text" id="cantTouch" value="299" readonly/>
                            </td>
                         </tr>
 
                         <tr>
-                           <td>
-                              예약자명
-                           </td>
+                           <td>예약자명</td>
                            <td>
                               &ensp;
-                              <input type="text" id="cantTouch" value="reserv.name" readonly/>
+                              <input type="text" id="cantTouch" value="김땡땡" readonly/>
                            </td>
                         </tr>
 
                         <tr>
-                           <td>
-                              휴대폰 번호
-                           </td>
+                           <td>휴대폰 번호</td>
                            <td>
                               &ensp;
-                              <input type="text" id="cantTouch" value="reserv.telNum" readonly/>
+                              <input type="text" id="cantTouch" value="010-0000-0000" readonly/>
                            </td>
                         </tr>
 
                         <tr>
-                           <td>
-                              이메일
-                           </td>
+                           <td>이메일</td>
                            <td>
                               &ensp;
-                              <input type="email" id="cantTouch" value="reserv.email" readonly/>
+                              <input type="email" id="cantTouch" value="user@gmail.com" readonly/>
                            </td> <!--  텍스트 입력 필드처럼 보이지만 유효성 검증 매개변수가 존재 -->
                         </tr>
 
                         <tr>
-                           <td>
-                              체크인
-                           </td>
+                           <td>체크인</td>
                            <td>
                               &ensp;
-                              <input type="date" id="cantTouch" value="reserv.check_in" readonly/>
+                              <input type="date" id="cantTouch" value="2022-06-07" readonly/>
                            </td>
                         </tr>
 
                         <tr>
-                           <td>
-                              체크아웃
-                           </td>
+                           <td>체크아웃</td>
                            <td>
                               &ensp;
-                              <input type="date" id="cantTouch" value="reserv.check_out" readonly/>
+                              <input type="date" id="cantTouch" value="2022-06-08" readonly/>
                            </td>
                         </tr>
 
                         <tr>
-                           <td>
-                              요금
-                           </td>
-                           <td>
-                              &ensp;
-                              <input type="text" id="cantTouch" value="reserv.price" readonly/>
-                           </td>
+                           <td>요금</td>
+                           <td> &ensp; <input type="text" id="cantTouch" value="100,000" readonly/></td>
                         </tr>
 
                         <tr>
-                           <td>
-                              고객 요청사항
-                           </td>
-                           <td>
-                              &ensp;
-                              <input type="text" id="cantTouch" style="height: 200px;" value="reserv.content" readonly/>
-                           </td>
-                        </tr>
-
-                        <tr>
-                           <td>
-                              객실
-                           </td>
+                           <th>객실</th>
+                           <br>
                         </tr>
                         <tr>
                            <td colspan="2">
@@ -116,17 +88,19 @@
 
                               <tr>
                                  <td  align="center">
-                                    <span>{{reserv.check_in}} ~ &ensp;
-                                    <br> &ensp; {{reserv.check_out}}</span>
+                                    <span>2022-06-07 ~ &ensp;
+                                    <br> &ensp; 2022-06-08</span>
                                  </td>
                                  <td  align="center">
-                                    <span>{{reserv.room_name}}</span>
+                                    <span>객실이름여기에</span>
                                  </td>                                 
                                  <td  align="center">
-                                    <span>{{reserv.price}}</span>
+                                    <span>100,000</span>
                                  </td>
                                  <td  align="center">
-                                    <input type="number" id="cantTouch" value="reserv.personnel" style="width: 40px;" readonly/>
+                                    <span>4</span>
+                                    <!--고객이 아니라 객실 등록할 때 입력된 객실 최대인원수 가 원래의 시나리오
+                                    하지만 그냥 고객이 예약한 인원수로 바꿔도 상관없습니다. -->
                                  </td>
                                  <td  align="center">
                                     <v-btn id="delButton" @click="onDelete">
@@ -145,7 +119,7 @@
                      <v-btn>
                            수정
                      </v-btn>
-                     <v-btn @click.stop="$emit('close')">
+                     <v-btn @click="cancel">
                            닫기
                      </v-btn>
                      <v-spacer></v-spacer>
@@ -157,31 +131,25 @@
 </template>
 
 <script>
-import axios from 'axios'
+//import axios from 'axios'
 
 export default {
    name: 'reservDatail',
    props: {
-      reserv: {
-         type: Object,
-         required: true
-      }
+
    },
+    data: () => ({
+        dialog: false
+    }),
    created() {
-      this.reservNo = this.reserv.reservNo
+
    },
    methods: {
+      cancel(){
+         this.dialog = false
+        },
       onDelete () {
-            const { reservNo } = this.reserv
-            //alert('지우는 게시물 번호: ' + boardNo)
-            axios.delete(`http://localhost:7777/reserv/${reservNo}`)
-                    .then(() => {
-                        alert('삭제 성공!')
-                        this.$router.push({ name: 'ManageReservList' })
-                    })
-                    .catch(() => {
-                        alert('삭제 실패! 문제 발생!')
-                    })
+
         }        
    }
 }
