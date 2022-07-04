@@ -39,24 +39,27 @@ public class ReservationController {
     }
 
     @GetMapping("/user/listAllReservations")
-    public List<Reservation> listAllReservations(){
+    public List<ReservationResponse> listAllReservations(){
         //String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         String email = "user@gmail.com";
         User user = userRepository.findByEmail(email).get();
         List<Reservation> reservations = reservationService.listAllReservations(user.getId());
-        return reservations;
+        List<ReservationResponse> reservationResponses = ReservationResponse.reservationResponseListBuilder(reservations);
+        return reservationResponses;
     }
 
     @GetMapping("/user/reservationListWithStatus")
-    public List<Reservation> listAllReservations(@RequestParam String status){
+    public List<ReservationResponse> listAllReservations(@RequestParam String status){
         //String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         String email = "user@gmail.com";
         User user = userRepository.findByEmail(email).get();
         List<Reservation> reservations = reservationService.listReservationsWithStatus(status, user.getId());
-        return reservations;
+        List<ReservationResponse> reservationResponses = ReservationResponse.reservationResponseListBuilder(reservations);
+
+        return reservationResponses;
     }
 
-    @GetMapping("/ceo/listAllResevations")
+    @GetMapping("/ceo/listAllReservations")
     public List<ReservationResponse> ceoListAllReservations(){
         //String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         String email = "ceo@gmail.com";

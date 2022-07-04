@@ -1,5 +1,6 @@
 package com.example.demo.repository.reservation;
 
+import com.example.demo.entity.member.User;
 import com.example.demo.entity.reservation.Reservation;
 import com.example.demo.entity.reservation.ReservationStatus;
 import org.springframework.data.jpa.repository.JpaRepository;

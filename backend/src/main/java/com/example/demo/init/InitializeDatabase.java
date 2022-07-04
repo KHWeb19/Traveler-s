@@ -108,6 +108,7 @@ public class InitializeDatabase implements CommandLineRunner {
                 .startDate(LocalDate.parse("2022-07-01"))
                 .endDate(LocalDate.parse("2022-07-07"))
                 .status(ReservationStatus.PENDING)
+                .price(9999L)
                 .room(room)
                 .user(userUser)
                 .build();
@@ -116,6 +117,7 @@ public class InitializeDatabase implements CommandLineRunner {
                 .startDate(LocalDate.parse("2022-08-01"))
                 .endDate(LocalDate.parse("2022-08-07"))
                 .status(ReservationStatus.RESERVED)
+                .price(9999L)
                 .room(room)
                 .user(userUser)
                 .build();
@@ -124,6 +126,7 @@ public class InitializeDatabase implements CommandLineRunner {
                 .startDate(LocalDate.parse("2022-09-01"))
                 .endDate(LocalDate.parse("2022-09-07"))
                 .status(ReservationStatus.CANCELLED)
+                .price(9999L)
                 .room(room)
                 .user(userUser)
                 .build();

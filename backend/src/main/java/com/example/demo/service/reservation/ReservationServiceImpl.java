@@ -77,7 +77,8 @@ public class ReservationServiceImpl implements ReservationService{
 
     @Override
     public List<Reservation> listReservationsForCEO(Long userId) {
-        return reservationRepository.findReservationsForCEO(userId);
+        List<Reservation> reservationsForCEO = reservationRepository.findReservationsForCEO(userId);
+        return reservationsForCEO;
     }
 
     @Override
