@@ -3,6 +3,7 @@ package com.example.demo.controller.hotel;
 import com.example.demo.dto.hotel.RoomRequest;
 import com.example.demo.dto.hotel.RoomResponse;
 import com.example.demo.dto.hotel.HotelResponse;
+import com.example.demo.dto.search.KeyWordRequest;
 import com.example.demo.entity.room.Room;
 import com.example.demo.service.member.UserService;
 import com.example.demo.service.room.RoomService;
@@ -86,10 +87,10 @@ public class RoomController {
     //---------------------------------------------------------------------------------------------------------------
 
     @PostMapping("/mem/list")
-    public List<RoomResponse> mRoomList (@RequestBody RoomRequest roomRequest) { //주석
-        log.info("hotel's roomList" + roomRequest.getHotelNo());
+    public List<RoomResponse> mRoomList (@RequestBody KeyWordRequest keyWordRequest) { //주석
+        log.info("hotel's roomList" + keyWordRequest);
 
-        return roomService.findMRoomList(roomRequest.getHotelNo());
+        return roomService.findMRoomList(keyWordRequest);
     }
 
 }
