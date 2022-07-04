@@ -17,6 +17,7 @@ import BRoomModifyPage from "@/views/room/RoomModifyPage.vue";
 import RoomRegisterPage from "@/views/room/RoomRegisterPage.vue";
 
 import WishListPage from "@/views/mypage/WishListPage.vue";
+import MyPageBooking from "@/views/mypage/MyPageBooking.vue";
 
 Vue.use(VueRouter);
 
@@ -165,6 +166,13 @@ const routes = [
     name: "WishListPage",
     components: {
       default: WishListPage,
+    },
+  },
+  {
+    path: "/mypagebooking",
+    name: "MyPageBooking",
+    components: {
+      default: MyPageBooking,
     },
   },
 ];

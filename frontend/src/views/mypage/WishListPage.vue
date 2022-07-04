@@ -17,7 +17,6 @@
 import MyPageLeftMenu from "@/components/mypage/MyPageLeftMenu.vue";
 import MyPageWish from "@/components/mypage/MyPageWish.vue";
 import { mapActions, mapState } from "vuex";
-
 export default {
   name: "WishListPage",
   components: { MyPageLeftMenu, MyPageWish },

@@ -33,5 +33,4 @@ public class Wish {
     private Hotel hotel;
 
 
-
 }
