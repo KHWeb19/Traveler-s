@@ -1,17 +1,22 @@
 <template>
-     <v-col id="Login">
-        <v-sheet class="UserSpace" v-if="!isLoggedIn">
-          <div>
+<!-- header의 로그인, 회원가입 버튼 컴포넌트 -->
+<div>
+    <!-- (비로그인 상태)로그인, 회원가입 버튼 
+    <v-col id="Login">-->
+        <!-- <v-sheet class="UserSpace" v-if="!isLoggedIn">-->
+          <div class="UserSpace" v-if="!isLoggedIn">
             <ul>
               <li id="LBotton"><a href="/login">
-                  <v-btn>로그인</v-btn>
+                  로그인
                 </a></li>
               <li id="RBotton"><a href="/signup">
-                  <v-btn>회원가입</v-btn>
+                  회원가입
                 </a></li>
             </ul>
           </div>
-        </v-sheet>
+        <!-- </v-sheet> -->
+
+        <!-- (로그인 상태) 로그아웃 버튼 -->
         <v-sheet class="UserSpace" v-else>
           <div>
             <ul>
@@ -25,7 +30,8 @@
             </ul>
           </div>
         </v-sheet>
-      </v-col>
+    <!-- </v-col> -->
+</div>
 </template>
 
 <script>
@@ -39,6 +45,7 @@ export default {
     methods: {
         onClickLogout() {
             this.$store.dispatch("attemptLogout");
+            alert('ㅂㅂ.')
         },
         checkLogin() {
             this.loginCheck = true;
@@ -52,56 +59,30 @@ export default {
 </script>
 
 <style scoped>
+
 .UserSpace {
     position: absolute;
-    width: 200px;
-    padding: 0;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .UserSpace ul {
     display: flex;
-    justify-content: right;
-    align-items: right;
-    margin-right: 1%;
 }
 
 .UserSpace ul li {
     list-style: none;
-    padding-top: 0;
 }
 
 .UserSpace ul li a {
     text-decoration: none;
-    color: rgb(0, 0, 0);
     position: relative;
-    font-size: 30px;
+    padding: 0 15px;
+    color: #404040;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 29px;
 }
-
-.UserSpace-top {
-    position: absolute;
-    top: 1em;
-    list-style: none;
-    right: 2em;
+.UserSpace ul li a:hover {
+  color: #569aff;
 }
-#RBotton {
-    margin-right: 2%;
-    margin-left: 3%;
-}
-
-#LBotton {
-    margin-right: 3%;
-    margin-left: 2%;
-}
-#Login{
-    height: 90px;
-    padding: 0;
-    padding-top: 18px;
-    margin: 0;
-    padding-right: 10%;
-    min-width: 205px;
-    max-width: 300px;
-  }
 
 </style>>
