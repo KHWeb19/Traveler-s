@@ -6,6 +6,7 @@ import store from "@/store";
 import states from "@/store/states";
 
 import MHotelReadPage from "@/views/hotelDetail/HotelReadPage.vue";
+import MReservPage from "@/views/reserv/MReservPage.vue";
 import TagSearchPage from "@/views/searchpage/TagSearchPage.vue";
 import CommonSearchPage from "@/views/searchpage/CommonSearchPage.vue";
 
@@ -78,6 +79,11 @@ const routes = [
     },
   },
   {
+    path: "/BManageReservPage",
+    name: "BManageReservPage",
+    component: () => import("@/views/business/ManageReservPage"),
+  },
+  {
     path: "/mypage",
     name: "MyPage",
     beforeEnter: (to, from, next) => {
@@ -105,6 +111,16 @@ const routes = [
     name: "MHotelReadPage",
     components: {
       default: MHotelReadPage,
+    },
+    props: {
+      default: true,
+    },
+  },
+  {
+    path: "/mReservPage",
+    name: "MReservPage",
+    components: {
+      default: MReservPage,
     },
     props: {
       default: true,
