@@ -1,11 +1,10 @@
 <template>
     <v-container fluid>
-        <v-divider></v-divider>
-        <section>
+
             <v-card-title
             id="TagName"
-            style="font-size:3em">
-            테마 검색
+            >
+            태그스토리
             </v-card-title>
             <v-row justify="center">
                 <v-btn v-for="(info, idx) in hotelInfo"
@@ -15,17 +14,42 @@
                 class="button1 b-color rot-1">#{{ info }}
                 </v-btn>
             </v-row>
-        </section>
 
-        <v-divider></v-divider>                     
+
+            <!-- 
+                   <div class="slide-3d">
+            <v-container>
+                <swiper 
+                    class="swiper" 
+                    :options="swiperOption"
+                >
+                    <swiper-slide><img src=""/></swiper-slide>
+                    <swiper-slide>Slide 2</swiper-slide>
+                    <swiper-slide>Slide 3</swiper-slide>
+                    <swiper-slide>Slide 4</swiper-slide>
+                    <swiper-slide>Slide 5</swiper-slide>
+                    <swiper-slide>Slide 6</swiper-slide>
+
+                    <div class="swiper-pagination" slot="pagination">
+                    </div>
+                </swiper>
+            </v-container>
+
+            </div>-->
     </v-container>
 </template>
 
 <script>
 import axios from 'axios'
+//import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+//import 'swiper/css/swiper.css'
 
 export default {
     name: 'TagSearch',
+    components: {
+        //Swiper,
+        //SwiperSlide
+        },
     props: {
         mHotels: {
             type: Array
@@ -35,16 +59,21 @@ export default {
         return {
             hotelInfo:[
                 '오션뷰',
-                '테라스',
-                '수영장',
-                '전기차충전',
-                '공항근처',
-                '골프장',
-                '무료주차',
+                '이색적인',
                 '바베큐그릴',
                 '반려동물',
                 '온천'
             ],
+            swiperOption: {
+                loop: true,
+                slidesPerView: 3,
+                spaceBetween: 20,
+                grabCursor: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    dynamicBullets: true
+                },
+            }
         }
     },
     methods : {

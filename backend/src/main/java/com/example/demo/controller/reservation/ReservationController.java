@@ -4,8 +4,9 @@ import com.example.demo.dto.reservation.ReservationRequest;
 import com.example.demo.dto.reservation.ReservationResponse;
 import com.example.demo.entity.member.User;
 import com.example.demo.entity.reservation.Reservation;
-import com.example.demo.entity.room.Room;
+
 import com.example.demo.repository.member.UserRepository;
+
 import com.example.demo.service.reservation.ReservationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +15,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -25,6 +25,7 @@ public class ReservationController {
 
     private final ReservationService reservationService;
     private final UserRepository userRepository;
+
 
     @PostMapping("/user/makeReservation")
     public ResponseEntity<?> makeReservation(@RequestBody ReservationRequest reservationRequest){

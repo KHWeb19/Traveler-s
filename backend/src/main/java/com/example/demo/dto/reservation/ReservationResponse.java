@@ -21,11 +21,11 @@ public class ReservationResponse {
     private LocalDate endDate;
     private String status;
 
-    public static List<ReservationResponse> reservationResponseListBuilder(List<Reservation> reservations){
+    public static List<ReservationResponse> reservationResponseListBuilder(List<Reservation> reservations) {
         return reservations.stream().map(r -> reservationResponseBuilder(r)).collect(Collectors.toList());
     }
 
-    public static ReservationResponse reservationResponseBuilder(Reservation reservation){
+    public static ReservationResponse reservationResponseBuilder(Reservation reservation) {
         return ReservationResponse.builder()
                 .id(reservation.getId())
                 .price(reservation.getPrice())

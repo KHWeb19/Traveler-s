@@ -1,5 +1,6 @@
 package com.example.demo.service.reservation;
 
+import com.example.demo.dto.reservation.ReservationResponse;
 import com.example.demo.entity.reservation.Reservation;
 import com.example.demo.entity.room.Room;
 
@@ -13,7 +14,5 @@ public interface ReservationService {
 
     List<Reservation> listReservationsForCEO(Long userId);
     List<Reservation> listReservationsByStatusForCEO(Long userId, String status);
-
-
 
 }

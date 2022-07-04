@@ -83,5 +83,4 @@ public class WishServiceImpl implements WishService {
 
         return maybeReadWish.get();
     }
-
 }

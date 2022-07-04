@@ -1,5 +1,6 @@
 package com.example.demo.service.reservation;
 
+import com.example.demo.dto.reservation.ReservationResponse;
 import com.example.demo.entity.member.User;
 import com.example.demo.entity.reservation.Reservation;
 import com.example.demo.entity.reservation.ReservationStatus;
@@ -9,15 +10,11 @@ import com.example.demo.repository.reservation.ReservationRepository;
 import com.example.demo.repository.room.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
