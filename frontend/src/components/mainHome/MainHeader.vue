@@ -2,15 +2,7 @@
 <section class="wrapper">
   <header>
 
-    <!--
-    <v-col id="BarBtn" v-if="!isLoggedIn" />
-    <v-col id="BarBtn" v-else>
-      <v-app-bar-nav-icon @click="drawer = !drawer" />
-    </v-col> -->
-
-    <v-col>
         <img src="@/assets/TravelLogo.png" class="logoImg" @click="home" />
-    </v-col>
 
     <nav>
       <!-- 메뉴 리스트 -->
@@ -42,23 +34,28 @@
     <LoginForm />
     </div>
 
-  </header>
+    <div class="navIcon">
+    <v-col id="BarBtn" v-if="!isLoggedIn" />
+    <v-col id="BarBtn" v-else>
+      <v-app-bar-nav-icon @click="drawer = !drawer" />
+    </v-col>
+    </div>
 
-
-
-    <!-- 로그인시 생기는 메뉴 
+    <!-- 로그인시 생기는 메뉴 -->
     <v-navigation-drawer disable-resize-watcher 
                          temporary 
                          app 
                          hide-overlay
                          v-model="drawer">
       <NavDrawer :userInfo="user"/>
-    </v-navigation-drawer>-->
+    </v-navigation-drawer>
+  </header>
+
+    
 
     
     
 </section>
-
 </template>
 
 <script>
@@ -66,14 +63,14 @@ import { mapState, mapActions } from 'vuex'
 import router from '@/router'
 
 import LoginForm from './LoginForm.vue'
-//import NavDrawer from './NavDrawer.vue';
+import NavDrawer from './NavDrawer.vue';
 
 export default {
   name: "MainHeader",
   
   components: {
     LoginForm,
-    //NavDrawer,
+    NavDrawer,
   },
   data() {
     return {
@@ -197,5 +194,13 @@ export default {
   right: 250px;
   z-index: 10;
   font-family: NanumSquareRound;
+}
+
+.navIcon {
+  position: absolute;
+  display: inline-block;
+  top: 41px;
+  right: 110px;
+  z-index: 10;
 }
 </style>
