@@ -1,16 +1,32 @@
 <template>
-  <div>
-      <h2>숙소 관리</h2>
-      <span class="page-count">전체</span>
-      <router-link :to="{ name: 'BHotelRegisterPage' }" class="btn"><v-btn>숙소등록</v-btn></router-link>
-      <br>
-    <hotel-list :bmHotels="bmHotels"
-                    @deleteHotels="deleteHotels"/>
+<div align="center">
+<v-container>
+    <table style="width: 80%">
+      <tr>
+        <td align="left" colspan="2">
+      <h2 class="pageTit">숙소 관리</h2>
+        </td>
+      </tr>
+      <tr>
+        <td align="left">
+            <span class="page-count">전체</span>
+        </td>
+        <td align="right">
+          <router-link :to="{ name: 'BHotelRegisterPage' }" class="btn"><v-btn>숙소등록</v-btn></router-link>
+        </td>
+      </tr>
+      <tr>
+        <td align="left" colspan="2">
+          <hotel-list :bmHotels="bmHotels"
+                          @deleteHotels="deleteHotels"/>
+        </td>
+      </tr>
+    </table>
+</v-container>
   </div>
 </template>
 
 <script>
-
 import HotelList from '@/components/hotel/HotelList.vue'
 import { mapState, mapActions } from 'vuex'
 import axios from 'axios'
@@ -41,7 +57,6 @@ export default {
                         .catch(() => {
                             alert('실패했습니다.')
                         })
-
         }
     }
 }
@@ -54,21 +69,37 @@ div {
   -ms-user-select:none;
   user-select:none
 }
-h2 {
-  padding: 50px 0px 30px 50px;
+.pageTit {
+  padding: 50px 0px 30px 0px;
+  font-family: 'NanumSquareRound';
+  font-size: 2.0rem;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+  color: #202020;
+  font-weight: 900;
+}
+.pageTit:after {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    margin-bottom: 24px;
+    border-radius: 50%;
+    background-color: #e63668;
 }
 .page-count {
-  margin-left: 50px;
-  border: none;
-  border-bottom: 5px solid #1890ff;
+  margin-left: 15px;
+  border: 1px;
+  border-bottom: 5px solid #e63668;
   border-radius: 5px;
   padding: 5px 10px;
   outline: none;
-  color: #1890ff;
+  color: #18225c;
+  -webkit-text-stroke: 0.7px #18225c;
 }
 .btn {
+  margin-right: 15px;
   position: sticky;
-  left: 90%;
   text-decoration: none;
 }
 </style>

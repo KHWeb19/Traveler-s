@@ -3,7 +3,7 @@
     <section>
       <div class="row">
         <v-col v-for="(mHotel ,idx) in paginatedData" :key="idx" cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
-          <v-card @click="readHotel(mHotel.hotelNo)">
+          <v-card @click="readHotel(mHotel)">
             <img id="HotelImg" style="height: 200px; width: 260px;"
               :src="require(`@/assets/hotelImg/${mHotel.hotelImages[0]}`)" />
             <v-card-title id="hotelName" class="justify-center">{{ mHotel.hotelName }}</v-card-title>
@@ -24,22 +24,28 @@
          <v-row>
             <v-col>
             <div class="btn-cover" align="center">
-                <v-btn
+                <button
                     :disabled="pageNum === 0"
                     @click="prevPage"
                     class="page-btn">
-                이전
-                </v-btn>
+                  <v-icon> mdi-chevron-left </v-icon>
+                </button>
+                
+                &ensp;
+                
                 <span class="page-count"
                 >{{ pageNum + 1 }} / {{ pageCount }} 페이지</span
                 >
-                <v-btn
+
+                &ensp;
+
+                <button
                     :disabled="pageNum >= pageCount - 1"
                     @click="nextPage"
                     class="page-btn"
                 >
-                다음
-                </v-btn>
+                  <v-icon> mdi-chevron-right </v-icon>                  
+                </button>
             </div>
             </v-col>
          </v-row>
@@ -72,8 +78,11 @@ export default {
         }
   },
   methods: {
-    readHotel(hotelNo) {
-            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: hotelNo.toString() } })      
+    readHotel(mHotel) {
+      const personnel = '2'
+      const dates = [new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10), new Date(Date.now() - new Date().getTimezoneOffset() * 220000).toISOString().substr(0,10)]
+      const payload = { dates, personnel}
+            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: mHotel.hotelNo.toString() , payload, mHotel} })      
     },
     search() {
         const { word } = this;

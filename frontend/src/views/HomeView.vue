@@ -75,6 +75,7 @@ export default {
         .catch((err) => {
         console.log(err);
 		});
+		this.$store.state.num = 0
    }
 };
 

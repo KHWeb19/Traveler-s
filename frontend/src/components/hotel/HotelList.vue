@@ -1,6 +1,7 @@
 <template>
-<div class="board-list">
-<table>
+<v-container class="board-list">
+
+<table style="width: 100%">
   <colgroup>
     <col class="select">
     <col class="hotelNo">
@@ -42,27 +43,36 @@
                 </router-link>
             </td>
             <td>
-                {{ bmHotel.regDate }}
+                {{ new Date(bmHotel.regDate).toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}).toString().substr(0, 11) }}
             </td>
         </tr>
   </tbody>
 </table>
-<v-btn @click="deleteHotel()">삭제</v-btn>
+
+<br>
+
+<v-btn class="btn" @click="deleteHotel()">삭제</v-btn>
+
+<br>
 
 <div class="page-box">
         <div class="btn-cover">
             <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
-                이전
+                <v-icon> mdi-chevron-left </v-icon>
             </button>
+            &ensp;
+
             <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }}</span>
+            
+            &ensp;
             <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
-                다음
+                <v-icon> mdi-chevron-right </v-icon>  
             </button>
         </div>
   </div>
 
-</div>
-
+<br>
+</v-container>
 </template>
 <script>
 
@@ -136,14 +146,17 @@ export default {
 <style scoped>
 .board-list {
   margin-top: 20px;
-  margin-left: 50px;
+  /*margin-left: 50px;
+  margin-right: 50px; */
 }
 /* 링크 색상 (중요하지 않음) */
 a {
   text-decoration: none;
   color: #333;
 }
-a:hover {color: #1890ff;}
+a:hover {
+  color: #e63668;
+}
 
 /* 테이블 색상 (중요하지 않음) */
 table {
@@ -151,22 +164,29 @@ table {
   border-collapse: collapse;
 }
 th {
-  background: #1890ff;
+  background: #54658a;
   color: #fff;
-}
-td, th {
+  font-size: 15px;
   border: 1px solid #dbdbdb;
+  height: 45px;
   padding: 5px 20px;
-  font-size:12px;
+}
+td {
+  border: 1px solid #dbdbdb;
+  color: rgb(34, 34, 34);
+  height: 42px;
+  padding: 5px 20px;
+  font-size:13px;
 }
 tr:nth-of-type(odd) { 
-	background: #eee; 
+	background: rgb(243, 243, 243); 
 }
 
 /* 체크박스의 크기 */
 .check {
   width:15px;
   height:15px;
+  accent-color: #e63668;
 }
 
 /* 컬럼의 너비 */
@@ -193,11 +213,15 @@ tr td:nth-child(5){text-align:center;}
 .page-box a.btn {
   display:inline-block;
   padding: 3px 5px;
-  font-size: 10px;
+  font-size: 15px;
   border: 1px solid #dbdbdb;
   color: #333;
 }
 .page-box a.btn.on {
   background-color: #dbdbdb;
+}
+.btn {
+  position: sticky;
+  text-decoration: none;
 }
 </style>

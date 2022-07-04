@@ -125,14 +125,15 @@
               <p>{{ mHotel.totalAddress }}</p>
             </td>
           </tr>
-          <td colspan="2" align="center">
+          <tr>
+            <td colspan="2" align="center">
             <kakao-map-api
               v-if="Object.keys(mHotel).length !== 0"
               :mHotel="mHotel"
             />
             <br />
           </td>
-          <tr></tr>
+          </tr>
 
           <tr>
             <td colspan="2">
@@ -140,7 +141,6 @@
             </td>
           </tr>
         </table>
-        <br />
       </form>
     </v-container>
   </div>

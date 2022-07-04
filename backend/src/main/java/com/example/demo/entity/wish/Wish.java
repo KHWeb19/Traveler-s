@@ -28,7 +28,7 @@ public class Wish {
     @JoinColumn(name= "id")
     private User user;
 
-
+    @JoinColumn(name= "hotelNo")
     @OneToOne(fetch = FetchType.EAGER)
     private Hotel hotel;
 

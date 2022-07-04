@@ -6,6 +6,7 @@ import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.reservation.Reservation;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +19,8 @@ import java.util.Date;
 import java.util.List;
 
 @Slf4j
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -57,7 +59,7 @@ public class Room {
     private Date updDate;
 
     @OneToMany (mappedBy = "room", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = false)
-    @JsonManagedReference
+    @JsonIgnore
     @Builder.Default
     private List<Reservation> reservations = new ArrayList<>();
 
@@ -79,6 +81,13 @@ public class Room {
     public void removeRoomImageFromRoom(RoomImage roomImage){
         roomImages.remove(roomImage);
         roomImage.setRoom(null);
+    }
+
+    public void addReservationToRoom(Reservation reservation){
+        this.reservations.add(reservation);
+        if (reservation.getRoom() != this){
+            reservation.setRoom(this);
+        }
     }
 
 }
