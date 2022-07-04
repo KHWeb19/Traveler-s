@@ -1,8 +1,7 @@
 <template>
     <div align="center">
 
-        <manage-reserv-list :reservs="reservs"
-                                :list-array="pageArray"/>
+        <manage-reserv-list/>
     </div>
 </template>
 
@@ -11,7 +10,7 @@ import ManageReservList from '@/components/business/ManageReservList.vue'
 
 
 export default {
-    name: 'ManageReservPage',
+    name: 'BManageReservPage',
     components: {
         ManageReservList
 
