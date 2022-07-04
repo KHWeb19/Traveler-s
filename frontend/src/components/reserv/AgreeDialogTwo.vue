@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-dialog resisten max-width="560px">
+        <v-dialog v-model="dialog" width="560px">
             <template v-slot:activator="{ on }">
                 <button v-on="on"  dark>
                         <v-icon> mdi-chevron-right </v-icon>
@@ -258,7 +258,7 @@
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn>
+                        <v-btn @click="cancel">
                             확인
                         </v-btn>
                         <v-spacer></v-spacer>
@@ -273,5 +273,13 @@
 <script>
 export default {
     name: 'AgreeDialogTwo', 
+    data: () => ({
+        dialog: false
+    }),
+    methods: {
+        cancel(){
+            this.dialog = false
+        },
+    }
 }
 </script>
