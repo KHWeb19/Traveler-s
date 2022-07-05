@@ -1,7 +1,7 @@
 <template>
 <footer>
-<div class="footBtm">
-    <div class="footInner">
+<v-container fluid class="footBtm">
+    <v-col class="footInner">
       <ul class="footMenu">
         <li><a href="#" role="button">개인정보처리방침</a></li>
         <li><a href="#" role="button">이용약관</a></li>
@@ -25,8 +25,8 @@
       <p class="txtCopy">
         <span>Copyright ⓒ TRAVELER'S All Rights Reserved</span>
       </p>
-    </div>
-  </div>
+    </v-col>
+  </v-container>
 </footer>
 </template>
 
@@ -219,5 +219,21 @@ footer .footBtm .txtCopy span {
 footer .footBtm .txtCopy span:first-child {
     padding-left: 0;
 }
+@media screen and (min-width: 1024px) and (max-width: 1240px) {
+    footer .footInner {
+        margin: 0 8% 0 6%;
+    }
+}
 
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    footer .footInner {
+        margin: 0 8% 0 4%;
+    }
+}
+
+@media screen and (min-width: 360px) and (max-width: 768px) {
+    footer .footInner {
+        margin: 0 1% 0 1.5%;
+    }
+}
 </style>

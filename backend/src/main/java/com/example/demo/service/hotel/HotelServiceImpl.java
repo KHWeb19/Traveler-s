@@ -57,6 +57,7 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
     public List<HotelResponse> bmHotelList() {
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.findByEmailWithHotels(email).get();
+        log.info("hotels : " + user.getHotels() );
 
         return hotelBuilder(user.getHotels());
 

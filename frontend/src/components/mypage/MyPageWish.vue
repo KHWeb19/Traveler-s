@@ -1,46 +1,62 @@
 <template>
   <v-container style="padding: 0px; margin-top: 20px">
-    <v-card class="right">
-      <div style="display: flex; justify-content: center; padding-top: 120px">
-        <table class="table">
-          <thead style="background: #1890ff; height: 60px">
-            <tr>
-              <th scope="col" align="center" width="150">이름</th>
-              <th scope="col" align="center" width="640">주소</th>
-              <th scope="col" align="center" width="150">삭제</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              v-if="
-                !wishLists ||
-                (Array.isArray(wishLists) && wishLists.length === 0)
-              "
-            >
-              <td colspan="4">현재 위시가 없습니다!</td>
-            </tr>
-            <tr v-else v-for="wishList in wishLists" :key="wishList.hotelNo">
-              <td align="center">
-                <router-link
-                  :to="{
-                    name: 'MHotelReadPage',
-                    params: { hotelNo: wishList.hotelNo.toString() },
-                  }"
-                >
-                  {{ wishList.hotelName }}
-                </router-link>
-              </td>
-              <td align="center">
-                {{ wishList.totalAddress }}
-              </td>
-              <th scope="col">
-                <v-btn @click="deletewish(wishList.hotelNo)">취소</v-btn>
-              </th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </v-card>
+    <table class="table">
+      <colgroup>
+        <col class="hotelName">
+        <col class="Address">
+        <col class="delete">
+      </colgroup>
+
+      <thead>
+        <tr>
+          <th scope="col" align="center" width="20%">이름</th>
+          <th scope="col" align="center" width="60%">주소</th>
+          <th scope="col" align="center" width="20%">삭제</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-if="
+            !wishLists ||(Array.isArray(wishLists) && wishLists.length === 0)">
+          <td align="center" colspan="3">현재 위시가 없습니다!</td>
+        </tr>
+        <tr v-else v-for="wishList in paginatedData" :key="wishList.hotelNo">
+          <td align="center">
+              {{ wishList.hotelName }}
+          </td>
+          <td align="center">
+            <router-link
+              :to="{ name: 'MHotelReadPage',
+                    params: { hotelNo: wishList.hotelNo.toString() },}">
+             {{ wishList.totalAddress }}
+            </router-link>
+          </td>
+          <td align="center">
+            <v-btn @click="deletewish(wishList.hotelNo)">취소</v-btn>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+<br>
+<br>
+
+<div class="page-box">
+        <div class="btn-cover">
+            <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
+                <v-icon> mdi-chevron-left </v-icon>
+            </button>
+            &ensp;
+
+            <span>{{ pageNum + 1 }} / {{ pageCount }}</span>
+            
+            &ensp;
+            <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
+                <v-icon> mdi-chevron-right </v-icon>  
+            </button>
+        </div>
+  </div>
+
+
   </v-container>
 </template>
 
@@ -53,9 +69,31 @@ export default {
       type: Array,
       required: true,
     },
-  },
+    pageSize: {
+      type: Number,
+      required: false,
+      default: 5
+    }
+},
   data() {
-    return {};
+    return {
+      pageNum: 0,
+    };
+  },
+  computed: {
+    pageCount () {
+            let listLeng = this.wishLists.length,
+                listSize = this.pageSize,
+                page = Math.floor(listLeng / listSize);
+            if (listLeng % listSize > 0) page += 1
+            return page;
+        },
+        paginatedData () {
+            const start = this.pageNum * this.pageSize,
+                    end = start + this.pageSize;
+            return this.wishLists.slice(start, end);
+            
+        }
   },
   methods: {
     deletewish(payload) {
@@ -70,51 +108,73 @@ export default {
         .catch(() => {
           alert("삭제요청실패");
         });
+      },
+    nextPage () {
+    this.pageNum += 1;
     },
-  },
+    prevPage () {
+    this.pageNum -= 1;
+    },
+},
 };
 </script>
 
 <style scoped>
-.left_menu {
-  width: 200px;
-  height: 848px;
-  border-right-width: 3px;
-  border-right-color: rgba(64, 64, 64);
-  border-right-style: dotted;
-  padding: 3%;
-  background: rgba(64, 64, 64);
-  color: white;
+.board-list {
+  margin-top: 20px;
+  /*margin-left: 50px;
+  margin-right: 50px; */
 }
-.proimg {
-  width: 150px;
-}
-.col1 {
-  background: rgb(224, 224, 224);
-}
-.btn2 {
-  background: rgb(224, 224, 224);
-}
-.right {
-  width: 600px;
-  height: 848px;
-  background: rgb(250, 250, 250);
-}
-.tb1 {
-  background: #ffe082;
-}
-ul a {
-  color: inherit;
-}
-ul {
-  list-style: none;
-  margin: 20% 0 0 0;
-}
+/* 링크 색상 (중요하지 않음) */
 a {
   text-decoration: none;
+  color: #333;
 }
-td,
+a:hover {
+  color: #e63668;
+}
+table {
+  width: 95%;
+  border-collapse: collapse;
+}
 th {
+  background: #54658a;
+  color: #fff;
+  font-size: 15px;
   border: 1px solid #dbdbdb;
+  height: 45px;
+  padding: 5px 20px;
+}
+td {
+  border: 1px solid #dbdbdb;
+  color: rgb(34, 34, 34);
+  height: 42px;
+  padding: 5px 20px;
+  font-size:13px;
+}
+tr:nth-of-type(odd) { 
+	background: rgb(243, 243, 243); 
+}
+
+/* 페이징 버튼 */
+.page-box {
+  width: 80%;
+  margin: 5px auto;
+  height: 30px;
+  text-align: center;
+}
+.page-box a.btn {
+  display:inline-block;
+  padding: 3px 5px;
+  font-size: 15px;
+  border: 1px solid #dbdbdb;
+  color: #333;
+}
+.page-box a.btn.on {
+  background-color: #dbdbdb;
+}
+.btn {
+  position: sticky;
+  text-decoration: none;
 }
 </style>

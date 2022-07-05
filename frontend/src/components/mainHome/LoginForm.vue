@@ -1,7 +1,7 @@
 <template>
 <!-- header의 로그인, 회원가입 버튼 컴포넌트 -->
 <div>
-    <!-- (비로그인 상태)로그인, 회원가입 버튼 
+    <!-- (비로그인 상태)로그인, 회원가입 버튼
     <v-col id="Login">-->
         <!-- <v-sheet class="UserSpace" v-if="!isLoggedIn">-->
           <div class="UserSpace" v-if="!isLoggedIn">
@@ -45,7 +45,6 @@ export default {
     methods: {
         onClickLogout() {
             this.$store.dispatch("attemptLogout");
-            alert('ㅂㅂ.')
         },
         checkLogin() {
             this.loginCheck = true;

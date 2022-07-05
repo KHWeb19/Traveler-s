@@ -1,11 +1,13 @@
 <template>
+<v-main>
   <v-app style="width: 100%">
     <MainHeader />
-    <v-main>
+
       <router-view class="page" />
-    </v-main>
+
     <MainFooter />
   </v-app>
+</v-main>
 </template>
 
 <script>
@@ -18,7 +20,7 @@ export default {
 
   components: {
     MainHeader,
-    MainFooter
+    MainFooter,
     //HomeView
     // HelloWorld,
   },
