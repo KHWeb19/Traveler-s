@@ -16,6 +16,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> findByUser_id(@Param(value = "id") Long userId);
     List<Reservation> findByStatusAndUser_id(ReservationStatus status, @Param(value ="id") Long userId);
 
+    Optional<Reservation> findById(Long reservationId);
+
     @Query("select r from Reservation r join r.room rm join rm.hotel h join h.user u where u.id = :userId")
     List<Reservation> findReservationsForCEO(Long userId);
 

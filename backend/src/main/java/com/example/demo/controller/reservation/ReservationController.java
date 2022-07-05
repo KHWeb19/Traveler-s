@@ -10,12 +10,16 @@ import com.example.demo.repository.member.UserRepository;
 import com.example.demo.service.reservation.ReservationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -30,12 +34,29 @@ public class ReservationController {
     @PostMapping("/user/makeReservation")
     public ResponseEntity<?> makeReservation(@RequestBody ReservationRequest reservationRequest){
         log.info("makeReservation controller: {}", reservationRequest.getRoomId());
+
         LocalDate startDate = LocalDate.parse(reservationRequest.getStartDate());
         LocalDate endDate = LocalDate.parse(reservationRequest.getEndDate());
 
-        reservationService.createReservation(Long.valueOf(reservationRequest.getRoomId()), startDate, endDate);
+        Reservation reservation = reservationService.createReservation(Long.valueOf(reservationRequest.getRoomId()), startDate, endDate);
+        String no = reservation.getId().toString();
+        return new ResponseEntity<>(no, HttpStatus.OK);
+    }
 
-        return ResponseEntity.ok().build();
+    @Transactional
+    @GetMapping("/user/readReservation")
+    public ReservationResponse readReservation(@RequestParam Long reservationId) throws BadCredentialsException{
+        String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        User user = userRepository.findByEmail(email).get();
+
+        Optional<Reservation> optionalReservation = reservationService.findReservationById(reservationId);
+        Reservation reservation = optionalReservation.get();
+        log.info("reading Reservation");
+
+        if (!user.getId().equals(reservation.getUser().getId()))
+            throw new BadCredentialsException("Bad Credentials Exception");
+        ReservationResponse reservationResponse = ReservationResponse.reservationResponseBuilderWithUser(reservation);
+        return reservationResponse;
     }
 
     @GetMapping("/user/listAllReservations")
@@ -78,4 +99,15 @@ public class ReservationController {
         return reservationResponses;
     }
 
+    @ExceptionHandler(IllegalStateException.class)
+    public ResponseEntity<?> illegalStateException(){
+        log.info("Handling Illegal State");
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<?> badCredentailsException(){
+        log.info("Handling Bad Credentials Exception");
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
 }

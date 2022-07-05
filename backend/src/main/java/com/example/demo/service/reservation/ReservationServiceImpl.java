@@ -26,39 +26,40 @@ public class ReservationServiceImpl implements ReservationService{
     private final UserRepository userRepository;
 
     @Override
-    public void createReservation(Long roomId, LocalDate startDate, LocalDate endDate) {
+    public Reservation createReservation(Long roomId, LocalDate startDate, LocalDate endDate) throws IllegalStateException {
         log.info("createReservation in serviceImpl");
         List<Reservation> reservationList = reservationRepository.findByRoom_RoomNo(roomId);
 
         boolean canMakeReservation = true;
 
-        if (!reservationList.isEmpty()){
+        if (!reservationList.isEmpty()) {
             //private method 인자값 room이 enddate가 date값보다 작은 reservation을 갖고있다면 return true
             canMakeReservation = validateRoom(reservationList, startDate, endDate);
         }
-        try {
-            if (!canMakeReservation)
-                throw new IllegalStateException("Cannot make a reservation");
-            Optional<User> optionalUser = userRepository.findByEmail("user@gmail.com");
-            User user = optionalUser.get();
-            Optional<Room> optionalRoom = roomRepository.findById(roomId);
-            Room room = optionalRoom.get();
+        if (!canMakeReservation)
+            throw new IllegalStateException("Cannot make a reservation");
+        Optional<User> optionalUser = userRepository.findByEmail("user@gmail.com");
+        User user = optionalUser.get();
+        Optional<Room> optionalRoom = roomRepository.findById(roomId);
+        Room room = optionalRoom.get();
 
-            Reservation reservation = Reservation.builder()
-                    .price(100000L)
-                    .status(ReservationStatus.PENDING)
-                    .startDate(startDate)
-                    .endDate(endDate)
-                    .room(room)
-                    .user(user)
-                    .build();
-            reservationRepository.save(reservation);
-            log.info("Created reservation");
+        Reservation reservation = Reservation.builder()
+                .price(100000L)
+                .status(ReservationStatus.PENDING)
+                .startDate(startDate)
+                .endDate(endDate)
+                .room(room)
+                .user(user)
+                .build();
+        reservationRepository.save(reservation);
+        log.info("Created reservation");
+        return reservation;
+    }
 
-        }
-        catch (IllegalStateException e){
-            e.printStackTrace();
-        }
+    @Override
+    public Optional<Reservation> findReservationById(Long reservationId) {
+        Optional<Reservation> optionalReservation = reservationRepository.findById(reservationId);
+        return optionalReservation;
     }
 
     @Override
@@ -91,9 +92,11 @@ public class ReservationServiceImpl implements ReservationService{
     private boolean validateRoom(List<Reservation> reservations, LocalDate startDate, LocalDate endDate){
         log.info("validateRoom method");
         Optional<Reservation> optionalReservation = reservations.stream().filter(f -> !(f.getEndDate().isBefore(startDate) && !(f.getStartDate().isAfter(endDate)))).findFirst();
-        if (optionalReservation.isEmpty())
+        if (optionalReservation.isEmpty()) {
+            log.info("Can make reservation.");
             return true;
-        log.info("Returning false!!");
+        }
+        log.info("Cannot make reservation.");
         return false;
     }
 
