@@ -1,7 +1,7 @@
 <template>
 <footer>
-<div class="footBtm">
-    <div class="footInner">
+<v-container fluid class="footBtm">
+    <v-col class="footInner">
       <ul class="footMenu">
         <li><a href="#" role="button">개인정보처리방침</a></li>
         <li><a href="#" role="button">이용약관</a></li>
@@ -25,8 +25,8 @@
       <p class="txtCopy">
         <span>Copyright ⓒ TRAVELER'S All Rights Reserved</span>
       </p>
-    </div>
-  </div>
+    </v-col>
+  </v-container>
 </footer>
 </template>
 
@@ -63,7 +63,8 @@ p {
 
 footer {
     position: relative;
-    height: 304px;
+    min-height: 280px;
+    max-height: 345px;
     border-top: 1px solid #EAEAEA;
     text-align: center;
     z-index: 1;
@@ -71,14 +72,17 @@ footer {
 }
 
 footer .footBtm .footInner {
-    padding: 60px 72px 0 72px;
+    padding-top: 2.3%;
+    padding-left: 2%;
+    padding-right: 2%;
+    /*padding: 60px 72px 0 72px;*/
 }
 
 footer .footInner {
-    position: relative;
-    width: 1280px;
+    position: center;
+    width: 1030px;
+    min-width: 290px;
     margin: 0 auto;
-    padding: 0 72px;
     text-align: left;
     z-index: 2;
 }
@@ -145,7 +149,7 @@ footer .footBtm .footMenu>li:first-child a:before {
 }
 
 footer .footBtm .txtFoot {
-    margin-top: 19px;
+    margin-top: 2%;
     color: rgba(255,255,255,0.6);
 }
 
@@ -163,7 +167,11 @@ footer .footBtm .txtFoot span:first-child {
 }
 
 footer .footBtm .txtFoot span .btns {
-    border: 1px solid rgba(255,255,255,0.5);
+    border: solid rgba(255,255,255,0.5);
+    border-right-width: 1px;
+    border-left-width: 0px;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
     padding: 5px;
     font-size: 1.1rem;
     border-radius: 5px;
@@ -186,23 +194,24 @@ footer .footBtm .txtFoot span:before {
     background: rgba(255,255,255,0.2);
 }
 
-/*footer .footBtm .txtFoot span .btns {
+footer .footBtm .txtFoot span .btns {
     border: 1px solid rgba(255,255,255,0.5);
     padding: 5px;
     font-size: 1.1rem;
     border-radius: 5px;
     margin-left: 4px;
-}*/
+}
 
-footer .footBtm .txtFoot02, footer .footBtm .txtFoot03 {
-    margin-top: 20px;
+footer .footBtm .txtFoot02 {
+    margin-top: 2%;
+    margin-bottom: 1%;
     color: rgba(255,255,255,0.6);
     font-size: 0.8rem;
     line-height: 1.5em;
 }
 
 footer .footBtm .txtCopy {
-    margin-top: 22px;
+    margin-top: 1%;
     color: #fff;
     font-size: 1.6rem;
 }
