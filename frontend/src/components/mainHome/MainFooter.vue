@@ -37,7 +37,6 @@ export default {
 </script>
 
 <style scoped>
-
 p, ul, ol, li, button, div, footer, span {
     margin: 0;
     padding: 0;
@@ -64,8 +63,7 @@ p {
 
 footer {
     position: relative;
-    min-height: 280px;
-    max-height: 345px;
+    height: 304px;
     border-top: 1px solid #EAEAEA;
     text-align: center;
     z-index: 1;
@@ -73,17 +71,14 @@ footer {
 }
 
 footer .footBtm .footInner {
-    padding-top: 2.3%;
-    padding-left: 0%;
-    padding-right: 7%;
-    /*padding: 60px 72px 0 72px;*/
+    padding: 60px 72px 0 72px;
 }
 
 footer .footInner {
-    position: center;
-    width: 1030px;
-    min-width: 290px;
-    margin: 0 8% 0 21.7%;
+    position: relative;
+    width: 1280px;
+    margin: 0 auto;
+    padding: 0 72px;
     text-align: left;
     z-index: 2;
 }
@@ -150,7 +145,7 @@ footer .footBtm .footMenu>li:first-child a:before {
 }
 
 footer .footBtm .txtFoot {
-    margin-top: 2%;
+    margin-top: 19px;
     color: rgba(255,255,255,0.6);
 }
 
@@ -168,11 +163,7 @@ footer .footBtm .txtFoot span:first-child {
 }
 
 footer .footBtm .txtFoot span .btns {
-    border: solid rgba(255,255,255,0.5);
-    border-right-width: 1px;
-    border-left-width: 0px;
-    border-top-width: 0px;
-    border-bottom-width: 0px;
+    border: 1px solid rgba(255,255,255,0.5);
     padding: 5px;
     font-size: 1.1rem;
     border-radius: 5px;
@@ -195,24 +186,23 @@ footer .footBtm .txtFoot span:before {
     background: rgba(255,255,255,0.2);
 }
 
-footer .footBtm .txtFoot span .btns {
+/*footer .footBtm .txtFoot span .btns {
     border: 1px solid rgba(255,255,255,0.5);
     padding: 5px;
     font-size: 1.1rem;
     border-radius: 5px;
     margin-left: 4px;
-}
+}*/
 
-footer .footBtm .txtFoot02 {
-    margin-top: 2%;
-    margin-bottom: 1%;
+footer .footBtm .txtFoot02, footer .footBtm .txtFoot03 {
+    margin-top: 20px;
     color: rgba(255,255,255,0.6);
     font-size: 0.8rem;
     line-height: 1.5em;
 }
 
 footer .footBtm .txtCopy {
-    margin-top: 1%;
+    margin-top: 22px;
     color: #fff;
     font-size: 1.6rem;
 }
@@ -229,7 +219,6 @@ footer .footBtm .txtCopy span {
 footer .footBtm .txtCopy span:first-child {
     padding-left: 0;
 }
-
 @media screen and (min-width: 1024px) and (max-width: 1240px) {
     footer .footInner {
         margin: 0 8% 0 6%;
@@ -247,5 +236,4 @@ footer .footBtm .txtCopy span:first-child {
         margin: 0 1% 0 1.5%;
     }
 }
-
 </style>

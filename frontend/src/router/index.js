@@ -118,7 +118,7 @@ const routes = [
     },
   },
   {
-    path: "/mReservPage",
+    path: "/mReservPage/:no",
     name: "MReservPage",
     components: {
       default: MReservPage,

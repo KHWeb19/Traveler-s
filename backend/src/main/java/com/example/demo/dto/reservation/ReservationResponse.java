@@ -21,6 +21,11 @@ public class ReservationResponse {
     private LocalDate endDate;
     private String status;
 
+    private String username;
+    private Long roomId;
+    private String hotelName;
+    private int personnel;
+
     public static List<ReservationResponse> reservationResponseListBuilder(List<Reservation> reservations) {
         return reservations.stream().map(r -> reservationResponseBuilder(r)).collect(Collectors.toList());
     }
@@ -28,6 +33,20 @@ public class ReservationResponse {
     public static ReservationResponse reservationResponseBuilder(Reservation reservation) {
         return ReservationResponse.builder()
                 .id(reservation.getId())
+                .price(reservation.getPrice())
+                .startDate(reservation.getStartDate())
+                .endDate(reservation.getEndDate())
+                .status(String.valueOf(reservation.getStatus()))
+                .build();
+    }
+
+    public static ReservationResponse reservationResponseBuilderWithUser(Reservation reservation){
+        return ReservationResponse.builder()
+                .id(reservation.getId())
+                .username(reservation.getUser().getName())
+                .roomId(reservation.getRoom().getRoomNo())
+                .personnel(reservation.getRoom().getPersonnel())
+                .hotelName(reservation.getRoom().getHotel().getHotelName())
                 .price(reservation.getPrice())
                 .startDate(reservation.getStartDate())
                 .endDate(reservation.getEndDate())
