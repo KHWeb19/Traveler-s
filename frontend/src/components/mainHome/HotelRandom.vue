@@ -2,8 +2,8 @@
   <v-container>
     <section>
       <v-card-title id="RandomTitle" style="font-size:3em">랜덤숙소 추천</v-card-title>
-      <div class="row">
-        <v-col v-for="mHotel in mHotels" :key="mHotel.hotelNo" cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
+      <v-row justify="center" >
+        <v-col justify="space-around" v-for="mHotel in mHotels" :key="mHotel.hotelNo" cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
           <v-card @click="readHotel(mHotel)">
             <img id="HotelImg" style="height: 200px; width: 260px;"
               :src="require(`@/assets/hotelImg/${mHotel.hotelImages[0]}`)" />
@@ -25,6 +25,7 @@
             <v-card-text class="address">
               {{ mHotel.totalAddress }}
             </v-card-text>
+            <v-card-text id="textSpan">
             <span id="tagSpan2"
             v-for="(item, i) in mHotel.hotelInfo"
             :key="i"
@@ -32,9 +33,10 @@
               {{ "#" + item }}
               <!-- i 번째 item를 출력  -->
             </span>
+            </v-card-text>
           </v-card>
         </v-col>
-      </div>
+      </v-row>
     </section>
   </v-container>
 </template>
@@ -72,7 +74,7 @@ export default {
 .v-card {
   margin-top: 10%;
   margin-bottom: 10%;
-  height: 600px;
+  height: 450px;
   Min-width: 276px;
   max-width: 290px;
 }
@@ -104,5 +106,8 @@ export default {
 }
 #HotelImg{
   margin-top:15px;
+}
+#textSpan {
+  margin: 0 2px;
 }
 </style>
