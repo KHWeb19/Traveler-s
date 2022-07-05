@@ -48,7 +48,6 @@
 import axios from "axios";
 export default {
   name: "MyPageWish",
-
   props: {
     wishLists: {
       type: Array,
@@ -90,14 +89,12 @@ export default {
 .proimg {
   width: 150px;
 }
-
 .col1 {
   background: rgb(224, 224, 224);
 }
 .btn2 {
   background: rgb(224, 224, 224);
 }
-
 .right {
   width: 600px;
   height: 848px;
@@ -106,16 +103,13 @@ export default {
 .tb1 {
   background: #ffe082;
 }
-
 ul a {
   color: inherit;
 }
-
 ul {
   list-style: none;
   margin: 20% 0 0 0;
 }
-
 a {
   text-decoration: none;
 }

@@ -34,7 +34,7 @@
             <br />
             <br />
             <li>
-              <router-link :to="{ name: '', params: {} }">
+              <router-link :to="{ name: 'MyPageBooking', params: {} }">
                 <strong style="text-align: center"> 예약 내역 확인 </strong>
               </router-link>
             </li>

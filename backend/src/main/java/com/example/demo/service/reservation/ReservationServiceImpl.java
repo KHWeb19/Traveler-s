@@ -1,5 +1,6 @@
 package com.example.demo.service.reservation;
 
+import com.example.demo.dto.reservation.ReservationResponse;
 import com.example.demo.entity.member.User;
 import com.example.demo.entity.reservation.Reservation;
 import com.example.demo.entity.reservation.ReservationStatus;
@@ -9,15 +10,11 @@ import com.example.demo.repository.reservation.ReservationRepository;
 import com.example.demo.repository.room.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -29,7 +26,7 @@ public class ReservationServiceImpl implements ReservationService{
     private final UserRepository userRepository;
 
     @Override
-    public void createReservation(Long roomId, LocalDate date) {
+    public void createReservation(Long roomId, LocalDate startDate, LocalDate endDate) {
         log.info("createReservation in serviceImpl");
         List<Reservation> reservationList = reservationRepository.findByRoom_RoomNo(roomId);
 
@@ -37,7 +34,7 @@ public class ReservationServiceImpl implements ReservationService{
 
         if (!reservationList.isEmpty()){
             //private method 인자값 room이 enddate가 date값보다 작은 reservation을 갖고있다면 return true
-            canMakeReservation = validateRoom(reservationList, date);
+            canMakeReservation = validateRoom(reservationList, startDate, endDate);
         }
         try {
             if (!canMakeReservation)
@@ -50,7 +47,8 @@ public class ReservationServiceImpl implements ReservationService{
             Reservation reservation = Reservation.builder()
                     .price(100000L)
                     .status(ReservationStatus.PENDING)
-                    .endDate(date)
+                    .startDate(startDate)
+                    .endDate(endDate)
                     .room(room)
                     .user(user)
                     .build();
@@ -64,23 +62,39 @@ public class ReservationServiceImpl implements ReservationService{
     }
 
     @Override
-    public List<Reservation> listReservationWithRoomId(Long id, LocalDate date) {
-        List<Reservation> reservations = reservationRepository.findByRoom_RoomNo(id);
-        List<Reservation> reservationsWithDate = reservations.stream().filter(f -> f.getEndDate().isBefore(date))
-                .collect(Collectors.toList());
+    public List<Reservation> listAllReservations(Long userId) {
+        List<Reservation> reservations = reservationRepository.findByUser_id(userId);
 
-        return reservationsWithDate;
+        return reservations;
     }
 
-    private boolean validateRoom(List<Reservation> reservations, LocalDate localDate){
+    @Override
+    public List<Reservation> listReservationsWithStatus(String status, Long userId) {
+        ReservationStatus reservationStatus = ReservationStatus.valueOf(status);
+        List<Reservation> reservations = reservationRepository.findByStatusAndUser_id(reservationStatus, userId);
+        return reservations;
+    }
+
+    @Override
+    public List<Reservation> listReservationsForCEO(Long userId) {
+        List<Reservation> reservationsForCEO = reservationRepository.findReservationsForCEO(userId);
+        return reservationsForCEO;
+    }
+
+    @Override
+    public List<Reservation> listReservationsByStatusForCEO(Long userId, String status) {
+        ReservationStatus reservationStatus = ReservationStatus.valueOf(status);
+        List<Reservation> reservationsByStatusForCEO = reservationRepository.findReservationsByStatusForCEO(userId, reservationStatus);
+        return reservationsByStatusForCEO;
+    }
+
+    private boolean validateRoom(List<Reservation> reservations, LocalDate startDate, LocalDate endDate){
         log.info("validateRoom method");
-        List<Reservation> reservationList = reservations.stream().filter(f -> (f.getEndDate() == null) || f.getEndDate().isBefore(localDate)).collect(Collectors.toList());
-        if (reservationList.isEmpty()){
-            return false;
-        }else {
-            log.info("validateRoom method returning true");
+        Optional<Reservation> optionalReservation = reservations.stream().filter(f -> !(f.getEndDate().isBefore(startDate) && !(f.getStartDate().isAfter(endDate)))).findFirst();
+        if (optionalReservation.isEmpty())
             return true;
-        }
+        log.info("Returning false!!");
+        return false;
     }
 
 }
