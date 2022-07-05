@@ -1,10 +1,11 @@
 <template>
-    <v-container>
+    <v-container class="board-list">
 
         <template> <!-- 서치 시간없으면 빼도 OK -->
-            <div align="center" style="width: 80%">
+            <div align="right" style="width: 100%">
             <v-col>
                 <v-row>
+                    <v-spacer></v-spacer>
                     <v-text-field
                     class="search"
                     v-model="keyWord"
@@ -28,8 +29,18 @@
 
     <template>
         <div>
-            <table style="width: 80%;">
+            <table style="width: 100%;">
+                <colgroup>
+                    <col class="id">
+                    <col class="checkIn">
+                    <col class="checkOut">
+                    <col class="roomName">
+                    <col class="userName">
+                    <col class="personnel">
+                </colgroup>
+                <thead>
                 <tr>
+                    <th align="center" width="160">예약번호</th>
                     <th align="center" width="160">체크인</th>
                     <th align="center" width="160">체크아웃</th>
                     <th align="center" width="300">객실명</th>
@@ -37,6 +48,7 @@
                     <th align="center" width="150">숙박인원</th>
                     <th align="center" width="100">  </th>
                 </tr>
+                </thead>
 
               <!--  <tr v-if="!reservs || (Array.isArray(reservs) && reservs.length === 0)">
                     <td colspan="5">
@@ -45,7 +57,11 @@
                 </tr> 백 연결하실 때 주석 살리고
                  아래 v-else v-for="reserv in reservs" :key="reserv.reservNo" 넣어주시면 됩니다.-->
 
+                <tbody>
                 <tr >
+                    <td align="center"> <!-- 예약번호(id) -->
+                        <span>1</span>
+                    </td>    
                     <td align="center"> <!-- 체크인 날짜 -->
                         <span>2022-06-07</span>
                     </td>                
@@ -67,7 +83,8 @@
                     <td align="center">
                         <reserv-detail/>
                     </td>
-                </tr>                
+                </tr>
+                </tbody>                
             </table>
         </div>
     </template>
@@ -120,17 +137,63 @@ export default {
 
 
 <style scoped>
-th{
-    border-bottom: 2px solid #444444;
+.board-list {
+  margin-top: 20px;
+  /*margin-left: 50px;
+  margin-right: 50px; */
 }
-td{
-    vertical-align: middle;
+/* 링크 색상 (중요하지 않음) */
+a {
+  text-decoration: none;
+  color: #333;
 }
+/* 테이블 색상 (중요하지 않음) */
+table {
+  width: 95%;
+  border-collapse: collapse;
+}
+th {
+  background: #54658a;
+  color: #fff;
+  font-size: 15px;
+  border: 1px solid #dbdbdb;
+  height: 45px;
+  padding: 5px 20px;
+}
+td {
+  border: 1px solid #dbdbdb;
+  color: rgb(34, 34, 34);
+  height: 42px;
+  padding: 5px 20px;
+  font-size:13px;
+}
+tr:nth-of-type(odd) { 
+	background: rgb(243, 243, 243); 
+}
+
+/* 페이징 버튼 */
+.page-box {
+  width: 80%;
+  margin: 5px auto;
+  height: 30px;
+  text-align: center;
+}
+.page-box a.btn {
+  display:inline-block;
+  padding: 3px 5px;
+  font-size: 15px;
+  border: 1px solid #dbdbdb;
+  color: #333;
+}
+.page-box a.btn.on {
+  background-color: #dbdbdb;
+}
+.btn {
+  position: sticky;
+  text-decoration: none;
+}
+
 #search{
-    width:80%;
-}
-#roomImg{
-    width: 100px;
-    height: 100px;
+    width:50%;
 }
 </style>
