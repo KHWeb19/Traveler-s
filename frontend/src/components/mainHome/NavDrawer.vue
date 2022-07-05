@@ -62,6 +62,7 @@ export default {
 
   data() {
     return {
+      drawer:false,
       items: [
         {
           title: "회원 메뉴",

@@ -3,6 +3,7 @@ package com.example.demo.service.search;
 import com.example.demo.dto.hotel.HotelResponse;
 import com.example.demo.dto.search.KeyWordRequest;
 import com.example.demo.entity.hotel.Hotel;
+import com.example.demo.entity.reservation.ReservationStatus;
 import com.example.demo.entity.room.Room;
 import com.example.demo.repository.hotel.HotelRepository;
 import com.example.demo.repository.room.RoomRepository;
@@ -41,10 +42,11 @@ public class SearchServiceImpl implements SearchService {
 
         Set<Hotel> hotelList = hotelRepository.findByTotalAddressContainingWithRoom(keyWordRequest.getCity(),keyWordRequest.getPersonnel());
         log.info("hotelList : " + hotelList);
-        List<Room> roomList = roomRepository.Search(keyWordRequest.getCity() , keyWordRequest.getPersonnel(), date);
+        List<Room> roomList = roomRepository.Search(keyWordRequest.getCity() , keyWordRequest.getPersonnel(), date, ReservationStatus.CANCELLED);
         log.info("roomList : " + roomList);
         //호텔에서 이 룸 제거 해야함 어케하노
         //호텔 리스트에서 룸 뺴내서 해야되나??
+
         List<Hotel> hotels = new ArrayList<>();
         //인생...
         //일단 예약하려는 날짜에 예약이 들어있으면 if문으로 들어감

@@ -1,4 +1,5 @@
 <template>
+<div>
         <v-container class="container" justify="center">
             <v-form ref="form" lazy-validation>
                 <p class="titDep2 titDepC">회원가입</p>
