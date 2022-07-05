@@ -209,9 +209,6 @@ export default {
     margin-bottom: 30px;
 
 }
-<<<<<<< HEAD
-</style>
-=======
 
 [class^=titDep].titDepC {
     text-align: center;
@@ -232,4 +229,3 @@ export default {
     font-weight: 700;
 }
 </style>
->>>>>>> upstream/main
