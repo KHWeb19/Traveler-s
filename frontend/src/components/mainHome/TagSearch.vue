@@ -1,30 +1,10 @@
 <template>
-    <v-container fluid>
+    <v-container>
 
             <h3 class="titDep2">태그스토리</h3>
 
-            <!-- swiper
-            <div class="slide-3d">
-                <swiper
-                    class="swiper"
-                    :options="swiperOption"
-                >
-
-                    <swiper-slide></swiper-slide>
-                    <swiper-slide></swiper-slide>
-                    <swiper-slide>Slide 3</swiper-slide>
-                    <swiper-slide>Slide 4</swiper-slide>
-                    <swiper-slide>Slide 5</swiper-slide>
-                    <swiper-slide>Slide 6</swiper-slide>
-
-                    <div class="swiper-pagination" slot="pagination">
-                    </div>
-                </swiper>
-            </div> -->
-
-
             <!-- img -->
-            <div class="tagImg">
+            <v-container class="tagImg">
                 <ul>
                     <li>
                         <figure>
@@ -71,7 +51,7 @@
                 </ul>
 
 
-            </div>
+            </v-container>
 
             <!-- #info -->
             <v-row justify="center">
@@ -91,14 +71,10 @@
 
 <script>
 import axios from 'axios'
-//import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-//import 'swiper/css/swiper.css'
 
 export default {
     name: 'TagSearch',
     components: {
-        //Swiper,
-        //SwiperSlide
         },
     props: {
         mHotels: {
@@ -112,7 +88,12 @@ export default {
                 '테라스',
                 '바베큐그릴',
                 '반려동물',
-                '온천'
+                '온천',
+                '수영장',
+                '전기차충전',
+                '공항근처',
+                '골프장',
+                '무료주차'
             ],
             swiperOption: {
                 loop: true,
@@ -185,10 +166,10 @@ body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fi
     font-family: Pretendard,-apple-system,BlinkMacSystemFont,Open Sans,Helvetica Neue,sans-serif;;
     color: #404040;
 }
-
 .justify-center {
     margin: 1px;
     padding: 20px;
+    width: 700px;
 }
 .v-divider {
     margin: 1px;
@@ -221,16 +202,17 @@ body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fi
     line-height: 1;
 }
 
+    .tagImg {
+    text-align: center;
+}
+
     img {
     border-radius: 15px;
 }
 
-    /*.tagImg {
-    transition: all 0.1s linear;
-    overflow: hidden;
-}
 
-    .tagImg:hover img {
+
+    /*.tagImg:hover img {
   transform: scale(1.1);
 }*/
 
