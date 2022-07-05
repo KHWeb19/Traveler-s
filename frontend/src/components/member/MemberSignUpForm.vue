@@ -87,7 +87,9 @@
                 </div>
             </v-form>
         </v-container>
-        <main-footer-top />
+        <footer>
+        <main-footer-top/>
+        </footer>
     </div>
 </template>
 

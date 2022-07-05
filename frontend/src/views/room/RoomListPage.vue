@@ -1,35 +1,58 @@
 <template>
-  <div>
-    <h2>숙소 관리</h2>
-    <span class="page-count">전체</span>
-    <label class="hotelNameLabel">* 호텔이름</label>
-    <select
-      class="hotel-select"
-      v-model="hotelNo"
-      @change="getRoomList($event)"
-    >
-      <option :value="''">호텔을 선택하세요.</option>
-      <option
-        v-for="(hotel, idx) in hotelType"
-        :key="idx"
-        :value="hotel.hotelNo"
-      >
-        {{ hotel.hotelName }}
-      </option>
-    </select>
+  <div align="center">
+    <v-container>
+      <table style="width: 800px;">
+        <tr>
+          <td align="left" colspan="2">
+            <h2 class="pageTit">객실 관리</h2>
+          </td>
+        </tr>
 
-    <router-link
-      v-if="hotelNo"
-      :to="{
-        name: 'RoomRegisterPage',
-        params: { hotelNo: this.hotelNo.toString() },
-      }"
-      class="btn"
-      ><v-btn>객실등록</v-btn></router-link
-    >
+        <tr>
+          <td align="left">
+            <span class="page-count">전체</span>
+          </td>
+          <td align="right">
+            <label class="hotelNameLabel">* 호텔이름</label>
+            <select
+              class="hotel-select"
+              v-model="hotelNo"
+              @change="getRoomList($event)">
+              
+              <option :value="''"> 호텔을 선택하세요.</option>
+              <option
+                v-for="(hotel, idx) in hotelType"
+                :key="idx"
+                :value="hotel.hotelNo">
+                {{ hotel.hotelName }}
+              </option>
+            </select>
+          </td>
+        </tr>
 
-    <br />
-    <room-list v-if="bmRoomList" :bmRoomList="bmRoomList" @deleteRooms="deleteRooms" />
+        <tr>
+          <td colspan="2">
+            <br>
+                <router-link
+                    v-if="hotelNo"
+                    :to="{ name: 'RoomRegisterPage', params: { hotelNo: this.hotelNo.toString() }, }"
+                    class="btn">
+
+                  <v-btn>객실등록</v-btn>
+                </router-link>
+          </td>
+        </tr>
+
+
+        <tr>
+          <td align="left" colspan="2">
+            <room-list v-if="bmRoomList" :bmRoomList="bmRoomList"
+                        @deleteRooms="deleteRooms" />
+          </td>
+        </tr>
+      </table>
+    
+    </v-container>
   </div>
 </template>
 
@@ -92,16 +115,35 @@ div {
   user-select: none;
 }
 h2 {
-  padding: 50px 0px 30px 50px;
+  padding: 50px 0px 30px 0px;
+}
+.pageTit {
+  padding: 50px 0px 30px 0px;
+  font-family: 'NanumSquareRound';
+  font-size: 2.0rem;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+  color: #202020;
+  font-weight: 900;
+}
+.pageTit:after {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    margin-bottom: 24px;
+    border-radius: 50%;
+    background-color: #e63668;
 }
 .page-count {
-  margin-left: 50px;
-  border: none;
-  border-bottom: 5px solid #1890ff;
+  margin-left: 15px;
+  border: 1px;
+  border-bottom: 5px solid #e63668;
   border-radius: 5px;
   padding: 5px 10px;
   outline: none;
-  color: #1890ff;
+  color: #18225c;
+  -webkit-text-stroke: 0.7px #18225c;
 }
 .btn {
   position: sticky;
@@ -122,4 +164,8 @@ h2 {
   font-size: 14px;
   margin-left: 50px;
 }
+/*table, th, td{
+    border-collapse:collapse;
+    border: 1px solid black;
+}*/
 </style>

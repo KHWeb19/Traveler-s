@@ -53,7 +53,9 @@
             </v-col>
         </v-row>
     </div> 
+    <footer>
         <main-footer-top/>
+    </footer>
 </div>
 </template>
 

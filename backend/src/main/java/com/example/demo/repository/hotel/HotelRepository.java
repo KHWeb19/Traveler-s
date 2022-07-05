@@ -14,7 +14,7 @@ import java.util.Set;
 
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
 
-    @Query(value = "select * from Hotel order by hotel_no desc limit :randNum", nativeQuery = true)
+    @Query(value = "select * from hotel order by rand() limit ?1", nativeQuery = true)
     public List<Hotel> randomPick(Integer randNum);
 
     @Query("select h from Hotel h join fetch h.user where h.hotelInfo like concat('%',:word,'%')")
