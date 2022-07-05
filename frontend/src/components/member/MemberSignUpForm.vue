@@ -1,43 +1,48 @@
 <template>
+    <div>
         <v-container class="container" justify="center">
             <v-form ref="form" lazy-validation>
                 <p class="titDep2 titDepC">회원가입</p>
                 <v-radio-group v-model="role" row>
-                        <v-radio v-for="kinds in kindsOfMember" :key="kinds" :label="`${kinds}`" :value="kinds">
-                        </v-radio>
+                    <v-radio v-for="kinds in kindsOfMember" :key="kinds" :label="`${kinds}`" :value="kinds">
+                    </v-radio>
                 </v-radio-group>
 
-                <v-text-field  class="email" :rules="emailRules" v-model="email"
-                    label="아이디(이메일)" type="text" prepend-icon="mdi-email-multiple" >
+                <v-text-field class="email" :rules="emailRules" v-model="email" label="아이디(이메일)" type="text"
+                    prepend-icon="mdi-email-multiple">
                 </v-text-field>
-                <v-text-field  class="password" :rules="passwordRules" v-model="password"
-                    label="비밀번호" type="password" prepend-icon="mdi-lock">
+                <v-text-field class="password" :rules="passwordRules" v-model="password" label="비밀번호" type="password"
+                    prepend-icon="mdi-lock">
                 </v-text-field>
-                <v-text-field  class="password-check" :rules="passwordCheckRules"  v-model="passwordChecking"
+                <v-text-field class="password-check" :rules="passwordCheckRules" v-model="passwordChecking"
                     label="비밀번호확인" type="password" prepend-icon="mdi-lock-check">
                 </v-text-field>
-                <v-text-field class="name" :rules="nameRules" v-model="name"
-                    label="이름" type="text" prepend-icon="mdi-account">
+                <v-text-field class="name" :rules="nameRules" v-model="name" label="이름" type="text"
+                    prepend-icon="mdi-account">
                 </v-text-field>
                 <div class="phone-number">
                     <table v-if="numberCheck == false">
                         <tr>
-                            <td><v-icon>mdi-cellphone</v-icon></td>
+                            <td>
+                                <v-icon>mdi-cellphone</v-icon>
+                            </td>
                             <td>
                                 <input class="cell-phone" type="text" v-model="mobile">
-                                <v-btn  @click="checkPhoneNumber()">
-                                번호인증
+                                <v-btn @click="checkPhoneNumber()">
+                                    번호인증
                                 </v-btn>
                             </td>
                         </tr>
                     </table>
-                        <table v-if="numberCheck == true">
+                    <table v-if="numberCheck == true">
                         <tr>
-                            <td><v-icon>mdi-cellphone</v-icon></td>
+                            <td>
+                                <v-icon>mdi-cellphone</v-icon>
+                            </td>
                             <td>
                                 <input class="cell-phone" type="text" v-model="mobile">
-                                <v-btn  @click="checkPhoneNumber()">
-                                재전송
+                                <v-btn @click="checkPhoneNumber()">
+                                    재전송
                                 </v-btn>
                             </td>
                         </tr>
@@ -46,22 +51,26 @@
                 <div>
                     <table v-if="numberCheck == true && this.certification == false">
                         <tr>
-                            <td><v-icon>mdi-cellphone-check</v-icon></td>
+                            <td>
+                                <v-icon>mdi-cellphone-check</v-icon>
+                            </td>
                             <td>
                                 <input class="authentication" type="text" v-model="submitNum">
                                 <v-btn @click="checkNumber()">
-                                확인
+                                    확인
                                 </v-btn>
                             </td>
                         </tr>
                     </table>
                     <table v-if="numberCheck == true && this.certification == true">
                         <tr>
-                            <td><v-icon>mdi-cellphone-check</v-icon></td>
+                            <td>
+                                <v-icon>mdi-cellphone-check</v-icon>
+                            </td>
                             <td>
                                 <input class="authentication" type="text" v-model="submitNum" readonly>
                                 <v-btn @click="checkNumber()" disabled>
-                                확인
+                                    확인
                                 </v-btn>
                             </td>
                         </tr>
@@ -69,16 +78,16 @@
                 </div>
 
                 <div class="button">
-                <v-btn text @click="signUp()">
+                    <v-btn text @click="signUp()">
                         가입
-                </v-btn>
-                <v-btn class="grey--text" text @click="cacelSignUp()">
-                            취소
-                </v-btn>
+                    </v-btn>
+                    <v-btn class="grey--text" text @click="cacelSignUp()">
+                        취소
+                    </v-btn>
                 </div>
             </v-form>
         </v-container>
-        <main-footer-top/>
+        <main-footer-top />
     </div>
 </template>
 
