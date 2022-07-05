@@ -62,7 +62,7 @@
             </button>
             &ensp;
 
-            <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }}</span>
+            <span>{{ pageNum + 1 }} / {{ pageCount }}</span>
             
             &ensp;
             <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
@@ -133,12 +133,12 @@ export default {
         const deleteHotels = this.deleteHotels
          this.$emit('deleteHotels', deleteHotels)
     },
-            nextPage () {
-            this.pageNum += 1;
-            },
-            prevPage () {
-            this.pageNum -= 1;
-            },
+    nextPage () {
+    this.pageNum += 1;
+    },
+    prevPage () {
+    this.pageNum -= 1;
+    },
 }
 }
 </script>

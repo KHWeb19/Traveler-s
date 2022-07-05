@@ -43,7 +43,7 @@
             </button>
             &ensp;
 
-            <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }}</span>
+            <span>{{ pageNum + 1 }} / {{ pageCount }}</span>
             
             &ensp;
             <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
