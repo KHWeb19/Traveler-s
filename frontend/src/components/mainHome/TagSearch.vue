@@ -1,4 +1,71 @@
 <template>
+
+    <v-container>
+
+            <h3 class="titDep2">태그스토리</h3>
+
+            <!-- img -->
+            <v-container class="tagImg">
+                <ul>
+                    <li>
+                        <figure>
+                            <a href="#"><img src="@/assets/tagSearchImg/tagImg1.png" width="368" height="436"/></a>
+                            <div class="infoTxt">
+                                <strong class="tit">읽어도 좋고 책멍도 좋다</strong>
+                                    <p class="txt">
+                                    <span>#카페투어</span>
+                                    <span>#북카페</span>
+                                    <span>#책방투어</span>
+                                    <span>#태그여행</span>
+                                    </p>
+                            </div>
+                        </figure>
+                    </li>
+                    <li>
+                        <figure>
+                            <a href="#"><img src="@/assets/tagSearchImg/tagImg2.png" width="368" height="436"/></a>
+                            <div class="infoTxt">
+                                <strong class="tit">스토리가 있는 여행<br>[우리들의 블루스]</strong>
+                                    <p class="txt">
+                                    <span>#카페투어</span>
+                                    <span>#뷰맛집</span>
+                                    <span>#힐링</span>
+                                    <span>#태그여행</span>
+                                    </p>
+                            </div>
+                        </figure>
+                    </li>
+                    <li>
+                        <figure>
+                            <a href="#"><img src="@/assets/tagSearchImg/tagImg3.png" width="368" height="436"/></a>
+                            <div class="infoTxt">
+                                <strong class="tit">pit a PET 나와 함께하개</strong>
+                                    <p class="txt">
+                                    <span>#반려동물동반</span>
+                                    <span>#오션뷰</span>
+                                    <span>#루프탑</span>
+                                    <span>#타르트맛집</span>
+                                    </p>
+                            </div>
+                        </figure>
+                    </li>
+                </ul>
+
+
+            </v-container>
+
+            <!-- #info -->
+            <v-row justify="center">
+                <v-btn v-for="(info, idx) in hotelInfo"
+                :key="idx"
+                @click="search(info)"
+                color="#f8f8f8"
+                variant="plain"
+                depressed="false"
+                class="button1 b-color rot-1">#{{ info }}
+                </v-btn>
+            </v-row>
+
     <v-container fluid>
         <h3 class="titDep2">태그스토리</h3>
         <!-- swiper
@@ -77,14 +144,10 @@
 
 <script>
 import axios from 'axios'
-//import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
-//import 'swiper/css/swiper.css'
 
 export default {
     name: 'TagSearch',
     components: {
-        //Swiper,
-        //SwiperSlide
         },
     props: {
         mHotels: {
@@ -98,7 +161,12 @@ export default {
                 '테라스',
                 '바베큐그릴',
                 '반려동물',
-                '온천'
+                '온천',
+                '수영장',
+                '전기차충전',
+                '공항근처',
+                '골프장',
+                '무료주차'
             ],
             swiperOption: {
                 loop: true,
@@ -171,10 +239,10 @@ body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fi
     font-family: Pretendard,-apple-system,BlinkMacSystemFont,Open Sans,Helvetica Neue,sans-serif;;
     color: #404040;
 }
-
 .justify-center {
     margin: 1px;
     padding: 20px;
+    width: 700px;
 }
 .v-divider {
     margin: 1px;
@@ -207,11 +275,23 @@ body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fi
     line-height: 1;
 }
 
+    .tagImg {
+    text-align: center;
+}
+
     img {
     border-radius: 15px;
     width:368px;
     height:436px;
 }
+
+
+
+
+    /*.tagImg:hover img {
+  transform: scale(1.1);
+}*/
+
 
     .tagImg {
         display: inline-flex;
