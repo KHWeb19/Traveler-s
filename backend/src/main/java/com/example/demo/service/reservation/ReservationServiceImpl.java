@@ -10,6 +10,7 @@ import com.example.demo.repository.reservation.ReservationRepository;
 import com.example.demo.repository.room.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -38,7 +39,8 @@ public class ReservationServiceImpl implements ReservationService{
         }
         if (!canMakeReservation)
             throw new IllegalStateException("Cannot make a reservation");
-        Optional<User> optionalUser = userRepository.findByEmail("user@gmail.com");
+        String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        Optional<User> optionalUser = userRepository.findByEmail(email);
         User user = optionalUser.get();
         Optional<Room> optionalRoom = roomRepository.findById(roomId);
         Room room = optionalRoom.get();
