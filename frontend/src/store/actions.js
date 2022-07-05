@@ -54,13 +54,14 @@ export default {
         commit(FETCH_BM_HOTEL, res.data);
       });
   },
-  attemptLogin({ commit, state }, payload) {
+  attemptLogin({dispatch, commit}, payload) {
     axios
       .post("http://localhost:7777/login", payload, { withCredentials: true })
       .then((res) => {
         localStorage.setItem("access_token", res.data.accessToken);
         commit(IS_LOGGEDIN);
-        console.log(state.isLoggedIn);
+        dispatch('setUser');
+        console.log('해줌')
         router.push("/");
       })
       .catch(() => alert("Invalid username or password"));

@@ -173,11 +173,6 @@ const routes = [
     },
   },
   {
-    path: "/reservationTest",
-    name: "ReservationTest",
-    component: () => import("../views/reservation/ReservationTest.vue"),
-  },
-  {
     path: "/wishlistpage",
     name: "WishListPage",
     components: {
