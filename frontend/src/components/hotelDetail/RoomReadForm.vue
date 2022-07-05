@@ -129,7 +129,7 @@
                                   <v-btn
                                     id="button"
                                     @click="
-                                      goReserv(mRoom.hotelNo, mRoom.roomNo)
+                                      goReserv(item)
                                     "
                                   >
                                     예약하기</v-btn
@@ -168,6 +168,7 @@
 </template>
 
 <script>
+import axios from "axios"
 /*import axios from 'axios'*/
 
 export default {
@@ -203,7 +204,27 @@ export default {
         },
     },
   methods: {
-    goReserv() {},
+    goReserv(item) {
+      const params = {
+        "roomId": item.roomNo,
+        "price": item.price,
+        "startDate": this.dates[0],
+        "endDate": this.dates[1],
+        "status": "PENDING"
+      }
+      console.log(params)
+      axios.post("http://localhost:7777/reserve/user/makeReservation", params)
+      .then((res) => {
+        if (res.status){
+          console.log(res.data)
+          this.$router.push({ name: 'MReservPage', params: {no: res.data}})
+        }
+      })
+      .catch(() =>{
+        alert("이미 예약된 숙소입니다")
+      })
+
+    },
     initDates() {
         return this.dates = []
     },
