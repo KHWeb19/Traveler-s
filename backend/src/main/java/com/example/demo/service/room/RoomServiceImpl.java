@@ -6,6 +6,7 @@ import com.example.demo.dto.hotel.RoomResponse;
 import com.example.demo.dto.search.KeyWordRequest;
 import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.member.User;
+import com.example.demo.entity.reservation.ReservationStatus;
 import com.example.demo.entity.room.Room;
 import com.example.demo.repository.hotel.HotelRepository;
 import com.example.demo.repository.member.UserRepository;
@@ -161,7 +162,7 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
        LocalDate date = LocalDate.parse(keyWordRequest.getDates().get(0));
         //그 호텔의 그 인원수 그날짜에 이용중인 룸 구하기
        List<Room> checkDateRooms =
-               roomRepository.findByIdAndDateAndPersonnel(keyWordRequest.getHotelNo(),keyWordRequest.getPersonnel(),date);
+               roomRepository.findByIdAndDateAndPersonnel(keyWordRequest.getHotelNo(),keyWordRequest.getPersonnel(),date, ReservationStatus.CANCELLED);
         log.info("rooms" + checkDateRooms);
         List<Room> deleteRooms = new ArrayList<>();
        if(!checkDateRooms.isEmpty()) {
@@ -173,7 +174,6 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
                        deleteRooms.add(room); // 바로 제거시키면 rooms 변해서 오류생김 그래서 delete에 넣고 제거 ...
                    }
                }
-
            }
            //포문이 몇개고 하 인생...
            for(Room room : deleteRooms){
