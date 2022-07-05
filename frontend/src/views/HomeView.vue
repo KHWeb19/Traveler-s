@@ -9,11 +9,11 @@
 					</v-row>
 				</v-container>
 
-				<hotel-random :mHotels="mHotels" :list-array="pageArray"/>
+				<hotel-random :mHotels="mHotels"/>
 
 				<v-container>
 					<v-row>
-						<tag-search :mHotels="mHotels"/>
+						<tag-search/>
 					</v-row>
 				</v-container>
 
@@ -41,7 +41,6 @@ import ServiceInfoUse from '@/components/mainHome/ServiceInfoUse.vue'
 import MainFooterTop from '@/components/mainHome/MainFooterTop.vue';
 
 import { mapState, mapActions } from 'vuex'
-import axios from 'axios';
 
 export default {
 	components: {
@@ -63,18 +62,9 @@ export default {
 	this.fetchMHotelList()
    },
    methods: {
-	...mapActions(['fetchMHotelList', 'fetchMHotel']),
+	...mapActions(['fetchMHotelList']),
    },
    created(){
-      axios
-        .get("http://localhost:7777/hotel/mainList")
-        .then((res) => {
-			console.log(res.data)
-        this.pageArray = res.data;
-        })
-        .catch((err) => {
-        console.log(err);
-		});
 		this.$store.state.num = 0
    }
 };

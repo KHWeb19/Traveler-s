@@ -78,7 +78,7 @@ export default {
   mounted() {},
 };
 </script>
-<style>
+<style scoped>
 .star-rating {
   display: flex;
   flex-direction: row-reverse;

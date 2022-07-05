@@ -43,8 +43,8 @@
 
     <!-- 로그인시 생기는 메뉴 -->
     <v-navigation-drawer disable-resize-watcher 
-                         temporary 
-                         app 
+                        right
+                        app             
                          hide-overlay
                          v-model="drawer">
       <NavDrawer :userInfo="user"/>
@@ -192,7 +192,7 @@ export default {
   display: inline-block;
   top: 45px;
   right: 250px;
-  z-index: 10;
+
   font-family: NanumSquareRound;
 }
 
@@ -201,6 +201,6 @@ export default {
   display: inline-block;
   top: 41px;
   right: 110px;
-  z-index: 10;
+
 }
 </style>
