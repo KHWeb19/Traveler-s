@@ -4,8 +4,9 @@ import com.example.demo.dto.reservation.ReservationRequest;
 import com.example.demo.dto.reservation.ReservationResponse;
 import com.example.demo.entity.member.User;
 import com.example.demo.entity.reservation.Reservation;
-import com.example.demo.entity.room.Room;
-import com.example.demo.service.member.UserService;
+
+import com.example.demo.repository.member.UserRepository;
+
 import com.example.demo.service.reservation.ReservationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,46 +15,67 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping("/reserve")
+@RequestMapping("/reserve/")
 @RequiredArgsConstructor
 public class ReservationController {
 
     private final ReservationService reservationService;
-    private final UserService userService;
+    private final UserRepository userRepository;
 
-    @PostMapping("/makeReservation")
+
+    @PostMapping("/user/makeReservation")
     public ResponseEntity<?> makeReservation(@RequestBody ReservationRequest reservationRequest){
-        log.info("makeReservation controller: {}", reservationRequest.getId());
-        LocalDate date = LocalDate.parse(reservationRequest.getDate());
-        log.info("Reservation Date: {}", date);
-        reservationService.createReservation(Long.valueOf(reservationRequest.getId()), date);
+        log.info("makeReservation controller: {}", reservationRequest.getRoomId());
+        LocalDate startDate = LocalDate.parse(reservationRequest.getStartDate());
+        LocalDate endDate = LocalDate.parse(reservationRequest.getEndDate());
+
+        reservationService.createReservation(Long.valueOf(reservationRequest.getRoomId()), startDate, endDate);
 
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/listReservation")
-    public List<Reservation> listReservation(@RequestBody ReservationRequest reservationRequest){
-        log.info("listReservation controller: {}", reservationRequest.getId());
-        LocalDate date = LocalDate.parse(reservationRequest.getDate());
-        log.info("Reservation Date: {}", date);
-
-        List<Reservation> reservations = reservationService.listReservationWithRoomId(Long.valueOf(reservationRequest.getId()), date);
-        return reservations;
+    @GetMapping("/user/listAllReservations")
+    public List<ReservationResponse> listAllReservations(){
+        //String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        String email = "user@gmail.com";
+        User user = userRepository.findByEmail(email).get();
+        List<Reservation> reservations = reservationService.listAllReservations(user.getId());
+        List<ReservationResponse> reservationResponses = ReservationResponse.reservationResponseListBuilder(reservations);
+        return reservationResponses;
     }
 
-    @GetMapping("/reservationList")
-    public List<ReservationResponse> listReservation(){
-        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Optional<User> optionalUser = userService.findByEmail(email);
-        User user = optionalUser.get();
-        log.info("ReservationResponse");
-        return reservationService.reservationList(user.getId());
+    @GetMapping("/user/reservationListWithStatus")
+    public List<ReservationResponse> listAllReservations(@RequestParam String status){
+        //String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        String email = "user@gmail.com";
+        User user = userRepository.findByEmail(email).get();
+        List<Reservation> reservations = reservationService.listReservationsWithStatus(status, user.getId());
+        List<ReservationResponse> reservationResponses = ReservationResponse.reservationResponseListBuilder(reservations);
+
+        return reservationResponses;
+    }
+
+    @GetMapping("/ceo/listAllReservations")
+    public List<ReservationResponse> ceoListAllReservations(){
+        //String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        String email = "ceo@gmail.com";
+        User user = userRepository.findByEmail(email).get();
+        List<Reservation> reservations = reservationService.listReservationsForCEO(user.getId());
+        List<ReservationResponse> reservationResponses = ReservationResponse.reservationResponseListBuilder(reservations);
+        return reservationResponses;
+    }
+    @GetMapping("/ceo/reservationListWithStatus")
+    public List<ReservationResponse> ceoListAllReservations(@RequestParam String status){
+        //String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+        String email = "ceo@gmail.com";
+        User user = userRepository.findByEmail(email).get();
+        List<Reservation> reservations = reservationService.listReservationsByStatusForCEO(user.getId(), status);
+        List<ReservationResponse> reservationResponses = ReservationResponse.reservationResponseListBuilder(reservations);
+        return reservationResponses;
     }
 
 }

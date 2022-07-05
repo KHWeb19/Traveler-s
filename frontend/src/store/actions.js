@@ -114,7 +114,7 @@ export default {
     });
   },
   fetchBookingLists({ commit }) {
-    axios.get("http://localhost:7777/reserve/reservationList").then((res) => {
+    axios.get("http://localhost:7777/reserve/user/listAllReservations").then((res) => {
       commit(FETCH_BOOKING_LISTS, res.data);
     });
   },

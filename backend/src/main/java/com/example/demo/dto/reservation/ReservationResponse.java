@@ -1,28 +1,37 @@
 package com.example.demo.dto.reservation;
 
-import com.example.demo.entity.reservation.ReservationStatus;
-import lombok.Data;
+import com.example.demo.entity.reservation.Reservation;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
-@Data
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ReservationResponse {
     private Long id;
-    private String roomType;
-    private ReservationStatus reservationStatus;
     private Long price;
     private LocalDate startDate;
     private LocalDate endDate;
+    private String status;
 
-    public ReservationResponse(Long id, String roomType, ReservationStatus reservationStatus, Long price, LocalDate startDate, LocalDate endDate){
-        this.id=id;
-        this.roomType=roomType;
-        this.reservationStatus=reservationStatus;
-        this.price=price;
-        this.startDate=startDate;
-        this.endDate=endDate;
+    public static List<ReservationResponse> reservationResponseListBuilder(List<Reservation> reservations) {
+        return reservations.stream().map(r -> reservationResponseBuilder(r)).collect(Collectors.toList());
     }
 
+    public static ReservationResponse reservationResponseBuilder(Reservation reservation) {
+        return ReservationResponse.builder()
+                .id(reservation.getId())
+                .price(reservation.getPrice())
+                .startDate(reservation.getStartDate())
+                .endDate(reservation.getEndDate())
+                .status(String.valueOf(reservation.getStatus()))
+                .build();
+    }
 }

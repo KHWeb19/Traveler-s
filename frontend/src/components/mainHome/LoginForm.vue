@@ -45,7 +45,6 @@ export default {
     methods: {
         onClickLogout() {
             this.$store.dispatch("attemptLogout");
-            alert('ㅂㅂ.')
         },
         checkLogin() {
             this.loginCheck = true;
