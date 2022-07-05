@@ -1,13 +1,12 @@
 <template>
-    <div>
-        <v-container class="container">
+        <v-container class="container" justify="center">
             <v-form ref="form" lazy-validation>
                 <p class="titDep2 titDepC">회원가입</p>
                 <v-radio-group v-model="role" row>
-                        <v-radio v-for="kinds in kindsOfMember" :key="kinds" :label="`${kinds}`" :value="kinds"> 
+                        <v-radio v-for="kinds in kindsOfMember" :key="kinds" :label="`${kinds}`" :value="kinds">
                         </v-radio>
                 </v-radio-group>
-                
+
                 <v-text-field  class="email" :rules="emailRules" v-model="email"
                     label="아이디(이메일)" type="text" prepend-icon="mdi-email-multiple" >
                 </v-text-field>
@@ -28,7 +27,7 @@
                                 <input class="cell-phone" type="text" v-model="mobile">
                                 <v-btn  @click="checkPhoneNumber()">
                                 번호인증
-                                </v-btn>   
+                                </v-btn>
                             </td>
                         </tr>
                     </table>
@@ -39,7 +38,7 @@
                                 <input class="cell-phone" type="text" v-model="mobile">
                                 <v-btn  @click="checkPhoneNumber()">
                                 재전송
-                                </v-btn>   
+                                </v-btn>
                             </td>
                         </tr>
                     </table>
@@ -52,7 +51,7 @@
                                 <input class="authentication" type="text" v-model="submitNum">
                                 <v-btn @click="checkNumber()">
                                 확인
-                                </v-btn>   
+                                </v-btn>
                             </td>
                         </tr>
                     </table>
@@ -63,16 +62,16 @@
                                 <input class="authentication" type="text" v-model="submitNum" readonly>
                                 <v-btn @click="checkNumber()" disabled>
                                 확인
-                                </v-btn>   
+                                </v-btn>
                             </td>
                         </tr>
                     </table>
                 </div>
-                
+
                 <div class="button">
                 <v-btn text @click="signUp()">
                         가입
-                </v-btn>   
+                </v-btn>
                 <v-btn class="grey--text" text @click="cacelSignUp()">
                             취소
                 </v-btn>
@@ -87,7 +86,7 @@
 
 import MainFooterTop from '@/components/mainHome/MainFooterTop.vue'
 
-export default {  
+export default {
     name: 'MemberSignUp',
     components: {
         MainFooterTop
@@ -102,7 +101,7 @@ export default {
             signUpDialog: false,
             password: '',
             mobile: '',
-            email: '', 
+            email: '',
             role: '',
             name:'',
             submitNum:'',
@@ -117,7 +116,7 @@ export default {
             nameRules:[
                             v => !!v || '이름을 작성해주세요',
                             v => /^[가-힣]+$/.test(v) || '한글만 가능합니다',
-                           
+
 
             ],
             emailRules: [
@@ -127,7 +126,7 @@ export default {
             ],
             /* v => !!v || '휴대폰 번호를 작성해주세요',
                             v => /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/.test(v)|| '휴대폰 번호를 작성해주세요'
-                           
+
 
             ],*/
             passwordRules: [
@@ -135,7 +134,7 @@ export default {
                             v =>  /^[a-zA-Z0-9]*$/.test(v) || '영문+숫자로만 입력해주세요',
                             v => /(?=.*[0-9])(?=.*[a-zA-ZS])/.test(v) || "영문+숫자를 섞어주세요",
                             v => !(v && v.length < 8) || '8자리이상으로해주세요' ,
-                            v => !(v && v.length > 15) || '15자리를 넘길수없습니다.' 
+                            v => !(v && v.length > 15) || '15자리를 넘길수없습니다.'
             ]
         }
     },
@@ -146,7 +145,7 @@ export default {
             if(validate && this.certification == true ){
                 const {email, password, name, mobile} = this
                 this.$emit('signUp', {email, password, name, mobile, role})
-               
+
             }
         },
         checkPhoneNumber () {
@@ -196,7 +195,7 @@ export default {
     outline: none;
 }
 .button{
-    margin-left: 150px; 
+    margin-left: 150px;
     margin-top: 30px;
 }
 .authentication{

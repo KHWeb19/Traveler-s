@@ -5,8 +5,8 @@
 
             <!-- swiper
             <div class="slide-3d">
-                <swiper 
-                    class="swiper" 
+                <swiper
+                    class="swiper"
                     :options="swiperOption"
                 >
 
@@ -29,48 +29,48 @@
                     <li>
                         <figure>
                             <a href="#"><img src="@/assets/tagSearchImg/tagImg1.png" width="368" height="436"/></a>
-                            <div class="infoTxt">            
+                            <div class="infoTxt">
                                 <strong class="tit">읽어도 좋고 책멍도 좋다</strong>
-                                    <p class="txt">                
-                                    <span>#카페투어</span>                
-                                    <span>#북카페</span>                
-                                    <span>#책방투어</span>                
-                                    <span>#태그여행</span>            
-                                    </p>        
+                                    <p class="txt">
+                                    <span>#카페투어</span>
+                                    <span>#북카페</span>
+                                    <span>#책방투어</span>
+                                    <span>#태그여행</span>
+                                    </p>
                             </div>
                         </figure>
                     </li>
                     <li>
                         <figure>
                             <a href="#"><img src="@/assets/tagSearchImg/tagImg2.png" width="368" height="436"/></a>
-                            <div class="infoTxt">            
+                            <div class="infoTxt">
                                 <strong class="tit">스토리가 있는 여행<br>[우리들의 블루스]</strong>
-                                    <p class="txt">                
-                                    <span>#카페투어</span>                
-                                    <span>#뷰맛집</span>                
-                                    <span>#힐링</span>                
-                                    <span>#태그여행</span>            
-                                    </p>        
+                                    <p class="txt">
+                                    <span>#카페투어</span>
+                                    <span>#뷰맛집</span>
+                                    <span>#힐링</span>
+                                    <span>#태그여행</span>
+                                    </p>
                             </div>
                         </figure>
                     </li>
                     <li>
                         <figure>
                             <a href="#"><img src="@/assets/tagSearchImg/tagImg3.png" width="368" height="436"/></a>
-                            <div class="infoTxt">            
+                            <div class="infoTxt">
                                 <strong class="tit">pit a PET 나와 함께하개</strong>
-                                    <p class="txt">                
-                                    <span>#반려동물동반</span>                
-                                    <span>#오션뷰</span>                
-                                    <span>#루프탑</span>                
-                                    <span>#타르트맛집</span>            
-                                    </p>        
+                                    <p class="txt">
+                                    <span>#반려동물동반</span>
+                                    <span>#오션뷰</span>
+                                    <span>#루프탑</span>
+                                    <span>#타르트맛집</span>
+                                    </p>
                             </div>
                         </figure>
                     </li>
                 </ul>
 
-                
+
             </div>
 
             <!-- #info -->
@@ -134,7 +134,7 @@ export default {
                     .then((res) => {
                         console.log("검색 성공")
                         console.log(res.data)
-                        
+
                         this.$router.push({name: 'TagSearchPage',
                                     params: { searchList: res.data, word } })
                                     //searchList와 pageArray는 같은 결과가 저장되기 때문에
@@ -146,10 +146,10 @@ export default {
                 .catch(() => {
                 alert("검색 실패");
             });
-             
+
         }
     },
-  
+
 }
 </script>
 <style scoped>

@@ -1,7 +1,7 @@
 <template>
-    <v-col class="MainSearch">
-        <v-row>
-            <v-col cols="12" xs="12" sm="6" md="4">
+    <v-container class="MainSearch" fluid>
+        <v-row justify="space-around">
+            <v-col id="colsize" cols="12" xs="12" sm="4" md="3">
                 <v-menu class="menu1" :close-on-content-click="false" transition="scale-transition"
                     offset-y>
                     <template v-slot:activator="{ on, attrs }">
@@ -15,11 +15,11 @@
                     </v-date-picker>
                 </v-menu>
             </v-col>
-            <v-col cols="12" xs="12" sm="6" md="4">
+            <v-col id="colsize" cols="12" xs="12" sm="4" md="3">
                 <v-select v-model="personnel" :items="items" item-value="value" prepend-icon="mdi-bed" label="인원 선택" class="PickPeople" rounded solo>
                 </v-select>
             </v-col>
-            <v-col cols="12" xs="12" sm="12" md="4">
+            <v-col id="colsize" cols="12" xs="12" sm="4" md="3">
                 <v-text-field v-model="city" class="CitySearch" prepend-icon="mdi-city-variant-outline" label="도시 입력" rounded solo
                     type="city">
                     <template #append>
@@ -30,7 +30,7 @@
                 </v-text-field>
             </v-col>
         </v-row>
-    </v-col>
+    </v-container>
 </template>
 
 <script>
@@ -92,8 +92,8 @@ export default {
 .MainSearch{
     margin-top: 9%;
     margin-bottom: 5%;
-    margin-right: 5%;
-    margin-left: 5%;
+    margin-right: 0;
+    margin-left: 0;
 }
 .DateSearch {
     min-width: 260px;
@@ -114,5 +114,11 @@ export default {
     color: rgb(55, 55, 55);
     width: 20px;
     font-size: 5px;
+}
+
+
+#colsize {
+    max-width: 420px;
+    min-width: 380px;
 }
 </style>
