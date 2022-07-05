@@ -6,7 +6,8 @@ import store from "@/store";
 import states from "@/store/states";
 
 import MHotelReadPage from "@/views/hotelDetail/HotelReadPage.vue";
-import SearchPage from "@/views/searchpage/SearchPage.vue";
+import MReservPage from "@/views/reserv/MReservPage.vue";
+import TagSearchPage from "@/views/searchpage/TagSearchPage.vue";
 import CommonSearchPage from "@/views/searchpage/CommonSearchPage.vue";
 
 import BHotelModifyPage from "@/views/hotel/HotelModifyPage.vue";
@@ -14,9 +15,10 @@ import BHotelReadPage from "@/views/hotel/HotelReadPage.vue";
 
 import BRoomReadPage from "@/views/room/RoomReadPage.vue";
 import BRoomModifyPage from "@/views/room/RoomModifyPage.vue";
-import RoomRegisterPage from "@/views/hotel/RoomRegisterPage.vue";
+import RoomRegisterPage from "@/views/room/RoomRegisterPage.vue";
 
 import WishListPage from "@/views/mypage/WishListPage.vue";
+import MyPageBooking from "@/views/mypage/MyPageBooking.vue";
 
 Vue.use(VueRouter);
 
@@ -78,6 +80,11 @@ const routes = [
     },
   },
   {
+    path: "/BManageReservPage",
+    name: "BManageReservPage",
+    component: () => import("@/views/business/ManageReservPage"),
+  },
+  {
     path: "/mypage",
     name: "MyPage",
     beforeEnter: (to, from, next) => {
@@ -111,10 +118,20 @@ const routes = [
     },
   },
   {
-    path: "/MSearchPage/:word",
-    name: "MSearchPage",
+    path: "/mReservPage",
+    name: "MReservPage",
     components: {
-      default: SearchPage,
+      default: MReservPage,
+    },
+    props: {
+      default: true,
+    },
+  },
+  {
+    path: "/TagSearchPage/:word",
+    name: "TagSearchPage",
+    components: {
+      default: TagSearchPage,
     },
     props: {
       default: true,
@@ -146,7 +163,7 @@ const routes = [
     },
   },
   {
-    path: "/commonSearchPage",
+    path: "/commonSearchPage/:num",
     name: "CommonSearchPage",
     components: {
       default: CommonSearchPage,
@@ -165,6 +182,13 @@ const routes = [
     name: "WishListPage",
     components: {
       default: WishListPage,
+    },
+  },
+  {
+    path: "/mypagebooking",
+    name: "MyPageBooking",
+    components: {
+      default: MyPageBooking,
     },
   },
 ];

@@ -1,17 +1,22 @@
 <template>
-     <v-col id="Login">
-        <v-sheet class="UserSpace1" v-if="!isLoggedIn">
-          <div>
+<!-- header의 로그인, 회원가입 버튼 컴포넌트 -->
+<div>
+    <!-- (비로그인 상태)로그인, 회원가입 버튼
+    <v-col id="Login">-->
+        <!-- <v-sheet class="UserSpace" v-if="!isLoggedIn">-->
+          <div class="UserSpace" v-if="!isLoggedIn">
             <ul>
               <li id="LBotton"><a href="/login">
-                  <v-btn>로그인</v-btn>
+                  로그인
                 </a></li>
               <li id="RBotton"><a href="/signup">
-                  <v-btn>회원가입</v-btn>
+                  회원가입
                 </a></li>
             </ul>
           </div>
-        </v-sheet>
+        <!-- </v-sheet> -->
+
+        <!-- (로그인 상태) 로그아웃 버튼 -->
         <v-sheet class="UserSpace2" v-else>
           <div>
             <ul>
@@ -20,12 +25,13 @@
                 </v-card>
               </li>
               <li id="RBotton"><button @click="onClickLogout">
-                  <v-btn>로그아웃</v-btn>
+                  로그아웃
                 </button></li>
             </ul>
           </div>
         </v-sheet>
-      </v-col>
+    <!-- </v-col> -->
+</div>
 </template>
 
 <script>
@@ -52,85 +58,57 @@ export default {
 </script>
 
 <style scoped>
-.UserSpace1{
-  position: absolute;
-    width: 200px;
-    padding: 0;
-    margin-top: 3px;
-    justify-content: space-between;
-    align-items: center;
+
+.UserSpace {
+    position: absolute;
 }
+
+.UserSpace ul {
+    display: flex;
+}
+
+.UserSpace ul li {
+    list-style: none;
+}
+
+.UserSpace ul li a {
+    text-decoration: none;
+    position: relative;
+    padding: 0 15px;
+    color: #404040;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 29px;
+}
+
+.UserSpace ul li a:hover {
+  color: #569aff;
+}
+
 .UserSpace2 {
     position: absolute;
-    width: 200px;
-    margin-top: 9px;
-    padding: 0;
-    justify-content: space-between;
-    align-items: center;
 }
-.UserSpace1 ul {
-    display: flex;
-    justify-content: right;
-    align-items: right;
-    margin-right: 1%;
-}
+
 .UserSpace2 ul {
     display: flex;
-    justify-content: right;
-    align-items: right;
-    margin-right: 1%;
 }
 
-.UserSpace1 ul li {
-    list-style: none;
-    padding-top: 0;
-}
 .UserSpace2 ul li {
     list-style: none;
-    padding-top: 0;
-}
-.UserSpace1 ul li a {
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    position: relative;
-    font-size: 30px;
-}
-.UserSpace2 ul li a {
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    position: relative;
-    font-size: 30px;
 }
 
-.UserSpace1-top {
-    position: absolute;
-    top: 1em;
-    list-style: none;
-    right: 2em;
-}
-.UserSpace2-top {
-    position: absolute;
-    top: 1em;
-    list-style: none;
-    right: 2em;
-}
-#RBotton {
-    margin-right: 2%;
-    margin-left: 3%;
+.UserSpace2 ul li button {
+    text-decoration: none;
+    position: relative;
+    padding: 0 15px;
+    color: #404040;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 29px;
 }
 
-#LBotton {
-    margin-right: 3%;
-    margin-left: 2%;
+.UserSpace2 ul li button:hover {
+  color: #569aff;
 }
-#Login{
-    height: 90px;
-    padding: 0;
-    padding-top: 18px;
-    margin: 0;
-    padding-right: 10%;
-    min-width: 205px;
-    max-width: 300px;
-  }
 
 </style>>

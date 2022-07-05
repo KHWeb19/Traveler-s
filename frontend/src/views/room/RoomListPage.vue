@@ -29,7 +29,7 @@
     >
 
     <br />
-    <room-list :roomList="roomList" @deleteRooms="deleteRooms" />
+    <room-list v-if="bmRoomList" :bmRoomList="bmRoomList" @deleteRooms="deleteRooms" />
   </div>
 </template>
 
@@ -46,28 +46,23 @@ export default {
   data() {
     return {
       hotelNo: "",
-      roomList: [],
     };
   },
   computed: {
     ...mapState(["hotelType"]),
+    ...mapState(["bmRoomList"]),
   },
   mounted() {
     this.getHotelType();
+    console.log(this.bmRoomList)
   },
   methods: {
     ...mapActions(["getHotelType"]),
+    ...mapActions(["fetchBmRoomList"]),
     getRoomList(event) {
       this.hotelNo = event.target.value;
-      console.log(this.hotelNo);
-      const hotelNo = event.target.value;
-      console.log(hotelNo);
-      axios
-        .post("http://localhost:7777/room/bm/list", { hotelNo })
-        .then((res) => {
-          console.log(res);
-          this.roomList = res.data;
-        });
+      this.fetchBmRoomList(this.hotelNo)
+      
     },
     deleteRooms(payload) {
       const rooms = payload;
@@ -83,6 +78,9 @@ export default {
         });
     },
   },
+  created () {
+    this.fetchBmRoomList(this.hotelNo)
+  }
 };
 </script>
 

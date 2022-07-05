@@ -3,6 +3,7 @@ package com.example.demo.controller.hotel;
 import com.example.demo.dto.hotel.RoomRequest;
 import com.example.demo.dto.hotel.RoomResponse;
 import com.example.demo.dto.hotel.HotelResponse;
+import com.example.demo.dto.search.KeyWordRequest;
 import com.example.demo.entity.room.Room;
 import com.example.demo.service.member.UserService;
 import com.example.demo.service.room.RoomService;
@@ -49,7 +50,7 @@ public class RoomController {
         return roomService.findRoomList(roomRequest.getHotelNo());
     }
     
-    @GetMapping("/bm/{roomNo}")
+   @GetMapping("/bm/{roomNo}")
     public RoomResponse bmHotelRead (
             @PathVariable("roomNo") Integer roomNo) {
         log.info("business member Room Read()" + roomNo);
@@ -57,7 +58,7 @@ public class RoomController {
     }
 
     @PutMapping("/bm/{roomNo}")
-    public RoomResponse bmRoomModify (
+    public Long bmRoomModify (
             @PathVariable("roomNo") Integer roomNo,
             @Validated @RequestPart(value="roomRequest") RoomRequest roomRequest,
             @RequestPart(value = "files") List<MultipartFile> files) {
@@ -86,10 +87,10 @@ public class RoomController {
     //---------------------------------------------------------------------------------------------------------------
 
     @PostMapping("/mem/list")
-    public List<RoomResponse> mRoomList (@RequestBody RoomRequest roomRequest) { //주석
-        log.info("hotel's roomList" + roomRequest.getHotelNo());
+    public List<RoomResponse> mRoomList (@RequestBody KeyWordRequest keyWordRequest) { //주석
+        log.info("hotel's roomList" + keyWordRequest);
 
-        return roomService.findMRoomList(roomRequest.getHotelNo());
+        return roomService.findMRoomList(keyWordRequest);
     }
 
 }

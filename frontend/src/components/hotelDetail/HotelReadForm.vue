@@ -9,7 +9,8 @@
             <td colspan="2">
               <v-btn>
                 <!--이 태그 안에 @click=""해서 작업하시면 됩니다. -->
-                <v-icon @click="wish" color="#ccbce3"> mdi-cards-heart </v-icon>
+                <v-icon v-if="checkWish == false" @click="wish" > mdi-cards-heart </v-icon>
+                <v-icon v-if="checkWish == true" @click="wish" color="#ccbce3"> mdi-cards-heart </v-icon>
               </v-btn>
               &ensp;
             </td>
@@ -26,55 +27,9 @@
                     hide-delimiters
                     class="cover"
                   >
-                    <v-carousel-item
-                      :src="
-                        require(`@/assets/hotelImg/${mHotel.hotelImgPath1}`)
-                      "
-                    />
-                    <v-carousel-item
-                      :src="
-                        require(`@/assets/hotelImg/${mHotel.hotelImgPath2}`)
-                      "
-                    />
-                    <v-carousel-item
-                      :src="
-                        require(`@/assets/hotelImg/${mHotel.hotelImgPath3}`)
-                      "
-                    />
-                    <v-carousel-item
-                      :src="
-                        require(`@/assets/hotelImg/${mHotel.hotelImgPath4}`)
-                      "
-                    />
-                    <v-carousel-item
-                      :src="
-                        require(`@/assets/hotelImg/${mHotel.hotelImgPath5}`)
-                      "
-                    />
-                    <v-carousel-item
-                      v-if="mHotel.hotelImgPath6"
-                      :src="
-                        require(`@/assets/hotelImg/${mHotel.hotelImgPath6}`)
-                      "
-                    />
-                    <v-carousel-item
-                      v-if="mHotel.hotelImgPath7"
-                      :src="
-                        require(`@/assets/hotelImg/${mHotel.hotelImgPath7}`)
-                      "
-                    />
-                    <v-carousel-item
-                      v-if="mHotel.hotelImgPath8"
-                      :src="
-                        require(`@/assets/hotelImg/${mHotel.hotelImgPath8}`)
-                      "
-                    />
-                    <v-carousel-item
-                      v-if="mHotel.hotelImgPath9"
-                      :src="
-                        require(`@/assets/hotelImg/${mHotel.hotelImgPath9}`)
-                      "
-                    />
+                  <v-carousel-item v-for="(item, index) in mHotel.hotelImages" :key="index" 
+                    :src="require(`@/assets/hotelImg/${item}`)">
+                  </v-carousel-item>
                   </v-carousel>
                 </v-container>
               </div>
@@ -170,14 +125,15 @@
               <p>{{ mHotel.totalAddress }}</p>
             </td>
           </tr>
-          <td colspan="2" align="center">
+          <tr>
+            <td colspan="2" align="center">
             <kakao-map-api
               v-if="Object.keys(mHotel).length !== 0"
               :mHotel="mHotel"
             />
             <br />
           </td>
-          <tr></tr>
+          </tr>
 
           <tr>
             <td colspan="2">
@@ -185,7 +141,6 @@
             </td>
           </tr>
         </table>
-        <br />
       </form>
     </v-container>
   </div>
@@ -203,6 +158,7 @@ export default {
     return {
       hotelInfo: [],
       pageArray: [],
+      checkWish: false
     };
   },
   props: {
@@ -211,29 +167,32 @@ export default {
       required: true,
     },
   },
-  created() {
-    this.hotelNo = this.mHotel.hotelNo;
-  },
   methods: {
     wish() {
-      {
-        const { hotelNo } = this;
         console.log(this.mHotel.hotelNo);
-        axios
-          .post(`http://localhost:7777/wish/${hotelNo}/save`, {})
+        if(this.checkWish == false){
+          axios.get(`http://localhost:7777/wish/${this.mHotel.hotelNo}`, {})
+            .then((res) => {
+                this.checkWish = res.data
+                console.log(this.checkWish)
+                alert("저장 성공");
+            })
+            .catch(() => {
+              alert("등록 실패");
+            });
+        }else{
+          axios.delete(`http://localhost:7777/wish/${this.mHotel.hotelNo}`)
           .then((res) => {
-            if (res.data) {
-              alert("저장 성공");
-            } else {
-              alert("이미 등록");
-            }
-          })
-          .catch(() => {
-            alert("등록 실패");
-          });
-      }
+                this.checkWish = res.data
+                console.log(this.checkWish)
+                alert("삭제 되었습니다");
+            })
+            .catch(() => {
+              alert("등록 실패");
+            });
+        }
     },
-  },
+  }
 };
 </script>
 

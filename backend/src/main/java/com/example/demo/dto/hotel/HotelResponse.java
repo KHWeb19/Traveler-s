@@ -2,6 +2,7 @@ package com.example.demo.dto.hotel;
 
 
 import com.example.demo.entity.hotel.Hotel;
+import com.example.demo.entity.hotel.HotelImage;
 import com.example.demo.entity.room.Room;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Builder
@@ -25,26 +27,17 @@ public class HotelResponse {
     String postcode;
     String writer;
     String totalAddress;
-    String hotelImgPath1;
-    String hotelImgPath2;
-    String hotelImgPath3;
-    String hotelImgPath4;
-    String hotelImgPath5;
-    String hotelImgPath6;
-    String hotelImgPath7;
-    String hotelImgPath8;
-    String hotelImgPath9;
+    List<String> hotelImages;
     Date regDate;
-
 
     public HotelResponse(Long hotelNo, String hotelName) {
         this.hotelNo = hotelNo;
         this.hotelName =hotelName;
     }
 
-    public HotelResponse(Long hotelNo,String hotelImgPath1, String hotelName, String totalAddress, List<String> hotelInfo) {
+    public HotelResponse(Long hotelNo, String hotelFirstImage, String hotelName, String totalAddress, List<String> hotelInfo) {
         this.hotelNo = hotelNo;
-        this.hotelImgPath1 = hotelImgPath1;
+        this.hotelImages = List.of(hotelFirstImage);
         this.hotelName = hotelName;
         this.totalAddress = totalAddress;
         this.hotelInfo = hotelInfo;
@@ -54,15 +47,8 @@ public class HotelResponse {
         List<HotelResponse> hotelRequestDTOList = hotels.stream().map(h -> HotelResponse.builder()
                 .hotelNo(h.getHotelNo())
                 .hotelName(h.getHotelName())
-                .hotelImgPath1(h.getHotelImgPath1())
-                .hotelImgPath2(h.getHotelImgPath2())
-                .hotelImgPath3(h.getHotelImgPath3())
-                .hotelImgPath4(h.getHotelImgPath4())
-                .hotelImgPath5(h.getHotelImgPath5())
-                .hotelImgPath6(h.getHotelImgPath6())
-                .hotelImgPath7(h.getHotelImgPath7())
-                .hotelImgPath8(h.getHotelImgPath8())
-                .hotelImgPath9(h.getHotelImgPath9())
+                .hotelImages(h.getHotelImages().stream().map(hotelImage-> hotelImage.getPath())
+                        .collect(Collectors.toList()))
                 .hotelInfo(h.getHotelInfo())
                 .hotelIntro(h.getHotelIntro())
                 .postcode(h.getPostcode())
@@ -79,15 +65,8 @@ public class HotelResponse {
         HotelResponse hotelRequestDTO = HotelResponse.builder()
                 .hotelNo(hotel.getHotelNo())
                 .hotelName(hotel.getHotelName())
-                .hotelImgPath1(hotel.getHotelImgPath1())
-                .hotelImgPath2(hotel.getHotelImgPath2())
-                .hotelImgPath3(hotel.getHotelImgPath3())
-                .hotelImgPath4(hotel.getHotelImgPath4())
-                .hotelImgPath5(hotel.getHotelImgPath5())
-                .hotelImgPath6(hotel.getHotelImgPath6())
-                .hotelImgPath7(hotel.getHotelImgPath7())
-                .hotelImgPath8(hotel.getHotelImgPath8())
-                .hotelImgPath9(hotel.getHotelImgPath9())
+                .hotelImages(hotel.getHotelImages().stream().map(hotelImage -> hotelImage.getPath())
+                        .collect(Collectors.toList()))
                 .hotelInfo(hotel.getHotelInfo())
                 .hotelIntro(hotel.getHotelIntro())
                 .postcode(hotel.getPostcode())
@@ -98,5 +77,23 @@ public class HotelResponse {
 
 
         return hotelRequestDTO;
+    }
+
+    public static List<HotelResponse> hotelBuilder(Set<Hotel> hotels) {
+        List<HotelResponse> hotelRequestDTOList = hotels.stream().map(h -> HotelResponse.builder()
+                .hotelNo(h.getHotelNo())
+                .hotelName(h.getHotelName())
+                .hotelImages(h.getHotelImages().stream().map(hotelImage-> hotelImage.getPath())
+                        .collect(Collectors.toList()))
+                .hotelInfo(h.getHotelInfo())
+                .hotelIntro(h.getHotelIntro())
+                .postcode(h.getPostcode())
+                .totalAddress(h.getTotalAddress())
+                .regDate(h.getRegDate())
+                .writer(h.getUser().getEmail())
+                .build()
+        ).collect(Collectors.toList());
+
+        return hotelRequestDTOList;
     }
 }

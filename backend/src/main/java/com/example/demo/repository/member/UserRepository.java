@@ -10,16 +10,15 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
         Optional<User> findByEmail(String email);
 
-        @Query("select m.email from User m where m.email = :email")
-        Optional<User> checkEmail(@Param("email") String email);
-
-
         Optional<User> findByMobile(String mobile);
 
         @Query("select u from User u join fetch u.hotels where u.email = :email")
         Optional<User> findByEmailWithHotels(String email);
 
         @Query("select u from User u join fetch u.wish where u.id = :id")
-        Optional<User> findByIDWithWishAndWithHotel(Long id);
+        Optional<User> findByIDWithWish(Long id);
+
+        @Query("select u from User u join fetch u.reservations where u.id = :id")
+        Optional<User> findByIDWithReservation(Long id);
 }
 

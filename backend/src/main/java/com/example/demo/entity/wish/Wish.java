@@ -28,10 +28,9 @@ public class Wish {
     @JoinColumn(name= "id")
     private User user;
 
-
-    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name= "hotelNo")
+    @OneToOne(fetch = FetchType.EAGER)
     private Hotel hotel;
-
 
 
 }

@@ -93,7 +93,7 @@ public class HotelController {
     public List<HotelResponse> hotelMainList () { //메인 페이지에서 호텔 list 불러오기
         log.info("HotelRandom()");
 
-        return  hotelService.random(); //randHotel을 추리는 작업을 hotelService안의 random이 실행한다.
+        return hotelService.random(); //randHotel을 추리는 작업을 hotelService안의 random이 실행한다.
     }
 
     @GetMapping("/mRead/{hotelNo}") //고객 페이지쪽 호텔 상세보기

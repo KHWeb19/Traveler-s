@@ -1,30 +1,30 @@
 package com.example.demo.entity.reservation;
 
 import com.example.demo.entity.member.User;
-import com.example.demo.entity.reservationroom.ReservationRoom;
+import com.example.demo.entity.room.Room;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 
 @Entity
-@NoArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Reservation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long price;
 
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     @Enumerated(value = EnumType.STRING)
     private ReservationStatus status;
@@ -33,7 +33,8 @@ public class Reservation {
     @JsonBackReference
     private User user;
 
-    @OneToMany (mappedBy = "reservation", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true)
-    @JsonManagedReference
-    private List<ReservationRoom> reservationRooms;
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Room room;
+
 }

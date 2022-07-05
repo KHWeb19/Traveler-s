@@ -34,22 +34,26 @@ public class WishController {
     private UserService userService;
 
 
-    @PostMapping("/{hotelNo}/save")
-    public boolean addWish(@PathVariable("hotelNo") Long hotelNo){
+    @GetMapping("/{hotelNo}")
+    public boolean addWish(@PathVariable("hotelNo") Integer hotelNo){
         String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> optionalUser = userService.findByEmail(email);
         User user = optionalUser.get();
         log.info ("wish()" +  hotelNo );
+
         return wishService.addWish(user, hotelNo);
     }
 
 
 
-    @DeleteMapping("/delete{wishNo}")
-    public void wishDelete(@PathVariable("wishNo") Long wishNo){
-        log.info("deleteWish() " + wishNo);
+    @DeleteMapping("/{hotelNo}")
+    public boolean wishDelete(@PathVariable("hotelNo") Integer hotelNo){
+        log.info("deleteWish() " + hotelNo);
+        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<User> optionalUser = userService.findByEmail(email);
+        User user = optionalUser.get();
 
-        wishService.deleteWish(wishNo);
+        return wishService.deleteWish(user,hotelNo);
     }
 
     @GetMapping("/HotelList")
@@ -60,6 +64,5 @@ public class WishController {
         log.info("WishResponse " );
         return wishService.findWish(user.getId());
     }
-
 
 }

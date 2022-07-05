@@ -34,16 +34,8 @@
             <h3>이미지</h3>
             <hr>
             <div>
-                <v-container>
-                <v-img width="100px" height="100px" :src="require(`@/assets/roomImg/${bmRoom.roomImgPath1}`)"/>
-                <v-img width="100px" height="100px" :src="require(`@/assets/roomImg/${bmRoom.roomImgPath2}`)"/>
-                <v-img width="100px" height="100px" :src="require(`@/assets/roomImg/${bmRoom.roomImgPath3}`)"/>
-                <v-img width="100px" height="100px" :src="require(`@/assets/roomImg/${bmRoom.roomImgPath4}`)"/>
-                <v-img width="100px" height="100px" :src="require(`@/assets/roomImg/${bmRoom.roomImgPath5}`)"/>
-                <v-img width="100px" height="100px" v-if="bmRoom.roomImgPath6" :src="require(`@/assets/roomImg/${bmRoom.roomImgPath6}`)"/>
-                <v-img width="100px" height="100px" v-if="bmRoom.roomImgPath7" :src="require(`@/assets/roomImg/${bmRoom.roomImgPath7}`)"/>
-                <v-img width="100px" height="100px" v-if="bmRoom.roomImgPath8" :src="require(`@/assets/roomImg/${bmRoom.roomImgPath8}`)"/>
-                <v-img width="100px" height="100px" v-if="bmRoom.roomImgPath9" :src="require(`@/assets/roomImg/${bmRoom.roomImgPath9}`)"/>
+                <v-container v-for="(image , idx) in bmRoom.roomImage" :key="idx">
+                    <v-img width="100px" height="100px" :src="require(`@/assets/roomImg/${image}`)"/>
                 </v-container>
                 
             </div>

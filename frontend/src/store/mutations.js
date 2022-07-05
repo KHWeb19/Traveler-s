@@ -7,8 +7,9 @@ import {
   FETCH_BM_HOTEL,
   GET_HOTEL_TYPE,
   FETCH_BM_ROOM,
+  FETCH_BM_ROOM_LIST,
   FETCH_WISH_LISTS,
-  FETCH_WISH_LIST,
+  FETCH_BOOKING_LISTS,
 } from "./mutation-types";
 
 export default {
@@ -45,10 +46,13 @@ export default {
   [FETCH_BM_ROOM](state, bmRoom) {
     state.bmRoom = bmRoom;
   },
+  [FETCH_BM_ROOM_LIST](state, bmRoomList) {
+    state.bmRoomList = bmRoomList;
+  },
   [FETCH_WISH_LISTS](state, wishLists) {
     state.wishLists = wishLists;
   },
-  [FETCH_WISH_LIST](state, wishList) {
-    state.wishList = wishList;
+  [FETCH_BOOKING_LISTS](state, bookingLists) {
+    state.bookingLists = bookingLists;
   },
 };

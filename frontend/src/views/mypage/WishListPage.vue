@@ -6,7 +6,7 @@
           <my-page-left-menu :userInfo="user"> </my-page-left-menu>
         </v-col>
         <v-col>
-          <my-page-wish></my-page-wish>
+          <my-page-wish :wishLists="wishLists"></my-page-wish>
         </v-col>
       </v-row>
     </div>
@@ -17,18 +17,18 @@
 import MyPageLeftMenu from "@/components/mypage/MyPageLeftMenu.vue";
 import MyPageWish from "@/components/mypage/MyPageWish.vue";
 import { mapActions, mapState } from "vuex";
-
 export default {
   name: "WishListPage",
   components: { MyPageLeftMenu, MyPageWish },
   computed: {
-    ...mapState(["user"]),
+    ...mapState(["user", "wishLists"]),
   },
   methods: {
-    ...mapActions(["setUser"]),
+    ...mapActions(["setUser", "fetchWishLists"]),
   },
   mounted() {
     this.setUser();
+    this.fetchWishLists();
   },
 };
 </script>

@@ -3,6 +3,7 @@ package com.example.demo.service.room;
 import com.example.demo.dto.hotel.RoomRequest;
 import com.example.demo.dto.hotel.RoomResponse;
 import com.example.demo.dto.hotel.HotelResponse;
+import com.example.demo.dto.search.KeyWordRequest;
 import com.example.demo.entity.room.Room;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,11 +14,11 @@ public interface RoomService {
     public List<HotelResponse> findHotel(String email);
     public List<RoomResponse> findRoomList(Long hotelNo);
     public RoomResponse bmRoomRead(Integer roomNo);
-    public RoomResponse bmRoomModify(RoomRequest roomRequest, List<MultipartFile> files, Integer roomNo);
+    public Long bmRoomModify(RoomRequest roomRequest, List<MultipartFile> files, Integer roomNo);
     public void bmRoomRemove(Integer roomNo);
     public void bmRoomsRemove(List<Long> roomNo);
 
     //----------------------------------------------------------
-    public List<RoomResponse> findMRoomList(Long hotelNo); //주석
+    public List<RoomResponse> findMRoomList(KeyWordRequest keyWordRequest);
 }
 

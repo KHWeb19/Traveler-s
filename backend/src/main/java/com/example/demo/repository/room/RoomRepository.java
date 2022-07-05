@@ -1,11 +1,14 @@
 package com.example.demo.repository.room;
 
+import com.example.demo.entity.hotel.Hotel;
 import com.example.demo.entity.room.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface RoomRepository extends JpaRepository<Room, Long> {
 
@@ -13,6 +16,14 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     List<Room> findAllRoomByHotelNo(Long hotelNo);
 
     @Query("select h from Room h join fetch h.hotel where h.roomNo = :roomNo")
-    Optional<Room> findByWithHotelAndWithReservationRooms(Long roomNo);
+    Optional<Room> findByWithHotel(Long roomNo);
+
+    @Query("select r from Room r join fetch r.hotel h join r.reservations b where h.hotelNo = :hotelNo " +
+            "and r.personnel >= :personnel and b.startDate <= :date and b.endDate > :date")
+    List<Room> findByIdAndDateAndPersonnel(Long hotelNo, int personnel, LocalDate date);
+
+    @Query("select r from Room r join fetch r.hotel h join r.reservations b where h.totalAddress like concat('%',:address,'%') " +
+            "and r.personnel >= :personnel and b.startDate <= :date and b.endDate > :date")
+    List<Room> Search(String address, int personnel, LocalDate date);
 }
 
