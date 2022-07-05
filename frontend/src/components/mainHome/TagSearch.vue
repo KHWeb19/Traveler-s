@@ -1,9 +1,7 @@
 <template>
     <v-container fluid>
-
-            <h3 class="titDep2">태그스토리</h3>
-
-            <!-- swiper
+        <h3 class="titDep2">태그스토리</h3>
+        <!-- swiper
             <div class="slide-3d">
                 <swiper
                     class="swiper"
@@ -21,71 +19,59 @@
                     </div>
                 </swiper>
             </div> -->
-
-
-            <!-- img -->
-            <div class="tagImg">
-                <ul>
-                    <li>
-                        <figure>
-                            <a href="#"><img src="@/assets/tagSearchImg/tagImg1.png" width="368" height="436"/></a>
-                            <div class="infoTxt">
-                                <strong class="tit">읽어도 좋고 책멍도 좋다</strong>
-                                    <p class="txt">
-                                    <span>#카페투어</span>
-                                    <span>#북카페</span>
-                                    <span>#책방투어</span>
-                                    <span>#태그여행</span>
-                                    </p>
-                            </div>
-                        </figure>
-                    </li>
-                    <li>
-                        <figure>
-                            <a href="#"><img src="@/assets/tagSearchImg/tagImg2.png" width="368" height="436"/></a>
-                            <div class="infoTxt">
-                                <strong class="tit">스토리가 있는 여행<br>[우리들의 블루스]</strong>
-                                    <p class="txt">
-                                    <span>#카페투어</span>
-                                    <span>#뷰맛집</span>
-                                    <span>#힐링</span>
-                                    <span>#태그여행</span>
-                                    </p>
-                            </div>
-                        </figure>
-                    </li>
-                    <li>
-                        <figure>
-                            <a href="#"><img src="@/assets/tagSearchImg/tagImg3.png" width="368" height="436"/></a>
-                            <div class="infoTxt">
-                                <strong class="tit">pit a PET 나와 함께하개</strong>
-                                    <p class="txt">
-                                    <span>#반려동물동반</span>
-                                    <span>#오션뷰</span>
-                                    <span>#루프탑</span>
-                                    <span>#타르트맛집</span>
-                                    </p>
-                            </div>
-                        </figure>
-                    </li>
-                </ul>
-
-
-            </div>
-
-            <!-- #info -->
-            <v-row justify="center">
-                <v-btn v-for="(info, idx) in hotelInfo"
-                :key="idx"
-                @click="search(info)"
-                color="#f8f8f8"
-                variant="plain"
-                depressed="false"
-                class="button1 b-color rot-1">#{{ info }}
-                </v-btn>
-            </v-row>
-
-
+        <!-- img -->
+        <div class="tagImg">
+            <ul>
+                <li>
+                    <figure>
+                        <a href="#"><img id="img1" src="@/assets/tagSearchImg/tagImg1.png"/></a>
+                        <div class="infoTxt">
+                            <strong class="tit">읽어도 좋고 책멍도 좋다</strong>
+                            <p class="txt">
+                                <span>#카페투어</span>
+                                <span>#북카페</span>
+                                <span>#책방투어</span>
+                                <span>#태그여행</span>
+                            </p>
+                        </div>
+                    </figure>
+                </li>
+                <li>
+                    <figure>
+                        <a href="#"><img id="img2" src="@/assets/tagSearchImg/tagImg2.png"/></a>
+                        <div class="infoTxt">
+                            <strong class="tit">스토리가 있는 여행<br>[우리들의 블루스]</strong>
+                            <p class="txt">
+                                <span>#카페투어</span>
+                                <span>#뷰맛집</span>
+                                <span>#힐링</span>
+                                <span>#태그여행</span>
+                            </p>
+                        </div>
+                    </figure>
+                </li>
+                <li>
+                    <figure>
+                        <a href="#"><img id="img3" src="@/assets/tagSearchImg/tagImg3.png"/></a>
+                        <div class="infoTxt">
+                            <strong class="tit">pit a PET 나와 함께하개</strong>
+                            <p class="txt">
+                                <span>#반려동물동반</span>
+                                <span>#오션뷰</span>
+                                <span>#루프탑</span>
+                                <span>#타르트맛집</span>
+                            </p>
+                        </div>
+                    </figure>
+                </li>
+            </ul>
+        </div>
+        <!-- #info -->
+        <v-row justify="center">
+            <v-btn v-for="(info, idx) in hotelInfo" :key="idx" @click="search(info)" color="#f8f8f8" variant="plain"
+                depressed="false" class="button1 b-color rot-1">#{{ info }}
+            </v-btn>
+        </v-row>
     </v-container>
 </template>
 
@@ -223,17 +209,14 @@ body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fi
 
     img {
     border-radius: 15px;
+    width:368px;
+    height:436px;
 }
 
-    /*.tagImg {
-    transition: all 0.1s linear;
-    overflow: hidden;
-}
-
-    .tagImg:hover img {
-  transform: scale(1.1);
-}*/
-
+    .tagImg {
+        display: inline-flex;
+    }
+   
     ul {
     display: flex;
 }
@@ -290,4 +273,26 @@ body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fi
     margin-right: 5px;
     color: #F8F8F8;
 }
+@media screen and (min-width: 1024px) and (max-width: 1270px) {
+#img3 {
+    display: none;
+}
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    #img3 {
+    display: none;
+}
+    #img2 {
+        display: none;
+    }
+}
+@media screen and (min-width: 360px) and (max-width: 768px) {
+    #img3 {
+    display: none;
+}
+    #img2 {
+        display: none;
+    }
+}
+
 </style>
