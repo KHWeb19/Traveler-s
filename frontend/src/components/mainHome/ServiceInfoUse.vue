@@ -6,7 +6,7 @@
             <ul class="mainIcon">
                 <li class="reservation"><a href="#"><span>예약안내</span></a></li>
                 <li class="insurance"><a href="#"><span>보험안내</span></a></li>
-                <li class="return"><a href="#"><span>0000</span></a></li>
+                <li class="return"><a href="#"><span>렌트안내</span></a></li>
                 <li class="infomation"><a href="#"><span>이용안내</span></a></li>
                 <li class="cancellation"><a href="#"><span>결항안내</span></a></li>
                 <li class="refund"><a href="#"><span>취소/환불 안내</span></a></li>
