@@ -43,14 +43,14 @@ export default {
       headerTitle1: [
         { text: "룸 타입", value: "roomType", width: "40px" },
         { text: "가격", value: "price", width: "10px" },
-        { text: "예약 상태", value: "reservationStatus", width: "90" },
+        { text: "예약 상태", value: "status", width: "90" },
         { text: "체크 인", value: "startDate", width: "80px" },
         { text: "체크 아웃", value: "endDate", width: "80px" },
       ],
       headerTitle2: [
         { text: "룸 타입", value: "roomType", width: "40px" },
         { text: "가격", value: "price", width: "10px" },
-        { text: "예약 상태", value: "reservationStatus", width: "90px" },
+        { text: "예약 상태", value: "status", width: "90px" },
         { text: "체크 인", value: "startDate", width: "80px" },
         { text: "체크 아웃", value: "endDate", width: "80px" },
       ],
@@ -68,7 +68,7 @@ export default {
         return (this.chooseState = "all");
       } else {
         for (let i = 0; i < this.bookingLists.length; i++) {
-          if (this.bookingLists[i].reservationStatus == this.findList) {
+          if (this.bookingLists[i].status == this.findList) {
             this.chooseProcessArr.push(this.bookingLists[i]);
           } else {
             continue;
