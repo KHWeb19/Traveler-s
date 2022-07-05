@@ -109,7 +109,7 @@ export default {
         return {
             hotelInfo:[
                 '오션뷰',
-                '이색적인',
+                '테라스',
                 '바베큐그릴',
                 '반려동물',
                 '온천'
