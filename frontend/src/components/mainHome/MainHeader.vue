@@ -89,12 +89,12 @@ export default {
       console.log(login)
       this.$emit('checkLogin', login)
     },
-    ...mapActions(["setUser"])
+    ...mapActions(["setUser"]),
   },
   mounted() {
-    if(this.$store.state.isLoggedIn ==true){
-      this.setUser();
-      }
+    if(this.$store.state.isLoggedIn == true){
+      this.setUser()
+    }
   }
 }
 

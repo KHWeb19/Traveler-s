@@ -53,10 +53,16 @@ public class InitializeDatabase implements CommandLineRunner {
                 .name("user")
                 .profile_path("default.png")
                 .build();
+        User userTest = User.builder().email("test@gmail.com")
+                .password(passwordEncoder.encode("password"))
+                .name("test")
+                .profile_path("default.png")
+                .build();
         userAdmin.addRoleToUser(roleAdmin);
         userCEO.addRoleToUser(roleCEO);
         userUser.addRoleToUser(roleUser);
-        userRepository.saveAll(List.of(userAdmin, userCEO, userUser));
+        userTest.addRoleToUser(roleUser);
+        userRepository.saveAll(List.of(userAdmin, userCEO, userUser, userTest));
         List<String> roomInfo = List.of("오션뷰,테라스,수영장,전기차충전,공항근처,골프장,무료주차,바베큐그릴,반려동물,온천");
 
         List<Hotel> hotels = new ArrayList<>();

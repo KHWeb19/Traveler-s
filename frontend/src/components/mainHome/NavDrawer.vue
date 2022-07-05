@@ -69,16 +69,15 @@ export default {
           active: true,
           subItems: [
             { title: "마이페이지", to: "/mypage" },
-            { title: "위시리스트", to: "" },
-            { title: "예약 내역 확인", to: "" },
+            { title: "위시리스트", to: "/wishlistpage" },
+            { title: "예약 내역 확인", to: "/mypagebooking" },
           ],
         },
         {
           title: "관리자 메뉴",
           subItems: [
             { title: "관리자 메뉴얼", to: "" },
-            { title: "예약관리", to: "" },
-            { title: "호텔등록", to: "/BHotelRegisterPage" },
+            { title: "예약관리", to: "/BManageReservPage" },
             { title: "숙소관리", to: "/BHotelListPage" },
             { title: "객실관리", to: "/BRoomListPage" },
           ],
@@ -90,8 +89,8 @@ export default {
           active: true,
           subItems2: [
             { title: "마이페이지", to: "/mypage" },
-            { title: "위시리스트", to: "" },
-            { title: "예약 내역 확인", to: "" },
+            { title: "위시리스트", to: "/wishlistpage" },
+            { title: "예약 내역 확인", to: "/mypagebooking" },
           ],
         },
       ],

@@ -10,7 +10,7 @@
           <tr>
             <td>
               <div>
-                <m-reserv-form/>      
+                <m-reserv-form :reservationInfo = "reservationInfo"/>      
               </div>
             </td>
           </tr>
@@ -23,18 +23,25 @@
 import MReservForm from '@/components/reserv/MReservForm.vue'
 
 //import { mapState, mapActions } from 'vuex'
-//import axios from 'axios'
+import axios from 'axios'
 
 export default {
+    data() {
+      return {
+        reservationInfo: {}
+      }
+    },
     name: 'MReservPage',
     components: {
       MReservForm
     },
     computed: {
-
     },
     mounted() {
-
+      const params = new URLSearchParams();
+      params.append('reservationId', this.$route.params.no)
+      axios.get("http://localhost:7777/reserve/user/readReservation", {params: params})
+      .then((res) => this.reservationInfo = res.data)
     },
     methods: {
 

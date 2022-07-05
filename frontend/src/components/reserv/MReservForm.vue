@@ -4,7 +4,7 @@
         <table style="width: 400px;">
             <tr>
                 <td align="center">
-                    <table style="width: 400px;"> <!-- 예약자 정보 테이블 -->
+                    <table v-if="Object.keys(reservationInfo).length !== 0" style="width: 400px;"> <!-- 예약자 정보 테이블 -->
                         <tr>
                             <td id="title1" colspan="2">
                                 <h3>예약자 정보</h3>
@@ -12,27 +12,27 @@
                         </tr>
                         <tr>
                             <td id="title2">&ensp; 대표 투숙자 </td>
-                            <td>&ensp; 김땡땡 </td>
+                            <td>&ensp; {{reservationInfo.username}} </td>
                        </tr>
                         <tr>
                             <td id="title2">&ensp; 숙소 이름 </td>
-                            <td>&ensp; hotel#1 </td>
+                            <td>&ensp; {{reservationInfo.hotelName}} </td>
                        </tr>
                         <tr>
                             <td id="title2">&ensp; 객실명 </td>
-                            <td>&ensp; 객실 no.2 </td>
+                            <td>&ensp; 객실 no. {{reservationInfo.roomId}}</td>
                         </tr>
                         <tr>
                             <td id="title2">&ensp; 숙박일 </td>
-                            <td>&ensp; 2022.06.30 ~ 2022.07.01 </td>
+                            <td>&ensp; {{reservationInfo.startDate}} ~ {{reservationInfo.endDate}} </td>
                         </tr>
                         <tr>
                             <td id="title2">&ensp; 숙박 인원 </td>
-                            <td>&ensp; 4명 </td>
+                            <td>&ensp; {{reservationInfo.personnel}}명 </td>
                         </tr>
                         <tr>
                             <td id="title2">&ensp; 가격 </td>
-                            <td>&ensp; 100,000 원 </td>
+                            <td>&ensp; {{reservationInfo.price}} 원 </td>
                         </tr>
                     </table>
                     <br>
@@ -135,6 +135,9 @@ export default {
             ]
         }
     },
+    props: {
+        reservationInfo: Object
+    }
 }
 </script>
 
