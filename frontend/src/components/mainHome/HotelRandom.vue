@@ -11,7 +11,7 @@
             <!-- <v-card-text>
             별점 이쪽을 잘모르겠네요.. 시간되면 진행하는걸로! (좋아요 누적?)
             <v-row align="center">
-              <v-rating :value="5" color="amber" half-increments size="18" margin="0"></v-rating>   
+              <v-rating :value="5" color="amber" half-increments size="18" margin="0"></v-rating>
               <div class="grey--text ms-4">
                 0~5점 (참여인수)
               </div>
@@ -25,9 +25,9 @@
             <v-card-text class="address">
               {{ mHotel.totalAddress }}
             </v-card-text>
-            <span id="tagSpan2" 
-            v-for="(item, i) in mHotel.hotelInfo" 
-            :key="i" 
+            <span id="tagSpan2"
+            v-for="(item, i) in mHotel.hotelInfo"
+            :key="i"
             class="hotel_info">
               {{ "#" + item }}
               <!-- i 번째 item를 출력  -->
