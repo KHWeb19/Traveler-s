@@ -37,6 +37,7 @@ export default {
 </script>
 
 <style scoped>
+
 p, ul, ol, li, button, div, footer, span {
     margin: 0;
     padding: 0;
@@ -73,8 +74,8 @@ footer {
 
 footer .footBtm .footInner {
     padding-top: 2.3%;
-    padding-left: 2%;
-    padding-right: 2%;
+    padding-left: 0%;
+    padding-right: 7%;
     /*padding: 60px 72px 0 72px;*/
 }
 
@@ -82,7 +83,7 @@ footer .footInner {
     position: center;
     width: 1030px;
     min-width: 290px;
-    margin: 0 auto;
+    margin: 0 8% 0 21.7%;
     text-align: left;
     z-index: 2;
 }
@@ -227,6 +228,24 @@ footer .footBtm .txtCopy span {
 
 footer .footBtm .txtCopy span:first-child {
     padding-left: 0;
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1240px) {
+    footer .footInner {
+        margin: 0 8% 0 6%;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    footer .footInner {
+        margin: 0 8% 0 4%;
+    }
+}
+
+@media screen and (min-width: 360px) and (max-width: 768px) {
+    footer .footInner {
+        margin: 0 1% 0 1.5%;
+    }
 }
 
 </style>
