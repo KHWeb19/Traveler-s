@@ -13,6 +13,7 @@ import {
   FETCH_BM_ROOM_LIST,
   FETCH_WISH_LISTS,
   FETCH_BOOKING_LISTS,
+  FETCH_CEOBOOKING_LISTS,
 } from "./mutation-types";
 
 import axios from "axios";
@@ -114,8 +115,17 @@ export default {
     });
   },
   fetchBookingLists({ commit }) {
-    axios.get("http://localhost:7777/reserve/user/listAllReservations").then((res) => {
-      commit(FETCH_BOOKING_LISTS, res.data);
-    });
+    axios
+      .get("http://localhost:7777/reserve/user/listAllReservations")
+      .then((res) => {
+        commit(FETCH_BOOKING_LISTS, res.data);
+      });
+  },
+  fetchCeoBookingLists({ commit }) {
+    axios
+      .get("http://localhost:7777/reserve/ceo/listAllReservations")
+      .then((res) => {
+        commit(FETCH_CEOBOOKING_LISTS, res.data);
+      });
   },
 };

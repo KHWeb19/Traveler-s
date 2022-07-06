@@ -12,7 +12,7 @@
                 </ul>
                 <div class="footAppDown">
                     <h5>App 다운로드</h5>
-                    <span class="txt">제주패스 앱 설치하고 </span>
+                    <span class="txt">에디패스 앱 설치하고 </span>
                     <span class="txt"> 더 편리하게 이용하세요.</span>
                     <ul class="appLink">
                         <li><button type="button" class="google" onclick="location.href='#';">구글플레이</button></li>
