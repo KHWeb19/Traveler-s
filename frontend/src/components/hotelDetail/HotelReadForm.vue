@@ -5,7 +5,7 @@
         <!-- 주석 -->
 
         <table style="width: 80%">
-          <tr align="right">
+          <tr align="right"> <!-- 좋아요 -->
             <td colspan="2">
               <v-btn  style="box-shadow:none; background:none;">
                 <!--이 태그 안에 @click=""해서 작업하시면 됩니다. -->
@@ -197,6 +197,11 @@ export default {
 </script>
 
 <style scoped>
+h1{
+  font-family: 'NanumSquareRound';  
+  color: #202020;
+}
+
 #inCard {
   border: 1px;
   color: black;
@@ -214,8 +219,21 @@ export default {
   padding: 6px;
   padding-left: 20px;
   padding-right: 20px;
-  border-radius: 5px;
-  background-color: lightgray;
+  background-color: #f8f8f8;
+  margin: 10px;
+  padding: 6px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #f8f8f8;
+  display: inline-block;
+  position: relative;
+  border-radius: 20px;
+  text-decoration: none;
+  margin: 0.7em;
+  font-size: 1.0em;
+  font-weight: 500;
+  font-family: Pretendard,-apple-system,BlinkMacSystemFont,Open Sans,Helvetica Neue,sans-serif;;
+  color: #404040;
 }
 #myImg {
   width: 55px;
