@@ -41,8 +41,10 @@ export default {
     ...mapState(["searchList"])
   },
    mounted() {
+	console.log(this.payload.dates)
+	if(this.payload.dates){
 	this.fetchSearchLists(this.paylaod)
-
+	}
    }
 };
 </script>
