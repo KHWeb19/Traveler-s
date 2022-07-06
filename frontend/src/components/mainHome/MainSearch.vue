@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+
 
 export default {
     name: 'MainSearch',
@@ -66,20 +66,11 @@ export default {
     },
     methods: {
         searchPage() {
-            console.log(this.dates)
-            this.num = this.$store.state.num++
-            const { dates, personnel , city, num} = this
-             const payload = { dates, personnel }
-            console.log(this.num)
-            axios.post('http://localhost:7777/search/commonSearch', {dates, personnel, city})
-                    .then((res) => {
-                        console.log("검색 성공")
-                        console.log(res.data)
-                       
-                        this.$router.push({name: 'CommonSearchPage',
-                                    params: { searchList: res.data , num, payload} })
-                    .catch(() => {});
-                })
+            const { dates, personnel , city} = this
+            const payload = { dates, personnel ,city}
+            const num = this.$store.state.num++
+            this.$router.push({name: 'CommonSearchPage',
+                                params: { payload ,num} })
         },
         initDates() {
             return this.dates = []

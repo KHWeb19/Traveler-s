@@ -17,4 +17,8 @@ export default {
   wishLists: [],
 
   bookingLists: [],
+
+  searchList:[],
+  keyWord:[],
+  num : 0
 };

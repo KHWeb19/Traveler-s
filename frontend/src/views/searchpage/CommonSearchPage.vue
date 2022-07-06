@@ -19,6 +19,8 @@
 <script>
 import MainSearch from '@/components/mainHome/MainSearch.vue'
 import CommonSearch from '@/components/detailSearch/CommonSearch.vue'
+import { mapActions, mapState } from 'vuex';
+
 
 export default {
 	name: 'CommonSearchPage',
@@ -26,18 +28,21 @@ export default {
 		MainSearch,
 		CommonSearch
 		
-	},data () {
-		return{
-			num : this.$store.state.num
-		}
 	},
    props: {
-		searchList: {
-			type:Array
-		},
-		payload : {
+		payload: {
 			type: Object
 		}
+   },
+   methods: {
+    ...mapActions(["fetchSearchLists"]),
+   },
+    computed: {
+    ...mapState(["searchList"])
+  },
+   mounted() {
+	this.fetchSearchLists(this.paylaod)
+
    }
 };
 </script>
