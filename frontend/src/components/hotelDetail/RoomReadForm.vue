@@ -67,8 +67,10 @@
                     </table>
                     <table id="inCard" style="width: 42%; height: 190px">
                       <tr>
-                        <td>
-                          <p>{{ item.roomType }} &ensp;|&ensp; {{ item.personnel }}</p>
+                        <td style="vertical-align: bottom;">
+                          <v-row>
+                            <h4>{{ item.roomType }}</h4> <p> &ensp;|&ensp; {{ item.personnel }}</p>
+                          </v-row>
                         </td>
                       </tr>
                       <tr>
@@ -252,8 +254,6 @@ h1{
   color: #202020;
 }
 #tagSpan1 {
-  margin: 10px;
-  padding: 6px;
   padding-left: 20px;
   padding-right: 20px;
   background-color: #f8f8f8;
