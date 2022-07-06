@@ -7,10 +7,10 @@
         <table style="width: 80%">
           <tr align="right">
             <td colspan="2">
-              <v-btn>
+              <v-btn  style="box-shadow:none; background:none;">
                 <!--이 태그 안에 @click=""해서 작업하시면 됩니다. -->
                 <v-icon v-if="checkWish == false" @click="wish" > mdi-cards-heart </v-icon>
-                <v-icon v-if="checkWish == true" @click="wish" color="#ccbce3"> mdi-cards-heart </v-icon>
+                <v-icon v-if="checkWish == true" @click="wish" color="#e63668"> mdi-cards-heart </v-icon>
               </v-btn>
               &ensp;
             </td>
@@ -222,6 +222,7 @@ export default {
   height: 55px;
   border-radius: 25px;
 }
+
 /*table{
     border-collapse:collapse;
     border: 1px solid black;
