@@ -35,8 +35,8 @@ export default {
         commit(FETCH_M_HOTEL, res.data);
       });
   },
-  fetchMRoomList({ commit }) {
-    return axios.get("http://localhost:7777/room/mem/list").then((res) => {
+  fetchMRoomList({ commit }, keyWord) {
+    return axios.post("http://localhost:7777/room/mem/list", keyWord).then((res) => {
       commit(FETCH_M_ROOM_LIST, res.data);
     });
   },

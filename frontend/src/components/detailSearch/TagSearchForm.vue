@@ -82,7 +82,7 @@ export default {
       const personnel = '2'
       const dates = [new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10), new Date(Date.now() - new Date().getTimezoneOffset() * 220000).toISOString().substr(0,10)]
       const payload = { dates, personnel}
-            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: mHotel.hotelNo.toString() , payload, mHotel} })      
+            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: mHotel.hotelNo.toString() , payload} })      
     },
     search() {
         const { word } = this;

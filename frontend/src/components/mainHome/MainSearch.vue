@@ -41,6 +41,9 @@ export default {
     props:{
         hotels:{
             type: Array
+        },
+        keyWord:{
+            type:Object
         }
     },
     component: {
@@ -75,7 +78,7 @@ export default {
         initDates() {
             return this.dates = []
         }
-    },
+    }
 }
 </script>
 
