@@ -61,13 +61,14 @@
                 @click="search(info)"
                 color="#f8f8f8"
                 variant="plain"
-                depressed="false"
+                depressed
                 class="button1 b-color rot-1">#{{ info }}
                 </v-btn>
             </v-row>
 
     
     </v-container>
+
 </template>
 
 <script>
