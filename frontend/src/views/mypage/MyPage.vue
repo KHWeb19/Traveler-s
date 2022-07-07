@@ -2,9 +2,9 @@
   <v-container style="text-align: center">
     <div style="display: inline-block">
       <v-row>
-        <v-col>
+        <!--<v-col>
           <my-page-left-menu-vue :userInfo="user" />
-        </v-col>
+        </v-col>-->
         <v-col>
           <my-page-profile-form
             :userInfo="user"
@@ -18,13 +18,14 @@
 
 <script>
 import MyPageProfileForm from "@/components/mypage/MyPageProfileForm.vue";
-import MyPageLeftMenuVue from "@/components/mypage/MyPageLeftMenu.vue";
+//import MyPageLeftMenuVue from "@/components/mypage/MyPageLeftMenu.vue";
 import { mapActions, mapState } from "vuex";
 import axios from "axios";
+
 export default {
   components: {
     MyPageProfileForm,
-    MyPageLeftMenuVue,
+    //MyPageLeftMenuVue,
   },
 
   computed: {

@@ -1,5 +1,5 @@
 <template>
-    <footer-top>
+    <div>
         <div class="footTop">
             <div class="footInner">
                 <ul class="footMenu">
@@ -16,7 +16,7 @@
                     <span class="txt"> 더 편리하게 이용하세요.</span>
                     <ul class="appLink">
                         <li><button type="button" class="google" onclick="location.href='#';">구글플레이</button></li>
-                        <li><button type="button" class="ios" onclick="location.href='#';">앱스토어</button></li>
+                        <li><button type="button" class="ios" onclick="location.hrediv#';">앱스토어</button></li>
                     </ul>
                 </div>
                 <div class="footCenter">
@@ -43,7 +43,7 @@
                 </div>
             </div>
         </div>
-    </footer-top>
+    </div>
 </template>
 
 <script>
@@ -53,43 +53,7 @@ export default {
 </script>
 
 <style scoped>
-body,
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-ul,
-ol,
-li,
-dl,
-dt,
-dd,
-table,
-th,
-td,
-form,
-fieldset,
-legend,
-input,
-textarea,
-button,
-select,
-div,
-figure,
-article,
-header,
-nav,
-footer,
-section,
-input,
-textarea,
-button,
-span,
-strong,
-em {
+body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fieldset, legend, input, textarea, button, select, div, figure, article, header, nav, footer, section, input, textarea, button, span, strong, em {
     margin: 0;
     padding: 0;
     color: #606060;
