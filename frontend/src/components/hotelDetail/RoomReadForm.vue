@@ -46,7 +46,7 @@
       <tr> <!-- 객실 란-->
         <td colspan="2">
           <v-container>
-            <v-col v-for="(item, i) in roomList" :key="i">
+            <v-col v-for="(item, i) in mRooms" :key="i">
               <v-card
                 align="center"
                 style="margin: 10px; width: 100%; height: 200px"
@@ -168,6 +168,7 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
 /*import axios from 'axios'*/
 
 export default {
@@ -181,17 +182,15 @@ export default {
         dialog: false
   }),
   props: {
-    roomList: {
-      type: Array,
+    payload: {
+      type : Object
     },
-    checkDate: {
-      type : Array
-    },
-    people : {
+    hotelNo: {
       type : String
     }
   },
     computed: {
+       ...mapState(['mRooms']),
         planDate () {
             if(this.dates.length == 2) {
                 if(this.dates[0] >= this.dates[1]){
@@ -203,6 +202,7 @@ export default {
         },
     },
   methods: {
+    ...mapActions(['fetchMRoomList']),
     goReserv() {},
     initDates() {
         return this.dates = []
@@ -219,14 +219,19 @@ export default {
     },
 
 },
- created() {
-      this.dates = this.checkDate
-      this.personnel = this.people
-      console.log(this.checkDate)
-      console.log(this.people)
-      
-  
+  mounted () {
+    console.log('room')
+    console.log(this.payload)
+    console.log(this.hotelNo)
+    if(this.payload){
+    const dates = this.payload.dates
+    const personnel = this.payload.personnel
+    const hotelNo = this.hotelNo
+    const keyWord = {dates, personnel, hotelNo}
+    this.fetchMRoomList(keyWord)
     }
+  }
+      
 };
 </script>
 

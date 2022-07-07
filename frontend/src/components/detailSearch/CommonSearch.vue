@@ -77,7 +77,8 @@ export default {
   methods: {
     readHotel(mHotel) {
             const payload = this.keyWord
-            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: mHotel.hotelNo.toString(), payload, mHotel} })      
+            console.log(payload)
+            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: mHotel.hotelNo.toString(), payload} })      
     },
     nextPage() {
         this.pageNum += 1;

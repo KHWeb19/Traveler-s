@@ -142,17 +142,22 @@
           </tr>
         </table>
       </form>
-    </v-container>
+    </v-container>   
+
+      <m-room-read-form :payload="payload"
+                        :hotelNo="hotelNo" />        
   </div>
 </template>
 
 <script>
 import KakaoMapApi from "@/components/hotelDetail/KakaoMapApi.vue";
+import MRoomReadForm from "@/components/hotelDetail/RoomReadForm.vue";
 import axios from "axios";
 export default {
   name: "HotelReadForm",
   components: {
     KakaoMapApi,
+    MRoomReadForm,
   },
   data() {
     return {
@@ -166,6 +171,12 @@ export default {
       type: Object,
       required: true,
     },
+    payload: {
+      type: Object
+    },
+    hotelNo: {
+      type: String
+    }
   },
   methods: {
     wish() {

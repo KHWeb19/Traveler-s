@@ -4,7 +4,7 @@
 	<div align="center" class="home_wrap">
 		<v-container>
 			<v-row>
-				<main-search />
+				<main-search :keyWord="keyWords"/>
 			</v-row>
 		</v-container>
 		<v-container>
@@ -27,7 +27,6 @@ export default {
 	components: {
 		MainSearch,
 		CommonSearch
-		
 	},
    props: {
 		payload: {
