@@ -38,7 +38,7 @@
                     :to="{ name: 'RoomRegisterPage', params: { hotelNo: this.hotelNo.toString() }, }"
                     class="btn">
 
-                  <v-btn>객실등록</v-btn>
+                  <button id="button">객실등록</button>
                 </router-link>
           </td>
         </tr>
