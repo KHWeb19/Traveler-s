@@ -1,18 +1,16 @@
 <template>
 <div>
-    <h1>숙소 정보</h1>
+    <h2>숙소 읽기</h2>
     <hotel-read v-if="bmHotel" :bmHotel="bmHotel"/>
     <p v-else>로딩중 입니다.</p>
     
-    <ul>
-        <li><router-link :to="{ name: 'BHotelModifyPage', params: { hotelNo } }">
-                수정
-        </router-link></li>
-        <li><button @click="onDelete">삭제</button></li>
-        <li><router-link :to="{ name: 'BHotelListPage' }">
-                목록
-        </router-link></li>
-    </ul>
+    <router-link :to="{ name: 'BHotelModifyPage', params: { hotelNo } }">
+            수정
+        </router-link>
+     <button @click="onDelete">삭제</button>
+     <router-link :to="{ name: 'BHotelListPage' }">
+            목록
+    </router-link>   
 </div>
 </template>
 
@@ -58,28 +56,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
-    h1 {
-        text-align: center;
-        margin-top: 10px;
-    }
-
-    ul {
-        list-style: none;
-        margin-left: 42%;
-        margin-top: 100px;
-        margin-bottom: 200px;
-        color: #569aff;
-    }
-
-    li {
-        float: left;
-        padding: 0 20px;
-    }
-
-    a {
-        text-decoration:none;
-        color: #569aff;
-    }
 </style>

@@ -4,7 +4,7 @@
       <!-- 쓰는 파일 -->
       <v-dialog v-model="dialog" width="800px">
         <template v-slot:activator="{ on }">
-          <v-btn style="color: black" v-on="on"> 상세보기 </v-btn>
+           <button id="button" v-on="on"> 상세보기 </button>
         </template>
         <v-card align="center">
           <v-card-title id="title">
@@ -122,7 +122,7 @@
                                     하지만 그냥 고객이 예약한 인원수로 바꿔도 상관없습니다. -->
                       </td>
                       <td align="center">
-                        <v-btn id="delButton" @click="onDelete"> X </v-btn>
+                        <v-btn id="delButton" @click="onDelete"> 예약취소 </v-btn>
                       </td>
                     </tr>
                   </table>
@@ -133,7 +133,6 @@
           <br />
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn> 수정 </v-btn>
             <v-btn @click="cancel"> 닫기 </v-btn>
             <v-spacer></v-spacer>
           </v-card-actions>
@@ -183,6 +182,20 @@ export default {
   border-radius: 50px;
   background-color: brown;
   color: white;
-  font-size: 20px;
+  font-size: 15px;
+}
+
+#button {
+    text-decoration: none;
+    position: relative;
+    padding: 0 15px;
+    color: #404040;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 29px;
+}
+
+#button:hover {
+  color: #569aff;
 }
 </style>
