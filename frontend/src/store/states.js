@@ -18,11 +18,14 @@ export default {
 
   bookingLists: [],
 
+
   searchList:[],
   keyWord:[],
   num : 0,
   searchKeyWord: null,
   hotelKeyWord: null,
   roomKeyWord: null,
-  hotel:null
+  hotel:null,
+  ceoBookingLists: [],
+
 };

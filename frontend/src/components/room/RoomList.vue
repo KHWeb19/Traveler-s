@@ -32,7 +32,7 @@
 </table>
 
 <br>
-<v-btn @click="deleteRoom()">삭제</v-btn>
+<button  id="button" @click="deleteRoom()">삭제</button>
 <br>
 <br>
 

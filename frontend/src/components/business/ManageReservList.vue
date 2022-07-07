@@ -1,140 +1,143 @@
 <template>
-    <v-container class="board-list">
+  <v-container>
+    <br />
+      <div>
+        <table style="width: 80%">
+          <tr>
+            <th align="center" width="160">체크인</th>
+            <th align="center" width="160">체크아웃</th>
+            <th align="center" width="180">예약상태</th>
+            <th align="center" width="300">객실명</th>
+            <th align="center" width="150">고객명</th>
+            <th align="center" width="150">숙박인원</th>
+            <th align="center" width="200"></th>
+          </tr>
+          <tbody>
+            <tr
+              v-if="
+                !ceoBookingLists ||
+                (Array.isArray(ceoBookingLists) && ceoBookingLists.length === 0)
+              "
+            >
+              <td colspan="5">현재 예약 고객이 없습니다!</td>
+            </tr>
 
-        <template> <!-- 서치 시간없으면 빼도 OK -->
-            <div align="right" style="width: 100%">
-            <v-col>
-                <v-row>
-                    <v-spacer></v-spacer>
-                    <v-text-field
-                    class="search"
-                    v-model="keyWord"
-                    label="Search"
-                    placeholder="키워드를 입력해주세요."
-                    single-line
-                    hide-details
-                    ></v-text-field>
-                    <v-col cols="2" md="1">
-                        <v-btn id="searchBtn" dark small>
-                            <v-icon>
-                                mdi-magnify
-                            </v-icon>
-                        </v-btn>
-                    </v-col>
-                </v-row>
-            </v-col>
-            </div>
-        </template>
-    <br>
+            <tr
+              v-else
+              v-for="(ceoBookingList, idx) in paginatedData"
+              :key="idx"
+            >
+              <td align="center">
+                <!-- 체크인 날짜 -->
+                <span>{{ ceoBookingList.startDate }}</span>
+              </td>
+              <td align="center">
+                <!-- 체크아웃 날짜 -->
+                <span>{{ ceoBookingList.endDate }}</span>
+              </td>
+              <td align="center">
+                <!-- 예약상태 -->
+                <span>{{ ceoBookingList.status }}</span>
+              </td>
+              <td align="center">
+                <!-- 객실명 -->
+                <v-col>
+                  <span>{{ ceoBookingList.roomType }}</span>
+                </v-col>
+              </td>
+              <td align="center">
+                <!-- 고객명 -->
+                <span>{{ ceoBookingList.username }}</span>
+              </td>
+              <td align="center">
+                <!-- 숙박인원 -->
+                <span>{{ ceoBookingList.personnel }} 명</span>
+              </td>
+              <td align="center">
+                <reserv-detail :bookingData="ceoBookingList" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-    <template>
-        <div>
-            <table style="width: 100%;">
-                <colgroup>
-                    <col class="id">
-                    <col class="checkIn">
-                    <col class="checkOut">
-                    <col class="roomName">
-                    <col class="userName">
-                    <col class="personnel">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th align="center" width="160">예약번호</th>
-                    <th align="center" width="160">체크인</th>
-                    <th align="center" width="160">체크아웃</th>
-                    <th align="center" width="300">객실명</th>
-                    <th align="center" width="150">고객명</th>
-                    <th align="center" width="150">숙박인원</th>
-                    <th align="center" width="100">  </th>
-                </tr>
-                </thead>
+<br>
 
-              <!--  <tr v-if="!reservs || (Array.isArray(reservs) && reservs.length === 0)">
-                    <td colspan="5">
-                        현재 예약 고객이 없습니다!
-                    </td>
-                </tr> 백 연결하실 때 주석 살리고
-                 아래 v-else v-for="reserv in reservs" :key="reserv.reservNo" 넣어주시면 됩니다.-->
+      <div class="page-box">
+              <div class="btn-cover">
+                  <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
+                      <v-icon> mdi-chevron-left </v-icon>
+                  </button>
+                  &ensp;
 
-                <tbody>
-                <tr >
-                    <td align="center"> <!-- 예약번호(id) -->
-                        <span>1</span>
-                    </td>    
-                    <td align="center"> <!-- 체크인 날짜 -->
-                        <span>2022-06-07</span>
-                    </td>                
-                    <td align="center"> <!-- 체크아웃 날짜 -->
-                        <span>2022-06-08</span>
-                    </td> 
-
-                    <td align="left"> <!-- 객실명 -->
-                    <v-col>                            
-                            <span>객실이름여기에</span>
-                    </v-col>
-                    </td>
-                    <td align="center"> <!-- 고객명 -->
-                        <span>김땡땡</span>
-                    </td>
-                    <td align="center"> <!-- 숙박인원 -->
-                        <span>4명</span>
-                    </td>
-                    <td align="center">
-                        <reserv-detail/>
-                    </td>
-                </tr>
-                </tbody>                
-            </table>
+                  <span>{{ pageNum + 1 }} / {{ pageCount }}</span>
+                  
+                  &ensp;
+                  <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
+                      <v-icon> mdi-chevron-right </v-icon>  
+                  </button>
+              </div>
         </div>
-    </template>
+
+<br>
+
 
     <!--테이블 페이지네이션-->
-
-    </v-container>
+  </v-container>
 </template>
 
 <script>
-import ReservDetail from '@/components/business/ReservDetail.vue'
+import ReservDetail from "@/components/business/ReservDetail.vue";
+
 //import axios from 'axios'
 
 export default {
-    name: 'manageReservList',
-    components: {
-        ReservDetail        
-    },
-    data() {
-        return {
-        
-        };
-    },
-    props: {
-        reservs: {
-            type: Array
-        },
-    },
-    methods: {
-        readReserv(){
+  name: "manageReservList",
+  components: {
+    ReservDetail,
+  },
 
-        },
-       /* search() {
-            const { keyWord } = this;
-                axios.post("http://localhost:7777/reserv/search", { keyWord })
-                    .then((res) => {
-                    console.log(res.data);
-                    alert("검색 완료");
-                    this.$router.push({ name: 'reservSearchList', params: { searchList: res.data, keyWord: this.keyWord },
-                        })
-                        .catch(() => {});
-                    })
-                    .catch(() => {
-                    alert("검색 실패");
-                }); 
-        },*/
+  props: {
+    ceoBookingLists: {
+      type: Array,
+      required: true,
+    },
+    pageSize: {
+      type: Number,
+      required: false,
+      default: 5
+    }
+  },
+  data() {
+    return {
+      pageNum: 0,
+    };
+  },
+  computed: {
+    pageCount () {
+                let listLeng = this.ceoBookingLists.length,
+                    listSize = this.pageSize,
+                    page = Math.floor(listLeng / listSize);
+                if (listLeng % listSize > 0) page += 1
+                return page;
+            },
+            paginatedData () {
+                const start = this.pageNum * this.pageSize,
+                        end = start + this.pageSize;
+                return this.ceoBookingLists.slice(start, end);
+                
+            }
+  },
+  methods: {
+    nextPage () {
+    this.pageNum += 1;
+    },
+    prevPage () {
+    this.pageNum -= 1;
     },
 }
+};
 </script>
-
 
 <style scoped>
 .board-list {
@@ -169,10 +172,9 @@ td {
 }
 tr:nth-of-type(odd) { 
 	background: rgb(243, 243, 243); 
+  vertical-align: middle;
 }
-
-/* 페이징 버튼 */
-.page-box {
+#search {
   width: 80%;
   margin: 5px auto;
   height: 30px;
@@ -192,8 +194,11 @@ tr:nth-of-type(odd) {
   position: sticky;
   text-decoration: none;
 }
-
 #search{
     width:50%;
+}
+#roomImg {
+  width: 100px;
+  height: 100px;
 }
 </style>
