@@ -20,5 +20,9 @@ export default {
 
   searchList:[],
   keyWord:[],
-  num : 0
+  num : 0,
+  searchKeyWord: null,
+  hotelKeyWord: null,
+  roomKeyWord: null,
+  hotel:null
 };

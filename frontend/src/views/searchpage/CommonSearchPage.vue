@@ -9,7 +9,7 @@
 		</v-container>
 		<v-container>
 			<common-search :searchList="searchList"
-							:payload="payload"/>
+							:keyWord="keyWords"/>
 		</v-container>
 	</div>
 	</v-app>
@@ -32,7 +32,12 @@ export default {
    props: {
 		payload: {
 			type: Object
-		}
+		},
+   },
+   data() {
+	return {
+		keyWords: null
+	}
    },
    methods: {
     ...mapActions(["fetchSearchLists"]),
@@ -41,12 +46,14 @@ export default {
     ...mapState(["searchList"])
   },
    mounted() {
-	console.log(this.payload.dates)
-	if(this.payload.dates){
-	this.fetchSearchLists(this.paylaod)
+	if(this.payload) {
+		this.$store.state.searchKeyWord = this.payload
 	}
+	this.keyWords = this.$store.state.searchKeyWord
+	this.fetchSearchLists(this.keyWords)
+
    }
-};
+}
 </script>
 
 <style scoped>

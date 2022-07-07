@@ -20,8 +20,6 @@ export default new Vuex.Store({
   mutations,
   getters,
   plugins: [
-    createPersistedState({
-      path: ['CommonSearchPage']
-    })
+    createPersistedState()
   ]
 })

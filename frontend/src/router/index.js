@@ -163,7 +163,7 @@ const routes = [
     },
   },
   {
-    path: "/commonSearchPage/:num",
+    path: "/commonSearchPage/:num/:city/:personnel",
     name: "CommonSearchPage",
     components: {
       default: CommonSearchPage,

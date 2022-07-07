@@ -19,19 +19,19 @@
             !wishLists ||(Array.isArray(wishLists) && wishLists.length === 0)">
           <td align="center" colspan="3">현재 위시가 없습니다!</td>
         </tr>
-        <tr v-else v-for="wishList in paginatedData" :key="wishList.hotelNo">
+        <tr v-else v-for="mHotel in paginatedData" :key="mHotel.hotelNo">
           <td align="center">
-              {{ wishList.hotelName }}
+              {{ mHotel.hotelName }}
           </td>
           <td align="center">
             <router-link
               :to="{ name: 'MHotelReadPage',
-                    params: { hotelNo: wishList.hotelNo.toString() },}">
-             {{ wishList.totalAddress }}
+                    params: { hotelNo: mHotel.hotelNo.toString(), mHotel },}">
+             {{ mHotel.totalAddress }}
             </router-link>
           </td>
           <td align="center">
-            <v-btn @click="deletewish(wishList.hotelNo)">취소</v-btn>
+            <v-btn @click="deletewish(mHotel.hotelNo)">취소</v-btn>
           </td>
         </tr>
       </tbody>

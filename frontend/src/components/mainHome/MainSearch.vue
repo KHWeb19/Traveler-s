@@ -70,7 +70,7 @@ export default {
             const payload = { dates, personnel ,city}
             const num = this.$store.state.num++
             this.$router.push({name: 'CommonSearchPage',
-                                params: { payload ,num} })
+                                params: { payload , num , city, personnel} })
         },
         initDates() {
             return this.dates = []
