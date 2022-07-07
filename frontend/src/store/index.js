@@ -13,11 +13,13 @@ Vue.use(Vuex)
 //const plugins= [createPersistedState({
  //   paths: []
 //})]
-
+import createPersistedState from 'vuex-persistedstate'
 export default new Vuex.Store({
   state,
   actions,
   mutations,
-  getters
-  //plugin
+  getters,
+  plugins: [
+    createPersistedState()
+  ]
 })

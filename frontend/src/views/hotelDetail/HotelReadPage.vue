@@ -1,6 +1,6 @@
 <template>
   <div align="center">
-    <m-hotel-read-form :mHotel="mHotel" />
+    <m-hotel-read-form :mHotel="hotel" />
     <!-- <m-search-calender-form/>
      SearchCalenderForm.vue 해당 컴포넌트 내역을 우선
      RoomReadForm 내로 이동시켰습니다.
@@ -40,6 +40,7 @@ export default {
   data() {
     return {
       roomList:[],
+      hotel:null,
       dates: [],
       personnel: ''
     }
@@ -53,8 +54,10 @@ export default {
       searchRoom(payload) {
         const {dates, personnel} = payload
         const hotelNo = this.hotelNo
+        const keyWord = {dates, personnel, hotelNo}
+        this.$store.state.roomKeyWord = keyWord
          axios
-        .post("http://localhost:7777/room/mem/list", { hotelNo, dates, personnel })
+        .post("http://localhost:7777/room/mem/list", keyWord)
         .then((res) => {
           console.log(res.data);
           this.roomList = res.data;
@@ -63,20 +66,25 @@ export default {
       }
   },
   created() {
-    
+    console.log('payload' + this.payload)
+    if(this.payload){
     const {dates , personnel} = this.payload
-    this.dates = dates
-    this.personnel = personnel
     const hotelNo = this.hotelNo;
+    const word = {dates, personnel, hotelNo}
+    console.log(word)
+    this.$store.state.roomKeyWord = word
+    this.$store.state.hotel = this.mHotel
+    console.log('hotel' + this.$store.state.hotel)
+    }
+    this.hotel = this.$store.state.hotel
+    console.log('roomKeyWord' + this.$store.state.roomKeyWord)
+    const keyWord = this.$store.state.roomKeyWord
       axios
-        .post("http://localhost:7777/room/mem/list", { hotelNo, dates, personnel })
+        .post("http://localhost:7777/room/mem/list",  keyWord )
         .then((res) => {
           console.log(res.data);
           this.roomList = res.data;
         });
-  
-
-    
   },
 
 };

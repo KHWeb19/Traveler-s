@@ -13,7 +13,9 @@ import {
   FETCH_BM_ROOM_LIST,
   FETCH_WISH_LISTS,
   FETCH_BOOKING_LISTS,
+  FETCH_SEARCH_LISTS,
   FETCH_CEOBOOKING_LISTS,
+
 } from "./mutation-types";
 
 import axios from "axios";
@@ -129,4 +131,10 @@ export default {
         commit(FETCH_CEOBOOKING_LISTS, res.data);
       });
   },
+  fetchSearchLists({ commit }, payload){
+    axios.post('http://localhost:7777/search/commonSearch', payload)
+                    .then((res) => {
+                     commit(FETCH_SEARCH_LISTS, res.data)
+                })
+   }
 };

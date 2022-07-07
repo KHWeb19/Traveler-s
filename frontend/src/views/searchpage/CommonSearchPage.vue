@@ -9,7 +9,7 @@
 		</v-container>
 		<v-container>
 			<common-search :searchList="searchList"
-							:payload="payload"/>
+							:keyWord="keyWords"/>
 		</v-container>
 	</div>
 	</v-app>
@@ -19,6 +19,8 @@
 <script>
 import MainSearch from '@/components/mainHome/MainSearch.vue'
 import CommonSearch from '@/components/detailSearch/CommonSearch.vue'
+import { mapActions, mapState } from 'vuex';
+
 
 export default {
 	name: 'CommonSearchPage',
@@ -26,20 +28,32 @@ export default {
 		MainSearch,
 		CommonSearch
 		
-	},data () {
-		return{
-			num : this.$store.state.num
-		}
 	},
    props: {
-		searchList: {
-			type:Array
-		},
-		payload : {
+		payload: {
 			type: Object
-		}
+		},
+   },
+   data() {
+	return {
+		keyWords: null
+	}
+   },
+   methods: {
+    ...mapActions(["fetchSearchLists"]),
+   },
+    computed: {
+    ...mapState(["searchList"])
+  },
+   mounted() {
+	if(this.payload) {
+		this.$store.state.searchKeyWord = this.payload
+	}
+	this.keyWords = this.$store.state.searchKeyWord
+	this.fetchSearchLists(this.keyWords)
+
    }
-};
+}
 </script>
 
 <style scoped>
