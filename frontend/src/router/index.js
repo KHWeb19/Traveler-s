@@ -118,7 +118,7 @@ const routes = [
     },
   },
   {
-    path: "/mReservPage",
+    path: "/mReservPage/:no",
     name: "MReservPage",
     components: {
       default: MReservPage,
@@ -171,11 +171,6 @@ const routes = [
     props: {
       default: true,
     },
-  },
-  {
-    path: "/reservationTest",
-    name: "ReservationTest",
-    component: () => import("../views/reservation/ReservationTest.vue"),
   },
   {
     path: "/wishlistpage",

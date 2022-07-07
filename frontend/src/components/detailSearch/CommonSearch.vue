@@ -23,24 +23,19 @@
         <v-container justify="center" >
          <v-row>
             <v-col>
-            <div class="btn-cover" align="center">
-                <v-btn
-                    :disabled="pageNum === 0"
-                    @click="prevPage"
-                    class="page-btn">
-                이전
-                </v-btn>
-                <span class="page-count"
-                >{{ pageNum + 1 }} / {{ pageCount }} 페이지</span
-                >
-                <v-btn
-                    :disabled="pageNum >= pageCount - 1"
-                    @click="nextPage"
-                    class="page-btn"
-                >
-                다음
-                </v-btn>
-            </div>
+        <div class="btn-cover">
+            <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
+                <v-icon> mdi-chevron-left </v-icon>
+            </button>
+            &ensp;
+
+                <span>{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
+
+            &ensp;
+            <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
+                <v-icon> mdi-chevron-right </v-icon>  
+            </button>
+        </div>
             </v-col>
          </v-row>
         </v-container>
@@ -65,7 +60,7 @@ export default {
     pageSize: {
       type: Number,
       required: false,
-      default: 4,
+      default: 6,
     }
   },
   data() {
@@ -150,4 +145,6 @@ export default {
 #spaninfo{
   margin: 1%;
 }
+
+
 </style>

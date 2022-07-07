@@ -67,13 +67,10 @@
                     </table>
                     <table id="inCard" style="width: 42%; height: 190px">
                       <tr>
-                        <td>
-                          <p>{{ item.roomType }}</p>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <p>{{ item.personnel }}</p>
+                        <td style="vertical-align: bottom;">
+                          <v-row>
+                            <h4>{{ item.roomType }}</h4> <p> &ensp;|&ensp; {{ item.personnel }}</p>
+                          </v-row>
                         </td>
                       </tr>
                       <tr>
@@ -101,7 +98,7 @@
                               <tr>
                                 <v-dialog v-model="dialog" width="700px">
                                   <template v-slot:activator="{ on }">
-                                    <v-btn v-on="on" dark> 상세보기 </v-btn>
+                                    <v-btn id="button" v-on="on"> 상세보기 </v-btn>
                                   </template>
                                   <!-- slide를 넣어서 객실 사진 전부를 확인할 수 있도록 한다. -->
                                   <div class="slide-10d">
@@ -127,9 +124,9 @@
                                 <td>
                                   <br />
                                   <v-btn
-                                    id="button"
+                                    id="button2"
                                     @click="
-                                      goReserv(mRoom.hotelNo, mRoom.roomNo)
+                                      goReserv(item)
                                     "
                                   >
                                     예약하기</v-btn
@@ -168,6 +165,7 @@
 </template>
 
 <script>
+import axios from "axios"
 /*import axios from 'axios'*/
 
 export default {
@@ -203,7 +201,27 @@ export default {
         },
     },
   methods: {
-    goReserv() {},
+    goReserv(item) {
+      const params = {
+        "roomId": item.roomNo,
+        "price": item.price,
+        "startDate": this.dates[0],
+        "endDate": this.dates[1],
+        "status": "PENDING"
+      }
+      console.log(params)
+      axios.post("http://localhost:7777/reserve/user/makeReservation", params)
+      .then((res) => {
+        if (res.status){
+          console.log(res.data)
+          this.$router.push({ name: 'MReservPage', params: {no: res.data}})
+        }
+      })
+      .catch(() =>{
+        alert("이미 예약된 숙소입니다")
+      })
+
+    },
     initDates() {
         return this.dates = []
     },
@@ -231,16 +249,41 @@ export default {
 </script>
 
 <style scoped>
+h1{
+  font-family: 'NanumSquareRound';  
+  color: #202020;
+}
 #tagSpan1 {
-  margin: 10px;
-  padding: 6px;
   padding-left: 20px;
   padding-right: 20px;
-  border-radius: 5px;
-  background-color: lightgray;
+  background-color: #f8f8f8;
+  display: inline-block;
+  position: relative;
+  border-radius: 20px;
+  text-decoration: none;
+  margin: 0.7em;
+  font-weight: 500;
+  font-family: Pretendard,-apple-system,BlinkMacSystemFont,Open Sans,Helvetica Neue,sans-serif;;
   font-size: 12px;
   color: gray;
 }
+
+#button2 {
+    text-decoration: none;
+    background-color: #54658a;
+    position: relative;
+    padding: 0 15px;
+    color: #f8f8f8;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 29px;
+}
+
+#button2:hover {
+  background-color: #e63668;
+}
+
+
 /*table, th, td{
     border-collapse:collapse;
     border: 1px solid black;

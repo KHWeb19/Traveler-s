@@ -10,7 +10,9 @@ import {
   FETCH_BM_ROOM_LIST,
   FETCH_WISH_LISTS,
   FETCH_BOOKING_LISTS,
-  FETCH_SEARCH_LISTS
+  FETCH_SEARCH_LISTS,
+  FETCH_CEOBOOKING_LISTS,
+
 } from "./mutation-types";
 
 export default {
@@ -58,5 +60,8 @@ export default {
   },
   [FETCH_SEARCH_LISTS](state, searchList){
     state.searchList = searchList
-  }
+  },
+  [FETCH_CEOBOOKING_LISTS](state, ceoBookingLists) {
+    state.ceoBookingLists = ceoBookingLists;
+  },
 };

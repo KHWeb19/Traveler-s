@@ -1,12 +1,11 @@
 <template>
-  <!-- 메인의 서비스 이용 안내 파트입니다. -->
-<div class="mainCont">
+    <!-- 메인의 서비스 이용 안내 파트입니다. -->
     <div class="mainCont">
         <h3 class="titDep2">서비스 이용안내</h3>
             <ul class="mainIcon">
                 <li class="reservation"><a href="#"><span>예약안내</span></a></li>
                 <li class="insurance"><a href="#"><span>보험안내</span></a></li>
-                <li class="return"><a href="#"><span>0000</span></a></li>
+                <li class="return"><a href="#"><span>렌트안내</span></a></li>
                 <li class="infomation"><a href="#"><span>이용안내</span></a></li>
                 <li class="cancellation"><a href="#"><span>결항안내</span></a></li>
                 <li class="refund"><a href="#"><span>취소/환불 안내</span></a></li>
@@ -22,9 +21,8 @@
 			<button type="button" class="btnDefault btnL action" subscriptionsbtn="">신청</button>
 		</div>
 	</div>
-    </div>
+       
 </div>
-
 </template>
 
 <script>
@@ -34,6 +32,7 @@ export default {
 </script>
 
 <style scoped>
+
 
 @font-face {
     font-family: 'NanumSquareRound';
@@ -179,17 +178,20 @@ div {
     display: flex;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    justify-content: space-between;
+    justify-content: space-around;
     position: relative;
-    margin-top: 56px;
-    padding: 40px 40px;
+    padding: 105px 40px 1vh;
+}
+.mainCont .mainNews{
+    height: 250px;
+    margin: 0%;
 }
 
     .mainCont .mainNews:before {
     content: '';
     display: block;
     position: absolute;
-    top: 0;
+    top: 60px;
     left: 0;
     width: 100%;
     height: 140px;
@@ -206,7 +208,17 @@ div {
     font-size: 1.4rem;
     line-height: 1.4;
 }
-
+.titDep4 {
+    display: block;
+    position: absolute;
+    top: -23px;
+    left: 20px;
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+    font-weight: 200;
+    line-height: 1.4;
+    color: gray;
+}
     .mainCont .mainNews .txt .desc {
     position: relative;
     margin-top: -8px;
@@ -217,7 +229,7 @@ div {
 
     .mainCont .mainNews .email {
     position: relative;
-    margin-bottom: 150px;
+    margin: 5px 0 150px;
 }
 
     .mainCont .mainNews .email input[type=text] {
@@ -244,7 +256,7 @@ input:focus {
 }
 
 .mainCont .mainNews .email .btnDefault.btnL.action {
-    min-width: 88px;
+    width: 5vw;
     margin-left: 4px;
 }
 
@@ -254,7 +266,7 @@ input:focus {
 }
 
 .btnL {
-    min-width: 120px;
+    min-width: 88px;
     height: 56px;
     padding: 0 24px;
     color: #63a1ff;
@@ -270,5 +282,50 @@ input:focus {
     display: inline-block;
     font-weight: 600;
     text-align: center;
+}
+@media screen and (min-width: 1904px){
+    .mainCont .mainNews:before {
+    left: 18%
+}
+.mainCont .mainNews {
+    justify-content: center;
+}
+.mainCont .mainNews .txt {
+    margin: 0 5%;
+}
+   .mainCont .mainNews .email {
+    margin-bottom: 150px;
+    padding: 0 5%;
+}
+.titDep4 {
+    top: -23px;
+    left: 100px;
+}
+}
+@media screen and (min-width: 360px) and (max-width: 768px) {
+    .mainCont {
+        height: outo;
+        flex-direction: column;
+    }
+
+    .mainCont .mainNews {
+        display: flex;
+        flex-direction: column;
+        height: 200px;
+        padding: 30px 0 10px;
+    }
+    .mainCont .mainNews:before {
+    top: 22px;
+    width: 100%;
+    height: 180px;
+    background: url(@/assets/bg_news.png) no-repeat;
+}
+.mainCont .mainNews .email {
+    margin-bottom: 42px;
+    padding: 0 5%;
+}
+.titDep4 {
+   display: none;
+}
 }
 </style>

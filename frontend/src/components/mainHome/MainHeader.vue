@@ -1,61 +1,53 @@
 <template>
-<section class="wrapper">
-  <header>
+  <section class="wrapper">
+    <header>
 
-        <img src="@/assets/TravelLogo.png" class="logoImg" @click="home" />
+      <img src="@/assets/TravelLogo.png" class="logoImg" @click="home" />
 
-    <nav>
-      <!-- 메뉴 리스트 -->
-      <div class="navList">
-        <h2>
-          <a href="#">공지사항</a>
-        </h2>
-        <h2>
-          <a href="#">항공</a>
-        </h2>
-        <h2>
-          <a href="#">렌터카</a>
-        </h2>
-        <h2>
-          <a href="#">숙박</a>
-        </h2>
-        <h2>
-          <a href="#">맛집</a>
-        </h2>
-        <h2>
-          <a href="#">에디패스</a>
-        </h2>
+      <nav>
+        <!-- 메뉴 리스트 -->
+        <div class="navList">
+          <h2>
+            <a href="#">공지사항</a>
+          </h2>
+          <h2>
+            <a href="#">항공</a>
+          </h2>
+          <h2>
+            <a href="#">렌터카</a>
+          </h2>
+          <h2>
+            <a href="#">숙박</a>
+          </h2>
+          <h2>
+            <a href="#">맛집</a>
+          </h2>
+          <h2>
+            <a href="#">에디패스</a>
+          </h2>
+        </div>
+
+      </nav>
+
+      <!-- 로그인, 회원가입 버튼-->
+      <div class="login">
+        <LoginForm />
       </div>
-      
-    </nav>
-    
-    <!-- 로그인, 회원가입 버튼-->
-    <div class="login">
-    <LoginForm />
-    </div>
 
-    <div class="navIcon">
-    <v-col id="BarBtn" v-if="!isLoggedIn" />
-    <v-col id="BarBtn" v-else>
-      <v-app-bar-nav-icon @click="drawer = !drawer" />
-    </v-col>
-    </div>
+      <div class="navIcon">
+        <v-col id="BarBtn" v-if="!isLoggedIn" />
+        <v-col id="BarBtn" v-else>
+          <v-app-bar-nav-icon @click="drawer = !drawer" />
+        </v-col>
+      </div>
 
-    <!-- 로그인시 생기는 메뉴 -->
-    <v-navigation-drawer disable-resize-watcher 
-                        right
-                        app             
-                         hide-overlay
-                         v-model="drawer">
-      <NavDrawer :userInfo="user"/>
-    </v-navigation-drawer>
-  </header>
+      <!-- 로그인시 생기는 메뉴 -->
+      <v-navigation-drawer disable-resize-watcher right app hide-overlay v-model="drawer">
+        <NavDrawer :userInfo="user" />
+      </v-navigation-drawer>
+    </header>
 
-    
-
-    
-    
-</section>
+  </section>
 </template>
 
 <script>
@@ -97,12 +89,12 @@ export default {
       console.log(login)
       this.$emit('checkLogin', login)
     },
-    ...mapActions(["setUser"])
+    ...mapActions(["setUser"]),
   },
   mounted() {
-    if(this.$store.state.isLoggedIn ==true){
-      this.setUser();
-      }
+    if(this.$store.state.isLoggedIn == true){
+      this.setUser()
+    }
   }
 }
 
@@ -202,5 +194,38 @@ export default {
   top: 41px;
   right: 110px;
 
+}
+@media screen and (min-width: 990px) and (max-width: 1070px) {
+.wrapper header {
+    position: relative;
+    min-width: 500px; 
+}
+}
+@media screen and (min-width: 780px) and (max-width: 990px) {
+.wrapper header {
+    position: relative;
+    min-width: 500px;
+    height: 200px
+}
+.wrapper header nav {
+    position: absolute;
+    top: 100px;
+    right: 13%;
+    padding: 35px 5%;
+}
+
+}
+@media screen and (max-width: 780px) {
+  .wrapper header {
+    position: relative;
+    min-width: 500px;
+    height: 200px
+}
+  .wrapper header nav {
+    position: absolute;
+    top: 100px;
+    right: 3%;
+    padding: 35px 5%;
+}
 }
 </style>
