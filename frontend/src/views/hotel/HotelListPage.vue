@@ -1,5 +1,6 @@
 <template>
 <div align="center">
+  <img src="@/assets/hotelbackimg.jpg"/>
 <v-container>
     <table style="width: 80%">
       <tr>
@@ -63,43 +64,63 @@ export default {
 </script>
 
 <style scoped>
-div {
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  user-select:none
-}
-.pageTit {
-  padding: 50px 0px 30px 0px;
-  font-family: 'NanumSquareRound';
-  font-size: 2.0rem;
-  line-height: 1.25;
-  letter-spacing: -.01em;
-  color: #202020;
-  font-weight: 900;
-}
-.pageTit:after {
-    content: '';
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    margin-bottom: 24px;
-    border-radius: 50%;
-    background-color: #e63668;
-}
-.page-count {
-  margin-left: 15px;
-  border: 1px;
-  border-bottom: 5px solid #e63668;
-  border-radius: 5px;
-  padding: 5px 10px;
-  outline: none;
-  color: #18225c;
-  -webkit-text-stroke: 0.7px #18225c;
-}
-.btn {
-  margin-right: 15px;
-  position: sticky;
-  text-decoration: none;
-}
+
+  div {
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    height: 100%;
+  }
+  .pageTit {
+    padding: 50px 0px 30px 10px;
+    font-family: 'NanumSquareRound';
+    font-size: 2.0rem;
+    line-height: 1.25;
+    letter-spacing: -.01em;
+    color: #202020;
+    font-weight: 900;
+  }
+  .pageTit:after {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      margin-bottom: 24px;
+      border-radius: 50%;
+      background-color: #e63668;
+  }
+  .page-count {
+    margin-left: 15px;
+    border: 1px;
+    border-bottom: 5px solid #e63668;
+    border-radius: 5px;
+    padding: 5px 10px;
+    outline: none;
+    color: #18225c;
+    -webkit-text-stroke: 0.7px #18225c;
+  }
+  .btn {
+    margin-right: 15px;
+    position: sticky;
+    text-decoration: none;
+  }
+
+  img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  /*
+  background: linear-gradient(
+            to bottom,
+            rgba(255,255,255,0) 10%,
+            rgba(255,255,255,0.5) 25%,
+            rgba(255,255,255,0.7) 40%,
+            rgba(255,255,255,1) 50%,
+            rgba(255,255,255,1) 100%
+          ), url(@/assets/hotelbackimg.jpg);
+  background-repeat: no-repeat;*/
+  
+  }
+
 </style>

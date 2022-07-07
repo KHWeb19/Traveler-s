@@ -32,10 +32,14 @@
         <div class="hotelImg">
             <h3>이미지</h3>
             <hr>
-            <div>
-                <v-container>
-                    <v-img width="100px" height="100px" v-for="(item, index) in bmHotel.hotelImages" :key=index
-                    :src="require(`@/assets/hotelImg/${item}`)"></v-img>
+            <div class="files">
+                <v-container fluid>
+                    <v-row>
+
+                        <v-img width="150px" height="150px" v-for="(item, index) in bmHotel.hotelImages" :key=index
+                        :src="require(`@/assets/hotelImg/${item}`)"></v-img>
+  
+                    </v-row>
                 </v-container>
             </div>
         </div>
@@ -99,7 +103,7 @@ h3 {
     margin-left: 50px;
 }
 .hotelInfobox, .hotelInfobox:focus {
-    width: 400px;
+    width: 600px;
     padding: 5px 8px;
     margin: 30px;
     font-size: 14px;
@@ -132,7 +136,7 @@ input[id="address"] {
 .hotelImg {
     margin: 50px 50px 10px 50px;
 }
-#files {
+.files {
     margin: 50px;
 }
 
