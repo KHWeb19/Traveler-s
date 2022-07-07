@@ -226,14 +226,17 @@ footer .footBtm .txtCopy span:first-child {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-    footer .footInner {
-        margin: 0 8% 0 4%;
+    footer .footBtm .footInner {
+        margin: 0%;
+        padding: 4% 2%;
     }
 }
 
-@media screen and (min-width: 360px) and (max-width: 768px) {
-    footer .footInner {
-        margin: 0 1% 0 1.5%;
-    }
+@media screen and (min-width: 499px) and (max-width: 768px) {
+
+    footer .footBtm .footInner {
+    margin: 0 1% 0 1.5%;
+        padding: 1% 0;
+}
 }
 </style>
