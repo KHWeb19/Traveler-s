@@ -51,7 +51,7 @@
 
 <br>
 
-<v-btn class="btn" @click="deleteHotel()">삭제</v-btn>
+<button id="button" @click="deleteHotel()">삭제</button>
 
 <br>
 

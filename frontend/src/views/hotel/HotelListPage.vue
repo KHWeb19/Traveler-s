@@ -1,7 +1,7 @@
 <template>
 <div align="center">
 <v-container>
-    <table style="width: 80%">
+    <table style="width: 100%">
       <tr>
         <td align="left" colspan="2">
       <h2 class="pageTit">숙소 관리</h2>
@@ -12,7 +12,7 @@
             <span class="page-count">전체</span>
         </td>
         <td align="right">
-          <router-link :to="{ name: 'BHotelRegisterPage' }" class="btn"><v-btn>숙소등록</v-btn></router-link>
+          <router-link :to="{ name: 'BHotelRegisterPage' }" class="btn"><button  id="button" >숙소등록</button></router-link>
         </td>
       </tr>
       <tr>
