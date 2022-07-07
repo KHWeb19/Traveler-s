@@ -33,7 +33,7 @@
                 
                 &ensp;
                 
-                <span class="page-count"
+                <span
                 >{{ pageNum + 1 }} / {{ pageCount }} 페이지</span
                 >
 
@@ -68,7 +68,7 @@ export default {
     pageSize: {
       type: Number,
       required: false,
-      default: 4,
+      default: 6,
     }
   },
   data() {

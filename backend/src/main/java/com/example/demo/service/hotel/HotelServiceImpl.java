@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -121,20 +122,20 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
     // ---------------------------------------------------------------------------------------------------------------
 
 
-
+    @Transactional
     public List<HotelResponse> random () {
         log.info("HotelServiceIMPL random");
         List<Hotel> randomResults = hotelRepository.randomPick(6);
 
-        List<HotelResponse> responses = new ArrayList<>();
+        //List<HotelResponse> responses = new ArrayList<>();
 
 
-        for(Hotel hotel : randomResults) {
+        /*for(Hotel hotel : randomResults) {
             responses.add(new HotelResponse(
                     hotel.getHotelNo(), hotel.getHotelImages().get(0).getPath(), hotel.getHotelName(), hotel.getTotalAddress(), hotel.getHotelInfo()
             ));
-        }
-        return responses;
+        }*/
+        return hotelBuilder(randomResults);
     }
 
     public HotelResponse mRead(Integer hotelNo) {

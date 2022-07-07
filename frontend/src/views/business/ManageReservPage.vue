@@ -1,47 +1,54 @@
 <template>
-    <div align="center">
-        <v-container>
-            <tabele style="width: 100%">
-                <tr>
-                    <td align="left">
-                <h2 class="pageTit">예약 관리</h2>
-                    </td>
-                </tr>
+  <div align="center">
+    <img src="@/assets/reservbackimg.jpg"/>
 
-                <tr>
-                    <td align="left">
-                        <span class="page-count">전체</span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td align="center">
-                      <manage-reserv-list/>
-                    </td>
-                </tr>
-
-            </tabele>
-        </v-container>
-    </div>
+    <manage-reserv-list :ceoBookingLists="ceoBookingLists" />
+  </div>
 </template>
 
 <script>
-import ManageReservList from '@/components/business/ManageReservList.vue'
-
+import ManageReservList from "@/components/business/ManageReservList.vue";
+import { mapActions, mapState } from "vuex";
 
 export default {
-    name: 'BManageReservPage',
-    components: {
-        ManageReservList
-
-    }    
-}
+  name: "BManageReservPage",
+  components: {
+    ManageReservList,
+  },
+  computed: {
+    ...mapState(["ceoBookingLists"]),
+  },
+  methods: {
+    ...mapActions(["fetchCeoBookingLists"]),
+  },
+  mounted() {
+    this.fetchCeoBookingLists();
+  },
+};
 </script>
 
-
 <style scoped>
-/*table, th, td{
-    border-collapse:collapse;
-    border: 1px solid black;
-}*/
+
+  div {
+    margin-top: 50px;
+    
+  }
+
+  img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  /*
+  background: linear-gradient(
+            to bottom,
+            rgba(255,255,255,0) 10%,
+            rgba(255,255,255,0.5) 25%,
+            rgba(255,255,255,0.7) 40%,
+            rgba(255,255,255,1) 50%,
+            rgba(255,255,255,1) 100%
+          ), url(@/assets/hotelbackimg.jpg);
+  background-repeat: no-repeat;*/
+  
+  }
+
 </style>

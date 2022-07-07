@@ -78,12 +78,14 @@ public class ReservationController {
         return reservationResponses;
     }
 
+
+    @Transactional
     @GetMapping("/ceo/listAllReservations")
     public List<ReservationResponse> ceoListAllReservations(){
         String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         User user = userRepository.findByEmail(email).get();
         List<Reservation> reservations = reservationService.listReservationsForCEO(user.getId());
-        List<ReservationResponse> reservationResponses = ReservationResponse.reservationResponseListBuilder(reservations);
+        List<ReservationResponse> reservationResponses = ReservationResponse.reservationResponseListBuilderForCeo(reservations);
         return reservationResponses;
     }
     @GetMapping("/ceo/reservationListWithStatus")

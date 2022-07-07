@@ -17,4 +17,6 @@ export default {
   wishLists: [],
 
   bookingLists: [],
+
+  ceoBookingLists: [],
 };
