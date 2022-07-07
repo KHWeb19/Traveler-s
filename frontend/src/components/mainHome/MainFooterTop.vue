@@ -1,5 +1,5 @@
 <template>
-    <footer-top>
+    <footer>
         <div class="footTop">
             <div class="footInner">
                 <ul class="footMenu">
@@ -43,7 +43,7 @@
                 </div>
             </div>
         </div>
-    </footer-top>
+    </footer>
 </template>
 
 <script>
