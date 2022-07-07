@@ -3,14 +3,12 @@
     <v-col class="mypage" outlined>
       <div style="display: flex;">
         <v-form class="pageBox" ref="form" lazy-validation>
+          <v-col class="pageTit">마이 페이지</v-col>
           <v-col>
-            <v-table-title class="pageTit">마이 페이지</v-table-title>
-          </v-col>
-          <v-col>
-            <v-profil>
+            <v-col>
               <v-img v-if="userInfo.profile_path" :src="require(`@/assets/img/${this.userInfo.profile_path}`)"
                 class="proimg" />
-            </v-profil>
+            </v-col>
             <table class="middle">
               <tr>
                 <td class="subject">
@@ -45,7 +43,7 @@
           </v-col>
           <v-col>
             <v-col class="imgCardTitle">
-              <v-title class="subTit">이미지 추가/변경</v-title>
+              <v-col class="subTit">이미지 추가/변경</v-col>
             </v-col>
             <v-card class="cardBox">
               <v-card-text class="imgChangeTxt" style="text-align: right; padding-right: 10px">
@@ -189,7 +187,7 @@ td {
 }
 
 .subTit {
-  margin: 50px 0px 30px 0px;
+  margin: 0px 0px 10px;
   font-family: 'NanumSquareRound';
   font-size: 1.4rem;
   line-height: 1.25;
