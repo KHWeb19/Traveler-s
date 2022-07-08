@@ -13,7 +13,9 @@ import {
   FETCH_BM_ROOM_LIST,
   FETCH_WISH_LISTS,
   FETCH_BOOKING_LISTS,
+  FETCH_SEARCH_LISTS,
   FETCH_CEOBOOKING_LISTS,
+
 } from "./mutation-types";
 
 import axios from "axios";
@@ -29,12 +31,11 @@ export default {
     return axios
       .get(`http://localhost:7777/hotel/mRead/${hotelNo}`)
       .then((res) => {
-        console.log("fetchMhotel: ", res.data);
         commit(FETCH_M_HOTEL, res.data);
       });
   },
-  fetchMRoomList({ commit }) {
-    return axios.get("http://localhost:7777/room/mem/list").then((res) => {
+  fetchMRoomList({ commit }, payload) {
+    return axios.post("http://localhost:7777/room/mem/list", payload).then((res) => {
       commit(FETCH_M_ROOM_LIST, res.data);
     });
   },
@@ -129,4 +130,10 @@ export default {
         commit(FETCH_CEOBOOKING_LISTS, res.data);
       });
   },
+  fetchSearchLists({ commit }, payload){
+    axios.post('http://localhost:7777/search/commonSearch', payload)
+                    .then((res) => {
+                     commit(FETCH_SEARCH_LISTS, res.data)
+                })
+   }
 };

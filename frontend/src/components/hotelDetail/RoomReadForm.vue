@@ -46,7 +46,7 @@
       <tr> <!-- 객실 란-->
         <td colspan="2">
           <v-container>
-            <v-col v-for="(item, i) in roomList" :key="i">
+            <v-col v-for="(item, i) in mRooms" :key="i">
               <v-card
                 align="center"
                 style="margin: 10px; width: 100%; height: 200px"
@@ -166,7 +166,6 @@
 
 <script>
 import axios from "axios"
-/*import axios from 'axios'*/
 
 export default {
   name: "RoomReadForm",
@@ -176,16 +175,17 @@ export default {
         items: ['1', '2', '3', '4'],
         value: null,
         personnel: '',
-        dialog: false
+        dialog: false,
+        roomList: []
   }),
   props: {
-    roomList: {
-      type: Array,
+    payload: {
+      type : Object
     },
-    checkDate: {
+    mRooms: {
       type : Array
     },
-    people : {
+    hotelNo: {
       type : String
     }
   },
@@ -232,19 +232,29 @@ export default {
     searchRoom() {
         console.log(this.dates)
         const { dates, personnel } = this
-      this.$emit('searchRoom', {dates, personnel})
+        const hotelNo = this.hotelNo
+        const payload = {dates, personnel, hotelNo}
+        axios
+        .post("http://localhost:7777/room/mem/list", payload)
+        .then((res) => {
+          console.log(res.data);
+          this.$store.state.mRooms = res.data;
+        });
+
+      }
         
     },
-
-},
- created() {
-      this.dates = this.checkDate
-      this.personnel = this.people
-      console.log(this.checkDate)
-      console.log(this.people)
+  mounted () {
+    this.roomList = this.$store.state.mRooms
+    console.log(this.mRooms)
+    console.log('room')
+    console.log(this.roomList)
+    console.log(this.$store.state.mRooms)
+    this.dates = this.payload.dates
+    this.personnel = this.payload.personnel
+    
+  }
       
-  
-    }
 };
 </script>
 

@@ -53,7 +53,10 @@ export default {
     readHotel(mHotel) {
       const personnel = '2'
       const dates = [new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10), new Date(Date.now() - new Date().getTimezoneOffset() * 220000).toISOString().substr(0,10)]
-      const payload = { dates, personnel}
+      const hotelNo = mHotel.hotelNo
+      const payload = { dates, personnel, hotelNo}
+      console.log('random')
+      console.log(payload)
       this.$router.push({
         name: 'MHotelReadPage',
         //인원수 디폴트 2명 , 날짜 오늘 - 오늘 날짜로 보내기 (어차피 앞에것만 씀)
