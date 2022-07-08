@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
 
 import store from "@/store";
-import states from "@/store/states";
+//mport states from "@/store/states";
 
 import MHotelReadPage from "@/views/hotelDetail/HotelReadPage.vue";
 import MReservPage from "@/views/reserv/MReservPage.vue";
@@ -88,7 +88,7 @@ const routes = [
     path: "/mypage",
     name: "MyPage",
     beforeEnter: (to, from, next) => {
-      if (states.isLoggedIn) {
+      if (store.state.isLoggedIn) {
         next();
       } else {
         alert("로그인이 필요한 페이지입니다");

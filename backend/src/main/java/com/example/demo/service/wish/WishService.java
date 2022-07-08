@@ -15,7 +15,7 @@ public interface WishService {
 
     public boolean deleteWish(User user,Integer wishNo);
 
-    public List<WishResponse> findWish(Long id);
+    public List<WishResponse> findWish();
 
     Wish wishRead(Long wishNo);
 }
