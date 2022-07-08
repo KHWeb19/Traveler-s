@@ -54,7 +54,7 @@ export default {
     searchList: {
       type: Array
     },
-    payload: {
+    keyWord: {
       type: Object
     },
     pageSize: {
@@ -71,9 +71,14 @@ export default {
   },
   methods: {
     readHotel(mHotel) {
-            console.log("common" + mHotel)
-            const payload = this.payload
-            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: mHotel.hotelNo.toString(), payload, mHotel} })      
+            const payload = {
+              dates : this.keyWord.dates,
+              perssonel: this.keyWord.perssonel,
+              hotelNo: mHotel.hotelNo
+            }
+            console.log('coomon')
+            console.log(payload)
+            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: mHotel.hotelNo.toString(), payload} })      
     },
     nextPage() {
         this.pageNum += 1;
