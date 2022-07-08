@@ -1,23 +1,24 @@
 <template>
   <v-col>
+    <v-col align-self id="profile">
+      <v-col>
+        <!--<img v-if="userInfo.profile_path" :src="require(`@/assets/img/${this.userInfo.profile_path}`)"
+                  id="imageBefore" class="proimg" />-->
+        <v-img v-if="userInfo.profile_path" :src="require(`@/assets/img/${this.userInfo.profile_path}`)"
+          id="imageBefore" class="proimg" />
+      </v-col>
+      <v-card-title id="profileName">{{ userInfo.name }}</v-card-title>
+    </v-col>
+    <v-divider></v-divider>
     <v-col v-for="(index, i) in userInfo.roles" :key="i">
       <v-list v-if="index.name == 'ROLE_CEO'">
-        <v-list-group
-          v-for="(item, n) in items"
-          :key="n"
-          v-model="item.active"
-          no-action
-        >
+        <v-list-group v-for="(item, n) in items" :key="n" v-model="item.active" no-action>
           <template v-slot:activator>
             <v-list-item-content>
               <v-list-item-title v-text="item.title"></v-list-item-title>
             </v-list-item-content>
           </template>
-          <v-list-item
-            v-for="subItem in item.subItems"
-            :key="subItem.title"
-            :to="subItem.to"
-          >
+          <v-list-item v-for="subItem in item.subItems" :key="subItem.title" :to="subItem.to">
             <v-list-item-content>
               <v-list-item-title v-text="subItem.title"></v-list-item-title>
             </v-list-item-content>
@@ -26,22 +27,13 @@
       </v-list>
 
       <v-list v-else>
-        <v-list-group
-          v-for="(item2, n) in items2"
-          :key="n"
-          v-model="item2.active"
-          no-action
-        >
+        <v-list-group v-for="(item2, n) in items2" :key="n" v-model="item2.active" no-action>
           <template v-slot:activator>
             <v-list-item-content>
               <v-list-item-title v-text="item2.title"></v-list-item-title>
             </v-list-item-content>
           </template>
-          <v-list-item
-            v-for="subItem2 in item2.subItems2"
-            :key="subItem2.title"
-            :to="subItem2.to"
-          >
+          <v-list-item v-for="subItem2 in item2.subItems2" :key="subItem2.title" :to="subItem2.to">
             <v-list-item-content>
               <v-list-item-title v-text="subItem2.title"></v-list-item-title>
             </v-list-item-content>
@@ -62,7 +54,7 @@ export default {
 
   data() {
     return {
-      drawer:false,
+      drawer: false,
       items: [
         {
           title: "회원 메뉴",
@@ -99,4 +91,20 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.proimg {
+  width: 130px;
+  height: 130px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 70%;
+}
+#profileName {
+  width: auto;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 10px 2px 0px;
+
+}
+</style>

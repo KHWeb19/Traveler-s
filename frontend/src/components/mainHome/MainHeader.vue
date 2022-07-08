@@ -4,7 +4,7 @@
 
       <img src="@/assets/TravelLogo.png" class="logoImg" @click="home" />
 
-      <nav>
+    <div class="navListBar">
         <!-- 메뉴 리스트 -->
         <div class="navList">
           <h2>
@@ -27,7 +27,7 @@
           </h2>
         </div>
 
-      </nav>
+      </div>
 
       <!-- 로그인, 회원가입 버튼-->
       <div class="login">
@@ -42,7 +42,7 @@
       </div>
 
       <!-- 로그인시 생기는 메뉴 -->
-      <v-navigation-drawer disable-resize-watcher right app hide-overlay v-model="drawer">
+      <v-navigation-drawer id="navBar" disable-resize-watcher right app hide-overlay v-model="drawer">
         <NavDrawer :userInfo="user" />
       </v-navigation-drawer>
     </header>
@@ -107,7 +107,8 @@ export default {
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
 }
 
-   h2, button, div, header, nav, section {
+
+   h2, button, div, header, .navListBar, section {
     margin: 0;
     padding: 0;
     color: #606060;
@@ -120,7 +121,9 @@ export default {
     word-wrap: break-word;
     white-space: normal;
 }
-
+#navBar {
+  z-index: 12;
+}
   .wrapper header .logoImg {
     position: absolute;
     top: 40px;
@@ -138,10 +141,10 @@ export default {
     transition: 0.3s;
     background: #fff;
     text-align: center;
-    z-index: 101;
+    z-index: 11;
 }
 
-.wrapper header nav {
+.wrapper header .navListBar {
     display: inline-block;
     margin: 0 auto;
     padding: 35px 0 0 0;
@@ -149,18 +152,18 @@ export default {
     font-size: 0;
 }
 
-.wrapper header nav .navList {
+.wrapper header .navListBar .navList {
     position: relative;
     display: inline-block;
     font-size: 0;
     z-index: 10;
 }
 
-  .wrapper header nav .navList>h2 {
+  .wrapper header .navListBar .navList>h2 {
     display: inline-block;
 }
 
-.wrapper header nav .navList>h2>a {
+.wrapper header .navListBar .navList>h2>a {
     display: block;
     padding: 0 16px;
     color: #202020;
@@ -171,11 +174,11 @@ export default {
     text-decoration: none;
 }
 
-.wrapper header nav .navList>h2>a:hover {
+.wrapper header .navListBar .navList>h2>a:hover {
   color: #569aff;
 }
 
-.wrapper header nav * {
+.wrapper header .navListBar * {
   vertical-align: top;
 }
 
@@ -207,13 +210,16 @@ export default {
     min-width: 500px;
     height: 200px
 }
-.wrapper header nav {
+.wrapper header .navListBar {
     position: absolute;
     top: 100px;
     right: 13%;
     padding: 35px 5%;
 }
-
+#navBar {
+  padding: 35px 0%;
+  right: 0%
+}
 }
 @media screen and (max-width: 780px) {
   .wrapper header {
@@ -221,11 +227,30 @@ export default {
     min-width: 500px;
     height: 200px
 }
-  .wrapper header nav {
+  .wrapper header .navListBar {
     position: absolute;
     top: 100px;
     right: 3%;
     padding: 35px 5%;
+}
+#navBar {
+  padding: 35px 0%;
+  right: 0%
+}
+.login {
+  position: absolute;
+  display: inline-block;
+  top: 45px;
+  right: 220px;
+
+  font-family: NanumSquareRound;
+}
+.navIcon {
+  position: absolute;
+  display: inline-block;
+  top: 41px;
+  right: 60px;
+
 }
 }
 </style>
