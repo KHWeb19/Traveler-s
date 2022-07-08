@@ -175,8 +175,7 @@ export default {
         items: ['1', '2', '3', '4'],
         value: null,
         personnel: '',
-        dialog: false,
-        roomList: []
+        dialog: false
   }),
   props: {
     payload: {
@@ -245,11 +244,6 @@ export default {
         
     },
   mounted () {
-    this.roomList = this.$store.state.mRooms
-    console.log(this.mRooms)
-    console.log('room')
-    console.log(this.roomList)
-    console.log(this.$store.state.mRooms)
     this.dates = this.payload.dates
     this.personnel = this.payload.personnel
     
