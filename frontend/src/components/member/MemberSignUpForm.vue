@@ -101,7 +101,9 @@
         </div>
       </v-form>
     </v-container>
+    <footer>
     <main-footer-top />
+    </footer>
   </div>
 </template>
 

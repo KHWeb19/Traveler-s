@@ -22,5 +22,11 @@ export default {
   pendings: [],
   cancelles: [],
 
+  searchList: [],
+  keyWord: [],
+  num: 0,
+  searchKeyWord: null,
+  keyWords: [],
+
   ceoBookingLists: [],
 };

@@ -3,7 +3,7 @@
   <v-app style="width: 100%">
     <MainHeader />
 
-      <router-view class="page" />
+      <router-view class="page" :key="$route.fullPath" />
 
     <MainFooter />
   </v-app>

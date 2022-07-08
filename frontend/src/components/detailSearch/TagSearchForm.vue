@@ -52,9 +52,7 @@
 
               &ensp;
 
-              <span class="page-count"
-                >{{ pageNum + 1 }} / {{ pageCount }} 페이지</span
-              >
+              <span>{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
 
               &ensp;
 
@@ -84,7 +82,7 @@ export default {
     pageSize: {
       type: Number,
       required: false,
-      default: 4,
+      default: 6,
     },
   },
   data() {
@@ -104,10 +102,13 @@ export default {
           .toISOString()
           .substr(0, 10),
       ];
-      const payload = { dates, personnel };
+      const hotelNo = mHotel.hotelNo;
+      console.log("hotel");
+      console.log(mHotel.hotelNo);
+      const payload = { dates, personnel, hotelNo };
       this.$router.push({
         name: "MHotelReadPage",
-        params: { hotelNo: mHotel.hotelNo.toString(), payload, mHotel },
+        params: { hotelNo: mHotel.hotelNo.toString(), payload },
       });
     },
     search() {

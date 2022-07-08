@@ -1,5 +1,19 @@
 <template>
   <v-col>
+    <v-col id="profile">
+      <v-col>
+        <!--<img v-if="userInfo.profile_path" :src="require(`@/assets/img/${this.userInfo.profile_path}`)"
+                  id="imageBefore" class="proimg" />-->
+        <v-img
+          v-if="userInfo.profile_path"
+          :src="require(`@/assets/img/${this.userInfo.profile_path}`)"
+          id="imageBefore"
+          class="proimg"
+        />
+      </v-col>
+      <v-card-title id="profileName">{{ userInfo.name }}</v-card-title>
+    </v-col>
+    <v-divider></v-divider>
     <v-col v-for="(index, i) in userInfo.roles" :key="i">
       <v-list v-if="index.name == 'ROLE_CEO'">
         <v-list-group
@@ -37,7 +51,6 @@
               <v-list-item-title v-text="item2.title"></v-list-item-title>
             </v-list-item-content>
           </template>
-
           <template>
             <v-list-item
               v-for="subItem2 in item2.subItems2"
@@ -124,4 +137,20 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.proimg {
+  width: 130px;
+  height: 130px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 70%;
+}
+#profileName {
+  width: auto;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 10px 2px 0px;
+  font-family: "NanumSquareRound";
+}
+</style>

@@ -19,19 +19,15 @@
             !wishLists ||(Array.isArray(wishLists) && wishLists.length === 0)">
           <td align="center" colspan="3">현재 위시가 없습니다!</td>
         </tr>
-        <tr v-else v-for="wishList in paginatedData" :key="wishList.hotelNo">
+        <tr v-else v-for="mHotel in paginatedData" :key="mHotel.hotelNo">
           <td align="center">
-              {{ wishList.hotelName }}
+              {{ mHotel.hotelName }}
+          </td>
+          <td align="center" @click="readHotel(mHotel)">
+             {{ mHotel.totalAddress }}
           </td>
           <td align="center">
-            <router-link
-              :to="{ name: 'MHotelReadPage',
-                    params: { hotelNo: wishList.hotelNo.toString() },}">
-             {{ wishList.totalAddress }}
-            </router-link>
-          </td>
-          <td align="center">
-            <v-btn @click="deletewish(wishList.hotelNo)">취소</v-btn>
+            <v-btn @click="deletewish(mHotel.hotelNo)">취소</v-btn>
           </td>
         </tr>
       </tbody>
@@ -115,6 +111,15 @@ export default {
     prevPage () {
     this.pageNum -= 1;
     },
+    readHotel(mHotel) {
+      const personnel = '2'
+      const dates = [new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10), new Date(Date.now() - new Date().getTimezoneOffset() * 220000).toISOString().substr(0,10)]
+      const hotelNo = mHotel.hotelNo
+      console.log('hotel')
+      console.log(mHotel.hotelNo)
+      const payload = { dates, personnel, hotelNo }
+            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: mHotel.hotelNo.toString() , payload} })   
+    }
 },
 };
 </script>

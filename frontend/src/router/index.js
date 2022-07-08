@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
 
 import store from "@/store";
-import states from "@/store/states";
+//mport states from "@/store/states";
 
 import MHotelReadPage from "@/views/hotelDetail/HotelReadPage.vue";
 import MReservPage from "@/views/reserv/MReservPage.vue";
@@ -24,6 +24,13 @@ import MyPageBookingPending from "@/views/mypage/MyPageBookingPending";
 import MyPageBookingCancelled from "@/views/mypage/MyPageBookingCancelled.vue";
 
 Vue.use(VueRouter);
+
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+	return originalPush.call(this, location).catch(err => {
+		if (err.name !== 'NavigationDuplicated') throw err;
+	});
+};
 
 const routes = [
   {
@@ -91,7 +98,7 @@ const routes = [
     path: "/mypage",
     name: "MyPage",
     beforeEnter: (to, from, next) => {
-      if (states.isLoggedIn) {
+      if (store.state.isLoggedIn) {
         next();
       } else {
         alert("로그인이 필요한 페이지입니다");
@@ -166,7 +173,7 @@ const routes = [
     },
   },
   {
-    path: "/commonSearchPage/:num",
+    path: "/commonSearchPage/:num/:city/:personnel",
     name: "CommonSearchPage",
     components: {
       default: CommonSearchPage,

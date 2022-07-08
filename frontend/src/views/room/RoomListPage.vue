@@ -1,5 +1,6 @@
 <template>
   <div align="center">
+    <img src="@/assets/roombackimg.jpg" />
     <v-container>
       <table style="width: 800px">
         <tr>
@@ -42,7 +43,7 @@
               }"
               class="btn"
             >
-              <v-btn>객실등록</v-btn>
+              <button id="button">객실등록</button>
             </router-link>
           </td>
         </tr>
@@ -65,7 +66,6 @@
 import RoomList from "@/components/room/RoomList.vue";
 import { mapState, mapActions } from "vuex";
 import axios from "axios";
-
 export default {
   name: "RoomListPage",
   components: {
@@ -93,7 +93,6 @@ export default {
     },
     deleteRooms(payload) {
       const rooms = payload;
-
       axios
         .post("http://localhost:7777/room/bm/deleteRooms", rooms)
         .then(() => {
@@ -117,6 +116,7 @@ div {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  height: 100%;
 }
 h2 {
   padding: 50px 0px 30px 0px;
@@ -172,4 +172,19 @@ h2 {
     border-collapse:collapse;
     border: 1px solid black;
 }*/
+img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  /*
+  background: linear-gradient(
+            to bottom,
+            rgba(255,255,255,0) 10%,
+            rgba(255,255,255,0.5) 25%,
+            rgba(255,255,255,0.7) 40%,
+            rgba(255,255,255,1) 50%,
+            rgba(255,255,255,1) 100%
+          ), url(@/assets/hotelbackimg.jpg);
+  background-repeat: no-repeat;*/
+}
 </style>

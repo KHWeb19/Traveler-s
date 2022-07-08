@@ -56,7 +56,6 @@ export default {};
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff")
     format("woff");
 }
-
 h3,
 ul,
 ol,
@@ -79,24 +78,19 @@ div {
   word-wrap: break-word;
   white-space: normal;
 }
-
 div {
   display: block;
 }
-
 .mainCont {
   margin-top: 104px;
 }
-
 .mainCont:first-child {
   margin-top: 54px;
 }
-
 .titDep2 {
   margin-top: 104px;
   text-align: center;
 }
-
 .titDep2 {
   margin-bottom: 32px;
   font-size: 2rem;
@@ -104,14 +98,12 @@ div {
   font-family: NanumSquareRound;
   font-weight: 900;
 }
-
 [class^="titDep"] {
   position: relative;
   color: #202020;
   line-height: 1;
   font-weight: 700;
 }
-
 h3 {
   display: block;
   font-size: 1.17em;
@@ -121,12 +113,10 @@ h3 {
   margin-inline-end: 0px;
   font-weight: bold;
 }
-
 ul,
 ol {
   list-style: none;
 }
-
 .mainCont .mainIcon {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -136,7 +126,6 @@ ol {
   justify-content: center;
   margin: 32px -34px 0;
 }
-
 .mainCont .mainIcon li {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -152,12 +141,10 @@ ol {
   -ms-flex-direction: column;
   flex-direction: column;
 }
-
 li {
   display: list-item;
   text-align: -webkit-match-parent;
 }
-
 .mainCont .mainIcon li a {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -174,11 +161,9 @@ li {
   -webkit-box-shadow: 0 8px 12px 0 rgb(32 32 32 / 4%);
   box-shadow: 0 8px 12px 0 rgb(32 32 32 / 4%);
 }
-
 .mainCont .mainIcon li.insurance a:before {
   background-position: -32px 0;
 }
-
 .mainCont .mainIcon li a:before {
   content: "";
   display: block;
@@ -187,7 +172,6 @@ li {
   height: 32px;
   background: url(@/assets/spr_mainicon.png) no-repeat 0 0;
 }
-
 .mainCont .mainIcon li a span {
   position: absolute;
   top: 120px;
@@ -197,7 +181,6 @@ li {
   font-weight: 600;
   line-height: 1.56;
 }
-
 .mainCont .mainNews {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -212,7 +195,6 @@ li {
   height: 250px;
   margin: 0%;
 }
-
 .mainCont .mainNews:before {
   content: "";
   display: block;
@@ -223,12 +205,10 @@ li {
   height: 140px;
   background: url(@/assets/bg_news.png) no-repeat;
 }
-
 .mainCont .mainNews .txt .titDep3 {
   position: relative;
   margin: 4px 0 11px;
 }
-
 .titDep3 {
   margin-bottom: 16px;
   font-size: 1.4rem;
@@ -252,17 +232,14 @@ li {
   line-height: 1.44;
   font-size: 1rem;
 }
-
 .mainCont .mainNews .email {
   position: relative;
   margin: 5px 0 150px;
 }
-
 .mainCont .mainNews .email input[type="text"] {
   height: 56px;
   padding: 0 45px 0 15px;
 }
-
 input[type="text"] {
   display: inline-block;
   min-width: 100px;
@@ -275,22 +252,18 @@ input[type="text"] {
   border: 1px solid #eaeaea;
   background: #fff;
 }
-
 input:focus {
   outline: none !important;
   border: 1px solid #1d68dc;
 }
-
 .mainCont .mainNews .email .btnDefault.btnL.action {
   width: 5vw;
   margin-left: 4px;
 }
-
 .btnDefault.action {
   color: #fff;
   background: #569aff;
 }
-
 .btnL {
   min-width: 88px;
   height: 56px;
@@ -301,7 +274,6 @@ input:focus {
   line-height: 56px;
   background: #e6effe;
 }
-
 .btnDefault {
   overflow: hidden;
   position: relative;
@@ -333,7 +305,6 @@ input:focus {
     height: outo;
     flex-direction: column;
   }
-
   .mainCont .mainNews {
     display: flex;
     flex-direction: column;
