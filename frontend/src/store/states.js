@@ -23,9 +23,7 @@ export default {
   keyWord:[],
   num : 0,
   searchKeyWord: null,
-  hotelKeyWord: null,
-  roomKeyWord: null,
-  hotel:null,
+  keyWords: [],
   ceoBookingLists: [],
 
 };
