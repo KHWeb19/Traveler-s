@@ -105,6 +105,6 @@ export default {
   font-size: 20px;
   font-weight: 600;
   padding: 10px 2px 0px;
-
+  font-family: 'NanumSquareRound';
 }
 </style>
