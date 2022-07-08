@@ -165,9 +165,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
 import axios from "axios"
-
 
 export default {
   name: "RoomReadForm",
@@ -177,18 +175,21 @@ export default {
         items: ['1', '2', '3', '4'],
         value: null,
         personnel: '',
-        dialog: false
+        dialog: false,
+        roomList: []
   }),
   props: {
     payload: {
       type : Object
+    },
+    mRooms: {
+      type : Array
     },
     hotelNo: {
       type : String
     }
   },
     computed: {
-       ...mapState(['mRooms']),
         planDate () {
             if(this.dates.length == 2) {
                 if(this.dates[0] >= this.dates[1]){
@@ -200,7 +201,6 @@ export default {
         },
     },
   methods: {
-    ...mapActions(['fetchMRoomList']),
     goReserv(item) {
       const params = {
         "roomId": item.roomNo,
@@ -232,22 +232,27 @@ export default {
     searchRoom() {
         console.log(this.dates)
         const { dates, personnel } = this
-      this.$emit('searchRoom', {dates, personnel})
+        const hotelNo = this.hotelNo
+        const payload = {dates, personnel, hotelNo}
+        axios
+        .post("http://localhost:7777/room/mem/list", payload)
+        .then((res) => {
+          console.log(res.data);
+          this.$store.state.mRooms = res.data;
+        });
+
+      }
         
     },
-
-},
   mounted () {
+    this.roomList = this.$store.state.mRooms
+    console.log(this.mRooms)
     console.log('room')
-    console.log(this.payload)
-    console.log(this.hotelNo)
-    if(this.payload){
-    const dates = this.payload.dates
-    const personnel = this.payload.personnel
-    const hotelNo = this.hotelNo
-    const keyWord = {dates, personnel, hotelNo}
-    this.fetchMRoomList(keyWord)
-    }
+    console.log(this.roomList)
+    console.log(this.$store.state.mRooms)
+    this.dates = this.payload.dates
+    this.personnel = this.payload.personnel
+    
   }
       
 };

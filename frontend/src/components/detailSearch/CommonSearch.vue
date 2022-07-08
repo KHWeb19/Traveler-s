@@ -71,7 +71,12 @@ export default {
   },
   methods: {
     readHotel(mHotel) {
-            const payload = this.keyWord
+            const payload = {
+              dates : this.keyWord.dates,
+              perssonel: this.keyWord.perssonel,
+              hotelNo: mHotel.hotelNo
+            }
+            console.log('coomon')
             console.log(payload)
             this.$router.push({ name:'MHotelReadPage', params: { hotelNo: mHotel.hotelNo.toString(), payload} })      
     },

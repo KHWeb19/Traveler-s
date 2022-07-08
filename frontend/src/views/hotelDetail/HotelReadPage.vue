@@ -18,7 +18,7 @@
 <script>
 
 import MHotelReadForm from "@/components/hotelDetail/HotelReadForm.vue";
-import axios from 'axios';
+
 import { mapActions, mapState } from 'vuex';
 //import MSearchCalenderForm from"@/components/hotelDetail/SearchCalenderForm.vue"
 
@@ -49,21 +49,8 @@ export default {
     },
   methods: {
      ...mapActions(['fetchMHotel']),
-      searchRoom(payload) {
-        const {dates, personnel} = payload
-        const hotelNo = this.hotelNo
-        const keyWord = {dates, personnel, hotelNo}
-        this.$store.state.roomKeyWord = keyWord
-         axios
-        .post("http://localhost:7777/room/mem/list", keyWord)
-        .then((res) => {
-          console.log(res.data);
-          this.roomList = res.data;
-        });
-
-      }
   },
-  mounted() {
+  created() {
      this.fetchMHotel(this.hotelNo)
   }
 };

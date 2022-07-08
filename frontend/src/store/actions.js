@@ -31,12 +31,11 @@ export default {
     return axios
       .get(`http://localhost:7777/hotel/mRead/${hotelNo}`)
       .then((res) => {
-        console.log("fetchMhotel: ", res.data);
         commit(FETCH_M_HOTEL, res.data);
       });
   },
-  fetchMRoomList({ commit }, keyWord) {
-    return axios.post("http://localhost:7777/room/mem/list", keyWord).then((res) => {
+  fetchMRoomList({ commit }, payload) {
+    return axios.post("http://localhost:7777/room/mem/list", payload).then((res) => {
       commit(FETCH_M_ROOM_LIST, res.data);
     });
   },
