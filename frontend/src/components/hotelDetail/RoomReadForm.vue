@@ -10,7 +10,7 @@
         <v-spacer cols="12" xs="0" sm="0" md="1" lg="1" xl="1" />
         <!-- 검색창 -->
 
-        <v-col cols="12" xs="5" sm="5" md="5" lg="4" xl="4">
+        <v-col cols="12" xs="12" sm="7" md="5" lg="4" xl="4">
           <v-menu class=" menu1" :close-on-content-click="false" transition="scale-transition" offset-y>
             <template v-slot:activator="{ on, attrs }">
               <v-text-field class="DateSearch" label="날짜 선택" v-model="planDate" prepend-icon="mdi-calendar"
@@ -21,12 +21,12 @@
             </v-date-picker>
           </v-menu>
         </v-col>
-        <v-col cols="12" xs="5" sm="5" md="5" lg="4" xl="4">
+        <v-col cols="12" xs="12" sm="5" md="5" lg="4" xl="4">
           <v-select v-model="personnel" :items="items" item-value="val4ue" prepend-icon="mdi-bed" label="인원 선택"
             class="PickPeople" rounded solo>
           </v-select>
         </v-col>
-        <v-col cols="2" xs="2" sm="2" md="1" lg="1" xl="1">
+        <v-col cols="12" xs="12" sm="12" md="1" lg="1" xl="1">
           <v-btn id="btn1" @click="searchRoom()" type="submit" value="Subscribe">
             검색하기
           </v-btn>
@@ -39,9 +39,6 @@
       <v-col v-for="(item, i) in mRooms" :key="i">
         <v-card id="hotlecard" align="center" >
           <v-row justify="center">
-            <!-- justify 에러메세지 뜨더라도 이거 아니면 객실이 전체적으로
-                                                가운데 정렬 될 방법이없기 때문에 이건 지우지 말아주세요... -->
-
             <v-col cols="12" xs="12" sm="6" md="5" lg="5" xl="5"  style="width: 30%; height: 200px">
               <v-img width="300px" height="160px" :src="require(`@/assets/roomImg/${item.roomImage[0]}`)" />
             </v-col>
@@ -64,7 +61,7 @@
 
             <v-col align-self="center" cols="12" xs="12" sm="12" md="2" lg="2" xl="2">
 
-                <v-dialog v-model="dialog" width="700px">
+                <v-dialog :retain-focus="false" v-model="dialog" width="700px">
                   <template v-slot:activator="{ on }">
                     <v-btn id="button" v-on="on"> 상세보기 </v-btn>
                   </template>
