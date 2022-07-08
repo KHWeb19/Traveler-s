@@ -244,6 +244,8 @@ export default {
         
     },
   mounted () {
+    console.log('room')
+    console.log(this.mRooms)
     this.dates = this.payload.dates
     this.personnel = this.payload.personnel
     
