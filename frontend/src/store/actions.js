@@ -14,6 +14,9 @@ import {
   FETCH_WISH_LISTS,
   FETCH_BOOKING_LISTS,
   FETCH_CEOBOOKING_LISTS,
+  GET_RESERVES,
+  GET_PENDINGS,
+  GET_CANCELLS,
 } from "./mutation-types";
 
 import axios from "axios";
@@ -55,14 +58,14 @@ export default {
         commit(FETCH_BM_HOTEL, res.data);
       });
   },
-  attemptLogin({dispatch, commit}, payload) {
+  attemptLogin({ dispatch, commit }, payload) {
     axios
       .post("http://localhost:7777/login", payload, { withCredentials: true })
       .then((res) => {
         localStorage.setItem("access_token", res.data.accessToken);
         commit(IS_LOGGEDIN);
-        dispatch('setUser');
-        console.log('해줌')
+        dispatch("setUser");
+        console.log("해줌");
         router.push("/");
       })
       .catch(() => alert("Invalid username or password"));
@@ -127,6 +130,33 @@ export default {
       .get("http://localhost:7777/reserve/ceo/listAllReservations")
       .then((res) => {
         commit(FETCH_CEOBOOKING_LISTS, res.data);
+      });
+  },
+  getReserves({ commit }) {
+    axios
+      .get(
+        "http://localhost:7777/reserve/user/reservationListWithStatus?status=RESERVED"
+      )
+      .then((res) => {
+        commit(GET_RESERVES, res.data);
+      });
+  },
+  getPedndings({ commit }) {
+    axios
+      .get(
+        "http://localhost:7777/reserve/user/reservationListWithStatus?status=PENDING"
+      )
+      .then((res) => {
+        commit(GET_PENDINGS, res.data);
+      });
+  },
+  getCancellss({ commit }) {
+    axios
+      .get(
+        "http://localhost:7777/reserve/user/reservationListWithStatus?status=CANCELLED"
+      )
+      .then((res) => {
+        commit(GET_CANCELLS, res.data);
       });
   },
 };

@@ -1,8 +1,7 @@
 <template>
   <div align="center" style="display: inline-block">
     <v-container>
-
-      <table style="width: 800px;">
+      <table style="width: 800px">
         <tr>
           <td align="left" colspan="2">
             <h2 class="pageTit">나의 예약 내역</h2>
@@ -12,22 +11,6 @@
         <tr>
           <td align="left">
             <span class="page-count">전체</span>
-          </td>
-          <td align="right">
-            <label class="reservationNameLabel">* 예약상태</label>
-            <select
-              class="reservation-select"
-              v-model="id"
-              @change="getStatusList($event)">
-              
-              <option :value="''"> 예약상태를 선택하세요.</option>
-        <!--      <option
-                v-for="(reservation, idx) in status"
-                :key="idx"
-                :value="reservation.id">
-                {{ reservation.status }}
-              </option> -->
-            </select>
           </td>
         </tr>
 
@@ -43,8 +26,7 @@
           </td>
         </tr>
       </table>
-
-  </v-container>
+    </v-container>
   </div>
 </template>
 
@@ -59,21 +41,24 @@ export default {
     //MyPageLeftMenu,
     MyPageBookingList,
   },
+  data() {
+    return {};
+  },
 
   computed: {
-    ...mapState(["user", "bookingLists"]),
+    ...mapState(["user"]),
+    ...mapState(["bookingLists"]),
   },
   methods: {
-    ...mapActions(["getStatusType"]),
-    ...mapActions(["setUser", "fetchBookingLists"]),
+    ...mapActions(["setUser"]),
+    ...mapActions(["fetchBookingLists"]),
 
-    getRoomList(event) {
-      this.id = event.target.value;
-      this.fetchBmRoomList(this.id)
-      
+    getStatusList(event) {
+      this.status = event.target.value;
+      this.fetchBookingLists(this.hotelNo);
+      console.log(this.status);
     },
-
-},
+  },
   mounted() {
     this.setUser();
     this.fetchBookingLists();
@@ -98,21 +83,21 @@ h2 {
 }
 .pageTit {
   padding: 50px 0px 30px 0px;
-  font-family: 'NanumSquareRound';
-  font-size: 2.0rem;
+  font-family: "NanumSquareRound";
+  font-size: 2rem;
   line-height: 1.25;
-  letter-spacing: -.01em;
+  letter-spacing: -0.01em;
   color: #202020;
   font-weight: 900;
 }
 .pageTit:after {
-    content: '';
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    margin-bottom: 24px;
-    border-radius: 50%;
-    background-color: #e63668;
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin-bottom: 24px;
+  border-radius: 50%;
+  background-color: #e63668;
 }
 .page-count {
   margin-left: 15px;

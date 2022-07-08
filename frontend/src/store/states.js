@@ -18,5 +18,9 @@ export default {
 
   bookingLists: [],
 
+  reserves: [],
+  pendings: [],
+  cancelles: [],
+
   ceoBookingLists: [],
 };

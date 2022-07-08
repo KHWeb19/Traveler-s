@@ -37,15 +37,36 @@
               <v-list-item-title v-text="item2.title"></v-list-item-title>
             </v-list-item-content>
           </template>
-          <v-list-item
-            v-for="subItem2 in item2.subItems2"
-            :key="subItem2.title"
-            :to="subItem2.to"
-          >
-            <v-list-item-content>
-              <v-list-item-title v-text="subItem2.title"></v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+
+          <template>
+            <v-list-item
+              v-for="subItem2 in item2.subItems2"
+              :key="subItem2.title"
+              :to="subItem2.to"
+            >
+              <v-list-item-content>
+                <v-list-item-title v-text="subItem2.title"></v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </template>
+          <v-list-group sub-group>
+            <template v-slot:activator>
+              <v-list-item-content>
+                <a href="/mypagebooking">
+                  <v-list-item-title>예약 내역 확인</v-list-item-title>
+                </a>
+              </v-list-item-content>
+            </template>
+            <v-list-item
+              v-for="subItem3 in item2.subItems3"
+              :key="subItem3.title"
+              :to="subItem3.to"
+            >
+              <v-list-item-content>
+                <v-list-item-title v-text="subItem3.title"></v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-group>
         </v-list-group>
       </v-list>
     </v-col>
@@ -62,7 +83,7 @@ export default {
 
   data() {
     return {
-      drawer:false,
+      drawer: false,
       items: [
         {
           title: "회원 메뉴",
@@ -90,7 +111,11 @@ export default {
           subItems2: [
             { title: "마이페이지", to: "/mypage" },
             { title: "위시리스트", to: "/wishlistpage" },
-            { title: "예약 내역 확인", to: "/mypagebooking" },
+          ],
+          subItems3: [
+            { title: "RESERVED", to: "/mypagebookingreservd" },
+            { title: "PENDING", to: "/mypagebookingpending" },
+            { title: "CANCELLED", to: "/mypagebookingcancelled" },
           ],
         },
       ],

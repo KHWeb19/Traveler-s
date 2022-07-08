@@ -1,17 +1,18 @@
 <template>
   <v-container class="board-list">
-
     <table style="width: 100%">
       <colgroup>
-        <col class="id">
-        <col class="price">
-        <col class="status">
-        <col class="checkIn">
-        <col class="checkOut">
+        <col class="id" />
+        <dic class="roomType" />
+        <col class="price" />
+        <col class="status" />
+        <col class="checkIn" />
+        <col class="checkOut" />
       </colgroup>
       <thead>
         <tr>
           <th>예약번호</th>
+          <th>룸 타입</th>
           <th>가격</th>
           <th>예약 상태</th>
           <th>체크 인</th>
@@ -21,26 +22,29 @@
       <tbody>
         <tr v-for="(bookingList, idx) in bookingLists" :key="idx">
           <td>
-            {{bookingList.id}}
+            {{ bookingList.id }}
           </td>
           <td>
-            {{bookingList.price}}
+            {{ bookingList.roomType }}
+          </td>
+
+          <td>
+            {{ bookingList.price }}
           </td>
           <td>
-            {{bookingList.status}}
+            {{ bookingList.status }}
           </td>
           <td>
-            {{bookingList.startDate}}
+            {{ bookingList.startDate }}
           </td>
           <td>
-            {{bookingList.endDate}}
+            {{ bookingList.endDate }}
           </td>
         </tr>
-
       </tbody>
     </table>
 
-<!-- v-data-table 작업부분 주석처리 하였습니다. 필요가 없다면 지워주세요.
+    <!-- v-data-table 작업부분 주석처리 하였습니다. 필요가 없다면 지워주세요.
     <v-card class="right">
       <div style="display: flex; justify-content: center; padding-top: 120px">
         <div>
@@ -68,7 +72,6 @@
         </div>
       </div>
     </v-card> -->
-
   </v-container>
 </template>
 
@@ -124,9 +127,11 @@ export default {
 </script>
 
 <style scoped>
-table, th, td{
-    border-collapse:collapse;
-    border: 1px solid black;
+table,
+th,
+td {
+  border-collapse: collapse;
+  border: 1px solid black;
 }
 
 .board-list {
@@ -142,7 +147,7 @@ a:hover {
 }
 /* 테이블 색상 (중요하지 않음) */
 table {
- /* width: 95%;*/
+  /* width: 95%;*/
   border-collapse: collapse;
 }
 th {
@@ -158,26 +163,51 @@ td {
   color: rgb(34, 34, 34);
   height: 42px;
   padding: 5px 20px;
-  font-size:13px;
+  font-size: 13px;
 }
-tr:nth-of-type(odd) { 
-	background: rgb(243, 243, 243); 
+tr:nth-of-type(odd) {
+  background: rgb(243, 243, 243);
 }
 
 /* 컬럼의 너비 */
-.id { width: 10%; }
-.price {width: 10%;}
-.status {width: 10%;}
-.checkIn { width: 20%; }
-.checkOut { width: 20%; }
+.id {
+  width: 15%;
+}
+.roomType {
+  width: 10%;
+}
+.price {
+  width: 10%;
+}
+.status {
+  width: 10%;
+}
+.checkIn {
+  width: 20%;
+}
+.checkOut {
+  width: 20%;
+}
 
 /* 컬럼의 정렬 */
-tr td:nth-child(1){text-align:center;}
-tr td:nth-child(2){text-align:center;}
-tr td:nth-child(3){text-align:center;}
-tr td:nth-child(4){text-align:center;}
-tr td:nth-child(5){text-align:center;}
-
+tr td:nth-child(1) {
+  text-align: center;
+}
+tr td:nth-child(2) {
+  text-align: center;
+}
+tr td:nth-child(3) {
+  text-align: center;
+}
+tr td:nth-child(4) {
+  text-align: center;
+}
+tr td:nth-child(5) {
+  text-align: center;
+}
+tr td:nth-child(6) {
+  text-align: center;
+}
 /* 페이징 버튼 */
 .page-box {
   width: 80%;
@@ -186,7 +216,7 @@ tr td:nth-child(5){text-align:center;}
   text-align: center;
 }
 .page-box a.btn {
-  display:inline-block;
+  display: inline-block;
   padding: 3px 5px;
   font-size: 10px;
   border: 1px solid #dbdbdb;
@@ -195,7 +225,6 @@ tr td:nth-child(5){text-align:center;}
 .page-box a.btn.on {
   background-color: #dbdbdb;
 }
-
 
 /* 영남씨가 작업할 때 사용하셨던 부분 주석처리 하였습니다. 필요 없다면 지워주세요.
 .left_menu {
@@ -244,6 +273,4 @@ td,
 th {
   border: 1px solid #dbdbdb;
 } */
-
-
 </style>

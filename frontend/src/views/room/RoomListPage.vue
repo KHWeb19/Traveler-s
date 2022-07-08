@@ -1,7 +1,7 @@
 <template>
   <div align="center">
     <v-container>
-      <table style="width: 800px;">
+      <table style="width: 800px">
         <tr>
           <td align="left" colspan="2">
             <h2 class="pageTit">객실 관리</h2>
@@ -17,13 +17,14 @@
             <select
               class="hotel-select"
               v-model="hotelNo"
-              @change="getRoomList($event)">
-              
-              <option :value="''"> 호텔을 선택하세요.</option>
+              @change="getRoomList($event)"
+            >
+              <option :value="''">호텔을 선택하세요.</option>
               <option
                 v-for="(hotel, idx) in hotelType"
                 :key="idx"
-                :value="hotel.hotelNo">
+                :value="hotel.hotelNo"
+              >
                 {{ hotel.hotelName }}
               </option>
             </select>
@@ -32,26 +33,30 @@
 
         <tr>
           <td colspan="2">
-            <br>
-                <router-link
-                    v-if="hotelNo"
-                    :to="{ name: 'RoomRegisterPage', params: { hotelNo: this.hotelNo.toString() }, }"
-                    class="btn">
-
-                  <v-btn>객실등록</v-btn>
-                </router-link>
+            <br />
+            <router-link
+              v-if="hotelNo"
+              :to="{
+                name: 'RoomRegisterPage',
+                params: { hotelNo: this.hotelNo.toString() },
+              }"
+              class="btn"
+            >
+              <v-btn>객실등록</v-btn>
+            </router-link>
           </td>
         </tr>
-
 
         <tr>
           <td align="left" colspan="2">
-            <room-list v-if="bmRoomList" :bmRoomList="bmRoomList"
-                        @deleteRooms="deleteRooms" />
+            <room-list
+              v-if="bmRoomList"
+              :bmRoomList="bmRoomList"
+              @deleteRooms="deleteRooms"
+            />
           </td>
         </tr>
       </table>
-    
     </v-container>
   </div>
 </template>
@@ -77,15 +82,14 @@ export default {
   },
   mounted() {
     this.getHotelType();
-    console.log(this.bmRoomList)
+    console.log(this.bmRoomList);
   },
   methods: {
     ...mapActions(["getHotelType"]),
     ...mapActions(["fetchBmRoomList"]),
     getRoomList(event) {
       this.hotelNo = event.target.value;
-      this.fetchBmRoomList(this.hotelNo)
-      
+      this.fetchBmRoomList(this.hotelNo);
     },
     deleteRooms(payload) {
       const rooms = payload;
@@ -101,9 +105,9 @@ export default {
         });
     },
   },
-  created () {
-    this.fetchBmRoomList(this.hotelNo)
-  }
+  created() {
+    this.fetchBmRoomList(this.hotelNo);
+  },
 };
 </script>
 
@@ -119,21 +123,21 @@ h2 {
 }
 .pageTit {
   padding: 50px 0px 30px 0px;
-  font-family: 'NanumSquareRound';
-  font-size: 2.0rem;
+  font-family: "NanumSquareRound";
+  font-size: 2rem;
   line-height: 1.25;
-  letter-spacing: -.01em;
+  letter-spacing: -0.01em;
   color: #202020;
   font-weight: 900;
 }
 .pageTit:after {
-    content: '';
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    margin-bottom: 24px;
-    border-radius: 50%;
-    background-color: #e63668;
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin-bottom: 24px;
+  border-radius: 50%;
+  background-color: #e63668;
 }
 .page-count {
   margin-left: 15px;
