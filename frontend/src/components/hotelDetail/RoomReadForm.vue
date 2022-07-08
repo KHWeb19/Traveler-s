@@ -63,7 +63,7 @@
             </v-col>
 
             <v-col align-self="center" cols="12" xs="12" sm="12" md="2" lg="2" xl="2">
-             
+
                 <v-dialog v-model="dialog" width="700px">
                   <template v-slot:activator="{ on }">
                     <v-btn id="button" v-on="on"> 상세보기 </v-btn>
@@ -82,9 +82,9 @@
                     <v-btn @click="cancel"> 닫기 </v-btn>
                   </v-card-actions>
                 </v-dialog>
-              
+
                 <v-btn id="button2" @click="goReserv(item)">예약하기</v-btn>
-              
+
             </v-col>
 
             <!-- <v-btn v-if="체크인날짜 || 예약테이블.예약date || 마지막 숙박일" 인 경우> 예약불가 <v-btn/>  -->
@@ -184,10 +184,12 @@ export default {
           this.$store.state.mRooms = res.data;
         });
 
-    }
-
-  },
-  mounted() {
+      }
+        
+    },
+  mounted () {
+    console.log('room')
+    console.log(this.mRooms)
     this.dates = this.payload.dates
     this.personnel = this.payload.personnel
 

@@ -1,7 +1,7 @@
 <template>
   <div align="center">
     <m-hotel-read-form :mHotel="mHotel"
-                        :payload="payload"
+                        :payload="keyWord"
                         :hotelNo="hotelNo" />
     <!-- <m-search-calender-form/>
      SearchCalenderForm.vue 해당 컴포넌트 내역을 우선
@@ -37,7 +37,8 @@ export default {
     return {
       roomList:[],
       dates: [],
-      personnel: ''
+      personnel: '',
+      keyWord: null
     }
   },
   components: {
@@ -51,6 +52,10 @@ export default {
      ...mapActions(['fetchMHotel']),
   },
   created() {
+     if(this.payload){
+      this.$store.state.keyWords = this.payload
+     }
+     this.keyWord = this.$store.state.keyWords
      this.fetchMHotel(this.hotelNo)
   }
 };
