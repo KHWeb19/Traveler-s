@@ -58,11 +58,9 @@ public class WishController {
 
     @GetMapping("/HotelList")
     public List<WishResponse> listHotel(){
-        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Optional<User> optionalUser = userService.findByEmail(email);
-        User user = optionalUser.get();
+
         log.info("WishResponse " );
-        return wishService.findWish(user.getId());
+        return wishService.findWish();
     }
 
 }

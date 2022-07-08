@@ -23,12 +23,8 @@
           <td align="center">
               {{ mHotel.hotelName }}
           </td>
-          <td align="center">
-            <router-link
-              :to="{ name: 'MHotelReadPage',
-                    params: { hotelNo: mHotel.hotelNo.toString(), mHotel },}">
+          <td align="center" @click="readHotel(mHotel)">
              {{ mHotel.totalAddress }}
-            </router-link>
           </td>
           <td align="center">
             <v-btn @click="deletewish(mHotel.hotelNo)">취소</v-btn>
@@ -115,6 +111,15 @@ export default {
     prevPage () {
     this.pageNum -= 1;
     },
+    readHotel(mHotel) {
+      const personnel = '2'
+      const dates = [new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10), new Date(Date.now() - new Date().getTimezoneOffset() * 220000).toISOString().substr(0,10)]
+      const hotelNo = mHotel.hotelNo
+      console.log('hotel')
+      console.log(mHotel.hotelNo)
+      const payload = { dates, personnel, hotelNo }
+            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: mHotel.hotelNo.toString() , payload} })   
+    }
 },
 };
 </script>

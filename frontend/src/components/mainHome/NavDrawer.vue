@@ -1,6 +1,6 @@
 <template>
   <v-col>
-    <v-col align-self id="profile">
+    <v-col id="profile">
       <v-col>
         <!--<img v-if="userInfo.profile_path" :src="require(`@/assets/img/${this.userInfo.profile_path}`)"
                   id="imageBefore" class="proimg" />-->
