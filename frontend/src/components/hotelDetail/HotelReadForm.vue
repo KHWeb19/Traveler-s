@@ -142,17 +142,24 @@
           </tr>
         </table>
       </form>
-    </v-container>
+    </v-container>   
+
+      <m-room-read-form :payload="payload"
+                        :mRooms="mRooms"
+                        :hotelNo="hotelNo" />        
   </div>
 </template>
 
 <script>
 import KakaoMapApi from "@/components/hotelDetail/KakaoMapApi.vue";
+import MRoomReadForm from "@/components/hotelDetail/RoomReadForm.vue";
 import axios from "axios";
+import { mapActions, mapState } from 'vuex';
 export default {
   name: "HotelReadForm",
   components: {
     KakaoMapApi,
+    MRoomReadForm,
   },
   data() {
     return {
@@ -166,8 +173,18 @@ export default {
       type: Object,
       required: true,
     },
+    payload: {
+      type: Object
+    },
+    hotelNo: {
+      type: String
+    }
+  },
+  computed: {
+       ...mapState(['mRooms'])
   },
   methods: {
+    ...mapActions(['fetchMRoomList']),
     wish() {
         console.log(this.mHotel.hotelNo);
         if(this.checkWish == false){
@@ -191,7 +208,10 @@ export default {
               alert("등록 실패");
             });
         }
-    },
+    },     
+  },
+   mounted () {
+    this.fetchMRoomList(this.payload)
   }
 };
 </script>
