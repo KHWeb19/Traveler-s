@@ -8,8 +8,8 @@
 						<main-search/>
 					</v-row>
 				</v-container>
-
-				<hotel-random :mHotels="mHotels"/>
+				
+				<hotel-random :mHotels="mHotels"/><br><br><br><br>
 
 				<v-container>
 					<v-row>

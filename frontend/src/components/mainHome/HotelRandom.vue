@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <section>
-      <v-card-title id="RandomTitle" style="font-size:3em">랜덤숙소 추천</v-card-title>
+      <h3 class="titDep2">다양한 유형의 숙소를 확인해 보세요</h3>
       <v-row justify="center" >
         <v-col justify="space-around" v-for="mHotel in mHotels" :key="mHotel.hotelNo" cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
           <v-card @click="readHotel(mHotel)">
@@ -69,6 +69,17 @@ export default {
 </script>
 
 <style scoped>
+
+    @font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+}
+
+h3 {
+  font-family: 'NanumSquareRound';
+  font-size: 1.6rem;
+}
+
 .v-container{
   width: 60%;
   margin-top: 5%;

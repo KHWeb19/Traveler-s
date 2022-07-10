@@ -1,5 +1,6 @@
 <template>
   <div align="center" style="display: inline-block">
+    <img src="@/assets/mypagereservbackimg.jpg"/>
     <v-container>
       <table style="width: 800px">
         <tr>
@@ -66,7 +67,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 /*table, th, td{
     border-collapse:collapse;
     border: 1px solid black;
@@ -77,6 +78,7 @@ div {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  height: 100%;
 }
 h2 {
   padding: 50px 0px 30px 0px;
@@ -128,4 +130,21 @@ h2 {
   font-size: 14px;
   margin-left: 50px;
 }
+
+  img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  /*
+  background: linear-gradient(
+            to bottom,
+            rgba(255,255,255,0) 10%,
+            rgba(255,255,255,0.5) 25%,
+            rgba(255,255,255,0.7) 40%,
+            rgba(255,255,255,1) 50%,
+            rgba(255,255,255,1) 100%
+          ), url(@/assets/hotelbackimg.jpg);
+  background-repeat: no-repeat;*/
+  
+  }
 </style>
