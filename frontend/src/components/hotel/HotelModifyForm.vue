@@ -58,12 +58,14 @@
     <div>
          <table>
             <tr>
-                <td v-for="(file, index) in files" :key="index" > <!-- bmHotel 통해서 들어온 files를 하나하나 index로 떼서 배열 -->
-                    <div>  <!-- 읽기 페이지에서 수정하기 버튼을 눌렀을때 바로 나오는 preview -->
-                    
+                <td v-for="(none, index) in notImage" :key="index" > 
+                    <div v-if="files[index] == null">
+                        <v-icon>
+                            mdi-image
+                        </v-icon>
                     </div>
-                    <div> <!-- 파일을 선택했을때 나오는 preview -->
-                        <img :src="files[index].preview" class="preview" width="100px" height="100px" :value="files"/>
+                    <div v-else>
+                         <img :src="files[index].preview" class="preview" width="100px" height="100px"/>
                          <v-icon @click="imgCancel(index)">
                             mdi-close
                         </v-icon>
