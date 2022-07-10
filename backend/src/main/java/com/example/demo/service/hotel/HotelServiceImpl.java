@@ -86,6 +86,7 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
 
         hotel.setHotelInfo(hotelRequest.getHotelInfo());
         hotel.setHotelName(hotelRequest.getHotelName());
+        hotel.setHotelIntro(hotelRequest.getHotelIntro());
         hotelImgPathRemove(hotel, path);
 
         List<String> filePathList = new ArrayList<>();

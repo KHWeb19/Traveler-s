@@ -108,7 +108,14 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
     public Long bmRoomModify(RoomRequest roomRequest, List<MultipartFile> files, Integer roomNo) {
         Optional<Room> roomInfo = roomRepository.findByWithHotel(Long.valueOf(roomNo));
         //어떻게 못하겠다 나의 한계
+
         Room room = roomInfo.get();
+
+        room.setRoomType(roomRequest.getRoomType());
+        room.setRoomInfo(roomRequest.getRoomInfo());
+        room.setPersonnel(roomRequest.getPersonnel());
+        room.setPrice(roomRequest.getPrice());
+
         roomImgPathRemove(room, path);
         //이것도 나의 한계
         Room r = Room.builder()

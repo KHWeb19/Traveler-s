@@ -6,7 +6,9 @@
         <h3>기본정보</h3>
         <hr>
         <label class="hotelNameLabel">* 숙소명</label>
-        <input type="text" class="hotelNameBox" v-model="hotelName"/>
+        <input type="text" class="hotelNameBox" v-model="hotelName"/><br>
+        <label class="hotelNameLabel">* 소개글</label>
+        <input type="text" class="hotelNameBox" v-model="hotelIntro"/>
     </div>
     
     <!-- 시설정보 -->
@@ -70,7 +72,6 @@
                     </div>
                 </td>
             </tr>
-
         </table>
     </div>
     </div>
@@ -97,6 +98,7 @@ data () {
     return {
         hotelName: '',
         hotelInfo: this.bmHotel.hotelInfo,
+        hotelIntro: '',
         files: [],
         notImage: ['','','','','','','','',''],
         fileNum: 0,
@@ -167,6 +169,7 @@ methods: {
  created () {
     this.hotelName = this.bmHotel.hotelName
     this.hotelInfo = this.bmHotel.hotelInfo
+    this.hotelIntro = this.bmHotel.hotelIntro
 }
 }
 </script>
