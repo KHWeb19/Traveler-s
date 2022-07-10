@@ -208,6 +208,7 @@ tr td:nth-child(5) {
 tr td:nth-child(6) {
   text-align: center;
 }
+
 /* 페이징 버튼 */
 .page-box {
   width: 80%;

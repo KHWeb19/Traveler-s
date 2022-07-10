@@ -19,6 +19,9 @@ import RoomRegisterPage from "@/views/room/RoomRegisterPage.vue";
 
 import WishListPage from "@/views/mypage/WishListPage.vue";
 import MyPageBooking from "@/views/mypage/MyPageBooking.vue";
+import MyPageBookingReserved from "@/views/mypage/MyPageBookingReserved.vue";
+import MyPageBookingPending from "@/views/mypage/MyPageBookingPending";
+import MyPageBookingCancelled from "@/views/mypage/MyPageBookingCancelled.vue";
 
 Vue.use(VueRouter);
 
@@ -191,6 +194,27 @@ const routes = [
     name: "MyPageBooking",
     components: {
       default: MyPageBooking,
+    },
+  },
+  {
+    path: "/mypagebookingreservd",
+    name: "MyPageBookingReserved",
+    components: {
+      default: MyPageBookingReserved,
+    },
+  },
+  {
+    path: "/mypagebookingpending",
+    name: "MyPageBookingPending",
+    components: {
+      default: MyPageBookingPending,
+    },
+  },
+  {
+    path: "/mypagebookingcancelled",
+    name: "MyPageBookingCancelled",
+    components: {
+      default: MyPageBookingCancelled,
     },
   },
 ];

@@ -12,7 +12,9 @@ import {
   FETCH_BOOKING_LISTS,
   FETCH_SEARCH_LISTS,
   FETCH_CEOBOOKING_LISTS,
-
+  GET_RESERVES,
+  GET_PENDINGS,
+  GET_CANCELLS,
 } from "./mutation-types";
 
 export default {
@@ -58,10 +60,19 @@ export default {
   [FETCH_BOOKING_LISTS](state, bookingLists) {
     state.bookingLists = bookingLists;
   },
-  [FETCH_SEARCH_LISTS](state, searchList){
-    state.searchList = searchList
+  [FETCH_SEARCH_LISTS](state, searchList) {
+    state.searchList = searchList;
   },
   [FETCH_CEOBOOKING_LISTS](state, ceoBookingLists) {
     state.ceoBookingLists = ceoBookingLists;
+  },
+  [GET_RESERVES](state, reserves) {
+    state.reserves = reserves;
+  },
+  [GET_PENDINGS](state, pendings) {
+    state.pendings = pendings;
+  },
+  [GET_CANCELLS](state, cancelles) {
+    state.cancelles = cancelles;
   },
 };

@@ -15,7 +15,9 @@ import {
   FETCH_BOOKING_LISTS,
   FETCH_SEARCH_LISTS,
   FETCH_CEOBOOKING_LISTS,
-
+  GET_RESERVES,
+  GET_PENDINGS,
+  GET_CANCELLS,
 } from "./mutation-types";
 
 import axios from "axios";
@@ -35,9 +37,11 @@ export default {
       });
   },
   fetchMRoomList({ commit }, payload) {
-    return axios.post("http://localhost:7777/room/mem/list", payload).then((res) => {
-      commit(FETCH_M_ROOM_LIST, res.data);
-    });
+    return axios
+      .post("http://localhost:7777/room/mem/list", payload)
+      .then((res) => {
+        commit(FETCH_M_ROOM_LIST, res.data);
+      });
   },
   fetchMRoom({ commit }, roomNo) {
     return axios.get(`http://localhost:7777/room/mem/${roomNo}`).then((res) => {
@@ -56,14 +60,14 @@ export default {
         commit(FETCH_BM_HOTEL, res.data);
       });
   },
-  attemptLogin({dispatch, commit}, payload) {
+  attemptLogin({ dispatch, commit }, payload) {
     axios
       .post("http://localhost:7777/login", payload, { withCredentials: true })
       .then((res) => {
         localStorage.setItem("access_token", res.data.accessToken);
         commit(IS_LOGGEDIN);
-        dispatch('setUser');
-        console.log('해줌')
+        dispatch("setUser");
+        console.log("해줌");
         router.push("/");
       })
       .catch(() => alert("Invalid username or password"));
@@ -130,10 +134,39 @@ export default {
         commit(FETCH_CEOBOOKING_LISTS, res.data);
       });
   },
-  fetchSearchLists({ commit }, payload){
-    axios.post('http://localhost:7777/search/commonSearch', payload)
-                    .then((res) => {
-                     commit(FETCH_SEARCH_LISTS, res.data)
-                })
-   }
+  getReserves({ commit }) {
+    axios
+      .get(
+        "http://localhost:7777/reserve/user/reservationListWithStatus?status=RESERVED"
+      )
+      .then((res) => {
+        commit(GET_RESERVES, res.data);
+      });
+  },
+  getPedndings({ commit }) {
+    axios
+      .get(
+        "http://localhost:7777/reserve/user/reservationListWithStatus?status=PENDING"
+      )
+      .then((res) => {
+        commit(GET_PENDINGS, res.data);
+      });
+  },
+  getCancellss({ commit }) {
+    axios
+      .get(
+        "http://localhost:7777/reserve/user/reservationListWithStatus?status=CANCELLED"
+      )
+      .then((res) => {
+        commit(GET_CANCELLS, res.data);
+      });
+  },
+
+  fetchSearchLists({ commit }, payload) {
+    axios
+      .post("http://localhost:7777/search/commonSearch", payload)
+      .then((res) => {
+        commit(FETCH_SEARCH_LISTS, res.data);
+      });
+  },
 };
