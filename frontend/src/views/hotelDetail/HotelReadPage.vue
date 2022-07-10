@@ -2,7 +2,7 @@
   <div align="center">
     <m-hotel-read-form :mHotel="mHotel"
                         :payload="keyWord"
-                        :hotelNo="hotelNo" />
+                        :hotelNo="hotelNo" /> 
     <!-- <m-search-calender-form/>
      SearchCalenderForm.vue 해당 컴포넌트 내역을 우선
      RoomReadForm 내로 이동시켰습니다.
