@@ -11,18 +11,18 @@
                 <li class="refund"><a href="#"><span>취소/환불 안내</span></a></li>
             </ul>
 
-    <div class="mainNews">
-		<div class="txt">
-			<h4 class="titDep3">에디패스 뉴스레터 구독하기</h4>
-			<p class="desc">매주 최신의 여행이야기를 받아보세요!</p>
-		</div>
-		<div class="email">
-			<input type="text" placeholder="구독신청 이메일을 입력해주세요." subscriptionsinp="">
-			<button type="button" class="btnDefault btnL action" subscriptionsbtn="">신청</button>
-		</div>
-	</div>
-       
-</div>
+        <div class="mainNews">
+            <div class="txt">
+                    <h4 class="titDep3">에디패스 뉴스레터 구독하기</h4>
+                    <p class="desc">매주 최신의 여행이야기를 받아보세요!</p>
+            </div>
+            <div class="email">
+                    <input type="text" placeholder="구독신청 이메일을 입력해주세요." subscriptionsinp="">
+                    <button type="button" class="btnDefault btnL action" subscriptionsbtn="">신청</button>
+            </div>
+        </div>
+
+    </div>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div id="map" style="width:70%;height:400px;"></div>
+        <div id="map"></div>
     </div>
     
 </template>
@@ -93,3 +93,12 @@ export default {
     }*/
 }
 </script>
+<style scoped>
+#map {
+    max-width: 45vw;
+    min-width: 400px;
+    height:50vh;
+    min-height: 400px;
+    margin: 10px 2%;
+}
+</style>>
