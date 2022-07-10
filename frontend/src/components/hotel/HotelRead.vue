@@ -18,7 +18,14 @@
                     <td align="center" id="title2">숙소명</td>
                     <td class="content">
                         <input type="text" class="hotelNameBox" :value="bmHotel.hotelName" readonly/>
-                    </td>
+                    </td>                    
+                </tr>
+                
+                <tr>
+                    <td align="center" id="title2">소개글</td>
+                    <td class="content">
+                        <input type="text" class="hotelNameBox" :value="bmHotel.hotelIntro" readonly/>
+                    </td>                    
                 </tr>
             </table>
 
