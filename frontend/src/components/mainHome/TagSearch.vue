@@ -60,7 +60,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
     name: 'TagSearch',
@@ -101,23 +100,9 @@ export default {
         search(info) {
             const word = info;
             console.log(word)
-            axios.post('http://localhost:7777/search/tagSearch',  { word })
-                    .then((res) => {
-                        console.log("검색 성공")
-                        console.log(res.data)
-
-                        this.$router.push({name: 'TagSearchPage',
-                                    params: { searchList: res.data, word } })
-                                    //searchList와 pageArray는 같은 결과가 저장되기 때문에
-                                    //차후 최종 확인하였을 때 하나만 필요한 시나리오인 게 확실하다면
-                                    //searchList를 삭제하도록 한다.
-                                    //이 파일 말고 components/detailSearch/searchDetailSearch.vue, views/searchpage/SearchPage.vue도 확인하여 삭제할 것
-                    .catch(() => {});
-                })
-                .catch(() => {
-                alert("검색 실패");
-            });
-
+            this.$router.push({name: 'TagSearchPage',
+                                    params: { word } })
+                                  
         }
     },
 

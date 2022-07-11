@@ -14,6 +14,7 @@ import {
   FETCH_WISH_LISTS,
   FETCH_BOOKING_LISTS,
   FETCH_SEARCH_LISTS,
+  FETCH_TAG_SEARCH_LISTS,
   FETCH_CEOBOOKING_LISTS,
   GET_RESERVES,
   GET_PENDINGS,
@@ -169,4 +170,10 @@ export default {
         commit(FETCH_SEARCH_LISTS, res.data);
       });
   },
+  fetchTagSearchLists({commit}, word) {
+    axios.post('http://localhost:7777/search/tagSearch', { word })
+				.then((res) => {
+					commit(FETCH_TAG_SEARCH_LISTS, res.data);
+        });
+  }
 };
