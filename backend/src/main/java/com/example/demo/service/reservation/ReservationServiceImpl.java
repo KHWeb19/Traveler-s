@@ -46,7 +46,7 @@ public class ReservationServiceImpl implements ReservationService{
         Room room = optionalRoom.get();
 
         Reservation reservation = Reservation.builder()
-                .price(100000L)
+                .price(room.getPrice())
                 .status(ReservationStatus.PENDING)
                 .startDate(startDate)
                 .endDate(endDate)
@@ -93,11 +93,14 @@ public class ReservationServiceImpl implements ReservationService{
 
     private boolean validateRoom(List<Reservation> reservations, LocalDate startDate, LocalDate endDate){
         log.info("validateRoom method");
-        Optional<Reservation> optionalReservation = reservations.stream().filter(f -> !(f.getEndDate().isBefore(startDate) && !(f.getStartDate().isAfter(endDate)))).findFirst();
+        //Optional<Reservation> optionalReservation = reservations.stream().filter(f -> !(f.getEndDate().isBefore(startDate) && !(f.getStartDate().isAfter(endDate)))).findFirst();
+        Optional<Reservation> optionalReservation = reservations.stream().filter(f -> startDate.isBefore(f.getEndDate()) && !(endDate.isBefore(f.getStartDate()))).findFirst();
+
         if (optionalReservation.isEmpty()) {
             log.info("Can make reservation.");
             return true;
         }
+
         log.info("Cannot make reservation.");
         return false;
     }

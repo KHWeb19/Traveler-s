@@ -51,21 +51,21 @@
                         </tr>
                         <tr>
                             <td>
-                                <input class="check" type="checkbox" name="agree1">
+                                <input class="check" type="checkbox" name="agree1" v-model="checkArray" value="checkOne">
                             </td>
                             <td> &ensp; 여행자 약관 동의 (필수) </td>
                             <td> <agree-dialog-one/> </td>
                         </tr>
                         <tr>
                             <td>
-                                <input class="check" type="checkbox" name="agree2">
+                                <input class="check" type="checkbox" name="agree2" v-model="checkArray" value="checkTwo">
                             </td>
                             <td> &ensp; 개인정보 제공 동의 (필수) </td>
                             <td> <agree-dialog-two/> </td>
                         </tr>
                         <tr>
                             <td>
-                                <input class="check" type="checkbox" name="agree3">
+                                <input class="check" type="checkbox" name="agree3" v-model="checkArray" value="checkThree">
                             </td>
                             <td> &ensp; 개인정보 수집 및 이용 동의 (필수) </td>
                             <td> <agree-dialog-three/> </td>
@@ -81,7 +81,7 @@
                     <table style="width: 400px;">
                         <tr>
                             <td id="title1">
-                                <h3>결제 정보</h3>
+                                <h3>결제 수단</h3>
                             </td>
                         </tr>
                         <tr>
@@ -101,7 +101,7 @@
                 <td align="center">
                     <br>
         <!-- 약관 안내 체크에 빠진 것이 없고 + 결제 라디오 버튼 중 한 개를 반드시 선택해야 결제가 가능하다. -->
-                        <v-btn block id="button2">
+                        <v-btn block id="button2" @click="requestPay">
                             결 제 하 기
                         </v-btn>
                 </td>
@@ -114,7 +114,6 @@
 import AgreeDialogOne from '@/components/reserv/AgreeDialogOne.vue'
 import AgreeDialogThree from '@/components/reserv/AgreeDialogThree.vue'
 import AgreeDialogTwo from '@/components/reserv/AgreeDialogTwo.vue'
-
 
 export default {
     name: 'MReservForm',
@@ -129,11 +128,21 @@ export default {
             pay: '',
             radioGroup:1,
             kindOfPay: [
-                '무통장 입금',
                 '신용/체크 카드',
-                '토스 결제'
-            ]
+            ],
+            checkArray: []
+
         }
+    },
+    methods: {
+      requestPay(){
+        if (this.checkArray.length === 3 && this.pay)
+            this.$emit('payRequest')
+        else{
+            alert("서비스 이용약관 및 결제 수단을 확인하세요")
+        }
+      }  
+      
     },
     props: {
         reservationInfo: Object

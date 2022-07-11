@@ -42,21 +42,25 @@ public class InitializeDatabase implements CommandLineRunner {
                 .password(passwordEncoder.encode("password"))
                 .name("admin")
                 .profile_path("default.png")
+                .mobile("010-1234-1234")
                 .build();
         User userCEO = User.builder().email("ceo@gmail.com")
                 .password(passwordEncoder.encode("password"))
                 .name("ceo")
                 .profile_path("default.png")
+                .mobile("010-1234-1234")
                 .build();
         User userUser = User.builder().email("user@gmail.com")
                 .password(passwordEncoder.encode("password"))
                 .name("user")
                 .profile_path("default.png")
+                .mobile("010-1234-1234")
                 .build();
         User userTest = User.builder().email("test@gmail.com")
                 .password(passwordEncoder.encode("password"))
                 .name("test")
                 .profile_path("default.png")
+                .mobile("010-1234-1234")
                 .build();
         userAdmin.addRoleToUser(roleAdmin);
         userCEO.addRoleToUser(roleCEO);
@@ -87,7 +91,7 @@ public class InitializeDatabase implements CommandLineRunner {
 
             for (int k = 1; k <= 3; k++){
                 Room room = Room.builder()
-                        .price(99999L)
+                        .price(1000L)
                         .personnel(4)
                         .roomInfo(roomInfo)
                         .roomType("roomType")
@@ -114,7 +118,7 @@ public class InitializeDatabase implements CommandLineRunner {
                 .startDate(LocalDate.parse("2022-07-01"))
                 .endDate(LocalDate.parse("2022-07-07"))
                 .status(ReservationStatus.PENDING)
-                .price(9999L)
+                .price(1000L)
                 .room(room)
                 .user(userUser)
                 .build();
@@ -123,7 +127,7 @@ public class InitializeDatabase implements CommandLineRunner {
                 .startDate(LocalDate.parse("2022-08-01"))
                 .endDate(LocalDate.parse("2022-08-07"))
                 .status(ReservationStatus.RESERVED)
-                .price(9999L)
+                .price(1000L)
                 .room(room)
                 .user(userUser)
                 .build();
@@ -132,7 +136,7 @@ public class InitializeDatabase implements CommandLineRunner {
                 .startDate(LocalDate.parse("2022-09-01"))
                 .endDate(LocalDate.parse("2022-09-07"))
                 .status(ReservationStatus.CANCELLED)
-                .price(9999L)
+                .price(1000L)
                 .room(room)
                 .user(userUser)
                 .build();

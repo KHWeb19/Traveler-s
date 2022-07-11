@@ -93,7 +93,7 @@ public class ReservationController {
         String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         User user = userRepository.findByEmail(email).get();
         List<Reservation> reservations = reservationService.listReservationsByStatusForCEO(user.getId(), status);
-        List<ReservationResponse> reservationResponses = ReservationResponse.reservationResponseListBuilder(reservations);
+        List<ReservationResponse> reservationResponses = ReservationResponse.reservationResponseListBuilderForCeo(reservations);
         return reservationResponses;
     }
 

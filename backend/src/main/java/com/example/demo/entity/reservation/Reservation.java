@@ -1,6 +1,7 @@
 package com.example.demo.entity.reservation;
 
 import com.example.demo.entity.member.User;
+import com.example.demo.entity.payment.Payment;
 import com.example.demo.entity.room.Room;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -37,4 +38,6 @@ public class Reservation {
     @JsonIgnore
     private Room room;
 
+    @OneToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Payment payment;
 }
