@@ -19,6 +19,7 @@ export default {
             map: null,
             geocoder: null,
             hotelInfo: [],
+            hotel: null
 }
     },
     methods: {
@@ -72,11 +73,14 @@ export default {
     },
 
     mounted () {
+            if(this.$store.state.hotel == null){
+                this.kakao;
+            }
+            this.hotel = this.$store.state.mHotel
             this.$watch('mHotel', function(){
                 this.kakao()
-                return
             })
-            this.kakao()      
+              
     }
     /*watch: {
         mHotel: function() {

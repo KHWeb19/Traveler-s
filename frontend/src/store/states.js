@@ -21,16 +21,13 @@ export default {
   reserves: [],
   pendings: [],
   cancelles: [],
-
+  tagSearchList: [],
   searchList: [],
   keyWord: [],
   num: 0,
   searchKeyWord: null,
-
-  keyWords: [],
+  tagSearchKeyWord: null,
   keyWords: null,
   ceoBookingLists: [],
-
-
-  ceoBookingLists: [],
+  hotel:null,
 };

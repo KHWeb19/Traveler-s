@@ -11,6 +11,7 @@ import {
   FETCH_WISH_LISTS,
   FETCH_BOOKING_LISTS,
   FETCH_SEARCH_LISTS,
+  FETCH_TAG_SEARCH_LISTS,
   FETCH_CEOBOOKING_LISTS,
   GET_RESERVES,
   GET_PENDINGS,
@@ -63,6 +64,9 @@ export default {
   [FETCH_SEARCH_LISTS](state, searchList) {
     state.searchList = searchList;
   },
+  [FETCH_TAG_SEARCH_LISTS](state,tagSearchList){
+    state.tagSearchList = tagSearchList;
+  },
   [FETCH_CEOBOOKING_LISTS](state, ceoBookingLists) {
     state.ceoBookingLists = ceoBookingLists;
   },
@@ -75,4 +79,5 @@ export default {
   [GET_CANCELLS](state, cancelles) {
     state.cancelles = cancelles;
   },
+
 };
