@@ -1,7 +1,8 @@
 <template>
   <div align="center">
+    <img src="@/assets/roombackimg.jpg" />
     <v-container>
-      <table style="width: 800px;">
+      <table style="width: 800px">
         <tr>
           <td align="left" colspan="2">
             <h2 class="pageTit">객실 관리</h2>
@@ -17,13 +18,14 @@
             <select
               class="hotel-select"
               v-model="hotelNo"
-              @change="getRoomList($event)">
-              
-              <option :value="''"> 호텔을 선택하세요.</option>
+              @change="getRoomList($event)"
+            >
+              <option :value="''">호텔을 선택하세요.</option>
               <option
                 v-for="(hotel, idx) in hotelType"
                 :key="idx"
-                :value="hotel.hotelNo">
+                :value="hotel.hotelNo"
+              >
                 {{ hotel.hotelName }}
               </option>
             </select>
@@ -32,26 +34,30 @@
 
         <tr>
           <td colspan="2">
-            <br>
-                <router-link
-                    v-if="hotelNo"
-                    :to="{ name: 'RoomRegisterPage', params: { hotelNo: this.hotelNo.toString() }, }"
-                    class="btn">
-
-                  <v-btn>객실등록</v-btn>
-                </router-link>
+            <br />
+            <router-link
+              v-if="hotelNo"
+              :to="{
+                name: 'RoomRegisterPage',
+                params: { hotelNo: this.hotelNo.toString() },
+              }"
+              class="btn"
+            >
+              <button id="button">객실등록</button>
+            </router-link>
           </td>
         </tr>
-
 
         <tr>
           <td align="left" colspan="2">
-            <room-list v-if="bmRoomList" :bmRoomList="bmRoomList"
-                        @deleteRooms="deleteRooms" />
+            <room-list
+              v-if="bmRoomList"
+              :bmRoomList="bmRoomList"
+              @deleteRooms="deleteRooms"
+            />
           </td>
         </tr>
       </table>
-    
     </v-container>
   </div>
 </template>
@@ -60,7 +66,6 @@
 import RoomList from "@/components/room/RoomList.vue";
 import { mapState, mapActions } from "vuex";
 import axios from "axios";
-
 export default {
   name: "RoomListPage",
   components: {
@@ -77,19 +82,17 @@ export default {
   },
   mounted() {
     this.getHotelType();
-    console.log(this.bmRoomList)
+    console.log(this.bmRoomList);
   },
   methods: {
     ...mapActions(["getHotelType"]),
     ...mapActions(["fetchBmRoomList"]),
     getRoomList(event) {
       this.hotelNo = event.target.value;
-      this.fetchBmRoomList(this.hotelNo)
-      
+      this.fetchBmRoomList(this.hotelNo);
     },
     deleteRooms(payload) {
       const rooms = payload;
-
       axios
         .post("http://localhost:7777/room/bm/deleteRooms", rooms)
         .then(() => {
@@ -101,9 +104,9 @@ export default {
         });
     },
   },
-  created () {
-    this.fetchBmRoomList(this.hotelNo)
-  }
+  created() {
+    this.fetchBmRoomList(this.hotelNo);
+  },
 };
 </script>
 
@@ -113,27 +116,28 @@ div {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  height: 100%;
 }
 h2 {
   padding: 50px 0px 30px 0px;
 }
 .pageTit {
   padding: 50px 0px 30px 0px;
-  font-family: 'NanumSquareRound';
-  font-size: 2.0rem;
+  font-family: "NanumSquareRound";
+  font-size: 2rem;
   line-height: 1.25;
-  letter-spacing: -.01em;
+  letter-spacing: -0.01em;
   color: #202020;
   font-weight: 900;
 }
 .pageTit:after {
-    content: '';
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    margin-bottom: 24px;
-    border-radius: 50%;
-    background-color: #e63668;
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin-bottom: 24px;
+  border-radius: 50%;
+  background-color: #e63668;
 }
 .page-count {
   margin-left: 15px;
@@ -168,4 +172,19 @@ h2 {
     border-collapse:collapse;
     border: 1px solid black;
 }*/
+img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  /*
+  background: linear-gradient(
+            to bottom,
+            rgba(255,255,255,0) 10%,
+            rgba(255,255,255,0.5) 25%,
+            rgba(255,255,255,0.7) 40%,
+            rgba(255,255,255,1) 50%,
+            rgba(255,255,255,1) 100%
+          ), url(@/assets/hotelbackimg.jpg);
+  background-repeat: no-repeat;*/
+}
 </style>

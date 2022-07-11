@@ -58,7 +58,7 @@ public class ReservationController {
         ReservationResponse reservationResponse = ReservationResponse.reservationResponseBuilderWithUser(reservation);
         return reservationResponse;
     }
-
+    @Transactional
     @GetMapping("/user/listAllReservations")
     public List<ReservationResponse> listAllReservations(){
         String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
@@ -67,7 +67,7 @@ public class ReservationController {
         List<ReservationResponse> reservationResponses = ReservationResponse.reservationResponseListBuilder(reservations);
         return reservationResponses;
     }
-
+    @Transactional
     @GetMapping("/user/reservationListWithStatus")
     public List<ReservationResponse> listAllReservations(@RequestParam String status){
         String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();

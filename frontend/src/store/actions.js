@@ -13,7 +13,12 @@ import {
   FETCH_BM_ROOM_LIST,
   FETCH_WISH_LISTS,
   FETCH_BOOKING_LISTS,
+  FETCH_SEARCH_LISTS,
+  FETCH_TAG_SEARCH_LISTS,
   FETCH_CEOBOOKING_LISTS,
+  GET_RESERVES,
+  GET_PENDINGS,
+  GET_CANCELLS,
 } from "./mutation-types";
 
 import axios from "axios";
@@ -29,14 +34,15 @@ export default {
     return axios
       .get(`http://localhost:7777/hotel/mRead/${hotelNo}`)
       .then((res) => {
-        console.log("fetchMhotel: ", res.data);
         commit(FETCH_M_HOTEL, res.data);
       });
   },
-  fetchMRoomList({ commit }) {
-    return axios.get("http://localhost:7777/room/mem/list").then((res) => {
-      commit(FETCH_M_ROOM_LIST, res.data);
-    });
+  fetchMRoomList({ commit }, payload) {
+    return axios
+      .post("http://localhost:7777/room/mem/list", payload)
+      .then((res) => {
+        commit(FETCH_M_ROOM_LIST, res.data);
+      });
   },
   fetchMRoom({ commit }, roomNo) {
     return axios.get(`http://localhost:7777/room/mem/${roomNo}`).then((res) => {
@@ -55,7 +61,7 @@ export default {
         commit(FETCH_BM_HOTEL, res.data);
       });
   },
-  attemptLogin({dispatch, commit}, payload) {
+  attemptLogin({ dispatch, commit }, payload) {
     axios
       .post("http://localhost:7777/login", payload, { withCredentials: true })
       .then((res) => {
@@ -128,4 +134,45 @@ export default {
         commit(FETCH_CEOBOOKING_LISTS, res.data);
       });
   },
+  getReserves({ commit }) {
+    axios
+      .get(
+        "http://localhost:7777/reserve/user/reservationListWithStatus?status=RESERVED"
+      )
+      .then((res) => {
+        commit(GET_RESERVES, res.data);
+      });
+  },
+  getPedndings({ commit }) {
+    axios
+      .get(
+        "http://localhost:7777/reserve/user/reservationListWithStatus?status=PENDING"
+      )
+      .then((res) => {
+        commit(GET_PENDINGS, res.data);
+      });
+  },
+  getCancellss({ commit }) {
+    axios
+      .get(
+        "http://localhost:7777/reserve/user/reservationListWithStatus?status=CANCELLED"
+      )
+      .then((res) => {
+        commit(GET_CANCELLS, res.data);
+      });
+  },
+
+  fetchSearchLists({ commit }, payload) {
+    axios
+      .post("http://localhost:7777/search/commonSearch", payload)
+      .then((res) => {
+        commit(FETCH_SEARCH_LISTS, res.data);
+      });
+  },
+  fetchTagSearchLists({commit}, word) {
+    axios.post('http://localhost:7777/search/tagSearch', { word })
+				.then((res) => {
+					commit(FETCH_TAG_SEARCH_LISTS, res.data);
+        });
+  }
 };

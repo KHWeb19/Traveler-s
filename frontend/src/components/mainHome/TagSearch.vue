@@ -1,150 +1,65 @@
 <template>
-
-    <v-container>
-
-            <h3 class="titDep2">태그스토리</h3>
-
-            <!-- img -->
-            <v-container class="tagImg">
-                <ul>
-                    <li>
-                        <figure>
-                            <a href="#"><img src="@/assets/tagSearchImg/tagImg1.png" width="368" height="436"/></a>
-                            <div class="infoTxt">
-                                <strong class="tit">읽어도 좋고 책멍도 좋다</strong>
-                                    <p class="txt">
-                                    <span>#카페투어</span>
-                                    <span>#북카페</span>
-                                    <span>#책방투어</span>
-                                    <span>#태그여행</span>
-                                    </p>
-                            </div>
-                        </figure>
-                    </li>
-                    <li>
-                        <figure>
-                            <a href="#"><img src="@/assets/tagSearchImg/tagImg2.png" width="368" height="436"/></a>
-                            <div class="infoTxt">
-                                <strong class="tit">스토리가 있는 여행<br>[우리들의 블루스]</strong>
-                                    <p class="txt">
-                                    <span>#카페투어</span>
-                                    <span>#뷰맛집</span>
-                                    <span>#힐링</span>
-                                    <span>#태그여행</span>
-                                    </p>
-                            </div>
-                        </figure>
-                    </li>
-                    <li>
-                        <figure>
-                            <a href="#"><img src="@/assets/tagSearchImg/tagImg3.png" width="368" height="436"/></a>
-                            <div class="infoTxt">
-                                <strong class="tit">pit a PET 나와 함께하개</strong>
-                                    <p class="txt">
-                                    <span>#반려동물동반</span>
-                                    <span>#오션뷰</span>
-                                    <span>#루프탑</span>
-                                    <span>#타르트맛집</span>
-                                    </p>
-                            </div>
-                        </figure>
-                    </li>
-                </ul>
-
-
-            </v-container>
-
-            <!-- #info -->
-            <v-row justify="center">
-                <v-btn v-for="(info, idx) in hotelInfo"
-                :key="idx"
-                @click="search(info)"
-                color="#f8f8f8"
-                variant="plain"
-                depressed="false"
-                class="button1 b-color rot-1">#{{ info }}
-                </v-btn>
-            </v-row>
-
-    <v-container fluid>
+    <v-container style="width:100%">
+        <v-col>
         <h3 class="titDep2">태그스토리</h3>
-        <!-- swiper
-            <div class="slide-3d">
-                <swiper
-                    class="swiper"
-                    :options="swiperOption"
-                >
+        </v-col>
 
-                    <swiper-slide></swiper-slide>
-                    <swiper-slide></swiper-slide>
-                    <swiper-slide>Slide 3</swiper-slide>
-                    <swiper-slide>Slide 4</swiper-slide>
-                    <swiper-slide>Slide 5</swiper-slide>
-                    <swiper-slide>Slide 6</swiper-slide>
-
-                    <div class="swiper-pagination" slot="pagination">
-                    </div>
-                </swiper>
-            </div> -->
         <!-- img -->
-        <div class="tagImg">
-            <ul>
-                <li>
-                    <figure>
-                        <a href="#"><img id="img1" src="@/assets/tagSearchImg/tagImg1.png"/></a>
-                        <div class="infoTxt">
-                            <strong class="tit">읽어도 좋고 책멍도 좋다</strong>
-                            <p class="txt">
-                                <span>#카페투어</span>
-                                <span>#북카페</span>
-                                <span>#책방투어</span>
-                                <span>#태그여행</span>
-                            </p>
-                        </div>
-                    </figure>
-                </li>
-                <li>
-                    <figure>
-                        <a href="#"><img id="img2" src="@/assets/tagSearchImg/tagImg2.png"/></a>
-                        <div class="infoTxt">
-                            <strong class="tit">스토리가 있는 여행<br>[우리들의 블루스]</strong>
-                            <p class="txt">
-                                <span>#카페투어</span>
-                                <span>#뷰맛집</span>
-                                <span>#힐링</span>
-                                <span>#태그여행</span>
-                            </p>
-                        </div>
-                    </figure>
-                </li>
-                <li>
-                    <figure>
-                        <a href="#"><img id="img3" src="@/assets/tagSearchImg/tagImg3.png"/></a>
-                        <div class="infoTxt">
-                            <strong class="tit">pit a PET 나와 함께하개</strong>
-                            <p class="txt">
-                                <span>#반려동물동반</span>
-                                <span>#오션뷰</span>
-                                <span>#루프탑</span>
-                                <span>#타르트맛집</span>
-                            </p>
-                        </div>
-                    </figure>
-                </li>
-            </ul>
-        </div>
-        <!-- #info -->
-        <v-row justify="center">
-            <v-btn v-for="(info, idx) in hotelInfo" :key="idx" @click="search(info)" color="#f8f8f8" variant="plain"
-                depressed="false" class="button1 b-color rot-1">#{{ info }}
-            </v-btn>
+        <v-row style="width:100%" justify="center">
+            <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="3" justify="center">
+                <figure id="storyImg">
+                    <a href="#"><img src="@/assets/tagSearchImg/tagImg1.png" width="368" height="436" /></a>
+                    <div class="infoTxt">
+                        <strong class="tit">읽어도 좋고 책멍도 좋다</strong>
+                        <p class="txt">
+                            <span>#카페투어</span>
+                            <span>#북카페</span>
+                            <span>#책방투어</span>
+                            <span>#태그여행</span>
+                        </p>
+                    </div>
+                </figure>
+            </v-col>
+            <v-col jcols="12" xs="12" sm="12" md="6" lg="4" xl="3">
+                <figure id="storyImg">
+                    <a href="#"><img src="@/assets/tagSearchImg/tagImg2.png" width="368" height="436" /></a>
+                    <div class="infoTxt">
+                        <strong class="tit">스토리가 있는 여행<br>[우리들의 블루스]</strong>
+                        <p class="txt">
+                            <span>#카페투어</span>
+                            <span>#뷰맛집</span>
+                            <span>#힐링</span>
+                            <span>#태그여행</span>
+                        </p>
+                    </div>
+                </figure>
+            </v-col>
+            <v-col cols="12" xs="12" sm="12" md="6" lg="4" xl="3">
+                <figure id="storyImg">
+                    <a href="#"><img src="@/assets/tagSearchImg/tagImg3.png" width="368" height="436" /></a>
+                    <div class="infoTxt">
+                        <strong class="tit">pit a PET 나와 함께하개</strong>
+                        <p class="txt">
+                            <span>#반려동물동반</span>
+                            <span>#오션뷰</span>
+                            <span>#루프탑</span>
+                            <span>#타르트맛집</span>
+                        </p>
+                    </div>
+                </figure>
+            </v-col>
         </v-row>
-    </v-container>
+
+        <!-- #info -->
+        <v-col justify="center">
+            <v-btn v-for="(info, idx) in hotelInfo" :key="idx" @click="search(info)" color="#f8f8f8" variant="plain"
+                depressed class="button1 b-color rot-1">#{{ info }}
+            </v-btn>
+        </v-col>
     </v-container>
 </template>
 
 <script>
-import axios from 'axios'
 
 export default {
     name: 'TagSearch',
@@ -185,23 +100,9 @@ export default {
         search(info) {
             const word = info;
             console.log(word)
-            axios.post('http://localhost:7777/search/tagSearch',  { word })
-                    .then((res) => {
-                        console.log("검색 성공")
-                        console.log(res.data)
-
-                        this.$router.push({name: 'TagSearchPage',
-                                    params: { searchList: res.data, word } })
-                                    //searchList와 pageArray는 같은 결과가 저장되기 때문에
-                                    //차후 최종 확인하였을 때 하나만 필요한 시나리오인 게 확실하다면
-                                    //searchList를 삭제하도록 한다.
-                                    //이 파일 말고 components/detailSearch/searchDetailSearch.vue, views/searchpage/SearchPage.vue도 확인하여 삭제할 것
-                    .catch(() => {});
-                })
-                .catch(() => {
-                alert("검색 실패");
-            });
-
+            this.$router.push({name: 'TagSearchPage',
+                                    params: { word } })
+                                  
         }
     },
 
@@ -276,10 +177,6 @@ body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fi
     line-height: 1;
 }
 
-    .tagImg {
-    text-align: center;
-}
-
     img {
     border-radius: 15px;
     width:368px;
@@ -293,19 +190,6 @@ body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fi
   transform: scale(1.1);
 }*/
 
-
-    .tagImg {
-        display: inline-flex;
-    }
-   
-    ul {
-    display: flex;
-}
-
-    ul li {
-    list-style: none;
-    padding: 0 8px;
-}
     figure {
     position: relative;
     width: 100%;
@@ -354,26 +238,10 @@ body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fi
     margin-right: 5px;
     color: #F8F8F8;
 }
-@media screen and (min-width: 1024px) and (max-width: 1270px) {
-#img3 {
-    display: none;
-}
-}
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-    #img3 {
-    display: none;
-}
-    #img2 {
-        display: none;
-    }
-}
-@media screen and (min-width: 360px) and (max-width: 768px) {
-    #img3 {
-    display: none;
-}
-    #img2 {
-        display: none;
-    }
+#storyImg {
+    width:368px;
+    height:436px;
+    margin: 15px 0;
 }
 
 </style>

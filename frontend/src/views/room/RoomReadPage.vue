@@ -1,15 +1,42 @@
 <template>
-<div>
-    <h2>숙소 읽기</h2>
-    <room-read v-if="bmRoom" :bmRoom="bmRoom"/>
-    <p v-else>로딩중 입니다.</p>
-    <router-link :to="{ name: 'BRoomModifyPage', params: { roomNo } }">
-            수정
-        </router-link>
-     <button @click="onDelete">삭제</button>
-     <router-link :to="{ name: 'BRoomListPage' }">
-            목록
-        </router-link>
+<div align="center">
+
+    <table style="width: 900px;">
+        <tr>
+            <td>
+                <h2 class="pageTit">{{bmRoom.roomType}} 상세 정보</h2>  
+            </td>
+            <td align="center">
+                <router-link :to="{ name: 'BRoomListPage' }">
+                    <button id="button"> 목록 </button>
+                </router-link>  
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <room-read v-if="bmRoom" :bmRoom="bmRoom"/>
+                <p v-else>로딩중 입니다.</p>
+                <br>
+                <br>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <router-link :to="{ name: 'BRoomModifyPage', params: { roomNo } }">
+                       <button id="button"> 수정 </button>
+                    </router-link>
+            </td>
+            <td align="right">
+                <button id="button" @click="onDelete">삭제</button>
+            </td>
+        </tr>
+ 
+    </table>
+
+    <br>
+
 </div>
 </template>
 

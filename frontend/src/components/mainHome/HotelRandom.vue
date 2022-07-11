@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <section>
-      <v-card-title id="RandomTitle" style="font-size:3em">랜덤숙소 추천</v-card-title>
+      <h3 class="titDep2">다양한 유형의 숙소를 확인해 보세요</h3>
       <v-row justify="center" >
         <v-col justify="space-around" v-for="mHotel in mHotels" :key="mHotel.hotelNo" cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
           <v-card @click="readHotel(mHotel)">
@@ -53,7 +53,10 @@ export default {
     readHotel(mHotel) {
       const personnel = '2'
       const dates = [new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10), new Date(Date.now() - new Date().getTimezoneOffset() * 220000).toISOString().substr(0,10)]
-      const payload = { dates, personnel}
+      const hotelNo = mHotel.hotelNo
+      const payload = { dates, personnel, hotelNo}
+      console.log('random')
+      console.log(payload)
       this.$router.push({
         name: 'MHotelReadPage',
         //인원수 디폴트 2명 , 날짜 오늘 - 오늘 날짜로 보내기 (어차피 앞에것만 씀)
@@ -66,6 +69,17 @@ export default {
 </script>
 
 <style scoped>
+
+    @font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+}
+
+h3 {
+  font-family: 'NanumSquareRound';
+  font-size: 1.6rem;
+}
+
 .v-container{
   width: 60%;
   margin-top: 5%;

@@ -101,7 +101,7 @@
                 <td align="center">
                     <br>
         <!-- 약관 안내 체크에 빠진 것이 없고 + 결제 라디오 버튼 중 한 개를 반드시 선택해야 결제가 가능하다. -->
-                        <v-btn block id="button" @click="requestPay">
+                        <v-btn block id="button2" @click="requestPay">
                             결 제 하 기
                         </v-btn>
                 </td>
@@ -166,11 +166,21 @@ td {
     font-weight: bold;
     width: 95px;
 }
-#button {
+#button2 {
+    text-decoration: none;
     background-color: #54658a;
-    color: #fff;
-    font-weight: bold;
+    position: relative;
+    padding: 0 15px;
+    color: #f8f8f8;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 29px;
 }
+
+#button2:hover {
+  background-color: #e63668;
+}
+
 
 .check {
   width:15px;

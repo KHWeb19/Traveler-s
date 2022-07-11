@@ -1,7 +1,7 @@
 <template>
   <div>
     <hotel-modify-form v-if="bmHotel" :bmHotel="bmHotel" @submit="onSubmit"/>
-    <p v-else>안뜨고있는거임 하.....</p>
+    <p v-else>로딩중입니다.</p>
   </div>
 </template>
 

@@ -42,6 +42,7 @@ public class ReservationResponse {
                 .startDate(reservation.getStartDate())
                 .endDate(reservation.getEndDate())
                 .status(String.valueOf(reservation.getStatus()))
+                .roomType(reservation.getRoom().getRoomType())
                 .build();
     }
 

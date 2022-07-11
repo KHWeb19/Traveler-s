@@ -1,48 +1,119 @@
 <template>
-    <div>
+    <v-container class="board-list">
         <!-- 기본정보 -->
         <div class="hotelName">
-            <h3>기본정보</h3>
-            <hr>
-            <label class="hotelNameLabel">숙소명</label>
-            <input type="text" class="hotelNameBox" :value="bmHotel.hotelName" readonly/>
+
+            <table style="width: 100%">
+                  <colgroup>
+                    <col class="label">
+                    <col class="content">
+                </colgroup>
+                <tr>
+                    <td colspan="2">
+                        <h3>기본정보</h3>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align="center" id="title2">숙소명</td>
+                    <td class="content">
+                        <input type="text" class="hotelNameBox" :value="bmHotel.hotelName" readonly/>
+                    </td>                    
+                </tr>
+                
+                <tr>
+                    <td align="center" id="title2">소개글</td>
+                    <td class="content">
+                        <input type="text" class="hotelNameBox" :value="bmHotel.hotelIntro" readonly/>
+                    </td>                    
+                </tr>
+            </table>
+
         </div>
 
         <!-- 시설정보 -->
         <div class="hotelInfo">
-            <h3>시설정보</h3>
-            <hr>
-            <label class="hotelInfoLabel">옵션</label>    
-            <input type="text" class="hotelInfobox" :value="bmHotel.hotelInfo" readonly/>
+
+            <table style="width: 100%">
+                  <colgroup>
+                    <col class="label">
+                    <col class="content">
+                </colgroup>
+                <tr>
+                    <td colspan="2">
+                        <h3>시설정보</h3>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align="center" id="title2">옵션</td>
+                    <td class="content">
+                        <input type="text" class="hotelInfobox" style="width: 100%" :value="bmHotel.hotelInfo" readonly/>
+                        
+                    </td>
+                </tr>
+            </table>
+
         </div>
         
         <!-- 위치정보 -->
         <div class="hotelAddress">
-            <h3>위치정보</h3>
-            <hr>
-            <div class="adApi">
-                <label>우편번호</label>
-                <input type="text" id="postcode" :value="bmHotel.postcode" readonly/><br>
-                <label>주소</label>
-                <input type="text" id="address" :value="bmHotel.totalAddress" readonly/>
-            </div>
+            <table style="width: 100%">
+                  <colgroup>
+                    <col class="label">
+                    <col class="content">
+                </colgroup>
+                <tr>
+                    <td colspan="2">
+                        <h3>위치정보</h3>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align="center" id="title2">우편번호</td>
+                    <td class="content">
+                        <input type="text" class="hotelInfobox" style="width: 100%" :value="bmHotel.postcode" readonly/>
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" id="title2">주소</td>
+                    <td class="content">
+                        <input type="text" class="hotelInfobox" style="width: 100%" :value="bmHotel.totalAddress" readonly/>
+                        
+                    </td>
+                </tr>                
+            </table>
+
         </div>
         
         <!-- 이미지 -->
         <div class="hotelImg">
-            <h3>이미지</h3>
-            <hr>
-            <div>
-                <v-container>
-                    <v-img width="100px" height="100px" v-for="(item, index) in bmHotel.hotelImages" :key=index
-                    :src="require(`@/assets/hotelImg/${item}`)"></v-img>
-                </v-container>
-            </div>
+
+            <table style="width: 100%">
+                  <colgroup>
+                    <col class="label">
+                    <col class="content">
+                </colgroup>
+                <tr>
+                    <td colspan="2">
+                        <h3>이미지</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <v-container>
+                            <v-row>
+                            <v-img width="100px" height="100px" v-for="(item, index) in bmHotel.hotelImages" :key=index
+                            :src="require(`@/assets/hotelImg/${item}`)"></v-img>
+                            </v-row>
+                        </v-container>
+                    </td>
+                </tr>
+            </table>
+
         </div>
-
-
-
-    </div>
+    </v-container>
 </template>
 
 <script>
@@ -58,6 +129,29 @@ export default {
 </script>
 
 <style scoped>
+/* 컬럼의 너비 */
+.label {width: 20%;}
+.content { /* 자동으로 맞춰집니다 */ }
+
+h3 {
+    margin: 10px;
+    color:#18225c;
+    padding: 10px 0px 10px 2px;
+}
+#title2 {
+    color:#6e91b3;
+    background-color: #e4f1f8;
+    font-weight: bold;
+    width: 95px;
+}
+
+
+td {
+  color: rgb(34, 34, 34);
+  font-size:14px;
+  height: 30px;
+}
+
 div {
   -webkit-user-select:none;
   -moz-user-select:none;
@@ -66,9 +160,6 @@ div {
 }
 a {
     text-decoration: none;
-}
-h3 {
-    margin: 10px;
 }
 .hotelName {
     margin: 50px 50px 10px 50px;
@@ -88,7 +179,6 @@ h3 {
     padding: 5px 8px;
     margin: 30px;
     font-size: 14px;
-    font-weight: bold;
     outline: none;
 }
 .hotelInfo {
@@ -103,7 +193,6 @@ h3 {
     padding: 5px 8px;
     margin: 30px;
     font-size: 14px;
-    font-weight: bold;
     outline: none;
 }
 .hotelAddress {
@@ -118,7 +207,6 @@ input[id="postcode"] {
     padding: 5px 8px;
     margin: 30px 0px 0px 35px;
     font-size: 14px;
-    font-weight: bold;
     outline: none;
 }
 input[id="address"] {
@@ -126,7 +214,6 @@ input[id="address"] {
     padding: 5px 8px;
     margin: 0px 0px 0px 35px;
     font-size: 14px;
-    font-weight: bold;
     outline: none;
 }
 .hotelImg {

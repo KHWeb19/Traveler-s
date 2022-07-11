@@ -12,6 +12,7 @@ import com.example.demo.repository.wish.WishRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -57,16 +58,21 @@ public class WishServiceImpl implements WishService {
         return false;
     }
 
+    @Transactional
     @Override
-    public List<WishResponse> findWish(Long id) {
-        Optional<User> user = userRepository.findByIDWithWish(id);
+    public List<WishResponse> findWish() {
+        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        User user = optionalUser.get();
 
         List<WishResponse> wishList = new ArrayList<>();
         WishResponse wishResponse;
-        log.info("wish :" + user.get().getWish());
-        for (Wish wish2 : user.get().getWish()) {
-            wishResponse = new WishResponse(wish2.getHotel().getHotelNo(),wish2.getWishNo(),wish2.getHotel().getHotelName(), wish2.getHotel().getTotalAddress());
-            wishList.add(wishResponse);
+        log.info("wish :" + user.getWish());
+        if(!user.getWish().isEmpty()) {
+            for (Wish wish2 : user.getWish()) {
+                wishResponse = new WishResponse(wish2.getHotel().getHotelNo(), wish2.getWishNo(), wish2.getHotel().getHotelName(), wish2.getHotel().getTotalAddress());
+                wishList.add(wishResponse);
+            }
         }
         log.info("wishList : " + wishList);
         return wishList;

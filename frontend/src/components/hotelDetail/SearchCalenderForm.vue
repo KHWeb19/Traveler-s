@@ -1,14 +1,13 @@
 <!-- 다시 살리게 될 일 생길까봐 일단 삭제는 하지 않고 살려둠-->
 <template>
     <v-container>
-        <table style="width: 80%">
-            <tr>
-                <td>
+        <v-col style="width: 80%">
+            
+                
                 <h1 align="left">객실 소개</h1>
-                </td>
+               
                 <!-- 검색창 -->
-                <td align="right">
-
+                
                     <v-row>
                     <v-spacer></v-spacer>
                     <!-- 수직상 top에 딱 맞춰져 있어서 검색바랑 버튼이 수평이 안맞아보임. 아마 cols 값 안고쳐서 그런 것도 있는듯 -->
@@ -39,9 +38,8 @@
                         &ensp; &ensp; &ensp;
                     </v-row>
 
-                </td>
-            </tr>
-        </table>
+            
+        </v-col>
     </v-container>
 </template>
 

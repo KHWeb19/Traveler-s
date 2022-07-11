@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div id="map" style="width:500px;height:400px;"></div>
+        <div id="map"></div>
     </div>
     
 </template>
@@ -17,8 +17,10 @@ export default {
     data() {
         return{
             map: null,
-            geocoder: null
-        }
+            geocoder: null,
+            hotelInfo: [],
+            hotel: null
+}
     },
     methods: {
         initMap() {
@@ -29,15 +31,12 @@ export default {
             }
             const map = new kakao.maps.Map(container, options)
             this.geocoder = new kakao.maps.services.Geocoder()
-            console.log(this.geocoder)
          
             const hotel = this.mHotel
             this.geocoder.addressSearch(hotel.totalAddress, function(result, status) {
-                console.log(kakao.maps.services.Status.OK)
                 if (status === kakao.maps.services.Status.OK) {
                       
                     const coords = new kakao.maps.LatLng(result[0].y, result[0].x)
-                    console.log(coords)
                     
                     // 결과값으로 받은 위치를 마커로 표시합니다
                     const marker = new kakao.maps.Marker({
@@ -74,13 +73,14 @@ export default {
     },
 
     mounted () {
+            if(this.$store.state.hotel == null){
+                this.kakao;
+            }
+            this.hotel = this.$store.state.mHotel
             this.$watch('mHotel', function(){
-                console.log('watch')
                 this.kakao()
-                return
             })
-            console.log('new')
-            this.kakao()      
+              
     }
     /*watch: {
         mHotel: function() {
@@ -97,3 +97,12 @@ export default {
     }*/
 }
 </script>
+<style scoped>
+#map {
+    max-width: 45vw;
+    min-width: 400px;
+    height:50vh;
+    min-height: 400px;
+    margin: 10px 2%;
+}
+</style>>

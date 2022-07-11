@@ -18,5 +18,16 @@ export default {
 
   bookingLists: [],
 
+  reserves: [],
+  pendings: [],
+  cancelles: [],
+  tagSearchList: [],
+  searchList: [],
+  keyWord: [],
+  num: 0,
+  searchKeyWord: null,
+  tagSearchKeyWord: null,
+  keyWords: null,
   ceoBookingLists: [],
+  hotel:null,
 };

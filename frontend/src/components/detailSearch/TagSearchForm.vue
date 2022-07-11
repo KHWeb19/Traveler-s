@@ -1,22 +1,24 @@
 <template>
   <v-container>
     <section>
-      <div class="row">
-        <v-col v-for="(mHotel ,idx) in paginatedData" :key="idx" cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
+      <v-row justify="center">
+        <v-col justify="space-around" v-for="(mHotel ,idx) in paginatedData" :key="idx" cols="12" xs="12" sm="6" md="4" lg="3" xl="2">
           <v-card @click="readHotel(mHotel)">
             <img id="HotelImg" style="height: 200px; width: 260px;"
               :src="require(`@/assets/hotelImg/${mHotel.hotelImages[0]}`)" />
             <v-card-title id="hotelName" class="justify-center">{{ mHotel.hotelName }}</v-card-title>
             <v-divider></v-divider>
             <v-card-text class="address">
-              {{ mHotel.hotelAddress }}
+              {{ mHotel.totalAddress }}
             </v-card-text>
+            <v-card-text>
             <span class="hotel_info" v-for="(info , i) in mHotel.hotelInfo" :key="i">
               {{ "#" + info }}
             </span>
+            </v-card-text>
           </v-card>
         </v-col>
-      </div>
+      </v-row>
     </section>
 
     <template>
@@ -33,7 +35,7 @@
                 
                 &ensp;
                 
-                <span class="page-count"
+                <span
                 >{{ pageNum + 1 }} / {{ pageCount }} 페이지</span
                 >
 
@@ -68,7 +70,7 @@ export default {
     pageSize: {
       type: Number,
       required: false,
-      default: 4,
+      default: 6,
     }
   },
   data() {
@@ -81,8 +83,11 @@ export default {
     readHotel(mHotel) {
       const personnel = '2'
       const dates = [new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10), new Date(Date.now() - new Date().getTimezoneOffset() * 220000).toISOString().substr(0,10)]
-      const payload = { dates, personnel}
-            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: mHotel.hotelNo.toString() , payload, mHotel} })      
+      const hotelNo = mHotel.hotelNo
+      console.log('hotel')
+      console.log(mHotel.hotelNo)
+      const payload = { dates, personnel, hotelNo }
+            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: mHotel.hotelNo.toString() , payload} })      
     },
     search() {
         const { word } = this;
@@ -135,7 +140,7 @@ export default {
 .v-card {
   margin-top: 10%;
   margin-bottom: 10%;
-  height: 600px;
+  height: 450px;
   Min-width: 276px;
   max-width: 290px;
 }
