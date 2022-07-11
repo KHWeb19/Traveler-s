@@ -52,7 +52,6 @@ public class SecurityConfig {
                                 .antMatchers("/hotel/hotelRegister", "/hotel/bm/**", "/reserve/ceo/**").hasRole("CEO")
                                 //.antMatchers(GET, "/listall").hasAnyAuthority("ROLE_USER")
                                 .anyRequest().authenticated())
-
                 )
                 .csrf((c) -> c.disable())
                 .cors().and()

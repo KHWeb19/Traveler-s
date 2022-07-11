@@ -49,6 +49,8 @@ public class ReservationResponse {
         return ReservationResponse.builder()
                 .id(reservation.getId())
                 .username(reservation.getUser().getName())
+                .email(reservation.getUser().getEmail())
+                .mobile(reservation.getUser().getMobile())
                 .roomId(reservation.getRoom().getRoomNo())
                 .personnel(reservation.getRoom().getPersonnel())
                 .hotelName(reservation.getRoom().getHotel().getHotelName())
