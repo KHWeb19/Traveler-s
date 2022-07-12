@@ -5,7 +5,6 @@
     <div class="room">
         <div>
             <h3>기본정보</h3>
-            <p class="roomName">*은 필수 입력사항입니다.</p>
             <hr>
             <label class="roomTypeLabel">* 객실유형</label>
             <input type="text" class="roomTypeBox" v-model="roomType" placeholder="객실유형을 입력해주세요."/>
@@ -42,12 +41,14 @@
     <div v-if="this.files.length < 9">
         <input type="file" id="files" ref="files" 
                         multiple v-on:change="handleFilesUpload()" hidden />
+        <div class="vbtn">
         <v-icon>
             mdi-image-plus 
         </v-icon>
         <v-btn @click="chooseFile" text>
             이미지 첨부
         </v-btn> 
+        </div>
     </div>  
     <div v-else>
         <v-icon>
@@ -67,7 +68,7 @@
                         </v-icon>
                     </div>
                     <div v-else>
-                         <img :src="files[index].preview" class="preview" width="100%" height="165px"/>
+                         <img :src="files[index].preview" class="preview" width="100%" height="100px"/>
                          <v-icon @click="imgCancel(index)">
                             mdi-close
                         </v-icon>
@@ -241,7 +242,7 @@ input[name="roominfo"] {
     margin: 50px 50px 10px 50px;
 }
 .roomImg {
-    margin: 50px 50px 100px 50px;
+    margin: 50px 50px 10px 50px;
 }
 .roomImgLabel  {
     font-size: 14px;
@@ -273,6 +274,7 @@ td {
 .btn1 {
     margin-left: 40%;
     margin-bottom: 30px;
+    margin-top: 30px;
     text-align: center;
     word-spacing: 15px;
     border: none;
@@ -286,6 +288,7 @@ td {
 .btn2 {
     margin-left: 10px;
     margin-bottom: 30px;
+    margin-top: 30px;
     text-align: center;
     word-spacing: 15px;
     border: none;
@@ -306,5 +309,9 @@ td {
     outline: none;
     transition: .1s;
 
+}
+
+.vbtn {
+    margin-left: 85%;
 }
 </style>
