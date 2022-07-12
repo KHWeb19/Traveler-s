@@ -42,7 +42,8 @@
       </div>
 
       <!-- 로그인시 생기는 메뉴 -->
-      <v-navigation-drawer id="navBar" disable-resize-watcher right app hide-overlay v-model="drawer">
+      <v-navigation-drawer id="navBar" style="margin-left: ${drawer ? '256px' : '0px'};"
+      disable-resize-watcher right app hide-overlay v-model="drawer">
         <NavDrawer :userInfo="user" />
       </v-navigation-drawer>
     </header>
@@ -123,6 +124,7 @@ export default {
 }
 #navBar {
   z-index: 12;
+  
 }
   .wrapper header .logoImg {
     position: absolute;
