@@ -42,15 +42,18 @@ export default {
     ...mapActions(["fetchSearchLists"]),
    },
     computed: {
-    ...mapState(["searchList"])
+	...mapState(["searchList"])
   },
-   mounted() {
-	if(this.payload) {
-		this.$store.state.searchKeyWord = this.payload
-	}
-	this.keyWords = this.$store.state.searchKeyWord
+   created() {
+	//그냥 state값 다 저장하면 this.$store.state로 가져와지는데
+	//module 만들어서 가져오는건 getter쓴다는데 잘안되서
+	//그냥 localStorage에 있는거 일단 가져오는 방식으로 함
+	console.log(JSON.parse(localStorage.getItem('vuex')))
+	const payload = JSON.parse(localStorage.getItem('vuex'))
+	this.keyWords = payload.keyWord.searchKeyword
+	console.log(this.keyWords)
+	//검색
 	this.fetchSearchLists(this.keyWords)
-
    }
 }
 </script>
