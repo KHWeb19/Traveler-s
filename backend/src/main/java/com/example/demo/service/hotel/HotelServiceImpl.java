@@ -3,9 +3,11 @@ package com.example.demo.service.hotel;
 import com.example.demo.dto.hotel.HotelRequest;
 import com.example.demo.dto.hotel.HotelResponse;
 import com.example.demo.entity.hotel.Hotel;
+import com.example.demo.entity.hotel.HotelImage;
 import com.example.demo.entity.member.User;
 import com.example.demo.repository.hotel.HotelRepository;
 import com.example.demo.repository.member.UserRepository;
+import com.example.demo.utility.FileUtility;
 import com.example.demo.utility.fileUpload.FileUpload;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +16,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static com.example.demo.dto.hotel.HotelResponse.hotelBuilder;
 
@@ -80,14 +84,26 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
 
     // 사업자 매뉴얼 호텔 수정
     @Override
-    public HotelResponse bmHotelModify(HotelRequest hotelRequest, List<MultipartFile> files, Integer hotelNo) {
+    public HotelResponse bmHotelModify(HotelRequest hotelRequest, List<MultipartFile> files, Integer hotelNo, List<String> oldFiles) {
         Optional<Hotel> hotelInfo = hotelRepository.findByIdWithUser(Long.valueOf(hotelNo));
         Hotel hotel = hotelInfo.get();
 
         hotel.setHotelInfo(hotelRequest.getHotelInfo());
         hotel.setHotelName(hotelRequest.getHotelName());
         hotel.setHotelIntro(hotelRequest.getHotelIntro());
-        hotelImgPathRemove(hotel, path);
+
+        List<HotelImage> hotelImages = hotel.getHotelImages();
+
+        List<HotelImage> imagesToRemove = new ArrayList<>();
+        hotelImages.forEach(f -> {
+            if (!oldFiles.contains(f.getPath())){
+                imagesToRemove.add(f);
+                FileUtility.deleteImage(f.getPath(), "hotelImg");
+            } else{
+                log.info("file: {} stil exists", f.getPath().toString());
+            }
+        });
+        imagesToRemove.forEach(f -> hotel.removeHotelImageFromHotel(f));
 
         List<String> filePathList = new ArrayList<>();
         fileUpload(files, path, filePathList);
@@ -158,5 +174,4 @@ public class HotelServiceImpl extends FileUpload implements HotelService {
 
         return hotelBuilder(hotel);
     }
-
 }

@@ -69,7 +69,7 @@ export default {
                     alert("결제완료")
                 } else{
                   // 결제 검증 실패, 환불
-                    
+                      
                     console.log(params)
                     axios.post("http://localhost:7777/payment/cancel", params)
                     .then(res => {

@@ -95,6 +95,7 @@ public class ReservationServiceImpl implements ReservationService{
         log.info("validateRoom method");
         //Optional<Reservation> optionalReservation = reservations.stream().filter(f -> !(f.getEndDate().isBefore(startDate) && !(f.getStartDate().isAfter(endDate)))).findFirst();
         Optional<Reservation> optionalReservation = reservations.stream().filter(f -> startDate.isBefore(f.getEndDate()) && !(endDate.isBefore(f.getStartDate()))).findFirst();
+        //Optional<Reservation> optionalReservation = reservations.stream().filter(f -> !(f.getEndDate().isAfter(startDate)) && !(endDate.isBefore(f.getStartDate()))).findFirst();
 
         if (optionalReservation.isEmpty()) {
             log.info("Can make reservation.");

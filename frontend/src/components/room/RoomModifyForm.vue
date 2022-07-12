@@ -31,7 +31,6 @@
         </div>
     </div>
 
-   
     <!-- 이미지 -->
     <div class="roomImg">
         <h3>이미지</h3>
@@ -39,7 +38,7 @@
         <p class="roomImgLabel">* 숙소이미지</p>
     </div>
 
-    <div v-if="this.files.length < 9">
+    <div v-if="fileNum < 9">
         <input type="file" id="files" ref="files" 
                         multiple v-on:change="handleFilesUpload()" hidden />
         <v-icon>
@@ -61,16 +60,24 @@
          <table>
             <tr>
                 <td v-for="(none, index) in notImage" :key="index" > 
-                    <div v-if="files[index] == null">
+                    <div v-if="oldFiles[index] == null && files[index-oldFiles.length] == null">
                         <v-icon>
                             mdi-image
                         </v-icon>
                     </div>
                     <div v-else>
-                         <img :src="files[index].preview" class="preview" width="100%" height="165px"/>
-                         <v-icon @click="imgCancel(index)">
+                        <div v-if="index<oldFiles.length">
+                            <img :src="require(`@/assets/roomImg/${oldFiles[index]}`)" class="preview" width="100%" height="165px"/>
+                            <v-icon @click="oldImgCancel(index)">
                             mdi-close
-                        </v-icon>
+                            </v-icon>
+                        </div>
+                        <div v-else>
+                            <img :src="files[index-oldFiles.length].preview" class="preview" width="100%" height="165px"/>
+                            <v-icon @click="imgCancel(index-oldFiles.length)">
+                            mdi-close
+                            </v-icon>
+                        </div>
                     </div>
                 </td>
             </tr>
@@ -116,29 +123,26 @@ export default {
                 "드라이기",
                 "소화기"
             ],
+            oldFiles: [],
         }
     },
     methods: {
         onSubmit () {
-            if(this.files.length < 5){
+            if(this.fileNum < 5){
                 alert('사진은 5장 이상 첨부해주세요')
             }else{
-              
-                
-                const { price, roomType, personnel,roomInfo, files } = this
-                this.$emit('submit', { price, roomType, personnel, roomInfo, files })
+                const { price, roomType, personnel,roomInfo, files, oldFiles } = this
+                this.$emit('submit', { price, roomType, personnel, roomInfo, files, oldFiles })
             }
         },
            handleFilesUpload () {
-            if(this.$refs.files.files.length > 9){
+            if(this.fileNum + this.$refs.files.files.length > 9){
                 alert("최대 9장 까지 가능 합니다")
                 this.$refs.files.value = ''
                 return
             }
 
-            this.fileNum += this.$refs.files.files.length
-            console.log(this.fileNum)
-            if(this.fileNum < 10){
+            if(this.fileNum + this.$refs.files.files.length < 10){
                         for (let i = 0; i < this.$refs.files.files.length; i++) {
                             this.files = [
                                 ...this.files,
@@ -147,12 +151,12 @@ export default {
                                     preview: URL.createObjectURL(this.$refs.files.files[i])
                                 }
                             ]
-                        }      
-                     
+                        }    
+                this.fileNum += this.$refs.files.files.length                
             }else{
                 alert("최대 9장 까지 가능 합니다")
                 console.log(this.fileNum)
-                this.fileNum -= this.$refs.files.files.length
+                //this.fileNum -= this.$refs.files.files.length
                 this.$refs.files.value = ''
             }  
             
@@ -162,6 +166,7 @@ export default {
         },
         cancelFile() {
             this.files = ''
+            this.oldFiles = ''
             this.fileNum = 0
         },
         imgCancel(index) {
@@ -170,12 +175,23 @@ export default {
             this.fileNum -= 1
             console.log(this.files)
         },
+        oldImgCancel(index){
+            this.oldFiles.splice(index, 1)
+            this.fileNum -= 1
+            console.log(this.oldFiles)
+        }
     },
     watch: {
         price : function (){
             
             return this.price = this.price.replace(/[^0-9]/, '')
             }
+    },
+    created() {
+        for (let i =0; i<this.bmRoom.roomImage.length; i++){
+            this.oldFiles.push(this.bmRoom.roomImage[i])
+        }
+        this.fileNum = this.oldFiles.length
     }
 }
 </script>
