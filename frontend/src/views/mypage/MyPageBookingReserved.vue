@@ -12,6 +12,14 @@
           <td align="left">
             <span class="page-count">RESERVED</span>
           </td>
+          <td>
+            <v-row>
+              <v-spacer></v-spacer>
+              <span>환불 및 위약금 규정</span>
+              <payment-dialog/>
+              &ensp;
+            </v-row>
+          </td>
         </tr>
 
         <tr>
@@ -35,6 +43,7 @@
 
 import { mapActions, mapState } from "vuex";
 import MyBookigListReserved from "@/components/mypage/MyBookigListReserved.vue";
+import PaymentDialog from '@/components/mypage/PaymentDialog.vue';
 
 export default {
   name: "MyPageBookingReserved",
@@ -42,6 +51,7 @@ export default {
     //MyPageLeftMenu,
 
     MyBookigListReserved,
+    PaymentDialog,
   },
   data() {
     return {

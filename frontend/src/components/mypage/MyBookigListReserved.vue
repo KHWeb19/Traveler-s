@@ -18,7 +18,7 @@
           <th>예약 상태</th>
           <th>체크 인</th>
           <th>체크 아웃</th>
-          <th>예약 취소</th>
+          <th>취소</th>
         </tr>
       </thead>
       <tbody>
@@ -43,7 +43,10 @@
             {{ bookingList.endDate }}
           </td>
           <td>
-            <button id="button2" v-on="on"> 취소 </button>
+            <button v-if="bookingList.startDate < new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10)" id="buttonNone"> 기간만료 </button>
+                    <!-- 만약 체크인 날짜가 오늘 날짜보다 작다면 이용불가가 확인되게 한다. -->
+                    <!-- 그 외에는 결제 버튼이 확인된다. -->
+            <button v-else id="button2" v-on="on"> 취소 </button>
           </td>
         </tr>
       </tbody>
@@ -202,6 +205,15 @@ tr td:nth-child(7) {
 }
 #button2:hover {
   color: #e63668;
+}
+#buttonNone {
+    text-decoration: none;
+    position: relative;
+    padding: 0 15px;
+    color: #acacac;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 29px;
 }
 
 

@@ -45,14 +45,14 @@
             {{ bookingList.endDate }}
           </td>
           <td>
-            <button v-if="bookingList.startDate <= new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10)" id="buttonNone"> 기간만료 </button>
-                    <!-- 만약 체크인 날짜가 오늘 날짜보다 작거나 같다면 이용불가가 확인(당일취소 못하도록) 보이게 한다. -->
+            <button v-if="bookingList.startDate < new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10)" id="buttonNone"> 기간만료 </button>
+                    <!-- 만약 체크인 날짜가 오늘 날짜보다 작다면 이용불가가 확인되게 한다. -->
                     <!-- 그 외에는 결제 버튼이 확인된다. -->
             <button v-else id="button1" @click="requestPay"> 결제 </button>
           </td>
           <td>
-            <button v-if="bookingList.startDate <= new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10)" id="buttonNone"> 기간만료 </button>
-                    <!-- 만약 체크인 날짜가 오늘 날짜보다 작거나 같다면 이용불가가 확인(당일취소 못하도록) 보이게 한다. -->
+            <button v-if="bookingList.startDate < new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10)" id="buttonNone"> 기간만료 </button>
+                    <!-- 만약 체크인 날짜가 오늘 날짜보다 작다면 이용불가가 확인되게 한다. -->
                     <!-- 그 외에는 결제 버튼이 확인된다. -->
 
             <button v-else id="button2" @click="cancel"> 취소 </button>
