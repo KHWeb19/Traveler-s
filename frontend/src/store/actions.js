@@ -67,8 +67,7 @@ export default {
       .then((res) => {
         localStorage.setItem("access_token", res.data.accessToken);
         commit(IS_LOGGEDIN);
-        dispatch("setUser");
-        console.log("해줌");
+        dispatch('setUser');
         router.push("/");
       })
       .catch(() => alert("Invalid username or password"));

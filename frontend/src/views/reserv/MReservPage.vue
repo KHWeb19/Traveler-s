@@ -10,7 +10,7 @@
           <tr>
             <td>
               <div>
-                <m-reserv-form :reservationInfo = "reservationInfo"/>      
+                <m-reserv-form :reservationInfo = "reservationInfo" @payRequest="requestPay"/>
               </div>
             </td>
           </tr>
@@ -21,14 +21,14 @@
 
 <script>
 import MReservForm from '@/components/reserv/MReservForm.vue'
-
-//import { mapState, mapActions } from 'vuex'
+import {v4 as uuidv4} from 'uuid'
 import axios from 'axios'
+const { IMP } = window
 
 export default {
     data() {
       return {
-        reservationInfo: {}
+        reservationInfo: {},
       }
     },
     name: 'MReservPage',
@@ -44,8 +44,48 @@ export default {
       .then((res) => this.reservationInfo = res.data)
     },
     methods: {
+      requestPay(){
+        IMP.init("imp53140629")
+        // IMP.request_pay(param, callback) 결제창 호출
+        IMP.request_pay({ 
+            pg: "html5_inicis",
+            pay_method: "card",
+            merchant_uid: uuidv4() + this.reservationInfo.id,
+            name: uuidv4() + this.reservationInfo.id,
+            amount: this.reservationInfo.price,
+            buyer_email: this.reservationInfo.email,
+            buyer_name: this.reservationInfo.username,
+            buyer_tel: this.reservationInfo.mobile
+      }, rsp => {
+        if (rsp.success){
+            const params = { 'imp_uid': rsp.imp_uid, 'merchant_uid': rsp.merchant_uid}
 
-    },
+            axios.post("http://localhost:7777/payment/complete", params)
+            .then((res) => {
+
+                console.log(res)
+
+                if (res){
+                    alert("결제완료")
+                } else{
+                  // 결제 검증 실패, 환불
+                    
+                    console.log(params)
+                    axios.post("http://localhost:7777/payment/cancel", params)
+                    .then(res => {
+                      alert("결제검증에 실패하여 결제가 취소되었습니다")
+                      console.log(res)})
+                }
+                    this.$router.push("/")
+
+            })
+        } else{
+            alert(`결제에 실패하였습니다. 에러 내용: ${rsp.error_msg}`)
+            this.$router.push("/")
+        }
+      })
+    }
+  }
 }
 </script>
 
