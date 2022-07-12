@@ -1,7 +1,7 @@
 <template>
   <div align="center" style="display: inline-block">
     <v-container>
-      <table style="width: 800px">
+      <table style="width: 1000px">
         <tr>
           <td align="left" colspan="2">
             <h2 class="pageTit">나의 예약 내역</h2>

@@ -8,6 +8,8 @@
         <col class="status" />
         <col class="checkIn" />
         <col class="checkOut" />
+        <col class="payment" />
+        <col class="cancel" />
       </colgroup>
       <thead>
         <tr>
@@ -17,6 +19,8 @@
           <th>예약 상태</th>
           <th>체크 인</th>
           <th>체크 아웃</th>
+          <th>결제</th>
+          <th>취소</th>
         </tr>
       </thead>
       <tbody>
@@ -40,38 +44,16 @@
           <td>
             {{ bookingList.endDate }}
           </td>
+          <td>
+            <button id="button1" v-on="on"> 결제 </button>
+          </td>
+          <td>
+            <button id="button2" v-on="on"> 취소 </button>
+          </td>
         </tr>
       </tbody>
     </table>
 
-    <!-- v-data-table 작업부분 주석처리 하였습니다. 필요가 없다면 지워주세요.
-    <v-card class="right">
-      <div style="display: flex; justify-content: center; padding-top: 120px">
-        <div>
-          <v-select
-            v-model="findList"
-            :items="selectState"
-            label="예약 상태"
-            style="width: 150px"
-            @change="findDesign"
-          ></v-select>
-          <v-data-table
-            :headers="headerTitle1"
-            :items="bookingLists"
-            style="width: 600px"
-            v-if="this.chooseState != 'part'"
-          >
-          </v-data-table>
-          <v-data-table
-            :headers="headerTitle2"
-            :items="chooseProcessArr"
-            style="width: 600px"
-            v-if="this.chooseState == 'part'"
-          >
-          </v-data-table>
-        </div>
-      </div>
-    </v-card> -->
   </v-container>
 </template>
 
@@ -171,7 +153,7 @@ tr:nth-of-type(odd) {
 
 /* 컬럼의 너비 */
 .id {
-  width: 15%;
+  width: 12%;
 }
 .roomType {
   width: 10%;
@@ -183,10 +165,10 @@ tr:nth-of-type(odd) {
   width: 10%;
 }
 .checkIn {
-  width: 20%;
+  width: 15%;
 }
 .checkOut {
-  width: 20%;
+  width: 15%;
 }
 
 /* 컬럼의 정렬 */
@@ -208,6 +190,12 @@ tr td:nth-child(5) {
 tr td:nth-child(6) {
   text-align: center;
 }
+tr td:nth-child(7) {
+  text-align: center;
+}
+tr td:nth-child(8) {
+  text-align: center;
+}
 
 /* 페이징 버튼 */
 .page-box {
@@ -227,51 +215,29 @@ tr td:nth-child(6) {
   background-color: #dbdbdb;
 }
 
-/* 영남씨가 작업할 때 사용하셨던 부분 주석처리 하였습니다. 필요 없다면 지워주세요.
-.left_menu {
-  width: 200px;
-  height: 848px;
-  border-right-width: 3px;
-  border-right-color: rgba(64, 64, 64);
-  border-right-style: dotted;
-  padding: 3%;
-  background: rgba(64, 64, 64);
-  color: white;
+#button1 {
+    text-decoration: none;
+    position: relative;
+    padding: 0 15px;
+    color: #404040;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 29px;
 }
-.proimg {
-  width: 150px;
+#button1:hover {
+  color: #569aff;
 }
-
-.col1 {
-  background: rgb(224, 224, 224);
+#button2 {
+    text-decoration: none;
+    position: relative;
+    padding: 0 15px;
+    color: #404040;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 29px;
 }
-.btn2 {
-  background: rgb(224, 224, 224);
-}
-
-.right {
-  width: 600px;
-  height: 848px;
-  background: rgb(250, 250, 250);
-}
-.tb1 {
-  background: #ffe082;
+#button2:hover {
+  color: #e63668;
 }
 
-ul a {
-  color: inherit;
-}
-
-ul {
-  list-style: none;
-  margin: 20% 0 0 0;
-}
-
-a {
-  text-decoration: none;
-}
-td,
-th {
-  border: 1px solid #dbdbdb;
-} */
 </style>
