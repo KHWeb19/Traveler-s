@@ -60,6 +60,7 @@
 
 <script>
 import axios from 'axios'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'DetailSearch',
@@ -80,6 +81,7 @@ export default {
         }
   },
   methods: {
+    ...mapActions(["setHotelReadKeyWord"]),
     readHotel(mHotel) {
       const personnel = '2'
       const dates = [new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10), new Date(Date.now() - new Date().getTimezoneOffset() * 220000).toISOString().substr(0,10)]
@@ -87,7 +89,9 @@ export default {
       console.log('hotel')
       console.log(mHotel.hotelNo)
       const payload = { dates, personnel, hotelNo }
-            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: mHotel.hotelNo.toString() , payload} })      
+      //keyWord 저장
+      this.setHotelReadKeyWord(payload)
+      this.$router.push({ name:'MHotelReadPage', params: { hotelNo: mHotel.hotelNo.toString() } })      
     },
     search() {
         const { word } = this;

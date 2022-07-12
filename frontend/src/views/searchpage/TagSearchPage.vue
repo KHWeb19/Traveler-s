@@ -41,11 +41,7 @@ export default {
     ...mapState(["tagSearchList"])
   },
    mounted() {
-	if(this.word) {
-		this.$store.state.tagSearchKeyWord = this.word
-	}
-	this.keyWord = this.$store.state.tagSearchKeyWord
-	this.fetchTagSearchLists(this.keyWord)
+	this.fetchTagSearchLists(this.word)
    }
 };
 </script>

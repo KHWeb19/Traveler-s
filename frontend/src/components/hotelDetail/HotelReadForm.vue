@@ -163,6 +163,9 @@ export default {
     },
     hotelNo: {
       type: String
+    },
+    userWish: {
+      type : Boolean
     }
   },
   computed: {
@@ -195,8 +198,13 @@ export default {
       }
     },
   },
-  mounted() {
-    this.fetchMRoomList(this.payload)
+  created() {
+    this.fetchMRoomList(this.payload),
+    axios.get(`http://localhost:7777/wish/userWish/${this.hotelNo}`)
+      .then((res) => {
+        console.log(res.data)
+        this.checkWish = res.data
+      });
   }
 };
 </script>

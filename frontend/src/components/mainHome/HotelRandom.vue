@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'HotelRandom',
   props: {
@@ -50,17 +51,20 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["setHotelReadKeyWord"]),
     readHotel(mHotel) {
       const personnel = '2'
       const dates = [new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10), new Date(Date.now() - new Date().getTimezoneOffset() * 220000).toISOString().substr(0,10)]
       const hotelNo = mHotel.hotelNo
       const payload = { dates, personnel, hotelNo}
+      //키워드 저장
+      this.setHotelReadKeyWord(payload)
       console.log('random')
       console.log(payload)
       this.$router.push({
         name: 'MHotelReadPage',
         //인원수 디폴트 2명 , 날짜 오늘 - 오늘 날짜로 보내기 (어차피 앞에것만 씀)
-        params: { hotelNo: mHotel.hotelNo.toString() , payload , mHotel }
+        params: { hotelNo: mHotel.hotelNo.toString() }
       })
     }
   },

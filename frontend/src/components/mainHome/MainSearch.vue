@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { mapActions} from 'vuex'
 
 
 export default {
@@ -54,7 +55,8 @@ export default {
         value: null,
         personnel: '',
         city:'',
-        num : ''
+        num : '',
+        payload: null
     }),
     computed: {
         planDate () {
@@ -66,17 +68,31 @@ export default {
             }
             return this.dates.join(' ~ ')
         },
+       
     },
     methods: {
+        ...mapActions(["setSearchKeyword"]),
         searchPage() {
             const { dates, personnel , city} = this
             const payload = { dates, personnel ,city}
+            this.payload = payload
+            console.log('payload')
+            console.log(this.payload)
+            this.setSearchKeyword(this.payload)
             const num = this.$store.state.num++
+       
             this.$router.push({name: 'CommonSearchPage',
                                 params: { payload , num , city, personnel} })
         },
         initDates() {
             return this.dates = []
+        }
+    },
+    created() {
+        if(this.keyWord){
+            this.dates = this.keyWord.dates
+            this.personnel = this.keyWord.personnel
+            this.city = this.keyWord.city
         }
     }
 }
