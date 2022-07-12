@@ -92,7 +92,7 @@ import ReservDetail from "@/components/business/ReservDetail.vue";
 //import axios from 'axios'
 
 export default {
-  name: "manageReservList",
+  name: "ManageReservList",
   components: {
     ReservDetail,
   },

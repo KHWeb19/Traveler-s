@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 
 
 export default {
@@ -72,15 +73,18 @@ export default {
         }
   },
   methods: {
+     ...mapActions(["setHotelReadKeyWord"]),
     readHotel(mHotel) {
             const payload = {
               dates : this.keyWord.dates,
-              perssonel: this.keyWord.perssonel,
+              personnel: this.keyWord.personnel,
               hotelNo: mHotel.hotelNo
             }
+            //호텔 키워드 저장
+            this.setHotelReadKeyWord(payload)
             console.log('coomon')
             console.log(payload)
-            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: mHotel.hotelNo.toString(), payload} })      
+            this.$router.push({ name:'MHotelReadPage', params: { hotelNo: mHotel.hotelNo.toString()} })      
     },
     nextPage() {
         this.pageNum += 1;

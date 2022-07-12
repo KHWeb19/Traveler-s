@@ -12,6 +12,14 @@
           <td align="left">
             <span class="page-count">CANCELLED</span>
           </td>
+          <td>
+            <v-row>
+              <v-spacer></v-spacer>
+              <span>환불 및 위약금 규정</span>
+              <payment-dialog/>
+              &ensp;
+            </v-row>
+          </td>
         </tr>
 
         <tr>
@@ -36,6 +44,7 @@
 import { mapActions, mapState } from "vuex";
 
 import MyBookingCancelled from "@/components/mypage/MyBookingCancelled.vue";
+import PaymentDialog from '@/components/mypage/PaymentDialog.vue';
 
 export default {
   name: "MyPageBookingPending",
@@ -43,6 +52,7 @@ export default {
     //MyPageLeftMenu,
 
     MyBookingCancelled,
+    PaymentDialog,
   },
   data() {
     return {

@@ -29,9 +29,6 @@ export default {
       type: String,
       required: true,
     },
-    payload: {
-      type: Object
-    },
   },
   data() {
     return {
@@ -52,11 +49,11 @@ export default {
      ...mapActions(['fetchMHotel']),
   },
   created() {
-     if(this.payload){
-      this.$store.state.keyWords = this.payload
-     }
-     this.keyWord = this.$store.state.keyWords
-     this.fetchMHotel(this.hotelNo)
+    const payload = JSON.parse(localStorage.getItem('vuex'))
+    this.keyWord =  payload.keyWord.hotelReadKeyword
+    console.log('keyword')
+    console.log(this.keyWord)
+    this.fetchMHotel(this.hotelNo)
   }
 };
 </script>

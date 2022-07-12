@@ -21,6 +21,8 @@ public class Payment {
 
     private Long price;
 
+    private String merchantUid;
+
     @CreationTimestamp
     private LocalDateTime regDate;
 

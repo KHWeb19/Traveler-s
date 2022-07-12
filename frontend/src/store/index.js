@@ -14,12 +14,18 @@ Vue.use(Vuex)
  //   paths: []
 //})]
 import createPersistedState from 'vuex-persistedstate'
+import keyWord from './modules/keyWord'
 export default new Vuex.Store({
   state,
   actions,
   mutations,
   getters,
+  modules: {
+    keyWord : keyWord
+  },
   plugins: [
-    createPersistedState()
+    createPersistedState({
+      paths: ["keyWord"]
+    })
   ]
 })

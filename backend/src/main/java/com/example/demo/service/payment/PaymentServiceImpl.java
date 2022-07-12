@@ -21,7 +21,6 @@ import java.util.Optional;
 @Service
 public class PaymentServiceImpl implements PaymentService{
 
-    private final PaymentRepository paymentRepository;
     private final ReservationRepository reservationRepository;
     private final PaymentUtility paymentUtility;
 
@@ -45,6 +44,7 @@ public class PaymentServiceImpl implements PaymentService{
         reservation.setStatus(ReservationStatus.RESERVED);
         Payment payment = Payment.builder()
                 .price(Long.valueOf(amount))
+                .merchantUid(id)
                 .build();
 
         payment.addReservationToPayment(reservation);

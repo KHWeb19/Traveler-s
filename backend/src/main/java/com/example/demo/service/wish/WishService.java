@@ -18,4 +18,6 @@ public interface WishService {
     public List<WishResponse> findWish();
 
     Wish wishRead(Long wishNo);
+
+    public boolean userWish(User user,Integer hotelNo);
 }
