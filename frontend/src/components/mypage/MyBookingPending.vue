@@ -45,10 +45,17 @@
             {{ bookingList.endDate }}
           </td>
           <td>
-            <button id="button1" v-on="on"> 결제 </button>
+            <button v-if="bookingList.startDate <= new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10)" id="buttonNone"> 이용불가 </button>
+                    <!-- 만약 체크인 날짜가 오늘 날짜보다 작거나 같다면 이용불가가 확인(당일취소 못하도록) 보이게 한다. -->
+                    <!-- 그 외에는 결제 버튼이 확인된다. -->
+            <button v-else id="button1" @click="requestPay"> 결제 </button>
           </td>
           <td>
-            <button id="button2" v-on="on"> 취소 </button>
+            <button v-if="bookingList.startDate <= new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10)" id="buttonNone"> 이용불가 </button>
+                    <!-- 만약 체크인 날짜가 오늘 날짜보다 작거나 같다면 이용불가가 확인(당일취소 못하도록) 보이게 한다. -->
+                    <!-- 그 외에는 결제 버튼이 확인된다. -->
+
+            <button v-else id="button2" @click="cancel"> 취소 </button>
           </td>
         </tr>
       </tbody>
@@ -104,7 +111,18 @@ export default {
         }
       }
     },
+
+    requestPay(){
+        if (this.checkArray.length === 3 && this.pay)
+            this.$emit('payRequest')
+        else{
+            alert("서비스 이용약관 및 결제 수단을 확인하세요")
+        }
+      }  
   },
+  created: {
+
+  }
 };
 </script>
 
@@ -153,7 +171,7 @@ tr:nth-of-type(odd) {
 
 /* 컬럼의 너비 */
 .id {
-  width: 12%;
+  width: 11%;
 }
 .roomType {
   width: 10%;
@@ -238,6 +256,15 @@ tr td:nth-child(8) {
 }
 #button2:hover {
   color: #e63668;
+}
+#buttonNone {
+    text-decoration: none;
+    position: relative;
+    padding: 0 15px;
+    color: #acacac;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 29px;
 }
 
 </style>
