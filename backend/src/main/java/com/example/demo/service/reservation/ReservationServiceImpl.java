@@ -14,7 +14,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDate;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Slf4j
@@ -89,6 +92,24 @@ public class ReservationServiceImpl implements ReservationService{
         ReservationStatus reservationStatus = ReservationStatus.valueOf(status);
         List<Reservation> reservationsByStatusForCEO = reservationRepository.findReservationsByStatusForCEO(userId, reservationStatus);
         return reservationsByStatusForCEO;
+    }
+
+    @Override
+    public void cancelReservation(String id) {
+        Optional<Reservation> optionalReservation = reservationRepository.findById(Long.valueOf(id));
+        if (optionalReservation.isEmpty())
+            throw new NoSuchElementException("Reservation does not exist");
+
+        Reservation reservation = optionalReservation.get();
+
+        if (!reservation.getStatus().equals(ReservationStatus.PENDING))
+            throw new IllegalStateException("Reservation Status is not Pending");
+        if (reservation.getEndDate().isBefore(ChronoLocalDate.from(LocalDateTime.now())))
+            throw new IllegalStateException("Reservation Date Overdue");
+
+        reservation.setStatus(ReservationStatus.CANCELLED);
+        reservationRepository.save(reservation);
+        log.info("Reservation cancelled");
     }
 
     private boolean validateRoom(List<Reservation> reservations, LocalDate startDate, LocalDate endDate){

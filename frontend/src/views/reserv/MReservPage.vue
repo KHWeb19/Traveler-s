@@ -41,7 +41,14 @@ export default {
       const params = new URLSearchParams();
       params.append('reservationId', this.$route.params.no)
       axios.get("http://localhost:7777/reserve/user/readReservation", {params: params})
-      .then((res) => this.reservationInfo = res.data)
+      .then((res) => {
+        if (res){
+        this.reservationInfo = res.data
+      }
+      else {
+        alert("예약 정보를 읽을 수 없습니다")
+        this.$router.push("/")
+      }})
     },
     methods: {
       requestPay(){

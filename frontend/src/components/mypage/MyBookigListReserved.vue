@@ -46,7 +46,7 @@
             <button v-if="bookingList.startDate < new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10)" id="buttonNone"> 기간만료 </button>
                     <!-- 만약 체크인 날짜가 오늘 날짜보다 작다면 이용불가가 확인되게 한다. -->
                     <!-- 그 외에는 결제 버튼이 확인된다. -->
-            <button v-else id="button2" v-on="on"> 취소 </button>
+            <button v-else id="button2" @click="requestRefund(bookingList.id)"> 취소 </button>
           </td>
         </tr>
       </tbody>
@@ -102,6 +102,9 @@ export default {
         }
       }
     },
+    requestRefund(id){
+      this.$emit("requestRefund", id)
+    }
   },
 };
 </script>

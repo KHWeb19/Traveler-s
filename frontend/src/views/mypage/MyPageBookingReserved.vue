@@ -28,6 +28,7 @@
               <v-col>
                 <my-bookig-list-reserved
                   :bookingLists="reserves"
+                  @requestRefund="requestRefund"
                 ></my-bookig-list-reserved>
               </v-col>
             </v-row>
@@ -40,7 +41,7 @@
 
 <script>
 //import MyPageLeftMenu from "@/components/mypage/MyPageLeftMenu.vue";
-
+import axios from "axios"
 import { mapActions, mapState } from "vuex";
 import MyBookigListReserved from "@/components/mypage/MyBookigListReserved.vue";
 import PaymentDialog from '@/components/mypage/PaymentDialog.vue';
@@ -71,6 +72,19 @@ export default {
 
       console.log(this.status);
     },
+    requestRefund(id){
+      axios.post(`http://localhost:7777/payment/requestRefund/${id}`)
+      .then((res) => {
+        if (res){
+          alert("예약 취소 성공")
+          this.$router.push("/")
+        } else {
+          alert("예약 취소 실패")
+          this.$router.push("/")
+        }
+      }
+      )
+    }
   },
   mounted() {
     this.setUser();

@@ -28,6 +28,8 @@
               <v-col>
                 <my-booking-pending
                   :bookingLists="pendings"
+                  @continueReservation="continueReservation"
+                  @cancelReservation="cancelReservation"
                 ></my-booking-pending>
               </v-col>
             </v-row>
@@ -40,7 +42,7 @@
 
 <script>
 //import MyPageLeftMenu from "@/components/mypage/MyPageLeftMenu.vue";
-
+import axios from "axios"
 import { mapActions, mapState } from "vuex";
 
 import MyBookingPending from "@/components/mypage/MyBookingPending.vue";
@@ -59,7 +61,6 @@ export default {
       status: "",
     };
   },
-
   computed: {
     ...mapState(["user", "pendings"]),
   },
@@ -72,6 +73,22 @@ export default {
 
       console.log(this.status);
     },
+    continueReservation(idx){
+      this.$router.push({path: `/mReservPage/${idx}`})
+    },
+    cancelReservation(id){
+      axios.post(`http://localhost:7777/reserve/user/cancelReservation/${id}`)
+      .then(res => {
+        if (res){
+          alert("예약 취소 완료")
+          console.log(res)
+          this.$router.push("/")
+        } else {
+          alert("예약 취소 완료")
+          this.$router.push("/")
+        }
+        })
+    }
   },
   mounted() {
     this.setUser();
