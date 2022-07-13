@@ -4,7 +4,6 @@ import com.example.demo.dto.payment.PaymentRequest;
 import com.example.demo.entity.payment.Payment;
 import com.example.demo.entity.reservation.Reservation;
 import com.example.demo.entity.reservation.ReservationStatus;
-import com.example.demo.repository.payment.PaymentRepository;
 import com.example.demo.repository.reservation.ReservationRepository;
 import com.example.demo.utility.payment.PaymentUtility;
 import com.fasterxml.jackson.core.JsonProcessingException;
