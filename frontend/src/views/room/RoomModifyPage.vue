@@ -57,7 +57,7 @@ export default {
                         console.log(res.data.roomNo)
                         this.$router.push({
                             name: 'BRoomReadPage',
-                            params: { roomNo: res.data.toString() }
+                            params: { roomNo: res.data.roomNo.toString(), roomType: res.data.roomType }
                         })
                     })
                     .catch(() => {

@@ -14,7 +14,7 @@ public interface RoomService {
     public List<HotelResponse> findHotel(String email);
     public List<RoomResponse> findRoomList(Long hotelNo);
     public RoomResponse bmRoomRead(Integer roomNo);
-    public Long bmRoomModify(RoomRequest roomRequest, List<MultipartFile> files, Integer roomNo, List<String> oldFiles);
+    public RoomResponse bmRoomModify(RoomRequest roomRequest, List<MultipartFile> files, Integer roomNo, List<String> oldFiles);
     public void bmRoomRemove(Integer roomNo);
     public void bmRoomsRemove(List<Long> roomNo);
 
