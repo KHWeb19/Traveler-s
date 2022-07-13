@@ -57,7 +57,7 @@ export default {
                         alert('수정되었습니다.')
                         this.$router.push({
                             name: 'BHotelReadPage',
-                            params: { hotelNo: res.data.hotelNo.toString() }
+                            params: { hotelNo: res.data.hotelNo.toString() , hotelName: res.data.hotelName}
                         })
                     })
                     .catch(() => {

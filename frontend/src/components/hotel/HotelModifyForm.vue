@@ -86,7 +86,7 @@
     
    <v-btn type="submit" class="btn1">저장하기</v-btn>
     <router-link :to="{ name: 'BHotelReadPage',
-                                    params: { hotelNo: bmHotel.hotelNo.toString() } }">
+                                    params: { hotelNo: bmHotel.hotelNo.toString(), hotelName: bmHotel.hotelName } }">
                     취소
                 </router-link>
 
