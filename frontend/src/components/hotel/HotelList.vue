@@ -32,13 +32,13 @@
             </td>
             <td>
                 <router-link :to="{ name: 'BHotelReadPage',
-                                    params: { hotelNo: bmHotel.hotelNo.toString() } }">
+                                    params: { hotelNo: bmHotel.hotelNo.toString(), hotelName: bmHotel.hotelName } }">
                     {{ bmHotel.hotelName }}
                 </router-link>
             </td>
             <td>
                 <router-link :to="{ name: 'BHotelReadPage',
-                                    params: { hotelNo: bmHotel.hotelNo.toString() } }">
+                                    params: { hotelNo: bmHotel.hotelNo.toString(), hotelName: bmHotel.hotelName } }">
                     {{ bmHotel.totalAddress }}
                 </router-link>
             </td>
