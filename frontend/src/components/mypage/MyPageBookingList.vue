@@ -3,7 +3,7 @@
     <table style="width: 100%">
       <colgroup>
         <col class="id" />
-        <dic class="roomType" />
+        <col class="roomType" />
         <col class="price" />
         <col class="status" />
         <col class="checkIn" />
