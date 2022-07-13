@@ -1,36 +1,29 @@
 <template>
-	<v-main>
-		<v-app>
+	<div align="center" class="home_wrap">
+			<v-container>
+				<v-row>
+					<main-search />
+				</v-row>
+			</v-container>
 
-			<div align="center" class="home_wrap">
-				<v-container>
-					<v-row>
-						<main-search/>
-					</v-row>
-				</v-container>
-				
-				<hotel-random :mHotels="mHotels"/><br><br><br><br>
+			<hotel-random :mHotels="mHotels" /><br><br><br><br>
 
-				<v-container>
-					<v-row>
-						<tag-search/>
-					</v-row>
-				</v-container>
+			<v-container>
+				<v-row>
+					<tag-search />
+				</v-row>
+			</v-container>
 
-				<v-container>
-						<!-- 서비스 이용 안내 -->
-						<service-info-use/>
+			<v-container>
+				<!-- 서비스 이용 안내 -->
+				<service-info-use />
 
-				</v-container>
-
-			</div>
-
+			</v-container>
+			<v-divider />
 			<footer>
-				<main-footer-top/>
+				<main-footer-top />
 			</footer>
-
-		</v-app>
-	</v-main>
+	</div>
 </template>
 
 <script>
