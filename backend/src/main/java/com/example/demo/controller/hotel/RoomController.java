@@ -58,7 +58,7 @@ public class RoomController {
     }
 
     @PutMapping("/bm/{roomNo}")
-    public Long bmRoomModify (
+    public RoomResponse bmRoomModify (
             @PathVariable("roomNo") Integer roomNo,
             @Validated @RequestPart(value="roomRequest") RoomRequest roomRequest,
             @RequestPart(value = "files") List<MultipartFile> files,
