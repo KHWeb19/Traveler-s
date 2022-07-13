@@ -40,7 +40,7 @@
         <hr>
         <p class="hotelImgLabel">* 숙소이미지</p>
     
-    <div v-if="this.files.length < 9">
+    <div v-if="fileNum < 9">
         <input type="file" id="files" ref="files" 
                         multiple v-on:change="handleFilesUpload()" hidden />
         <v-btn @click="chooseFile"  class="vbtn">
@@ -54,21 +54,29 @@
             전체 취소
         </v-btn> 
     </div>
-
     <div>
          <table>
             <tr>
                 <td v-for="(none, index) in notImage" :key="index" > 
-                    <div v-if="files[index] == null">
+                    <div v-if="oldFiles[index] == null && files[index-oldFiles.length] == null">
                         <v-icon>
                             mdi-image
                         </v-icon>
                     </div>
                     <div v-else>
-                         <img :src="files[index].preview" class="preview" width="100px" height="100px"/>
-                         <v-icon @click="imgCancel(index)">
+                        <div v-if="index<oldFiles.length">
+                            <img :src="require(`@/assets/hotelImg/${oldFiles[index]}`)" class="preview" width="100px" height="100px"/>
+                            <v-icon @click="oldImgCancel(index)">
                             mdi-close
-                        </v-icon>
+                            </v-icon>
+                        </div>
+                        <div v-else>
+                            <img :src="files[index-oldFiles.length].preview" class="preview" width="100px" height="100px"/>
+                            <v-icon @click="imgCancel(index-oldFiles.length)">
+                            mdi-close
+                            </v-icon>
+                        </div>
+                        
                     </div>
                 </td>
             </tr>
@@ -78,7 +86,7 @@
     
    <v-btn type="submit" class="btn1">저장하기</v-btn>
     <router-link :to="{ name: 'BHotelReadPage',
-                                    params: { hotelNo: bmHotel.hotelNo.toString() } }">
+                                    params: { hotelNo: bmHotel.hotelNo.toString(), hotelName: bmHotel.hotelName } }">
                     취소
                 </router-link>
 
@@ -86,7 +94,9 @@
 </template>
 
 <script>
+
 export default {
+    
 name: 'HotelModifyForm',
 props: {
     bmHotel: {
@@ -113,28 +123,28 @@ data () {
             "바베큐그릴",
             "반려동물",
             "온천"
-        ]
+        ],
+        oldFiles: [],
     }
 },
 methods: {
     onSubmit () {
-        if(this.files.length < 5){
+        if(this.fileNum < 5){
                 alert('사진은 5장 이상 첨부해주세요')
             } else {
-        const { hotelName, hotelInfo, hotelIntro, postcode, totalAddress,  files } = this
-        this.$emit('submit', { hotelName, hotelInfo, hotelIntro, postcode, totalAddress, files })
+        const { hotelName, hotelInfo, hotelIntro, postcode, totalAddress,  files, oldFiles } = this
+        this.$emit('submit', { hotelName, hotelInfo, hotelIntro, postcode, totalAddress, files, oldFiles })
         }
     },
     handleFilesUpload () {
-            if(this.$refs.files.files.length > 9){
+
+            if(this.fileNum + this.$refs.files.files.length > 9){
                 alert("최대 9장 까지 가능 합니다")
                 this.$refs.files.value = ''
                 return
             }
 
-            this.fileNum += this.$refs.files.files.length
-            console.log(this.fileNum)
-            if(this.fileNum < 10){
+            if(this.fileNum + this.$refs.files.files.length < 10){
                         for (let i = 0; i < this.$refs.files.files.length; i++) {
                             this.files = [
                                 ...this.files,
@@ -143,12 +153,13 @@ methods: {
                                     preview: URL.createObjectURL(this.$refs.files.files[i])
                                 }
                             ]
-                        }      
+                        }
+                        this.fileNum += this.$refs.files.files.length       
                      
             }else{
                 alert("최대 9장 까지 가능 합니다")
                 console.log(this.fileNum)
-                this.fileNum -= this.$refs.files.files.length
+                //this.fileNum -= this.$refs.files.files.length
                 this.$refs.files.value = ''
             }  
            },
@@ -157,6 +168,7 @@ methods: {
         },
         cancelFile() {
             this.files = ''
+            this.oldFiles = ''
             this.fileNum = 0
         },
         imgCancel(index) {
@@ -164,12 +176,21 @@ methods: {
             this.files.splice(index,1)
             this.fileNum -= 1
             console.log(this.files)
+        },
+        oldImgCancel(index){
+            this.oldFiles.splice(index, 1)
+            this.fileNum -= 1
+            console.log(this.oldFiles)
         }
     },
  created () {
     this.hotelName = this.bmHotel.hotelName
     this.hotelInfo = this.bmHotel.hotelInfo
     this.hotelIntro = this.bmHotel.hotelIntro
+    for (let i =0; i<this.bmHotel.hotelImages.length; i++){
+            this.oldFiles.push(this.bmHotel.hotelImages[i])
+        }
+    this.fileNum = this.oldFiles.length
 }
 }
 </script>

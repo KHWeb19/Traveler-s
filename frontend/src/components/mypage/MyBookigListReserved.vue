@@ -8,6 +8,7 @@
         <col class="status" />
         <col class="checkIn" />
         <col class="checkOut" />
+        <col class="cancel" />
       </colgroup>
       <thead>
         <tr>
@@ -17,6 +18,7 @@
           <th>예약 상태</th>
           <th>체크 인</th>
           <th>체크 아웃</th>
+          <th>취소</th>
         </tr>
       </thead>
       <tbody>
@@ -40,38 +42,16 @@
           <td>
             {{ bookingList.endDate }}
           </td>
+          <td>
+            <button v-if="bookingList.startDate < new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0,10)" id="buttonNone"> 기간만료 </button>
+                    <!-- 만약 체크인 날짜가 오늘 날짜보다 작다면 이용불가가 확인되게 한다. -->
+                    <!-- 그 외에는 결제 버튼이 확인된다. -->
+            <button v-else id="button2" @click="requestRefund(bookingList.id)"> 취소 </button>
+          </td>
         </tr>
       </tbody>
     </table>
 
-    <!-- v-data-table 작업부분 주석처리 하였습니다. 필요가 없다면 지워주세요.
-    <v-card class="right">
-      <div style="display: flex; justify-content: center; padding-top: 120px">
-        <div>
-          <v-select
-            v-model="findList"
-            :items="selectState"
-            label="예약 상태"
-            style="width: 150px"
-            @change="findDesign"
-          ></v-select>
-          <v-data-table
-            :headers="headerTitle1"
-            :items="bookingLists"
-            style="width: 600px"
-            v-if="this.chooseState != 'part'"
-          >
-          </v-data-table>
-          <v-data-table
-            :headers="headerTitle2"
-            :items="chooseProcessArr"
-            style="width: 600px"
-            v-if="this.chooseState == 'part'"
-          >
-          </v-data-table>
-        </div>
-      </div>
-    </v-card> -->
   </v-container>
 </template>
 
@@ -122,6 +102,9 @@ export default {
         }
       }
     },
+    requestRefund(id){
+      this.$emit("requestRefund", id)
+    }
   },
 };
 </script>
@@ -171,7 +154,7 @@ tr:nth-of-type(odd) {
 
 /* 컬럼의 너비 */
 .id {
-  width: 15%;
+  width: 12%;
 }
 .roomType {
   width: 10%;
@@ -188,6 +171,8 @@ tr:nth-of-type(odd) {
 .checkOut {
   width: 20%;
 }
+
+
 
 /* 컬럼의 정렬 */
 tr td:nth-child(1) {
@@ -208,6 +193,32 @@ tr td:nth-child(5) {
 tr td:nth-child(6) {
   text-align: center;
 }
+tr td:nth-child(7) {
+  text-align: center;
+}
+
+#button2 {
+    text-decoration: none;
+    position: relative;
+    padding: 0 15px;
+    color: #404040;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 29px;
+}
+#button2:hover {
+  color: #e63668;
+}
+#buttonNone {
+    text-decoration: none;
+    position: relative;
+    padding: 0 15px;
+    color: #acacac;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 29px;
+}
+
 
 /* 페이징 버튼 */
 .page-box {
@@ -227,51 +238,4 @@ tr td:nth-child(6) {
   background-color: #dbdbdb;
 }
 
-/* 영남씨가 작업할 때 사용하셨던 부분 주석처리 하였습니다. 필요 없다면 지워주세요.
-.left_menu {
-  width: 200px;
-  height: 848px;
-  border-right-width: 3px;
-  border-right-color: rgba(64, 64, 64);
-  border-right-style: dotted;
-  padding: 3%;
-  background: rgba(64, 64, 64);
-  color: white;
-}
-.proimg {
-  width: 150px;
-}
-
-.col1 {
-  background: rgb(224, 224, 224);
-}
-.btn2 {
-  background: rgb(224, 224, 224);
-}
-
-.right {
-  width: 600px;
-  height: 848px;
-  background: rgb(250, 250, 250);
-}
-.tb1 {
-  background: #ffe082;
-}
-
-ul a {
-  color: inherit;
-}
-
-ul {
-  list-style: none;
-  margin: 20% 0 0 0;
-}
-
-a {
-  text-decoration: none;
-}
-td,
-th {
-  border: 1px solid #dbdbdb;
-} */
 </style>

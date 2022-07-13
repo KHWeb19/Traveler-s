@@ -5,6 +5,7 @@ import com.example.demo.dto.reservation.ReservationResponse;
 import com.example.demo.entity.member.User;
 import com.example.demo.entity.reservation.Reservation;
 
+import com.example.demo.entity.reservation.ReservationStatus;
 import com.example.demo.repository.member.UserRepository;
 
 import com.example.demo.service.reservation.ReservationService;
@@ -18,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,6 +58,15 @@ public class ReservationController {
 
         if (!user.getId().equals(reservation.getUser().getId()))
             throw new BadCredentialsException("Bad Credentials Exception");
+        // PENDING 상태의 예약 정보만 읽을수 있게 처리
+        if (!reservation.getStatus().equals(ReservationStatus.PENDING))
+            throw new IllegalStateException("Status is Not Pending");
+        // 예약 끝나는 날짜가 오늘 이전인지 확인
+        if (reservation.getEndDate().isBefore(ChronoLocalDate.from(LocalDateTime.now()))){
+            log.info("Reservation End Date: {}", reservation.getEndDate().toString());
+            log.info("Today: {}", LocalDateTime.now());
+            throw new IllegalStateException("Reservation Date Overdue");
+        }
         ReservationResponse reservationResponse = ReservationResponse.reservationResponseBuilderWithUser(reservation);
         return reservationResponse;
     }
@@ -78,6 +90,11 @@ public class ReservationController {
         return reservationResponses;
     }
 
+    @PostMapping("/user/cancelReservation/{id}")
+    public ResponseEntity<?> cancelReservation(@PathVariable(value ="id") String id){
+        reservationService.cancelReservation(id);
+        return ResponseEntity.ok().build();
+    }
 
     @Transactional
     @GetMapping("/ceo/listAllReservations")

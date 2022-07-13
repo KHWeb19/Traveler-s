@@ -67,7 +67,7 @@ public class InitializeDatabase implements CommandLineRunner {
         userUser.addRoleToUser(roleUser);
         userTest.addRoleToUser(roleUser);
         userRepository.saveAll(List.of(userAdmin, userCEO, userUser, userTest));
-        List<String> roomInfo = List.of("오션뷰,테라스,수영장,전기차충전,공항근처,골프장,무료주차,바베큐그릴,반려동물,온천");
+        List<String> roomInfo = List.of("욕조,주방,와이파이,주차장,세탁기,건조기,샤워실,TV,드라이기,소화기");
 
         List<Hotel> hotels = new ArrayList<>();
         List<Room> rooms = new ArrayList<>();

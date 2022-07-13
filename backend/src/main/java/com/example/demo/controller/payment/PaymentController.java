@@ -26,16 +26,26 @@ public class PaymentController {
         return ResponseEntity.ok().build();
     }
 
+    // 결제 검증 실패시 환불 요청
     @PostMapping("/cancel")
-    public ResponseEntity<?> paymentCancel(@RequestBody PaymentRequest paymentRequest) throws JsonProcessingException {
-        paymentService.requestRefund(paymentRequest);
+    public ResponseEntity<?> cancelPayment(@RequestBody PaymentRequest paymentRequest) throws JsonProcessingException {
+        paymentService.cancelPayment(paymentRequest);
+
+        return ResponseEntity.ok().build();
+    }
+
+    // 직접 환불요청
+    @PostMapping("/requestRefund/{id}")
+    public ResponseEntity<?> requestRefund(@PathVariable(value="id") String id) throws JsonProcessingException {
+        log.info("Requesting Refund for Reservation Id: {}", id);
+        paymentService.requestRefund(id);
 
         return ResponseEntity.ok().build();
     }
 
     @ExceptionHandler(JsonProcessingException.class)
     public ResponseEntity<?> jsonProcessingException(){
-        log.info("Handlnig Json Processing Exception");
+        log.info("Handling Json Processing Exception");
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
