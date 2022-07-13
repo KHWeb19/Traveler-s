@@ -19,7 +19,8 @@ export default {
             map: null,
             geocoder: null,
             hotelInfo: [],
-            hotel: null
+            hotel: null,
+            num : 0
 }
     },
     methods: {
@@ -75,12 +76,17 @@ export default {
     mounted () {
         //현재 mHotel이 변경되기전에 밑에 this.kakao한번 랜더링?되고
         //후에 mHotel변경되면서 this.kakao한번더 랜더링?되어서 두개 겹쳐서 나옴 고민중
-            this.$watch('mHotel', function(){
+            
+           /* this.$watch('mHotel', function(){
                 this.kakao()
                 return
-            })
+            })*/
+            //살짝 지연?
+            setTimeout( () => {
+                this.kakao()
 
-            this.kakao()
+            }, 500)// 0.2초
+            
               
     }
     /*watch: {
