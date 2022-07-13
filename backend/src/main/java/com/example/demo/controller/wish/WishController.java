@@ -63,4 +63,14 @@ public class WishController {
         return wishService.findWish();
     }
 
+    @GetMapping("/userWish/{hotelNo}")
+    public boolean userWish(@PathVariable("hotelNo") Integer hotelNo){
+        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<User> optionalUser = userService.findByEmail(email);
+        User user = optionalUser.get();
+
+        log.info("userWish " + hotelNo );
+        return wishService.userWish(user,hotelNo);
+    }
+
 }

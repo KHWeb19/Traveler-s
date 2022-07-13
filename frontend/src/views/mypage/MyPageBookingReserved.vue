@@ -1,7 +1,7 @@
 <template>
-  <div align="center" style="display: inline-block">
+  <div align="center" style="display: inline-block" class="wrap">
     <v-container>
-      <table style="width: 800px">
+      <table style="width: 1000px">
         <tr>
           <td align="left" colspan="2">
             <h2 class="pageTit">나의 예약 내역</h2>
@@ -12,6 +12,14 @@
           <td align="left">
             <span class="page-count">RESERVED</span>
           </td>
+          <td>
+            <v-row>
+              <v-spacer></v-spacer>
+              <span>환불 및 위약금 규정</span>
+              <payment-dialog/>
+              &ensp;
+            </v-row>
+          </td>
         </tr>
 
         <tr>
@@ -20,6 +28,7 @@
               <v-col>
                 <my-bookig-list-reserved
                   :bookingLists="reserves"
+                  @requestRefund="requestRefund"
                 ></my-bookig-list-reserved>
               </v-col>
             </v-row>
@@ -32,9 +41,10 @@
 
 <script>
 //import MyPageLeftMenu from "@/components/mypage/MyPageLeftMenu.vue";
-
+import axios from "axios"
 import { mapActions, mapState } from "vuex";
 import MyBookigListReserved from "@/components/mypage/MyBookigListReserved.vue";
+import PaymentDialog from '@/components/mypage/PaymentDialog.vue';
 
 export default {
   name: "MyPageBookingReserved",
@@ -42,6 +52,7 @@ export default {
     //MyPageLeftMenu,
 
     MyBookigListReserved,
+    PaymentDialog,
   },
   data() {
     return {
@@ -61,6 +72,19 @@ export default {
 
       console.log(this.status);
     },
+    requestRefund(id){
+      axios.post(`http://localhost:7777/payment/requestRefund/${id}`)
+      .then((res) => {
+        if (res){
+          alert("예약 취소 성공")
+          this.$router.push("/")
+        } else {
+          alert("예약 취소 실패")
+          this.$router.push("/")
+        }
+      }
+      )
+    }
   },
   mounted() {
     this.setUser();
@@ -81,6 +105,10 @@ div {
   -ms-user-select: none;
   user-select: none;
 }
+.wrap {
+  height: 100%;
+}
+
 h2 {
   padding: 50px 0px 30px 0px;
 }

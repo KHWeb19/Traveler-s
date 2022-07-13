@@ -11,7 +11,7 @@ public interface HotelService {
     public void register (HotelRequest hotelRequest, List<MultipartFile> files, User user) throws Exception;
     public HotelResponse bmHotelRead (Integer hotelNo);
     public List<HotelResponse> bmHotelList ();
-    public HotelResponse bmHotelModify (HotelRequest hotelRequest, List<MultipartFile> files, Integer hotelNo);
+    public HotelResponse bmHotelModify (HotelRequest hotelRequest, List<MultipartFile> files, Integer hotelNo, List<String> oldFiles);
     public void bmHotelRemove (Integer hotelNo);
     public void bmHotelsRemove(List<Long> hotelNo);
 

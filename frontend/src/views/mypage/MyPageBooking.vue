@@ -13,6 +13,14 @@
           <td align="left">
             <span class="page-count">전체</span>
           </td>
+          <td>
+            <v-row>
+              <v-spacer></v-spacer>
+              <span>환불 및 위약금 규정</span>
+              <payment-dialog/>
+              &ensp;
+            </v-row>
+          </td>
         </tr>
 
         <tr>
@@ -34,6 +42,8 @@
 <script>
 //import MyPageLeftMenu from "@/components/mypage/MyPageLeftMenu.vue";
 import MyPageBookingList from "@/components/mypage/MyPageBookingList.vue";
+import PaymentDialog from '@/components/mypage/PaymentDialog.vue';
+
 import { mapActions, mapState } from "vuex";
 
 export default {
@@ -41,6 +51,7 @@ export default {
   components: {
     //MyPageLeftMenu,
     MyPageBookingList,
+    PaymentDialog,
   },
   data() {
     return {};

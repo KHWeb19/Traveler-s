@@ -58,14 +58,16 @@ public class RoomController {
     }
 
     @PutMapping("/bm/{roomNo}")
-    public Long bmRoomModify (
+    public RoomResponse bmRoomModify (
             @PathVariable("roomNo") Integer roomNo,
             @Validated @RequestPart(value="roomRequest") RoomRequest roomRequest,
-            @RequestPart(value = "files") List<MultipartFile> files) {
+            @RequestPart(value = "files", required = false) List<MultipartFile> files,
+            @RequestPart(value = "oldFiles", required = false) List<String> oldFiles) {
         log.info("business member Hotel Modify(): " + roomRequest);
         log.info("files :" + files);
+        log.info(oldFiles.toString());
 
-        return roomService.bmRoomModify(roomRequest, files , roomNo);
+        return roomService.bmRoomModify(roomRequest, files , roomNo, oldFiles);
     }
 
     @DeleteMapping("/bm/{roomNo}")

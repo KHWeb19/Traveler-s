@@ -1,7 +1,7 @@
 <template>
-  <div align="center" style="display: inline-block">
+  <div align="center" style="display: inline-block" class="wrap">
     <v-container>
-      <table style="width: 800px">
+      <table style="width: 1000px">
         <tr>
           <td align="left" colspan="2">
             <h2 class="pageTit">나의 예약 내역</h2>
@@ -12,6 +12,14 @@
           <td align="left">
             <span class="page-count">PENDING</span>
           </td>
+          <td>
+            <v-row>
+              <v-spacer></v-spacer>
+              <span>환불 및 위약금 규정</span>
+              <payment-dialog/>
+              &ensp;
+            </v-row>
+          </td>
         </tr>
 
         <tr>
@@ -20,6 +28,8 @@
               <v-col>
                 <my-booking-pending
                   :bookingLists="pendings"
+                  @continueReservation="continueReservation"
+                  @cancelReservation="cancelReservation"
                 ></my-booking-pending>
               </v-col>
             </v-row>
@@ -32,10 +42,11 @@
 
 <script>
 //import MyPageLeftMenu from "@/components/mypage/MyPageLeftMenu.vue";
-
+import axios from "axios"
 import { mapActions, mapState } from "vuex";
 
 import MyBookingPending from "@/components/mypage/MyBookingPending.vue";
+import PaymentDialog from '@/components/mypage/PaymentDialog.vue';
 
 export default {
   name: "MyPageBookingPending",
@@ -43,13 +54,13 @@ export default {
     //MyPageLeftMenu,
 
     MyBookingPending,
+    PaymentDialog
   },
   data() {
     return {
       status: "",
     };
   },
-
   computed: {
     ...mapState(["user", "pendings"]),
   },
@@ -62,6 +73,22 @@ export default {
 
       console.log(this.status);
     },
+    continueReservation(idx){
+      this.$router.push({path: `/mReservPage/${idx}`})
+    },
+    cancelReservation(id){
+      axios.post(`http://localhost:7777/reserve/user/cancelReservation/${id}`)
+      .then(res => {
+        if (res){
+          alert("예약 취소 완료")
+          console.log(res)
+          this.$router.push("/")
+        } else {
+          alert("예약 취소 완료")
+          this.$router.push("/")
+        }
+        })
+    }
   },
   mounted() {
     this.setUser();
@@ -81,6 +108,9 @@ div {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+.wrap {
+  height: 100%;
 }
 h2 {
   padding: 50px 0px 30px 0px;

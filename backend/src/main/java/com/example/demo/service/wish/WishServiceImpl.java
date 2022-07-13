@@ -89,4 +89,16 @@ public class WishServiceImpl implements WishService {
 
         return maybeReadWish.get();
     }
+
+    @Transactional
+    @Override
+    public boolean userWish(User user, Integer hotelNo){
+        Optional<Wish> wish = wishRepository.findByUserIdAndHotelNo(user.getId(), Long.valueOf(hotelNo));
+
+        if(wish.equals(Optional.empty())){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }

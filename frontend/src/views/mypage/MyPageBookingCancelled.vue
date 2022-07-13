@@ -1,5 +1,5 @@
 <template>
-  <div align="center" style="display: inline-block">
+  <div align="center" style="display: inline-block" class="wrap">
     <v-container>
       <table style="width: 800px">
         <tr>
@@ -11,6 +11,14 @@
         <tr>
           <td align="left">
             <span class="page-count">CANCELLED</span>
+          </td>
+          <td>
+            <v-row>
+              <v-spacer></v-spacer>
+              <span>환불 및 위약금 규정</span>
+              <payment-dialog/>
+              &ensp;
+            </v-row>
           </td>
         </tr>
 
@@ -36,6 +44,7 @@
 import { mapActions, mapState } from "vuex";
 
 import MyBookingCancelled from "@/components/mypage/MyBookingCancelled.vue";
+import PaymentDialog from '@/components/mypage/PaymentDialog.vue';
 
 export default {
   name: "MyPageBookingPending",
@@ -43,6 +52,7 @@ export default {
     //MyPageLeftMenu,
 
     MyBookingCancelled,
+    PaymentDialog,
   },
   data() {
     return {
@@ -81,6 +91,9 @@ div {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+.wrap {
+  height: 100%;
 }
 h2 {
   padding: 50px 0px 30px 0px;

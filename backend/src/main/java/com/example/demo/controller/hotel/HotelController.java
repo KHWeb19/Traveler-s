@@ -62,11 +62,12 @@ public class HotelController {
     public HotelResponse bmHotelModify (
             @PathVariable("hotelNo") Integer hotelNo,
             @Validated @RequestPart(value="hotel") HotelRequest hotelRequest,
-            @RequestPart(value = "files") List<MultipartFile> files) {
+            @RequestPart(value = "files", required = false) List<MultipartFile> files,
+            @RequestPart(value = "oldFiles", required = false) List<String> oldFiles) {
         log.info("business member Hotel Modify(): " + hotelRequest);
         log.info("files :" + files);
 
-        return hotelService.bmHotelModify(hotelRequest, files , hotelNo);
+        return hotelService.bmHotelModify(hotelRequest, files , hotelNo, oldFiles);
     }
 
     //사업자 매뉴얼 페이지 호텔 삭제

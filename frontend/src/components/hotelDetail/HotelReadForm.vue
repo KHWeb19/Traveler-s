@@ -163,6 +163,9 @@ export default {
     },
     hotelNo: {
       type: String
+    },
+    userWish: {
+      type : Boolean
     }
   },
   computed: {
@@ -170,6 +173,15 @@ export default {
   },
   methods: {
     ...mapActions(['fetchMRoomList']),
+    wishCheck() {
+      if(this.$store.state.isLoggedIn == true) {
+        axios.get(`http://localhost:7777/wish/userWish/${this.hotelNo}`)
+        .then((res) => {
+          console.log(res.data)
+          this.checkWish = res.data
+        });
+      }
+    },
     wish() {
       console.log(this.mHotel.hotelNo);
       if (this.checkWish == false) {
@@ -195,8 +207,9 @@ export default {
       }
     },
   },
-  mounted() {
-    this.fetchMRoomList(this.payload)
+  created() {
+    this.fetchMRoomList(this.payload),
+    this.wishCheck()
   }
 };
 </script>

@@ -3,7 +3,7 @@
     <table style="width: 100%">
       <colgroup>
         <col class="id" />
-        <dic class="roomType" />
+        <col class="roomType" />
         <col class="price" />
         <col class="status" />
         <col class="checkIn" />
@@ -44,34 +44,6 @@
       </tbody>
     </table>
 
-    <!-- v-data-table 작업부분 주석처리 하였습니다. 필요가 없다면 지워주세요.
-    <v-card class="right">
-      <div style="display: flex; justify-content: center; padding-top: 120px">
-        <div>
-          <v-select
-            v-model="findList"
-            :items="selectState"
-            label="예약 상태"
-            style="width: 150px"
-            @change="findDesign"
-          ></v-select>
-          <v-data-table
-            :headers="headerTitle1"
-            :items="bookingLists"
-            style="width: 600px"
-            v-if="this.chooseState != 'part'"
-          >
-          </v-data-table>
-          <v-data-table
-            :headers="headerTitle2"
-            :items="chooseProcessArr"
-            style="width: 600px"
-            v-if="this.chooseState == 'part'"
-          >
-          </v-data-table>
-        </div>
-      </div>
-    </v-card> -->
   </v-container>
 </template>
 
@@ -227,51 +199,4 @@ tr td:nth-child(6) {
   background-color: #dbdbdb;
 }
 
-/* 영남씨가 작업할 때 사용하셨던 부분 주석처리 하였습니다. 필요 없다면 지워주세요.
-.left_menu {
-  width: 200px;
-  height: 848px;
-  border-right-width: 3px;
-  border-right-color: rgba(64, 64, 64);
-  border-right-style: dotted;
-  padding: 3%;
-  background: rgba(64, 64, 64);
-  color: white;
-}
-.proimg {
-  width: 150px;
-}
-
-.col1 {
-  background: rgb(224, 224, 224);
-}
-.btn2 {
-  background: rgb(224, 224, 224);
-}
-
-.right {
-  width: 600px;
-  height: 848px;
-  background: rgb(250, 250, 250);
-}
-.tb1 {
-  background: #ffe082;
-}
-
-ul a {
-  color: inherit;
-}
-
-ul {
-  list-style: none;
-  margin: 20% 0 0 0;
-}
-
-a {
-  text-decoration: none;
-}
-td,
-th {
-  border: 1px solid #dbdbdb;
-} */
 </style>

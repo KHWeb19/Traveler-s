@@ -4,7 +4,7 @@
     <table style="width: 900px;">
         <tr>
             <td>
-                <h2 class="pageTit">{{bmRoom.roomType}} 상세 정보</h2>  
+                <h2 class="pageTit">{{roomType}} 상세 정보</h2>  
             </td>
             <td align="center">
                 <router-link :to="{ name: 'BRoomListPage' }">
@@ -50,6 +50,9 @@ export default {
         roomNo: {
             type: String,
             required: true
+        },
+        roomType: {
+            type:String
         }
     },
     components: {

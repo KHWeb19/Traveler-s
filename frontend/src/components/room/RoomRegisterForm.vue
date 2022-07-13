@@ -42,12 +42,14 @@
     <div v-if="this.files.length < 9">
         <input type="file" id="files" ref="files" 
                         multiple v-on:change="handleFilesUpload()" hidden />
+        <div class="vbtn">
         <v-icon>
             mdi-image-plus 
         </v-icon>
         <v-btn @click="chooseFile" text>
             이미지 첨부
         </v-btn> 
+        </div>
     </div>  
     <div v-else>
         <v-icon>
@@ -235,7 +237,7 @@ input[name="roominfo"] {
     margin: 50px 50px 10px 50px;
 }
 .roomImg {
-    margin: 50px 50px 100px 50px;
+    margin: 50px 50px 10px 50px;
 }
 .roomImgLabel  {
     font-size: 14px;
@@ -267,6 +269,7 @@ td {
 .btn1 {
     margin-left: 40%;
     margin-bottom: 30px;
+    margin-top: 30px;
     text-align: center;
     word-spacing: 15px;
     border: none;
@@ -280,6 +283,7 @@ td {
 .btn2 {
     margin-left: 10px;
     margin-bottom: 30px;
+    margin-top: 30px;
     text-align: center;
     word-spacing: 15px;
     border: none;
@@ -300,5 +304,9 @@ td {
     outline: none;
     transition: .1s;
 
+}
+
+.vbtn {
+    margin-left: 85%;
 }
 </style>
