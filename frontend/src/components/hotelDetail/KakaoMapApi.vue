@@ -85,7 +85,7 @@ export default {
             setTimeout( () => {
                 this.kakao()
 
-            }, 200)
+            }, 500)// 0.2초
             
               
     }
