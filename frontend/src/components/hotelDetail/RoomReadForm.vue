@@ -107,6 +107,7 @@
 
 <script>
 import axios from "axios"
+import { mapActions } from 'vuex';
 
 export default {
   name: "RoomReadForm",
@@ -168,13 +169,14 @@ export default {
     cancel() {
       this.dialog = false
     },
-
+     ...mapActions(["setHotelReadKeyWord"]),
     searchRoom() {
       console.log(this.dates)
       const { dates, personnel } = this
       const hotelNo = this.hotelNo
       const payload = { dates, personnel, hotelNo }
-      axios
+      this.setHotelReadKeyWord(payload)
+      axios 
         .post("http://localhost:7777/room/mem/list", payload)
         .then((res) => {
           console.log(res.data);
