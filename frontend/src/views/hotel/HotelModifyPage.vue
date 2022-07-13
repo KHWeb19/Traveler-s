@@ -28,7 +28,7 @@ export default {
     methods: {
         ...mapActions(['fetchBmHotel']),
         onSubmit (payload) {
-            const { hotelName, hotelInfo, hotelIntro, postcode, totalAddress, files } = payload
+            const { hotelName, hotelInfo, hotelIntro, postcode, totalAddress, files, oldFiles} = payload
 
             let formData = new FormData()
             let hotel = {
@@ -38,13 +38,15 @@ export default {
                     postcode,
                     totalAddress,
             }
-
+            console.log("oldFiles: "+oldFiles)
             formData.append('hotel',new Blob([JSON.stringify(hotel)],{type: "application/json"}))
             
             for (let i = 0; i <  files.length; i++) {
                 formData.append('files',files[i].file)
             }
 
+            formData.append('oldFiles', new Blob([JSON.stringify(oldFiles)], {type: "application/json"}))
+            
             console.log(files)
 
             axios.put(`http://localhost:7777/hotel/bm/${this.hotelNo}`,

@@ -28,7 +28,7 @@ export default {
     methods: {
         ...mapActions(['fetchBmRoom']),
         onSubmit (payload) {
-            const { price, roomType, personnel,roomInfo, files } = payload
+            const { price, roomType, personnel,roomInfo, files, oldFiles } = payload
 
             let formData = new FormData()
             let room = {
@@ -36,14 +36,15 @@ export default {
                    roomType, 
                    personnel,
                    roomInfo, 
-                   files,
             }
-
+            console.log("oldFiles: " + oldFiles)
             formData.append('roomRequest',new Blob([JSON.stringify(room)],{type: "application/json"}))
             
             for (let i = 0; i <  files.length; i++) {
                 formData.append('files',files[i].file)
             }
+
+            formData.append('oldFiles', new Blob([JSON.stringify(oldFiles)], {type: "application/json"}))
 
             console.log(files)
 

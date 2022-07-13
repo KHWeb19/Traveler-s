@@ -5,12 +5,15 @@ import com.example.demo.dto.hotel.HotelResponse;
 import com.example.demo.dto.hotel.RoomResponse;
 import com.example.demo.dto.search.KeyWordRequest;
 import com.example.demo.entity.hotel.Hotel;
+import com.example.demo.entity.hotel.HotelImage;
 import com.example.demo.entity.member.User;
 import com.example.demo.entity.reservation.ReservationStatus;
 import com.example.demo.entity.room.Room;
+import com.example.demo.entity.room.RoomImage;
 import com.example.demo.repository.hotel.HotelRepository;
 import com.example.demo.repository.member.UserRepository;
 import com.example.demo.repository.room.RoomRepository;
+import com.example.demo.utility.FileUtility;
 import com.example.demo.utility.fileUpload.FileUpload;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -105,14 +108,25 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
     }
 
     @Override
-    public Long bmRoomModify(RoomRequest roomRequest, List<MultipartFile> files, Integer roomNo) {
+    public Long bmRoomModify(RoomRequest roomRequest, List<MultipartFile> files, Integer roomNo, List<String> oldFiles) {
         Optional<Room> roomInfo = roomRepository.findByWithHotel(Long.valueOf(roomNo));
-        //어떻게 못하겠다 나의 한계
-
         Room room = roomInfo.get();
 
-        roomImgPathRemove(room, path);
-        //이것도 나의 한계
+        //room file modify logic
+        List<RoomImage> roomImages = room.getRoomImages();
+        List<RoomImage> imagesToRemove = new ArrayList<>();
+
+        roomImages.forEach(f -> {
+            if (!oldFiles.contains(f.getPath())){
+                imagesToRemove.add(f);
+                FileUtility.deleteImage(f.getPath(), "roomImg");
+            } else{
+                log.info("file: {} stil exists", f.getPath().toString());
+            }
+        });
+        imagesToRemove.forEach(f -> room.removeRoomImageFromRoom(f));
+
+        /*
         Room r = Room.builder()
                 .roomNo(Long.valueOf(roomNo))
                 .roomType(roomRequest.getRoomType())
@@ -122,15 +136,14 @@ public class RoomServiceImpl extends FileUpload implements RoomService {
                 .regDate(room.getRegDate())
                 .hotel(roomInfo.get().getHotel())
                 .build();
-
+*/
         List<String> filePathList = new ArrayList<>();
         fileUpload(files, path, filePathList);
         log.info("filePathList : " + filePathList);
-        //이것도 나의 한계
-        addRoomImgPath(r,filePathList);
+        addRoomImgPath(room,filePathList);
 
-        roomRepository.save(r);
-         return r.getRoomNo();
+        roomRepository.save(room);
+        return room.getRoomNo();
 
     }
 
