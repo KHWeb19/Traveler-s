@@ -62,8 +62,8 @@ public class HotelController {
     public HotelResponse bmHotelModify (
             @PathVariable("hotelNo") Integer hotelNo,
             @Validated @RequestPart(value="hotel") HotelRequest hotelRequest,
-            @RequestPart(value = "files") List<MultipartFile> files,
-            @RequestPart(value = "oldFiles") List<String> oldFiles) {
+            @RequestPart(value = "files", required = false) List<MultipartFile> files,
+            @RequestPart(value = "oldFiles", required = false) List<String> oldFiles) {
         log.info("business member Hotel Modify(): " + hotelRequest);
         log.info("files :" + files);
 
