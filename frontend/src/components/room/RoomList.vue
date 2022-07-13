@@ -20,7 +20,7 @@
           <td><input class="check all" type="checkbox" v-model="deleteRooms" :value="room.roomNo" ></td>
             <td>
                  <router-link :to="{ name: 'BRoomReadPage',
-                                    params: { roomNo: room.roomNo.toString() } }">
+                                    params: { roomNo: room.roomNo.toString(), roomType : room.roomType } }">
                 {{ room.roomType }}
                  </router-link>
             </td>

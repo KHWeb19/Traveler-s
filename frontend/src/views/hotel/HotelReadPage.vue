@@ -4,7 +4,7 @@
     <table style="width: 900px;">
         <tr>
             <td>
-                <h2 class="pageTit">{{bmHotel.hotelName}} 상세 정보</h2>  
+                <h2 class="pageTit">{{hotelName}} 상세 정보</h2>  
             </td>
             <td align="center">
                 <router-link :to="{ name: 'BHotelListPage' }">
@@ -51,6 +51,9 @@ export default {
         hotelNo: {
             type: String,
             required: true
+        },
+        hotelName: {
+            type: String
         }
     },
     components: {

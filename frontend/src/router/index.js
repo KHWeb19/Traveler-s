@@ -70,7 +70,7 @@ const routes = [
     component: () => import("../views/hotel/HotelRegisterPage.vue"),
   },
   {
-    path: "/BHotelReadPage/:hotelNo",
+    path: "/BHotelReadPage/:hotelNo/:hotelName",
     name: "BHotelReadPage",
     components: {
       default: BHotelReadPage,
@@ -153,7 +153,7 @@ const routes = [
     component: () => import("../views/room/RoomListPage.vue"),
   },
   {
-    path: "/BRoomReadPage/:roomNo",
+    path: "/BRoomReadPage/:roomNo/:roomType",
     name: "BRoomReadPage",
     components: {
       default: BRoomReadPage,
