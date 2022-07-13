@@ -17,4 +17,5 @@ public interface ReservationService {
     List<Reservation> listReservationsForCEO(Long userId);
     List<Reservation> listReservationsByStatusForCEO(Long userId, String status);
 
+    void cancelReservation(String id);
 }

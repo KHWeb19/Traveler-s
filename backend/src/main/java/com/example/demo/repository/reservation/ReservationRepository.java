@@ -23,4 +23,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     @Query("select r from Reservation r join r.room rm join rm.hotel h join h.user u where u.id = :userId and r.status = :status")
     List<Reservation> findReservationsByStatusForCEO(Long userId, ReservationStatus status);
+
+    @Query("select r from Reservation r join fetch r.payment where r.id = :reservationId")
+    Optional<Reservation> findByIdWithPayment(Long reservationId);
 }
