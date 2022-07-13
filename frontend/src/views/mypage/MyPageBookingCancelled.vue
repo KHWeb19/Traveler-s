@@ -1,5 +1,5 @@
 <template>
-  <div align="center" style="display: inline-block">
+  <div align="center" style="display: inline-block" class="wrap">
     <v-container>
       <table style="width: 800px">
         <tr>
@@ -91,6 +91,9 @@ div {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+.wrap {
+  height: 100%;
 }
 h2 {
   padding: 50px 0px 30px 0px;
